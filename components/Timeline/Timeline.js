@@ -16,7 +16,8 @@ class Timeline extends Component {
     }
     componentWillMount() {
         this.setState({
-            timeline: this.props.build.build_list 
+            timeline: this.props.build.build_list,
+            id: this.props.build._id
         })
     }
     updateTimeline(updated){
@@ -71,9 +72,7 @@ class Timeline extends Component {
                         <div className="panel-block">
                             <button className="button is-link is-outlined" onClick={()=>{this.toggleEmptyLogic(this.state.timeline)}}> {this.state.isEdit === true ? 'Show' : 'Hide'} orderless seconds </button>
                             <button className="button is-link is-outlined" onClick={()=>{this.addSecond()}}> Add Second </button>
-                        </div>
-                        
-                        
+                        </div>     
                     </div>
                     <table className="table is-fullwidth is-hoverable is-bordered">
                         <thead>
@@ -101,21 +100,31 @@ class Timeline extends Component {
                     </table>
                 </div>
                 <div className="column">
-                    <InGameHelper /> 
+                    <InGameHelper isEdit={this.state.isEdit} toggleEmpty={this.toggleEmptyLogic}/> 
                     <AddOrder addOrder={this.addOrder}/>
                 </div>
             </div>
         );
     }
      addSecond() {
-        const timeline = this.state.timeline;
+        let timeline;
+         if(!this.state.isEdit) {
+             timeline = this.state.timeline;
+         } else {
+             this.setState({isEdit:false});
+             timeline = this.state.most_recent_timeline;
+         };
         const nextSecond = timeline.length + 1;
         const newSecond = { second: nextSecond };
         timeline.push(newSecond);
-        this.saveTimelineToDatabase(timeline);
+        this.saveTimelineToDatabase();
     }
     removeSecond() {
-        const timeline = this.state.timeline;
+         if(!this.state.isEdit) {
+             const timeline = this.state.timeline;
+         } else {
+             const timeline = this.state.most_recent_timeline;
+         };
         const lastSecond = timeline.length - 1;
         timeline.splice(lastSecond, 1);
         this.saveTimelineToDatabase();
@@ -154,7 +163,7 @@ class Timeline extends Component {
             supply_cost: order.supply_cost,
             }
             timeline[arrPosOfSecond].order=formatttedOrderToPush;
-            this.saveTimelineToDatabase();
+        this.saveTimelineToDatabase();
         
     }
     setupTimeline(vals) {
@@ -197,11 +206,12 @@ class Timeline extends Component {
         let buildToSend;
         const id = this.state.id;
         if(this.state.isEdit === true) {
-            buildToSend = this.props.most_recent_timeline;
+            buildToSend = this.state.most_recent_timeline;
+            console.log(id)
             this.props.updateBuild(buildToSend, id)
             this.updateTimeline(buildToSend);
         } else {
-            buildToSend = this.props.timeline;
+            buildToSend = this.state.timeline;
             this.props.updateBuild(buildToSend, id)
             this.updateTimeline(buildToSend);
         }

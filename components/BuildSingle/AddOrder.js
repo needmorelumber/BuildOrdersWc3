@@ -7,10 +7,11 @@ import data from './../../MasterData';
 class AddOrder extends Component {
   constructor(props) {
     super(props)
-    // State of this componenet can be found in the timeline reducer('root/reducers/timeline.js') that handles the http calls of the timeline;
+    // State of this componenet can be found in the timeline reducer('/reducers/timeline.js') that handles the http calls of the timeline;
     // Functions that operate on the timeline will be contianed within Timeline.js
     this.state = props.addOrderForm;
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(event) {
         const target = event.target;
@@ -20,6 +21,10 @@ class AddOrder extends Component {
                 [name]: value
             });
   }
+  handleSubmit(event) {
+    event.preventDefault()
+    this.props.addOrder(this.state)
+  }
   render() {
     const inputsArray = Object.entries(this.state.inputs);
     return (
@@ -27,7 +32,7 @@ class AddOrder extends Component {
       <div className="panel">
       <p className="panel-heading">Add Command</p>
         <div className="panel-block">
-          <form >
+          <form onSubmit={this.handleSubmit}>
           {
               inputsArray.map((inp, index) => {
                   return (
@@ -42,11 +47,10 @@ class AddOrder extends Component {
                               handleChange={this.handleChange}
                               key={index}
                               />
-    
                   )
               })
           }        
-          <button className="button" onClick={()=>this.props.addOrder(this.state)}>Add Order</button>
+            <input className="button" type="submit" value="Submit" />
           </form>
         </div>
       </div>

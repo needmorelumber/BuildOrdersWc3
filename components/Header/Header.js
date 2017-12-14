@@ -10,8 +10,12 @@ export default class Header extends Component {
                 display: "Browse Builds"
             },
             {   
-                pathname: "/",
+                pathname: "/builds",
                 display: "Home"
+            },
+            {
+                pathname: "/builds/new",
+                display: "Submit a new Build"
             }
         ]
         return navBarItems

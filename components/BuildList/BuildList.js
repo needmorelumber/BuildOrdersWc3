@@ -20,12 +20,9 @@ export default class BuildList extends React.Component {
               lastUpdated = new Date(this.props.builds.lastUpdated).toLocaleTimeString();
         const onBuildClick = this.props.onBuildClick;
         return (
-        
          <div className="section">
             <h1 className="title">Warcraft 3 RoC build orders</h1>
             <p className="subtitle">Select to view in detail</p>
-                <div className="columns">
-                    <div className="column is-8">
                     <table className="table is-fullwidth is-hoverable">
                         <thead>
                             <tr>
@@ -48,11 +45,6 @@ export default class BuildList extends React.Component {
                         }
                         </tbody>
                     </table>
-                    </div>
-                    <div className="column">
-                    <Link to="/new"> <button type="" className="button"> Submit a new build</button> </Link>
-                    </div>
-                </div>
         </div>
         )
     }

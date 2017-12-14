@@ -34,14 +34,6 @@ const addOrderStateReference = {
             userType: "textarea", 
             class: "textarea"
 
-        },
-        "supply_cost": {
-            name: "supply_cost",
-            label: "Supply Cost",
-            type: "number",
-            userType: "textarea", 
-            class: "input"
-
         }
     },
     message: "",

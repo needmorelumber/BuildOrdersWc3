@@ -44,7 +44,7 @@ var buildController = {};
         const id = body.id
         const timeline = body.timeline;
         build_order.findById(id, (err, build) => {
-            if(!err && build) {
+            if(!err && build) {           
                 build.build_list = timeline;
                 build.save();
                 res.json({data: build.build_list})

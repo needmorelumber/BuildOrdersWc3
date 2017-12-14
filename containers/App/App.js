@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
 import './app.css';
 import api from './../../api';
 import BuildsPage from '../BuildsPage';
@@ -9,11 +9,12 @@ import Header from './../../components/Header/Header';
 import NewBuild from './../../components/NewBuild';
 import CurrentBuild from './../CurrentBuild';
 import TimeLineContainer from './../TimeLineContainer';
+import NoMatch from './../../components/noMatch'
 
 
 const RouteAndSub = (route) => (
   <Route path={route.path} render={props => (
-    // pass the sub-routes down to keep nesting
+      //nesting
     <route.component {...props} routes={route.routes}/>
   )}/>
 )
@@ -23,26 +24,17 @@ class App extends Component {
     this.state = {
       routes: [
         {
-          path: '/',
-          component: HomePage
-        },
-        {
-          path: '/new',
+          path: '/builds/new',
           component: NewBuild
         },
         {
           path: '/builds',
+          exact: true,
           component: BuildsPage,
         },
         {
-          path: '/build',
+          path: '/build/:id',
           component: TimeLineContainer,
-          routes: [
-            {
-              path: '/build/:id',
-              component: TimeLineContainer
-            }
-          ]
         }
       ]
     }

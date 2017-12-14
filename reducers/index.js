@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import {builds, currentVisibleBuild, newBuildForm} from './builds'
-import {addOrderForm} from './timeline'
+import {addOrderForm} from './addOrder'
 
 
 

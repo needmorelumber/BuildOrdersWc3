@@ -4,7 +4,7 @@ class CurrentOrder extends Component {
   render() {
     return (
       <div>
-        Current Order Goes here
+        Current Order : {this.props.name}
       </div>
     );
   }

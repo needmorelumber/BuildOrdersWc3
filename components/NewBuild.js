@@ -9,12 +9,25 @@ import './custom.sass';
 class NewBuild extends Component {
     constructor(props){
         super(props);
-        // State of this componenet can be found in builds reducer.
-        // FORM STATE IS MAINTAINED IN REACT STATE
-        this.state = props.newBuildForm;
+        // Fields of this form componenet can be found in builds reducer.
+        // Form state like message and ui toggles are maintained in react state,
+        this.state = Object.assign({}, props.newBuildForm,{
+            fireRedirect : false,
+            errorMessage: ""
+        })
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         
+    }
+    renderErrorMessage(messageContent, time) {
+        this.setState({
+            errorMessage: messageContent
+        })
+        window.setTimeout(()=>{
+            this.setState({
+                errorMessage: ""
+            })
+        }, time)
     }
     handleChange(event) {
         const target = event.target;
@@ -25,11 +38,27 @@ class NewBuild extends Component {
             });
   }
     handleSubmit(event) {
-        event.preventDefault();
-        const buildFormToSubmit = this.state;
-        this.props.dispatch(newBuild(buildFormToSubmit))
-  }
+        const state = this.state;
+        if (!state.name){
+            event.preventDefault();
+            this.renderErrorMessage("Please name the build", 3000);
+        } else if (!state.description){
+            event.preventDefault();
+            this.renderErrorMessage("Please provide a description", 3000);
+        } else if (!state.race){
+            event.preventDefault();
+            this.renderErrorMessage("Race is required", 3000);
+        } else {
+            const buildFormToSubmit = this.state;
+            event.preventDefault();
+            this.props.dispatch(newBuild(buildFormToSubmit))
+            this.setState({ fireRedirect: true })
+        }
+
+  } 
     render() {
+        const from = this.props.location.state || '/'
+        const fireRedirect = this.state.fireRedirect
         const inputsArray = Object.entries(this.state.inputs);
         return (
                 <div className="modal is-active" id="newBuildForm">
@@ -59,9 +88,14 @@ class NewBuild extends Component {
                                 }              
                                 <button type="submit" value="Submit" className="button is-success">Submit</button>
                             </form>
+                            {
+                                fireRedirect && (
+                                    <Redirect to={'/builds'}/>
+                                )
+                            }
                             </section>
                             <footer className="modal-card-foot"> 
-                            <p className="subtitle help is-danger"> {this.props.newBuildForm.message} </p>
+                            <p className="subtitle help is-danger"> {this.state.errorMessage} </p>
                             </footer>
                         </div>
                 </div>
