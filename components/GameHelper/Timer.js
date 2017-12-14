@@ -4,7 +4,7 @@ class Timer extends Component {
   render() {
     return (
       <div>
-        
+        Clock Goes Here
       </div>
     );
   }

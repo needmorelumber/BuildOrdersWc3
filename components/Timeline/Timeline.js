@@ -6,7 +6,7 @@ import InGameHelper from './../../containers/InGameHelper';
 class Timeline extends Component {
     constructor(props){
         super(props)
-        this.state ={
+        this.state = {
             message: "",
             timeline: [],
             most_recent_timeline: [],
@@ -15,29 +15,14 @@ class Timeline extends Component {
         this.addOrder = this.addOrder.bind(this);
     }
     componentWillMount() {
-        const build = this.props.build;
-        if(build.build_list){
-            const timeline = this.setupTimeline(build.build_list);
-        }
+        this.setState({
+            timeline: this.props.build.build_list 
+        })
     }
     updateTimeline(updated){
         this.setState({
             timeline: updated
         })
-    }
-    saveTimelineToDatabase() {
-        let buildToSend;
-        const id = this.state.id;
-        if(this.state.isEdit === true) {
-            buildToSend = this.props.most_recent_timeline;
-            this.props.updateBuild(buildToSend, id)
-            this.updateTimeline(buildToSend);
-        } else {
-            buildToSend = this.props.timeline;
-            this.props.updateBuild(buildToSend, id)
-            this.updateTimeline(buildToSend);
-        }
-        
     }
     renderErrorMessage(message) {
         this.setState({
@@ -50,10 +35,20 @@ class Timeline extends Component {
         }, 2800)
 
     }
+    toggleEmptyLogic(timeline) {
+    let newTimeline = [];
+          for (let i = 0; i < timeline.length; i++) {
+              let order = timeline[i].order;
+              if(order){
+                  newTimeline.push(timeline[i])
+              }
+          }
+          this.setState({
+              justOrders
+          })
+    }
     render() {
         // Assign the build from props
-        const timeline = this.props.build.build_list;
-        if(timeline){
         return (
             <div className="columns">
                 <div className="column is-8">
@@ -63,7 +58,7 @@ class Timeline extends Component {
                             <p className="help is-danger">{this.state.message}</p>
                         </div>
                         <div className="panel-block">
-                            <button className="button is-link is-outlined" onClick={()=>{this.toggleEmpty()}}> {this.state.isEdit === true ? 'Show' : 'Hide'} orderless seconds </button>
+                            <button className="button is-link is-outlined" onClick={()=>{this.toggleEmptyLogic(this.state.timeline)}}> {this.state.isEdit === true ? 'Show' : 'Hide'} orderless seconds </button>
                             <button className="button is-link is-outlined" onClick={()=>{this.addSecond()}}> Add Second </button>
                         </div>
                         
@@ -74,11 +69,10 @@ class Timeline extends Component {
                             <tr>
                                 <th>Second in Game</th>
                                 <th>Order</th>
-
                             </tr>
                         </thead>
                         <tbody>
-                            {timeline.map((second, i) => {
+                            {this.state.timeline.map((second, i) => {
                                 return (
                                     <tr key={i + 1}>
                                         <td>
@@ -101,16 +95,7 @@ class Timeline extends Component {
                 </div>
             </div>
         );
-        }else {
-            return (
-                <div>Could not load</div>
-            )
-        }
-        
     }
-     getOrderArray(){
-
-     }
      addSecond() {
         const timeline = this.state.timeline;
         const nextSecond = timeline.length + 1;
@@ -196,6 +181,20 @@ class Timeline extends Component {
             return oldTimeline.push(order);
         })
         this.setState({ most_recent_timeline: oldTimeline });
+    }
+    saveTimelineToDatabase() {
+        let buildToSend;
+        const id = this.state.id;
+        if(this.state.isEdit === true) {
+            buildToSend = this.props.most_recent_timeline;
+            this.props.updateBuild(buildToSend, id)
+            this.updateTimeline(buildToSend);
+        } else {
+            buildToSend = this.props.timeline;
+            this.props.updateBuild(buildToSend, id)
+            this.updateTimeline(buildToSend);
+        }
+        
     }
 
 }

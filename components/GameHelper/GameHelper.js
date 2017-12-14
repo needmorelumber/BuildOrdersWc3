@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Timer from './Timer';
+import NextOrder from './NextOrder';
+import CurrentOrder from './CurrentOrder';
 
 class GameHelper extends Component {
   constructor(props){
@@ -9,13 +12,13 @@ class GameHelper extends Component {
     }
   }
 
-  updateState() {
+  updateCurrentAndNextOrder() {
     // If first time init
     // Make the next order the current order
   }
   
   componentWillMount() {
-    console.log(this.props)
+    
   }
   
   findAndUpdateNextOrder(currIndex, buildList){
@@ -23,30 +26,16 @@ class GameHelper extends Component {
       currentOrder: buildList[currIndex].order
     })
     for(let i = currIndex; i<buildList; i++){
-      console.log(buildList[i])
+      (buildList[i])
       if(buildList[i].order) {
         this.setState({
           nextOrder: buildList[i].order
         })
-        console.log('next order is')
-        console.log(this.state.nextOrder)
       }
     }
-    console.log(this.state.currentOrder)
-    console.log(this.state.nextOrder)
   }
   startWalkthrough(){
-    const timeline = this.state.build_list;
-    let newTimeline = [];
-          for (let i = 0; i < timeline.length; i++) {
-              let order = timeline[i].order
-              if (order === {} || order === undefined || order === null || !order) {
-                  newTimeline.splice(i, 1);
-                  i--;
-              }
-          }
-    console.log(this.props.toggleEmpty)
-    this.props.toggleEmpty(newTimeline);
+
   }
   pauseWalkthrough(){
     window.clearInterval(this.state.timerInterval);
@@ -58,10 +47,17 @@ class GameHelper extends Component {
   }
   render() {
     return (
-      <div className="row">
-        <button className="button is-dark" type="" onClick={()=>this.startWalkthrough()}>Start</button>
-        <button className="button is-dark" type="" onClick={()=>this.pauseWalkthrough()}>Pause</button>
-        <button className="button is-dark" type="" onClick={()=>this.resetWalkthrough()}>Reset</button>
+      <div>
+        <div>
+          <Timer />
+          <CurrentOrder />
+          <NextOrder />
+        </div>
+        <div className="row">
+          <button className="button is-dark" type="" onClick={()=>this.startWalkthrough()}>Start</button>
+          <button className="button is-dark" type="" onClick={()=>this.pauseWalkthrough()}>Pause</button>
+          <button className="button is-dark" type="" onClick={()=>this.resetWalkthrough()}>Reset</button>
+        </div>
       </div>
     );
   }

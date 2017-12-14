@@ -95,7 +95,9 @@ export function toggleEmpty(build) {
         type: TOGGLE_EMPTY,
         payload: {
             isEdit: true,
-            build: build
+            item: {
+                build: build
+            }
         }
     }
 }

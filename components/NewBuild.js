@@ -3,6 +3,7 @@ import { Link,  Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { newBuild } from '../actions/actions'
 import Input from './Input'
+import './custom.sass';
 
 
 class NewBuild extends Component {
@@ -31,7 +32,7 @@ class NewBuild extends Component {
     render() {
         const inputsArray = Object.entries(this.state.inputs);
         return (
-                <div className="modal is-active">
+                <div className="modal is-active" id="newBuildForm">
                     <Link to="/builds"><div className="modal-background"></div></Link>
                         <div className="modal-card">
                             <header className="modal-card-head"> 
@@ -46,6 +47,7 @@ class NewBuild extends Component {
                                             <Input  name={inp[1].name}
                                                     label={inp[1].label}
                                                     type={inp[1].type}
+                                                    userType={inp[1].userType}
                                                     options={inp[1].options}
                                                     message={inp[1].message}
                                                     class={inp[1].class}

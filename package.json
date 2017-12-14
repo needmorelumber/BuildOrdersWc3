@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@fortawesome/fontawesome": "^1.0.0",
+    "animejs": "^2.2.0",
     "axios": "^0.17.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import './input.css';
 
 class Input extends Component {
     render() {
         let info = { ...this.props };
         let userType = info.userType;
         switch (userType) {
-            case ('text'):
+            case 'text':
                 return (
                     <div className="field">
                         <label className="label">{info.label}</label>
@@ -16,7 +15,7 @@ class Input extends Component {
                         <p className="help is-success">{info.message}</p>
                     </div>
                 );
-            case ('textarea'):
+            case 'textarea':
                 return (
                     <div className="field">
                         <label className="label">{info.label}</label>
@@ -26,7 +25,7 @@ class Input extends Component {
                         <p className="help is-success">{info.message}</p>
                     </div>
                 )
-            case ('select'):
+            case 'select':
                 return (
                     <div className="field">
                         <label className="label">{info.label}</label>
@@ -46,7 +45,7 @@ class Input extends Component {
                         <p className="help is-success">{info.message}</p>
                     </div>
                 )
-            case ('number'):
+            case 'number':
                 return (
                     <div className="field">
                         <label className="label">{info.label}</label>
@@ -56,7 +55,7 @@ class Input extends Component {
                         <p className="help is-success">{info.message}</p>
                     </div>
                 )
-            case ('datalist'):
+            case 'datalist':
                 return (
                     <div className="field">
                         <label className="label">{info.label}</label>
@@ -74,6 +73,8 @@ class Input extends Component {
                         </div>
                     </div>
                 )
+            default:
+            return null
         }
 
     }

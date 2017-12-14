@@ -60,9 +60,9 @@ export function currentVisibleBuild(state = buildStateReference, action) {
                 item: action.payload.item
             })
         case TOGGLE_EMPTY:
-        console.log('here')
             return Object.assign({}, state, {
-                ordersArray: action.payload.build
+                isEdit: action.payload.isEdit,
+                item: action.payload.item
             })
         default:
             return state
@@ -75,6 +75,7 @@ const buildFormStateReference = {
             name: "name",
             label: "Name",
             type: "text",
+            userType: "text",
             class: "input"
 
         },
@@ -82,6 +83,7 @@ const buildFormStateReference = {
             name: "build_type",
             label: "Build Type",
             type: "text",
+            userType: "text",
             class: "input"
 
         },
@@ -89,6 +91,7 @@ const buildFormStateReference = {
             name: "description",
             label: "Description",
             type: "textarea",
+            userType: "textarea",
             class: "textarea"
 
         },
@@ -96,6 +99,7 @@ const buildFormStateReference = {
             name: "analysis",
             label: "Analysis",
             type: "textarea",
+            userType: "textarea",
             class: "textarea"
 
         },
@@ -103,6 +107,7 @@ const buildFormStateReference = {
             name: "vod_link",
             label: "Vod Link",
             type: "text",
+            userType: "text",
             class: "input"
 
         },
@@ -110,6 +115,7 @@ const buildFormStateReference = {
             name: "title_unit",
             label: "Title Unit",
             type: "text",
+            userType: "text",
             class: "input"
 
         },
@@ -117,6 +123,7 @@ const buildFormStateReference = {
             name: "race",
             label: "Race",
             type: "select",
+            userType: "select",
             options: [
                 "Orc", "Human", "Night Elf", "Undead"
             ],
