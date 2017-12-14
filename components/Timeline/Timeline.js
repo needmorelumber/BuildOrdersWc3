@@ -36,6 +36,14 @@ class Timeline extends Component {
 
     }
     toggleEmptyLogic(timeline) {
+    const isEdit=this.state.isEdit;
+    if (isEdit) {
+        this.setState({
+            timeline: this.state.most_recent_timeline,
+            most_recent_timeline: [],
+            isEdit: false
+            })
+    } else {
     let newTimeline = [];
           for (let i = 0; i < timeline.length; i++) {
               let order = timeline[i].order;
@@ -44,8 +52,11 @@ class Timeline extends Component {
               }
           }
           this.setState({
-              justOrders
+              most_recent_timeline: timeline,
+              timeline: newTimeline,
+              isEdit: true
           })
+    }
     }
     render() {
         // Assign the build from props
@@ -101,7 +112,7 @@ class Timeline extends Component {
         const nextSecond = timeline.length + 1;
         const newSecond = { second: nextSecond };
         timeline.push(newSecond);
-        this.saveTimelineToDatabase();
+        this.saveTimelineToDatabase(timeline);
     }
     removeSecond() {
         const timeline = this.state.timeline;
