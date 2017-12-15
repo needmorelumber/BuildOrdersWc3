@@ -7,32 +7,24 @@ class GameHelper extends Component {
   constructor(props){
     super(props)
     this.state = {
-      build_list: this.props.currentVisibleBuild.item.build.build_list,
-      possInWalk: false,
+      build_list: this.props.justOrders,
+      totalLength: this.props.totalLength,
+      build_map: this.mapOrdersIntoObjectForTimer(this.props.justOrders),
+      curPos: 0,
       currentOrder: false,
-      nextOrder: false
+      nextOrder: false,
+      timeStampSeconds: new Date(0,0,0,0,0,0,0).toTimeString()
     }
   }
-
-  updateCurrentAndNextOrder() {
-    // If first time init
-    // Make the next order the current order
-  }
-  
-  componentWillMount() {
-    
-  }
-  getNextOrder(currIndex, buildList){
-    // for(let i = currIndex; i<buildList; i++){
-    //   console.log('here')
-    //   if(buildList[i].order) {
-    //     console.log(build_list[i].order)
-    //     let nextOrder = buildList[i].order;
-        this.setState({
-          nextOrder: buildList[currIndex + 1].order
-        })
-    //   }
-    // }
+  mapOrdersIntoObjectForTimer(justOrders){
+    let mapToReturn={};
+    for(let i=0; i<justOrders.length; i++){
+      let second=justOrders[i].second;
+      if(!mapToReturn[second]){
+        mapToReturn[second]=justOrders[i]
+      }
+    }
+    return mapToReturn;
   }
   findAndUpdateNextOrder(currIndex, buildList){
     let order = buildList[currIndex].order;
@@ -44,20 +36,21 @@ class GameHelper extends Component {
     this.setState({possInWalk: nextPostition})
   }
   startWalkthrough(){
-    let possInWalk = this.state.possInWalk;
-    if(!possInWalk){
-      this.setState({
-        possInWalk: 0
-      })
-    }
     this.setState({
       timerInterval:
         window.setInterval(() => {
-          let pos=this.state.possInWalk;
-          let timeline=this.state.build_list;
-          this.findAndUpdateNextOrder(pos, timeline);
-        },1000)
+          let curpos=this.state.curPos
+          if(this.state.build_map[curpos]){
+            let order = this.state.build_map[curpos];
+          }
+          this.setState({
+            curPos : curpos + 1
+          })
+          console.log('here')
+        }, 1000)
     })
+    console.log(this.state.totalLength)
+    console.log(this.state.timeStampSeconds)
   }
   pauseWalkthrough(){
     window.clearInterval(this.state.timerInterval);

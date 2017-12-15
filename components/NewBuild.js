@@ -36,7 +36,7 @@ class NewBuild extends Component {
         this.setState({
                 [name]: value
             });
-  }
+    }
     handleSubmit(event) {
         const state = this.state;
         if (!state.name){

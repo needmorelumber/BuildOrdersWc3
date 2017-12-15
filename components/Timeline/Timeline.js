@@ -8,17 +8,13 @@ class Timeline extends Component {
         super(props)
         this.state = {
             message: "",
-            timeline: [],
+            timeline: this.props.build.build_list,
             most_recent_timeline: [],
-            isEdit: false
+            isEdit: false,
+            justOrders: this.returnJustOrders(this.props.build.build_list),
+            id: this.props.build._id,
         }
         this.addOrder = this.addOrder.bind(this);
-    }
-    componentWillMount() {
-        this.setState({
-            timeline: this.props.build.build_list,
-            id: this.props.build._id
-        })
     }
     updateTimeline(updated){
         this.setState({
@@ -36,10 +32,21 @@ class Timeline extends Component {
         }, 2800)
 
     }
+    returnJustOrders(buildList) {
+        let newTimeline = [];
+            for (let i = 0; i < buildList.length; i++) {
+                let order = buildList[i].order;
+                if(order){
+                    newTimeline.push(buildList[i])
+                }
+            }
+            return newTimeline
+    } 
     toggleEmptyLogic(timeline) {
     const isEdit=this.state.isEdit;
     if (isEdit) {
         this.setState({
+            justOrders: this.state.timeline,
             timeline: this.state.most_recent_timeline,
             most_recent_timeline: [],
             isEdit: false
@@ -53,6 +60,7 @@ class Timeline extends Component {
               }
           }
           this.setState({
+              justOrders: newTimeline,
               most_recent_timeline: timeline,
               timeline: newTimeline,
               isEdit: true
@@ -100,7 +108,7 @@ class Timeline extends Component {
                     </table>
                 </div>
                 <div className="column">
-                    <InGameHelper isEdit={this.state.isEdit} toggleEmpty={this.toggleEmptyLogic}/> 
+                    <InGameHelper isEdit={this.state.isEdit} justOrders={this.state.justOrders} totalLength={this.state.timeline.length}/> 
                     <AddOrder addOrder={this.addOrder}/>
                 </div>
             </div>

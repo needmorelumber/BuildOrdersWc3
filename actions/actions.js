@@ -107,6 +107,43 @@ function createBuilds() {
         type: CREATE_BUILDS
     }
 }
+export const TRY_LOGIN = "TRY_LOGIN";
+function tryLogin(credentials) {
+    return{
+        type: TRY_LOGIN,
+        payload: {
+            isFetching: true,
+            payload: {credentials}
+        }
+    }
+}
+export const RESOLVE_LOGIN = "RESOLVE_LOGIN";
+function resolveLogin(user) {
+    return{
+        type: RESOLVE_LOGIN,
+        payload: {
+            user: {user}
+        }
+    }
+}
+export const TRY_REGISTER = "TRY_REGISTER";
+function tryRegister(credentials) {
+    return{
+        type: TRY_REGISTER,
+        payload: {credentials}
+    }
+}
+export const RESOLVE_REGISTER = "RESOLVE_REGISTER";
+function resolveRegister(user) {
+    return{
+        type: RESOLVE_REGISTER,
+        payload: {
+            user: {user}
+        }
+    }
+}
+
+
 //VISIBILITY FILTERS
 export const VisibilityFilters = {
   SHOW_ALL: 'SHOW_ALL'
@@ -169,6 +206,19 @@ export function updateBuildById(build, id) {
         )
         .then( json => {
             dispatch(resolveBuildUpdate(json));
+        })
+    }
+}
+export function loginToServer(credentials) {
+    return function(dispatch) {
+        dispatch(tryLogin())
+        return axios.post('/api/login',{credentials})
+        .then(
+            res => (res.data),
+            err => console.log(err)
+        )
+        .then( user => {
+            dispatch(resolveLogin(user))
         })
     }
 }

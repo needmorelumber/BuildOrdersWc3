@@ -19,7 +19,7 @@ class PreviewBuild extends Component {
                         <div className="card-header-icon">
                             <Link to= { buildsRoute + build._id }>  <img src={imgString} alt="" /> </Link>
                         </div>
-                        <Link className="card-header-title" to= { buildsRoute + build._id }> <u>{'Playback' + ' ' + build.name + ' ' + 'In Game'}</u></Link>
+                        <Link className="card-header-title" to= { buildsRoute + build._id }> <u>{'Playback' + '  "' + build.name + '"  ' + 'In Game'}</u></Link>
                     </div>
                     <div className="card-content">
                         <ul>
@@ -33,6 +33,8 @@ class PreviewBuild extends Component {
                                 <li>{build.analysis}</li>
                             <label className="label" htmlFor="Vod Link"> VOD </label>
                                 <li>{build.vod_link}</li>
+                            <label className="label" htmlFor="Build race"> Race </label>
+                                <li>{build.race}</li>
                         </ul>
                     </div>
                 </div>

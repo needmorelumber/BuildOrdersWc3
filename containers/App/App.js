@@ -9,7 +9,8 @@ import Header from './../../components/Header/Header';
 import NewBuild from './../../components/NewBuild';
 import CurrentBuild from './../CurrentBuild';
 import TimeLineContainer from './../TimeLineContainer';
-import NoMatch from './../../components/noMatch'
+import NoMatch from './../../components/noMatch';
+import LoginPage from './../LoginPage';
 
 
 const RouteAndSub = (route) => (
@@ -35,6 +36,10 @@ class App extends Component {
         {
           path: '/build/:id',
           component: TimeLineContainer,
+        },
+        {
+          path: '/login',
+          component: LoginPage
         }
       ]
     }

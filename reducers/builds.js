@@ -132,10 +132,10 @@ const buildFormStateReference = {
         }
 
     },
-    message: "",
+    isFetching: false
 
 }
-export function newBuildForm(state = buildFormStateReference, action) {
+export function newBuildForm(state=buildFormStateReference, action) {
     switch (action.type) {
         case BEGIN_BUILD_UPLOAD:
             return Object.assign({}, state, {

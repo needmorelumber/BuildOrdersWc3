@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import data from './../MasterData';
 
 class Input extends Component {
     render() {
@@ -51,6 +52,26 @@ class Input extends Component {
                         <label className="label">{info.label}</label>
                         <div className="control">
                             <input className={info.class} name={info.name} min="1" type={info.type} onChange={info.handleChange} />
+                        </div>
+                        <p className="help is-success">{info.message}</p>
+                    </div>
+                )
+            case 'password':
+                return (
+                    <div className="field">
+                        <label className="label">{info.label}</label>
+                        <div className="control">
+                            <input className={info.class} name={info.name} type={info.type} onChange={info.handleChange} />
+                        </div>
+                        <p className="help is-success">{info.message}</p>
+                    </div>
+                )
+            case 'email':
+                return (
+                    <div className="field">
+                        <label className="label">{info.label}</label>
+                        <div className="control">
+                            <input className={info.class} name={info.name} type={info.type} onChange={info.handleChange} />
                         </div>
                         <p className="help is-success">{info.message}</p>
                     </div>
