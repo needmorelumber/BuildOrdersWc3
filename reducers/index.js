@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import {builds, currentVisibleBuild, newBuildForm} from './builds'
 import {addOrderForm} from './addOrder'
-import {login} from './user';
+import {login, register} from './user';
 
 
 
@@ -10,7 +10,8 @@ const warcraftApp = combineReducers({
   currentVisibleBuild,
   newBuildForm,
   addOrderForm,
-  login
+  login,
+  register
 
 })
 

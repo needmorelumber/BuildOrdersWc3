@@ -61,7 +61,7 @@ class Input extends Component {
                     <div className="field">
                         <label className="label">{info.label}</label>
                         <div className="control">
-                            <input className={info.class} name={info.name} type={info.type} onChange={info.handleChange} />
+                            <input className={info.class} placeholder={info.label} name={info.name} type={info.type} onChange={info.handleChange} />
                         </div>
                         <p className="help is-success">{info.message}</p>
                     </div>
@@ -71,7 +71,7 @@ class Input extends Component {
                     <div className="field">
                         <label className="label">{info.label}</label>
                         <div className="control">
-                            <input className={info.class} name={info.name} type={info.type} onChange={info.handleChange} />
+                            <input placeholder={info.label} className={info.class} name={info.name} type={info.type} onChange={info.handleChange} />
                         </div>
                         <p className="help is-success">{info.message}</p>
                     </div>

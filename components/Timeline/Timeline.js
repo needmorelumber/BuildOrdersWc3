@@ -108,8 +108,7 @@ class Timeline extends Component {
                     </table>
                 </div>
                 <div className="column">
-                    <InGameHelper isEdit={this.state.isEdit} justOrders={this.state.justOrders} totalLength={this.state.timeline.length}/> 
-                    <AddOrder addOrder={this.addOrder}/>
+                    <InGameHelper addOrder={this.addOrder}isEdit={this.state.isEdit} justOrders={this.state.justOrders} totalLength={this.state.timeline.length}/> 
                 </div>
             </div>
         );

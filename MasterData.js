@@ -1795,9 +1795,6 @@ const data = {
   },
   "Night Elf": {
     "Buildings": [
-      {
-        
-      },
 
     ],
     "Wisp": {

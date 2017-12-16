@@ -192,6 +192,7 @@ export function newBuild(build) {
         .then( json => {
             // This json should have information about error from the server
            dispatch(resolveBuildUpload(json))
+           dispatch((fetchBuilds()))
         })
 
     }
@@ -215,10 +216,24 @@ export function loginToServer(credentials) {
         return axios.post('/api/login',{credentials})
         .then(
             res => (res.data),
+            err => dispatch(resolveLogin(err))
+        )
+        .then(user => {   
+            console.log(user)
+            dispatch(resolveLogin(user))
+        })
+    }
+}
+export function registerNewUser(credentials) {
+    return function(dispatch) {
+        dispatch(tryRegister())
+        return axios.post('/api/new_user', {credentials})
+        .then(
+            res => (res.data),
             err => console.log(err)
         )
         .then( user => {
-            dispatch(resolveLogin(user))
+            dispatch(resolveRegister(user))
         })
     }
 }

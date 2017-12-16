@@ -11,6 +11,7 @@ import CurrentBuild from './../CurrentBuild';
 import TimeLineContainer from './../TimeLineContainer';
 import NoMatch from './../../components/noMatch';
 import LoginPage from './../LoginPage';
+import RegisterPage from './../RegisterPage'
 
 
 const RouteAndSub = (route) => (
@@ -40,6 +41,10 @@ class App extends Component {
         {
           path: '/login',
           component: LoginPage
+        },
+        {
+          path: '/register',
+          component: RegisterPage
         }
       ]
     }

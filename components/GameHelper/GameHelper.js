@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Timer from './Timer';
 import NextOrder from './NextOrder';
 import CurrentOrder from './CurrentOrder';
+import AddOrder from './../BuildSingle/AddOrder';
 
 class GameHelper extends Component {
   constructor(props){
@@ -13,7 +14,8 @@ class GameHelper extends Component {
       curPos: 0,
       currentOrder: false,
       nextOrder: false,
-      timeStampSeconds: new Date(0,0,0,0,0,0,0).toTimeString()
+      ownedByLooker: true,
+      timeStampSeconds: new Date(0,0,0,0,0,0,0)
     }
   }
   mapOrdersIntoObjectForTimer(justOrders){
@@ -44,13 +46,12 @@ class GameHelper extends Component {
             let order = this.state.build_map[curpos];
           }
           this.setState({
-            curPos : curpos + 1
+            curPos : curpos + 1,
+            timeStampSeconds: new Date(0,0,0,0,0,curpos+1,0)
           })
           console.log('here')
         }, 1000)
     })
-    console.log(this.state.totalLength)
-    console.log(this.state.timeStampSeconds)
   }
   pauseWalkthrough(){
     window.clearInterval(this.state.timerInterval);
@@ -59,29 +60,40 @@ class GameHelper extends Component {
     this.setState({
       currentOrder: false,
       nextOrder: false,
-      possInWalk: false
+      possInWalk: false,
+      curPos: 0,
+      timeStampSeconds: new Date(0,0,0,0,0,0,0)
     })
   }
   render() {
     return (
+      this.state.ownedByLooker === true
+      ?
       <div>
-        <div className="section row">
-          {this.state.possInWalk  === true ? <Timer timeInGame={this.state.possInWalk + 1}/> : null}
-          {this.state.currentOrder ? <CurrentOrder name={this.state.currentOrder.race_unit} /> : null}
-          {this.state.nextOrder ? <NextOrder name={this.state.nextOrder.race_unit}/> : null}
-        </div>
       {
         this.props.isEdit === false 
         ? 
-          <div className="section row">
+          <div className="row">
             <button className="button is-dark" type="" onClick={()=>this.startWalkthrough()}>Start</button>
-            <button className="button is-dark" type="" onClick={()=>this.pauseWalkthrough()}>Pause</button>
-            <button className="button is-dark" type="" onClick={()=>this.resetWalkthrough()}>Reset</button>
+            <button className="button is-info" type="" onClick={()=>this.pauseWalkthrough()}>Pause</button>
+            <button className="button is-warning" type="" onClick={()=>this.resetWalkthrough()}>Reset</button>
           </div>
         : 
           <p>View the whole Timeline to start timer</p>
       }
+        <div className="row">
+          {this.state.curPos ? <Timer timeInGame={this.state.timeStampSeconds}/> : null}
+          {this.state.currentOrder ? <CurrentOrder name={this.state.currentOrder.race_unit} /> : null}
+          {this.state.nextOrder ? <NextOrder name={this.state.nextOrder.race_unit}/> : null}
+        </div>
+        <AddOrder />
       </div>
+      :
+      <div>
+        You can't edit this build.
+        <p>add button that loads this build into new build with curr user as owner</p>
+      </div>
+      
     );
   }
 }

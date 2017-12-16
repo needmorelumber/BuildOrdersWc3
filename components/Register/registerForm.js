@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Input from './../Input';
 
-class LoginForm extends Component {
+class RegisterForm extends Component {
   constructor(props){
     super(props)
-        this.state = Object.assign({}, props.login,{
+        this.state = Object.assign({}, props.register,{
             fireRedirect : false,
             errorMessage: ""
         })
@@ -19,19 +19,35 @@ class LoginForm extends Component {
                 [name]: value
             });
   }
+  renderErrorMessage(messageContent, time) {
+        this.setState({
+            errorMessage: messageContent
+        })
+        window.setTimeout(()=>{
+            this.setState({
+                errorMessage: ""
+            })
+        }, time)
+    }
   handleSubmit(event) {
         const state = this.state;
-        if (!state.eMail){
+          if(!state.username){
             event.preventDefault();
-            this.renderErrorMessage("Please ", 3000);
-        } else if (!state.password){
+            this.renderErrorMessage("Please enter a Username", 3000);
+        } else if (!state.eMail){
             event.preventDefault();
-            this.renderErrorMessage("Enter password", 3000);
+            this.renderErrorMessage("Please enter an Email", 3000);
+        } else if (!state.password || !state.confirmPassword){
+            event.preventDefault();
+            this.renderErrorMessage("Enter password and confirm", 3000);
+        } else if(state.password !== state.confirmPassword){
+            event.preventDefault();
+            this.renderErrorMessage("Passwords do not match", 3000); 
         }
         else {
             const buildFormToSubmit = this.state;
             event.preventDefault();
-            this.props.loginToServer(buildFormToSubmit);
+            this.props.registerNewUser(buildFormToSubmit);
             // this.setState({ fireRedirect: true })
         }
 
@@ -43,7 +59,7 @@ class LoginForm extends Component {
         <article className="container">
           <div className="card">
           <div className="card-header">
-            <div className="card-header-title title is-centered">Login</div>
+            <div className="card-header-title title is-centered">Register new account</div>
           </div>
           <div className="card-content">
           <form onSubmit={this.handleSubmit}>
@@ -69,10 +85,9 @@ class LoginForm extends Component {
                 ? 
                 <button type="submit" value="Submit" className="button is-success">Submit</button> 
                 :
-                <div>Loading...</div>
+                <div>Thanks for registering! Waiting for server...</div>
                 
-              }
-              
+              } 
             </form>
             </div>
             <div className="card-footer">
@@ -85,4 +100,4 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+export default RegisterForm;

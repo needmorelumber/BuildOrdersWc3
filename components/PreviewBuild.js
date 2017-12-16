@@ -9,7 +9,7 @@ class PreviewBuild extends Component {
         const build = this.props.currentVisibleBuild.item.build;        
         const buildsRoute= "/build/";
         const race = this.props.currentVisibleBuild.item.build.race;
-        const imgString = path.join('/assets/icons/', race + '.jpg')
+        const iconString = path.join('/assets/icons/', race + '.jpg')
         return (
             <div className="section">
             { race 
@@ -17,7 +17,7 @@ class PreviewBuild extends Component {
                 <div className="card">
                     <div className="card-header">
                         <div className="card-header-icon">
-                            <Link to= { buildsRoute + build._id }>  <img src={imgString} alt="" /> </Link>
+                            <Link to= { buildsRoute + build._id }>  <img src={iconString} alt="" /> </Link>
                         </div>
                         <Link className="card-header-title" to= { buildsRoute + build._id }> <u>{'Playback' + '  "' + build.name + '"  ' + 'In Game'}</u></Link>
                     </div>
@@ -39,7 +39,10 @@ class PreviewBuild extends Component {
                     </div>
                 </div>
             :
-                <div> Check out some builds! </div>
+                <div className="container">
+                 <p className="title">  Check out some builds! </p> 
+                 <p className="help">  Click a build to view in detail... </p> 
+                </div>
             }
             </div>
         );
