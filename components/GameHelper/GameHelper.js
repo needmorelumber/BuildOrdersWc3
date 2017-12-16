@@ -15,8 +15,10 @@ class GameHelper extends Component {
       currentOrder: false,
       nextOrder: false,
       ownedByLooker: true,
+      race: this.props.currentVisibleBuild.item.build.race,
       timeStampSeconds: new Date(0,0,0,0,0,0,0)
     }
+    
   }
   mapOrdersIntoObjectForTimer(justOrders){
     let mapToReturn={};
@@ -38,22 +40,34 @@ class GameHelper extends Component {
     this.setState({possInWalk: nextPostition})
   }
   startWalkthrough(){
+    this.props.fetchById(this.props.id);
+    this.setState({
+      currentlyTicking: true
+    })
     this.setState({
       timerInterval:
         window.setInterval(() => {
           let curpos=this.state.curPos
+          if(curpos === this.state.totalLength) {
+            window.clearInterval(this.state.timerInterval)
+          }
           if(this.state.build_map[curpos]){
             let order = this.state.build_map[curpos];
+            this.setState({
+              currentOrder: order.order
+            })
           }
           this.setState({
             curPos : curpos + 1,
-            timeStampSeconds: new Date(0,0,0,0,0,curpos+1,0)
+            timeStampSeconds: new Date(0,0,0,0,0,curpos,0)
           })
-          console.log('here')
         }, 1000)
     })
   }
   pauseWalkthrough(){
+    this.setState({
+      currentlyTicking: false
+    })
     window.clearInterval(this.state.timerInterval);
   }
   resetWalkthrough(){
@@ -61,32 +75,44 @@ class GameHelper extends Component {
       currentOrder: false,
       nextOrder: false,
       possInWalk: false,
+      currentlyTicking: false,
       curPos: 0,
       timeStampSeconds: new Date(0,0,0,0,0,0,0)
     })
+    window.clearInterval(this.state.timerInterval);
   }
   render() {
     return (
       this.state.ownedByLooker === true
       ?
       <div>
+        <div className="row">
+            {this.state.curPos ? <Timer timeInGame={this.state.timeStampSeconds}/> : null}  
+            {this.state.currentOrder ? <CurrentOrder race={this.state.race} currentOrder={this.state.currentOrder} /> : null}
+            {this.state.nextOrder ? <NextOrder name={this.state.nextOrder.race_unit}/> : null}
+        </div>
       {
         this.props.isEdit === false 
         ? 
-          <div className="row">
-            <button className="button is-dark" type="" onClick={()=>this.startWalkthrough()}>Start</button>
-            <button className="button is-info" type="" onClick={()=>this.pauseWalkthrough()}>Pause</button>
-            <button className="button is-warning" type="" onClick={()=>this.resetWalkthrough()}>Reset</button>
+          <div className="row level">
+            <div className="level-left">
+            { !this.state.currentlyTicking
+            ? 
+            <div>
+              <button className="button is-dark level-item" type="" onClick={()=>this.startWalkthrough()}>Start</button>
+            </div>
+            :
+            <div>
+              <button className="button is-info level-item" type="" onClick={()=>this.pauseWalkthrough()}>Pause</button>   
+            </div>
+            }
+            <button className="button is-warning level-item" type="" onClick={()=>this.resetWalkthrough()}>Reset</button>
+            </div>
           </div>
         : 
           <p>View the whole Timeline to start timer</p>
       }
-        <div className="row">
-          {this.state.curPos ? <Timer timeInGame={this.state.timeStampSeconds}/> : null}
-          {this.state.currentOrder ? <CurrentOrder name={this.state.currentOrder.race_unit} /> : null}
-          {this.state.nextOrder ? <NextOrder name={this.state.nextOrder.race_unit}/> : null}
-        </div>
-        <AddOrder />
+        <AddOrder addOrder={this.props.addOrder} id={this.props.id} fetchById={this.props.fetchById}/>
       </div>
       :
       <div>

@@ -41,7 +41,10 @@ class BuildSingle extends Component {
                         </div>
                         </div>  
                      </section>
-                     <Timeline build={this.props.currentVisibleBuild.item.build} updateBuild={this.props.updateBuild} toggleEmpty={this.props.toggleEmpty}/>
+                     <Timeline build={this.props.currentVisibleBuild.item.build} 
+                               updateBuild={this.props.updateBuild} 
+                               toggleEmpty={this.props.toggleEmpty}
+                               fetchById={this.props.fetchById}/>
                 </div>
             )
         } else{

@@ -71,7 +71,7 @@ class Timeline extends Component {
         // Assign the build from props
         return (
             <div className="columns">
-                <div className="column is-8">
+                <div className="column is-6 section">
                     <div className="panel">
                         <p className="panel-heading"> Timeline Controls </p>
                         <div className="panel-block">
@@ -107,13 +107,13 @@ class Timeline extends Component {
                         </tbody>
                     </table>
                 </div>
-                <div className="column">
-                    <InGameHelper addOrder={this.addOrder}isEdit={this.state.isEdit} justOrders={this.state.justOrders} totalLength={this.state.timeline.length}/> 
+                <div className="column is-6 section">
+                    <InGameHelper id={this.state.id} addOrder={this.addOrder}isEdit={this.state.isEdit} justOrders={this.state.justOrders} totalLength={this.state.timeline.length}/> 
                 </div>
             </div>
         );
     }
-     addSecond() {
+    addSecond() {
         let timeline;
          if(!this.state.isEdit) {
              timeline = this.state.timeline;
@@ -171,6 +171,7 @@ class Timeline extends Component {
             }
             timeline[arrPosOfSecond].order=formatttedOrderToPush;
         this.saveTimelineToDatabase();
+        window.location.reload()
         
     }
     setupTimeline(vals) {

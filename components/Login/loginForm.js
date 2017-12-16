@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Input from './../Input';
+import { Redirect } from 'react-router-dom';
 
 class LoginForm extends Component {
   constructor(props){
@@ -32,12 +33,13 @@ class LoginForm extends Component {
             const buildFormToSubmit = this.state;
             event.preventDefault();
             this.props.loginToServer(buildFormToSubmit);
-            // this.setState({ fireRedirect: true })
+            this.setState({ fireRedirect: true })
         }
 
   } 
   render() {
     const inputsArray = Object.entries(this.props.inputs);
+    const fireRedirect = this.state.fireRedirect
     return (
       <div className="section">
         <article className="container">
@@ -74,6 +76,11 @@ class LoginForm extends Component {
               }
               
             </form>
+                  {
+                    fireRedirect && (
+                      <Redirect to={'/builds'}/>
+                    )
+                  }
             </div>
             <div className="card-footer">
                 <p className="card-footer-item">{this.state.errorMessage}</p>
