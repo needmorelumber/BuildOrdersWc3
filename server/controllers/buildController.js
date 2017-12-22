@@ -24,7 +24,9 @@ var buildController = {};
         if(!id){res.status(400)}
         build_order.findById(id, (err, build) => {
             if(!err && build) {
-                res.status(200).json( {build} );
+                res.status(200).json({build});
+            } else{
+                res.status(200).json(false)
             }
         })
     }

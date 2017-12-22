@@ -29,6 +29,7 @@ export default class BuildList extends React.Component {
                                 <th> Race </th>
                                 <th> Name </th>
                                 <th> Style </th>
+                                <th> Author </th>
                                 <th> Public Stats </th>
                             </tr>
                         </thead>
@@ -39,6 +40,7 @@ export default class BuildList extends React.Component {
                                 <td>{build.race}</td>
                                 <td>{build.name}</td>
                                 <td>{build.build_type}</td>
+                                <td>{build.ownerUsername}</td>
                                 <td>"liked/viewed x times"</td>
                             </tr>
                         ))

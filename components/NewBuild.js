@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link,  Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { newBuild } from '../actions/actions'
+import {newBuild,fetchAndUpdateUser } from '../actions/actions'
 import Input from './Input'
 import './custom.sass';
 
@@ -11,9 +11,11 @@ class NewBuild extends Component {
         super(props);
         // Fields of this form componenet can be found in builds reducer.
         // Form state like message and ui toggles are maintained in react state,
-        this.state = Object.assign({}, props.newBuildForm,{
+        this.state = Object.assign(props.userState, props.newBuildForm, {
             fireRedirect : false,
-            errorMessage: ""
+            fireFailedToBeLoggedInRedirect: false,
+            errorMessage: "",
+            Form: {}
         })
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,12 +35,15 @@ class NewBuild extends Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
+        const nextFormState = {...this.state.Form, [name]: value}
         this.setState({
-                [name]: value
+                Form: nextFormState
             });
     }
     handleSubmit(event) {
-        const state = this.state;
+        const state = this.state.Form;
+        state.ownerId = this.props.userState.user.user._id;
+        state.ownerUsername =  this.props.userState.user.user.username;
         if (!state.name){
             event.preventDefault();
             this.renderErrorMessage("Please name the build", 3000);
@@ -49,7 +54,7 @@ class NewBuild extends Component {
             event.preventDefault();
             this.renderErrorMessage("Race is required", 3000);
         } else {
-            const buildFormToSubmit = this.state;
+            const buildFormToSubmit = this.state.Form;
             event.preventDefault();
             this.props.dispatch(newBuild(buildFormToSubmit))
             this.setState({ fireRedirect: true })
@@ -62,7 +67,8 @@ class NewBuild extends Component {
         const inputsArray = Object.entries(this.state.inputs);
         return (
                 <div className="modal is-active" id="newBuildForm">
-                    <Link to="/builds"><div className="modal-background"></div></Link>
+                { !this.props.userState.user.user && (<Redirect to={'/builds'}/>)}
+                    <div className="modal-background"></div>
                         <div className="modal-card">
                             <header className="modal-card-head"> 
                                 <p className="modal-card-title"> Submit a new build </p>

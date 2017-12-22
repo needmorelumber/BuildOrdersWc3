@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { loginToServer } from './../actions/actions'
+import { loginToServer,updateLoginMessage } from './../actions/actions'
 import Login from '../components/Login/Login';
 
 const mapStateToProps = (state) => {
@@ -11,6 +11,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loginToServer: user => {
       dispatch(loginToServer(user))
+    },
+    updateLoginMessage: message => {
+      dispatch(updateLoginMessage(message))
     }
   }
 }

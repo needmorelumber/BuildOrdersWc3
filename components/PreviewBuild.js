@@ -4,15 +4,19 @@ import data from './../MasterData';
 import path from 'path';
 
 class PreviewBuild extends Component {
-    
     render() {
-        const build = this.props.currentVisibleBuild.item.build;        
-        const buildsRoute= "/build/";
-        const race = this.props.currentVisibleBuild.item.build.race;
-        const iconString = path.join('/assets/icons/', race + '.jpg')
+        var build;
+        if(!this.props.currentVisibleBuild.item.build){
+            build = false
+        } else {
+            build = this.props.currentVisibleBuild.item.build; 
+            var buildsRoute= "/build/";
+            var race = build.race;
+            var iconString = path.join('/assets/icons/', race + '.jpg')
+        }
         return (
             <div className="section">
-            { race 
+            { build._id
             ? 
                 <div className="card">
                     <div className="card-header">

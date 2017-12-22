@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './app.css';
 import api from './../../api';
 import BuildsPage from '../BuildsPage';
@@ -11,7 +12,9 @@ import CurrentBuild from './../CurrentBuild';
 import TimeLineContainer from './../TimeLineContainer';
 import NoMatch from './../../components/noMatch';
 import LoginPage from './../LoginPage';
-import RegisterPage from './../RegisterPage'
+import RegisterPage from './../RegisterPage';
+import UserPage from './../UserPage';
+import AddOrder from './../../components/BuildSingle/AddOrder'
 
 
 const RouteAndSub = (route) => (
@@ -45,6 +48,10 @@ class App extends Component {
         {
           path: '/register',
           component: RegisterPage
+        },
+        {
+          path: '/user/profile',
+          component: UserPage
         }
       ]
     }

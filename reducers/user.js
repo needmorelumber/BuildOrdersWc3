@@ -1,12 +1,15 @@
 import {TRY_LOGIN,
         TRY_REGISTER,
         RESOLVE_LOGIN,
-        RESOLVE_REGISTER
+        RESOLVE_REGISTER,
+        UPDATE_USER, 
+        UPDATE_REG_MESSAGE,
+        UPDATE_LOGIN_MESSAGE
 } from './../actions/actions.js'
 
 const loginFormStateReference = {
-  user: null,
   isFetching: false,
+  message: "",
   inputs:
    {
      "eMail": {
@@ -26,8 +29,8 @@ const loginFormStateReference = {
    }
 }
 const registerFormStateReference = {
-  user: null,
   isFetching: false,
+  message: "",
   inputs:
    {
      "username": {
@@ -68,10 +71,13 @@ export function login(state=loginFormStateReference, action) {
       })
     case RESOLVE_LOGIN:
       return Object.assign({}, state, {
-       isFetching: false,
-       user: action.payload.user
+       isFetching: false
       })
-      default: return state
+    case UPDATE_LOGIN_MESSAGE:
+      return Object.assign({}, state, {
+        message: action.payload.message
+      })
+    default: return state
   }
 }
 export function register(state=registerFormStateReference, action) {
@@ -82,10 +88,26 @@ export function register(state=registerFormStateReference, action) {
       })
     case RESOLVE_REGISTER:
       return Object.assign({}, state, {
-       isFetching: false,
-       user: action.payload.user
+       isFetching: false
+      })
+    case UPDATE_REG_MESSAGE:
+      return Object.assign({}, state, {
+        message: action.payload.message
       })
     default:
       return state
   }
+}
+const defaultUserState = {
+  user: false
+}
+export function userState(state=defaultUserState, action){
+switch(action.type) {
+  case UPDATE_USER:
+    return Object.assign({}, state, {
+      user: action.payload.user
+    })
+  default:
+  return state
+}
 }

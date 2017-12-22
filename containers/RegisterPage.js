@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { registerNewUser } from './../actions/actions'
+import { registerNewUser,updateRegMessage } from './../actions/actions'
 import Register from '../components/Register/Register';
 
 const mapStateToProps = (state) => {
@@ -11,6 +11,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     registerNewUser: user => {
       dispatch(registerNewUser(user))
+    },
+    updateRegMessage: message => {
+      dispatch(updateRegMessage(message))
     }
   }
 }

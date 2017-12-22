@@ -11,7 +11,8 @@ var build_order_schema = new mongoose.Schema({
     analysis: String, 
     vod_link: String,
     patch: String,
-    author: String,
+    ownerId: String,
+    ownerUsername: String,
     build_list: [] // Of build_units
 });
 mongoose.model('build_order', build_order_schema);

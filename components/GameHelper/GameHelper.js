@@ -70,6 +70,9 @@ class GameHelper extends Component {
     })
     window.clearInterval(this.state.timerInterval);
   }
+  checkOwnership(){
+
+  }
   resetWalkthrough(){
     this.setState({
       currentOrder: false,

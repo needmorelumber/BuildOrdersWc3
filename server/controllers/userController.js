@@ -6,7 +6,6 @@ module.exports = (() => {
   return {
     newUser(req, res) {
       let body = req.body;
-      console.log(body)
       if(!body.credentials.username || !body.credentials.eMail || !body.credentials.password || !body.credentials.confirmPassword) {
           // Calling api directly... 
           res.status(404).send({
@@ -24,7 +23,7 @@ module.exports = (() => {
           return;
         }
         if (userFound) {
-          res.status(404).send({
+          res.status(200).send({
             Message: 'Invalid E-mail'
           });
           return;
@@ -40,6 +39,8 @@ module.exports = (() => {
                 if (err) {
                   console.log(err)
                 } else {
+                  req.session.user = userToSave;
+                  userToSave.password = null;
                   res.json({
                     user: userToSave
                   });
@@ -56,32 +57,44 @@ module.exports = (() => {
       let loginInfo=req.body.credentials;
         User.findOne({
           eMail: loginInfo.eMail
-        }, (err, userFound) => {
+          }, (err, userFound) => {
           if (!loginInfo.eMail || !loginInfo.password) {
-            res.json({
-              error: "field_missing"
-            });
+            res.status(200).send({Message: "missing field sneaky"})
           } else if (userFound) {
-            console.log(userFound)
             bcrypt.compare(loginInfo.password, userFound.password, (err, bcryptRes) => {
               if (bcryptRes === true) {
-                console.log('matched and sending')
+                userFound.password = null;
+                req.session.user = userFound;
                 res.json({
                   user: userFound
                 });
               } else {
-                console.log('didnt match')
-                res.status(204).send({
-                  Message: 'User Not Found'
+                res.status(200).send({
+                  Message: 'Credentials Failed, please try again.'
                 });
               }
             });
           } else {
-            res.status(204).send({
+            res.status(200).send({
               Message: 'User Not Found'
             });
           }
         });
+    },
+    getCurrentUserCookie(req, res) {
+      const user = req.session.user;
+      if(user._id){
+        res.json({user: user});
+        }
+      else{
+        res.json({user: false})
+      }
+      
+    },
+    logOut(req, res) {
+      const user = req.session.user ? req.session.user : null
+      req.session.user = {};
+      res.json({loggedOut: true})
     }
   }
 })();

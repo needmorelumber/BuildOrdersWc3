@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import Input from './../Input';
+import LoadingPlaceholder from './../loadingAnimation'
 
 class RegisterForm extends Component {
   constructor(props){
     super(props)
         this.state = Object.assign({}, props.register,{
-            fireRedirect : false,
-            errorMessage: ""
+            fireRedirect : false
         })
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  rendermessage(message, time){
+    this.props.updateRegMessage(message)
+    window.setTimeout(() =>{
+      this.props.updateRegMessage("")
+    }, 3000)
   }
   handleChange(event) {
         const target = event.target;
@@ -19,30 +25,20 @@ class RegisterForm extends Component {
                 [name]: value
             });
   }
-  renderErrorMessage(messageContent, time) {
-        this.setState({
-            errorMessage: messageContent
-        })
-        window.setTimeout(()=>{
-            this.setState({
-                errorMessage: ""
-            })
-        }, time)
-    }
   handleSubmit(event) {
         const state = this.state;
           if(!state.username){
             event.preventDefault();
-            this.renderErrorMessage("Please enter a Username", 3000);
+            this.rendermessage("Please enter a Username", 3000);
         } else if (!state.eMail){
             event.preventDefault();
-            this.renderErrorMessage("Please enter an Email", 3000);
+            this.rendermessage("Please enter an Email", 3000);
         } else if (!state.password || !state.confirmPassword){
             event.preventDefault();
-            this.renderErrorMessage("Enter password and confirm", 3000);
+            this.rendermessage("Enter password and confirm", 3000);
         } else if(state.password !== state.confirmPassword){
             event.preventDefault();
-            this.renderErrorMessage("Passwords do not match", 3000); 
+            this.rendermessage("Passwords do not match", 3000); 
         }
         else {
             const buildFormToSubmit = this.state;
@@ -53,6 +49,7 @@ class RegisterForm extends Component {
 
   } 
   render() {
+    console.log(this.props)
     const inputsArray = Object.entries(this.props.inputs);
     return (
       <div className="section">
@@ -79,19 +76,20 @@ class RegisterForm extends Component {
               })
   
             }
-            
               {
                 this.props.isFetching === false 
                 ? 
                 <button type="submit" value="Submit" className="button is-success">Submit</button> 
                 :
-                <div>Thanks for registering! Waiting for server...</div>
+                <div>
+                Thanks for registering!
+                </div>
                 
               } 
             </form>
             </div>
             <div className="card-footer">
-                <p className="card-footer-item">{this.state.errorMessage}</p>
+                <p className="card-footer-item">{this.props.message}</p>
             </div>
           </div>
         </article>

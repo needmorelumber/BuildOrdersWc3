@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AddOrder from './../BuildSingle/AddOrder';
 import InGameHelper from './../../containers/InGameHelper';
+import { Redirect } from 'react-router-dom'
 
 
 class Timeline extends Component {
@@ -11,11 +12,19 @@ class Timeline extends Component {
             timeline: this.props.build.build_list,
             most_recent_timeline: [],
             isEdit: false,
-            justOrders: this.returnJustOrders(this.props.build.build_list),
             id: this.props.build._id,
         }
         this.addOrder = this.addOrder.bind(this);
     }
+    
+    componentWillMount() {
+        if(this.props.build.build_list){
+            this.setState({
+                justOrders: this.returnJustOrders(this.props.build.build_list)
+            })
+        }
+    }
+    
     updateTimeline(updated){
         this.setState({
             timeline: updated

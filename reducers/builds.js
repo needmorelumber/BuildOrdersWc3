@@ -45,7 +45,7 @@ const buildStateReference = {
     isEdit: false,
     ordersArray: [],
     item: {
-        build: {}
+        build: false
     }
 }
 export function currentVisibleBuild(state = buildStateReference, action) {

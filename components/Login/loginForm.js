@@ -6,11 +6,16 @@ class LoginForm extends Component {
   constructor(props){
     super(props)
         this.state = Object.assign({}, props.login,{
-            fireRedirect : false,
-            errorMessage: ""
+            fireRedirect : false
         })
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  rendermessage(message, time){
+    this.props.updateLoginMessage(message)
+    window.setTimeout(() =>{
+      this.props.updateLoginMessage("")
+    }, 3000)
   }
   handleChange(event) {
         const target = event.target;
@@ -20,20 +25,20 @@ class LoginForm extends Component {
                 [name]: value
             });
   }
+
   handleSubmit(event) {
         const state = this.state;
         if (!state.eMail){
             event.preventDefault();
-            this.renderErrorMessage("Please ", 3000);
+            this.rendermessage("Please Enter Email", 3000);
         } else if (!state.password){
             event.preventDefault();
-            this.renderErrorMessage("Enter password", 3000);
+            this.rendermessage("Enter password", 3000);
         }
         else {
             const buildFormToSubmit = this.state;
             event.preventDefault();
             this.props.loginToServer(buildFormToSubmit);
-            this.setState({ fireRedirect: true })
         }
 
   } 
@@ -77,13 +82,13 @@ class LoginForm extends Component {
               
             </form>
                   {
-                    fireRedirect && (
+                    this.props.message==="Success" && (
                       <Redirect to={'/builds'}/>
                     )
                   }
             </div>
             <div className="card-footer">
-                <p className="card-footer-item">{this.state.errorMessage}</p>
+                <p className="card-footer-item">{this.props.message}</p>
             </div>
           </div>
         </article>

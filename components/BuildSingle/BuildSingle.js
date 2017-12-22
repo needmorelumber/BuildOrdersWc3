@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Timeline from './../Timeline/Timeline'
 import path from 'path';
+import { Redirect } from 'react-router-dom';
+import LoadingPlaceholder from './../loadingAnimation';
+
 
 class BuildSingle extends Component {
     
@@ -9,19 +12,12 @@ class BuildSingle extends Component {
     }
     
     getIdFromPathname(){
-        const pathName = this.props.location.pathname;
-        const length = pathName.length;
-        let idString = '';
-        for(let i=length - 1; i>=0; i--) {
-            if(pathName[i] === '/') {
-                break;
-            }
-            idString += pathName[i];
-        }
-        return(idString.split("").reverse().join(""));
+        return(this.props.match.params.id);
     }
     render() {
-        if(this.props.currentVisibleBuild.item.build._id){
+        const build = this.props.currentVisibleBuild.item.build;
+        const state = this.props.currentVisibleBuild;
+        if(build){
             const race = this.props.currentVisibleBuild.item.build.race;
             const iconString = path.join('/assets/icons/', race + '.jpg')
             return(
@@ -47,10 +43,19 @@ class BuildSingle extends Component {
                                fetchById={this.props.fetchById}/>
                 </div>
             )
-        } else{
-            return(
-                <div>Loading....</div>
+        } else {
+            switch(state.isFetching){
+             case true:
+             default:
+                return(
+                    <LoadingPlaceholder />
             )
+            case false:
+                return(
+                    <div>Could Not find build, sorry!</div>
+                    // <Redirect to="/builds"></Redirect>
+            )
+            }
         }
     }
 }
