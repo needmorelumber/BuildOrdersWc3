@@ -53,7 +53,6 @@ class BuildSingle extends Component {
             case false:
                 return(
                     <div>Could Not find build, sorry!</div>
-                    // <Redirect to="/builds"></Redirect>
             )
             }
         }

@@ -46,14 +46,7 @@ class LoginForm extends Component {
     const inputsArray = Object.entries(this.props.inputs);
     const fireRedirect = this.state.fireRedirect
     return (
-      <div className="section">
-        <article className="container">
-          <div className="card">
-          <div className="card-header">
-            <div className="card-header-title title is-centered">Login</div>
-          </div>
-          <div className="card-content">
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className="go-bottom">
             {
               inputsArray.map((inp, index)=>{
                 return (
@@ -74,25 +67,18 @@ class LoginForm extends Component {
               {
                 this.props.isFetching === false 
                 ? 
-                <button type="submit" value="Submit" className="button is-success">Submit</button> 
+               <button type="submit" className="button is-large is-dark is-block">Login</button>
                 :
                 <div>Loading...</div>
                 
               }
-              
-            </form>
-                  {
+              <p className="card-footer-item">{this.props.message}</p>
+              {
                     this.props.message==="Success" && (
                       <Redirect to={'/builds'}/>
                     )
                   }
-            </div>
-            <div className="card-footer">
-                <p className="card-footer-item">{this.props.message}</p>
-            </div>
-          </div>
-        </article>
-      </div>
+            </form>
     );
   }
 }

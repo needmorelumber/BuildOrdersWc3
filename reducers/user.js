@@ -16,14 +16,14 @@ const loginFormStateReference = {
        name: "eMail",
        label: "E-Mail",
        type: "email",
-       class: "input",
+       class: "input is-large",
        userType: "email"
      },
      "password": {
        name: "password",
        label: "Password",
        type: "password",
-       class: "input",
+       class: "input is-large",
        userType: "password"
      },
    }
@@ -37,28 +37,28 @@ const registerFormStateReference = {
        name: "username",
        label: "Username",
        type: "text",
-       class: "input",
+       class: "input is-large",
        userType: "text"
      },
      "eMail": {
        name: "eMail",
        label: "E-Mail",
        type: "email",
-       class: "input",
+       class: "input is-large",
        userType: "email"
      },
      "password": {
        name: "password",
        label: "Password",
        type: "password",
-       class: "input",
+       class: "input is-large",
        userType: "password"
      },
       "confirmPassword": {
        name: "confirmPassword",
        label: "Confirm Password",
        type: "password",
-       class: "input",
+       class: "input is-large",
        userType: "password"
      }
    }

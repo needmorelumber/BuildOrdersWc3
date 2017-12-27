@@ -82,11 +82,13 @@ module.exports = (() => {
         });
     },
     getCurrentUserCookie(req, res) {
-      const user = req.session.user;
-      if(user._id){
+      const session = req.session;
+      if(session.user){
+        const user = session.user;
         res.json({user: user});
         }
       else{
+        console.log('sending false')
         res.json({user: false})
       }
       

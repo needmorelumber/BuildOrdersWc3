@@ -3,23 +3,22 @@ import Timer from './Timer';
 import NextOrder from './NextOrder';
 import CurrentOrder from './CurrentOrder';
 import AddOrder from './../BuildSingle/AddOrder';
+import LoadingPlaceholder from './../loadingAnimation';
 
 class GameHelper extends Component {
   constructor(props){
     super(props)
     this.state = {
-      build_list: this.props.justOrders,
-      totalLength: this.props.totalLength,
       build_map: this.mapOrdersIntoObjectForTimer(this.props.justOrders),
       curPos: 0,
       currentOrder: false,
       nextOrder: false,
-      ownedByLooker: true,
-      race: this.props.currentVisibleBuild.item.build.race,
+      ownedByLooker: false,
+      justOrders: [],
       timeStampSeconds: new Date(0,0,0,0,0,0,0)
     }
-    
   }
+  
   mapOrdersIntoObjectForTimer(justOrders){
     let mapToReturn={};
     for(let i=0; i<justOrders.length; i++){
@@ -48,17 +47,20 @@ class GameHelper extends Component {
       timerInterval:
         window.setInterval(() => {
           let curpos=this.state.curPos
-          if(curpos === this.state.totalLength) {
+          if(curpos === this.props.totalLength) {
             window.clearInterval(this.state.timerInterval)
           }
           if(this.state.build_map[curpos]){
+            let newOrders = this.props.justOrders.splice(0, 1);
             let order = this.state.build_map[curpos];
             this.setState({
-              currentOrder: order.order
+              currentOrder: order.order,
+              justOrders: newOrders
             })
           }
           this.setState({
             curPos : curpos + 1,
+            nextOrder: this.state.justOrders[1],
             timeStampSeconds: new Date(0,0,0,0,0,curpos,0)
           })
         }, 1000)
@@ -69,9 +71,6 @@ class GameHelper extends Component {
       currentlyTicking: false
     })
     window.clearInterval(this.state.timerInterval);
-  }
-  checkOwnership(){
-
   }
   resetWalkthrough(){
     this.setState({
@@ -85,45 +84,80 @@ class GameHelper extends Component {
     window.clearInterval(this.state.timerInterval);
   }
   render() {
+    if(this.props.userState.user && this.props.currentVisibleBuild.item.build){
+    let user = this.props.userState.user.user;
+    let build = this.props.currentVisibleBuild.item.build;
+    if(this.state.currentlyTicking){
+      return (
+        <div>
+         <Timer timeInGame={this.state.timeStampSeconds}/>
+          <div className="columns">
+                <CurrentOrder race={this.props.currentVisibleBuild.item.build.race} currentOrder={this.state.currentOrder} />
+                <NextOrder race={this.props.currentVisibleBuild.item.build.race} currentOrder={this.state.nextOrder}/> 
+          </div>
+          <div className="row level">
+            <div className="level-left">
+              { !this.state.currentlyTicking
+              ? 
+              <div>
+                <button className="button is-dark level-item" type="" onClick={()=>this.startWalkthrough()}>Start</button>
+              </div>
+              :
+              <div>
+                <button className="button is-info level-item" type="" onClick={()=>this.pauseWalkthrough()}>Pause</button>   
+              </div>
+              }
+              <button className="button is-warning level-item" type="" onClick={()=>this.resetWalkthrough()}>Reset</button>
+              </div>
+            </div>
+        </div>
+      )
+    }
     return (
-      this.state.ownedByLooker === true
+      user._id == build.ownerId
       ?
       <div>
-        <div className="row">
-            {this.state.curPos ? <Timer timeInGame={this.state.timeStampSeconds}/> : null}  
-            {this.state.currentOrder ? <CurrentOrder race={this.state.race} currentOrder={this.state.currentOrder} /> : null}
-            {this.state.nextOrder ? <NextOrder name={this.state.nextOrder.race_unit}/> : null}
-        </div>
       {
         this.props.isEdit === false 
         ? 
-          <div className="row level">
+        <div className="rows">
+          <div className="row">
+            <button className="button is-block is-large is-dark level-item" onClick={()=>this.startWalkthrough()}>Start In Game walkthrough!</button>
+          </div>
+          <div className="row">
+            <AddOrder addOrder={this.props.addOrder} id={this.props.id} fetchById={this.props.fetchById}/>
+          </div>
+        </div>
+        : 
+          <p>View the whole Timeline to start timer</p>
+      }
+      </div>
+      :
+      <div>
+       <div className="row level">
             <div className="level-left">
             { !this.state.currentlyTicking
             ? 
             <div>
-              <button className="button is-dark level-item" type="" onClick={()=>this.startWalkthrough()}>Start</button>
+              <button className="button is-block is-large is-dark level-item" onClick={()=>this.startWalkthrough()}>Start In Game walkthrough!</button>
             </div>
             :
             <div>
               <button className="button is-info level-item" type="" onClick={()=>this.pauseWalkthrough()}>Pause</button>   
             </div>
             }
-            <button className="button is-warning level-item" type="" onClick={()=>this.resetWalkthrough()}>Reset</button>
             </div>
-          </div>
-        : 
-          <p>View the whole Timeline to start timer</p>
-      }
-        <AddOrder addOrder={this.props.addOrder} id={this.props.id} fetchById={this.props.fetchById}/>
       </div>
-      :
-      <div>
-        You can't edit this build.
-        <p>add button that loads this build into new build with curr user as owner</p>
+      <div className="container section content">
+        <h3> Created by {this.props.currentVisibleBuild.item.build.ownerUsername} </h3>
       </div>
-      
+      </div>
     );
+    } else {
+      return (
+        <LoadingPlaceholder />
+      )
+    }
   }
 }
 

@@ -6,7 +6,8 @@
   "proxy": "http://localhost:4200",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server"
+    "start": "concurrently \"webpack-dev-server --open --config webpack.dev.js\" \"nodemon server.js\"",
+    "build": "concurrently \"webpack --config webpack.prod.js\" \"nodemon server.js\""
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,7 @@
     "babel-preset-react": "^6.24.1",
     "bcrypt": "^1.0.3",
     "bulma": "^0.6.1",
+    "concurrently": "^3.5.1",
     "connect-mongo": "^2.0.0",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
@@ -44,11 +46,13 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "webpack": "^3.9.1",
-    "webpack-dev-server": "^2.9.4"
+    "webpack-dev-server": "^2.9.4",
+    "webpack-merge": "^4.1.1"
   }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AddOrder from './../BuildSingle/AddOrder';
 import InGameHelper from './../../containers/InGameHelper';
 import { Redirect } from 'react-router-dom'
+import './timeline.css'
 
 
 class Timeline extends Component {
@@ -79,8 +80,11 @@ class Timeline extends Component {
     render() {
         // Assign the build from props
         return (
-            <div className="columns">
-                <div className="column is-6 section">
+            <div className="rows">
+                <div className="row is-6 container section fixed ">
+                    <InGameHelper id={this.state.id} addOrder={this.addOrder} isEdit={this.state.isEdit} justOrders={this.state.justOrders} totalLength={this.state.timeline.length}/> 
+                </div>
+                <div className="row section">
                     <div className="panel">
                         <p className="panel-heading"> Timeline Controls </p>
                         <div className="panel-block">
@@ -115,9 +119,6 @@ class Timeline extends Component {
                             })}
                         </tbody>
                     </table>
-                </div>
-                <div className="column is-6 section">
-                    <InGameHelper id={this.state.id} addOrder={this.addOrder}isEdit={this.state.isEdit} justOrders={this.state.justOrders} totalLength={this.state.timeline.length}/> 
                 </div>
             </div>
         );
@@ -224,7 +225,6 @@ class Timeline extends Component {
         const id = this.state.id;
         if(this.state.isEdit === true) {
             buildToSend = this.state.most_recent_timeline;
-            console.log(id)
             this.props.updateBuild(buildToSend, id)
             this.updateTimeline(buildToSend);
         } else {

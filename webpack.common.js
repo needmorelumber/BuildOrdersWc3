@@ -1,14 +1,11 @@
 const path = require('path');
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './index.html',
   filename: 'index.html',
   inject: 'body'
 })
-
-
-
 module.exports = {
   entry: './index.js',
   output: {
@@ -36,12 +33,4 @@ module.exports = {
       ]
   },
   plugins: [HtmlWebpackPluginConfig],
-  devServer: {
-    historyApiFallback: true,
-    compress: true,
-    port: 3000,
-    proxy: {
-      "/api": "http://localhost:4200"
-  }
-}
 }

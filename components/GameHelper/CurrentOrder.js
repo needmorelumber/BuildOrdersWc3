@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import data from './../../MasterData';
 import path from 'path'
+import LoadingPlaceholder from './../loadingAnimation'
 
 class CurrentOrder extends Component {
   render() {
     const unitData = data[this.props.race][this.props.currentOrder.race_unit];
+    if(unitData) {
     return (
-      <div className="card">
+      <div className="card column">
         <div className="card-content">
           <div className="media">
             <div className="media-left">
             { unitData && (
-              <figure className="image is-48x48">
+              <figure className="image is-100x100">
                 <img src={unitData.Portrait} alt={unitData.Unit} />
               </figure>
               )
@@ -43,6 +45,11 @@ class CurrentOrder extends Component {
         
       </div>
     );
+    } else {
+      return (
+        <div>Nothing to build</div>
+      )
+    }
   }
 }
 

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import data from './../../MasterData'
 import {fetchAndUpdateUser,logOut} from './../../actions/actions'
-
 class Header extends Component {
     constructor(props) {
         super(props)
@@ -13,16 +12,24 @@ class Header extends Component {
         this.props.fetchUser()
         // console.log(this.props)
     }
+    toggleMenuMobile(){
+        let navMenu = document.getElementById('navMenu');
+        if(navMenu.classList.contains('is-active')){
+            navMenu.classList.remove('is-active')
+        }else {
+            navMenu.classList.add('is-active');
+        }        
+    }
     
     navBarItems(){
         const navBarItems = [
+            {   
+                pathname: "/home",
+                display: "Home"
+            },
             { 
                 pathname: "/builds",
                 display: "Browse Builds"
-            },
-            {   
-                pathname: "/builds",
-                display: "Home"
             }
         ]
         return navBarItems
@@ -30,18 +37,24 @@ class Header extends Component {
     render() {
         const user=this.props.userState.user.user;
         return (
-            <nav className="navbar is-primary">
+            <nav className="navbar is-transparent">
                 <div className="navbar-brand"> 
-                    <Link className="navbar-item" to="/">
+                    <Link className="navbar-item" to="/home">
                     { !user
                         ?
-                        <h1 className="title is-5">Create Warcraft Build Orders</h1>
+                        <h1 className="title is-5">NeedMoreLumber</h1>
                         :                        
                         <p className="title is-5"> Logged in as {user.username}</p>
                     }
                     </Link>
+                    <button className="button is-dark navbar-burger" data-target="navMenu" onClick={this.toggleMenuMobile}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        </button>    
                 </div>
-                <div className="navbar-menu">
+                
+                <div className="navbar-menu" id="navMenu">
                     <div className="navbar-start">
                     {this.navBarItems().map((item, index) => (
                         // to "item" works because of react router object assesment for "to" prop
@@ -51,11 +64,12 @@ class Header extends Component {
                     ))}
                     </div>
                     <div className="navbar-end">
+                    
                         { !user
                             ?
                                 <Link className="navbar-item" to={'/login'}>Login</Link>
                             :
-                                <Link className="navbar-item" to={location.pathname} onClick={this.props.logOut}>Logout</Link>
+                                <Link className="navbar-item" to={'/home'} onClick={this.props.logOut}>Logout</Link>
                         }
                         { !user
                             ?
@@ -68,7 +82,8 @@ class Header extends Component {
                             null
                             :
                                 <Link className="navbar-item" user={user._id} to={'/user/profile'}>Your Profile</Link>
-                        }         
+                        } 
+                            
                     </div>
                 </div>
             </nav>

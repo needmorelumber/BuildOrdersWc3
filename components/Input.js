@@ -9,9 +9,9 @@ class Input extends Component {
             case 'text':
                 return (
                     <div className="field">
-                        <label className="label">{info.label}</label>
                         <div className="control">
-                            <input className={info.class} type={info.type} name={info.name} placeholder={info.label} onChange={info.handleChange} />
+                            <input required className={info.class} type={info.type} name={info.name} placeholder={info.label} onChange={info.handleChange} />
+                            <label className="label">{info.label}</label>
                         </div>
                         <p className="help is-success">{info.message}</p>
                     </div>
@@ -19,9 +19,9 @@ class Input extends Component {
             case 'textarea':
                 return (
                     <div className="field">
-                        <label className="label">{info.label}</label>
                         <div className="control">
                             <textarea className={info.class} type={info.type} name={info.name} placeholder={info.label} onChange={info.handleChange} />
+                            <label className="label">{info.label}</label>
                         </div>
                         <p className="help is-success">{info.message}</p>
                     </div>
@@ -29,7 +29,6 @@ class Input extends Component {
             case 'select':
                 return (
                     <div className="field">
-                        <label className="label">{info.label}</label>
                         <div className="control">
                             <div className={info.class}>
                                 <select name={info.name} type={info.type} onChange={info.handleChange} >
@@ -41,7 +40,9 @@ class Input extends Component {
                                             )
                                         })}
                                 </select>
+                                
                             </div>
+                            <label className="label">{info.label}</label>
                         </div>
                         <p className="help is-success">{info.message}</p>
                     </div>
@@ -49,9 +50,9 @@ class Input extends Component {
             case 'number':
                 return (
                     <div className="field">
-                        <label className="label">{info.label}</label>
                         <div className="control">
-                            <input className={info.class} name={info.name} min="1" type={info.type} onChange={info.handleChange} />
+                            <input required className={info.class} name={info.name} min="1" type={info.type} onChange={info.handleChange} />
+                             <label className="label">{info.label}</label>
                         </div>
                         <p className="help is-success">{info.message}</p>
                     </div>
@@ -59,9 +60,9 @@ class Input extends Component {
             case 'password':
                 return (
                     <div className="field">
-                        <label className="label">{info.label}</label>
                         <div className="control">
-                            <input className={info.class} placeholder={info.label} name={info.name} type={info.type} onChange={info.handleChange} />
+                            <input required className={info.class} placeholder={info.label} name={info.name} type={info.type} onChange={info.handleChange} />
+                            <label className="label">{info.label}</label>
                         </div>
                         <p className="help is-success">{info.message}</p>
                     </div>
@@ -69,9 +70,9 @@ class Input extends Component {
             case 'email':
                 return (
                     <div className="field">
-                        <label className="label">{info.label}</label>
                         <div className="control">
-                            <input placeholder={info.label} className={info.class} name={info.name} type={info.type} onChange={info.handleChange} />
+                            <input required placeholder={info.label} className={info.class} name={info.name} type={info.type} onChange={info.handleChange} />
+                            <label className="label">{info.label}</label>
                         </div>
                         <p className="help is-success">{info.message}</p>
                     </div>
@@ -79,9 +80,8 @@ class Input extends Component {
             case 'datalist':
                 return (
                     <div className="field">
-                        <label className="label">{info.label}</label>
                         <div className="control">
-                            <input className={info.class} name={info.name} type={info.type} onChange={info.handleChange} list={info.list} />
+                            <input required className={info.class} name={info.name} type={info.type} onChange={info.handleChange} list={info.list} />
                             <datalist id={info.list}>
                                 {
                                     info.options.map((o, i) => {
@@ -91,6 +91,7 @@ class Input extends Component {
                                     })
                                 }
                             </datalist>
+                            <label className="label">{info.label}</label>
                         </div>
                     </div>
                 )

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const build_order = mongoose.model('build_order');
+const User = mongoose.model('user');
 
 
 const parseError = (err, res) => {
@@ -34,7 +35,19 @@ var buildController = {};
         const newBuild = new build_order(req.body);
         newBuild.save((error) => {
             if(!error) {
-                res.json({data: true});
+                let sessUser =  req.session.user
+                let id = sessUser._id
+                sessUser.ownedTimelineIds.push(newBuild._id)
+                User.findById(id, (err, user) => {
+                    if(!err && user) {
+                        user.ownedTimelineIds.push(newBuild._id);
+                        user.save();
+                        res.json({data: true});        
+                    }else {
+                       console.log(err)
+                    }
+                })
+                
             } else {
                 console.log(error)
                 parseError(error, res);

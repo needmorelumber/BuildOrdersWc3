@@ -1,5 +1,5 @@
 server/config/**
-server.js
+dist/
 node_modules/**
 .vscode/**
 warcraft.svg

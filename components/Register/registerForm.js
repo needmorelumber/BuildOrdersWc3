@@ -49,16 +49,8 @@ class RegisterForm extends Component {
 
   } 
   render() {
-    console.log(this.props)
     const inputsArray = Object.entries(this.props.inputs);
     return (
-      <div className="section">
-        <article className="container">
-          <div className="card">
-          <div className="card-header">
-            <div className="card-header-title title is-centered">Register new account</div>
-          </div>
-          <div className="card-content">
           <form onSubmit={this.handleSubmit}>
             {
               inputsArray.map((inp, index)=>{
@@ -79,21 +71,15 @@ class RegisterForm extends Component {
               {
                 this.props.isFetching === false 
                 ? 
-                <button type="submit" value="Submit" className="button is-success">Submit</button> 
+                <button type="submit" value="Submit" className="button is-success is-large is-block">Submit</button> 
                 :
                 <div>
                 Thanks for registering!
                 </div>
                 
               } 
+            <p className="card-footer-item">{this.props.message}</p>
             </form>
-            </div>
-            <div className="card-footer">
-                <p className="card-footer-item">{this.props.message}</p>
-            </div>
-          </div>
-        </article>
-      </div>
     );
   }
 }

@@ -43,19 +43,14 @@ export function addOrderForm(state=addOrderStateReference, action) {
   switch(action.type){
     case(UPDATE_CURRENT_BUILD):
     let namesarray = [];
-    if(action.payload.item._id){
-        console.log('DIDNT SKIP THIS')
+    if(action.payload.item){
      const race = action.payload.item.build.race;
      const racearray = Object.entries(data[race]);
-     const buildingsArray = Object.entries(data[race].Buildings)
      for(let i=0; i<racearray.length; i++){
          namesarray.push(racearray[i][0]);
      }
-     for(let i=0; i<buildingsArray.length; i++){
-         namesarray.push(buildingsArray[i][0]);
-     }
      namesarray.splice(0, 1);
-    }
+    } 
     return Object.assign({}, state, {
         inputs: {
             "second": {

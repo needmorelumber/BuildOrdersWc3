@@ -1,3 +1,9 @@
+var path = require('path')
+const returnImageString = (race, building) => {
+  //Buildings are lowercase
+ var imgPath = path.resolve(`./assets/buildings/${race}/${building}.gif`)
+ return imgPath;
+};
 const data = {
   "Human": {
     "Buildings": {
@@ -569,79 +575,89 @@ const data = {
     }
   },
   "Orc": {
-    "Buildings": {
-      "Great Hall": {
-        "Unit": "Great Hall",
-        "Gold": "385",
-        "Lumber": "185",
-        "Build Time": "150"
-      },
-        "Stronghold": {
-        "Unit": "Stronghold",
-        "Gold": "315",
-        "Lumber": "190",
-        "Build Time": "140"
-      },
-        "Fortress": {
-        "Unit": "Fortress",
-        "Gold": "325",
-        "Lumber": "190",
-        "Build Time": "140"
-      },
-        "Barracks": {
-        "Unit": "Barracks",
-        "Gold": "180",
-        "Lumber": "50",
-        "Build Time": "60"
-      },
-        "Altar of Storms": {
-        "Unit": "Altar of Storms",
-        "Gold": "180",
-        "Lumber": "50",
-        "Build Time": "60"
-      },
-        "War Mill": {
-        "Unit": "War Mill",
-        "Gold": "205",
-        "Lumber": "0",
-        "Build Time": "70"
-      },
-        "Beastiary": {
-        "Unit": "Beastiary",
-        "Gold": "145",
-        "Lumber": "140",
-        "Build Time": "60"
-      },
-        "Spirit Lodge": {
-        "Unit": "Spirit Lodge",
-        "Gold": "150",
-        "Lumber": "150",
-        "Build Time": "70"
-      },
-        "Tauren Totem": {
-        "Unit": "Blacksmith",
-        "Gold": "135",
-        "Lumber": "155",
-        "Build Time": "70"
-      },
-        "Voodoo Lounge": {
-        "Unit": "Voodoo Lounge",
-        "Gold": "130",
-        "Lumber": "30",
-        "Build Time": "60"
-      },
-        "Burrow": {
-        "Unit": "Burrow",
-        "Gold": "160",
-        "Lumber": "40",
-        "Build Time": "50"
-      },
-        "Watch Tower": {
-        "Unit": "Watch Tower",
-        "Gold": "110",
-        "Lumber": "80",
-        "Build Time": "55"
+    "Great Hall": {
+    "Unit": "Great Hall",
+    "Gold": "385",
+    "Lumber": "185",
+    "Build Time": "150",
+    "Portrait": returnImageString('Orc', 'greathall')
     },
+    "Stronghold": {
+      "Unit": "Stronghold",
+      "Gold": "315",
+      "Lumber": "190",
+      "Build Time": "140",
+       "Portrait": returnImageString('Orc', 'stronghold')
+    },
+    "Fortress": {
+      "Unit": "Fortress",
+      "Gold": "325",
+      "Lumber": "190",
+      "Build Time": "140",
+       "Portrait": returnImageString('Orc', 'fortress')
+    },
+    "Barracks": {
+      "Unit": "Barracks",
+      "Gold": "180",
+      "Lumber": "50",
+      "Build Time": "60",
+      "Portrait": returnImageString('Orc', 'barracks')
+    },
+    "Altar of Storms": {
+      "Unit": "Altar of Storms",
+      "Gold": "180",
+      "Lumber": "50",
+      "Build Time": "60",
+      "Portrait": returnImageString('Orc', 'altarofstorms')
+    },
+    "War Mill": {
+      "Unit": "War Mill",
+      "Gold": "205",
+      "Lumber": "0",
+      "Build Time": "70",
+      "Portrait": returnImageString('Orc', 'warmill')
+    },
+    "Beastiary": {
+      "Unit": "Beastiary",
+      "Gold": "145",
+      "Lumber": "140",
+      "Build Time": "60",
+      "Portrait": returnImageString('Orc', 'beastiary')
+    },
+    "Spirit Lodge": {
+      "Unit": "Spirit Lodge",
+      "Gold": "150",
+      "Lumber": "150",
+      "Build Time": "70",
+      "Portrait": returnImageString('Orc', 'spiritlodge')
+    },
+    "Tauren Totem": {
+      "Unit": "Blacksmith",
+      "Gold": "135",
+      "Lumber": "155",
+      "Build Time": "70",
+      "Portrait": returnImageString('Orc', 'taurentotem')
+    },
+    "Voodoo Lounge": {
+      "Unit": "Voodoo Lounge",
+      "Gold": "130",
+      "Lumber": "30",
+      "Build Time": "60",
+      "Portrait": returnImageString('Orc', 'voodoolounge')
+    },
+    "Burrow": {
+      "Unit": "Burrow",
+      "Gold": "160",
+      "Lumber": "40",
+      "Build Time": "50",
+      "Portrait": returnImageString('Orc', 'burrow')
+    },
+    "Watch Tower": {
+      "Unit": "Watch Tower",
+      "Gold": "110",
+      "Lumber": "80",
+      "Build Time": "55",
+      "Portrait": returnImageString('Orc', 'watchtower')
     },
     "Peon": {
       "Unit": "Peon",

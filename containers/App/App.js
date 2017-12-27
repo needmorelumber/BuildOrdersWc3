@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Link, Redirect, Switch,CSSTransitionGroup } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './app.css';
 import api from './../../api';
@@ -14,10 +14,12 @@ import NoMatch from './../../components/noMatch';
 import LoginPage from './../LoginPage';
 import RegisterPage from './../RegisterPage';
 import UserPage from './../UserPage';
-import AddOrder from './../../components/BuildSingle/AddOrder'
+import AddOrder from './../../components/BuildSingle/AddOrder';
+import Home from './../../components/Home';
 
 
 const RouteAndSub = (route) => (
+
   <Route path={route.path} render={props => (
       //nesting
     <route.component {...props} routes={route.routes}/>
@@ -28,6 +30,11 @@ class App extends Component {
     super(props);
     this.state = {
       routes: [
+        {
+          path: '/home',
+          exact: true,
+          component: Home
+        },
         {
           path: '/builds/new',
           component: NewBuild
@@ -61,11 +68,17 @@ class App extends Component {
     return (
       <div>
         <Header />
-        {this.state.routes.map((route, i) => {
-          return (
-            <RouteAndSub key={i} {...route}/>
-          )
-        })}
+        <Switch>  
+      <Route exact path="/" render={() => (
+          <Redirect to="/builds"/>
+        )}/>
+          {this.state.routes.map((route, i) => {
+            return (
+                <RouteAndSub key={i} {...route}/>
+            )
+          })}
+        <Route component={NoMatch} />
+        </Switch>
       </div>
     );
   }
