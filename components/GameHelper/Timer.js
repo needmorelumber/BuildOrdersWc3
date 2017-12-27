@@ -5,8 +5,8 @@ class Timer extends Component {
     const timeStamp=this.props.timeInGame.toTimeString().slice(0,8)
     return (
       <div className="section">
-      <p className="subtitle is-4">Time in Game</p>
-        <h1 className="title is-2">{timeStamp}</h1>
+      <p className="title is-3 is-inline">Time in Game</p> &nbsp;·&nbsp;&nbsp;·&nbsp;
+      <h1 className="title is-3 is-inline">{timeStamp}</h1>
       </div>
     );
   }

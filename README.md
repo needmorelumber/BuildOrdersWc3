@@ -1,6 +1,16 @@
-## server info not pushed because this is going to be live.
+## Hey this is www.needMoreLumber.com
 
-## You can pull it locally but you're going to need to write a rough api that calls the controller methods. And you will need to config a mongoosefile with mongodb credentials and the database you want to test on. for more info http://mongoosejs.com/
-## Also you need to write an express server config. then npm install and should be fine. 
+## It's a place to create build orders for warcraft 3, and use those builds to help you in game!!
 
+## Not live yet. Check it out locally by cloning, and running npm install. Must have mongodb running. Next create a config file in /server/config called 'config.js'. Make that look like this... 
+```
+module.exports =  (() => {
+  const config = {
+    dbURI: `Your mongoose connection string`,
+    sessionSecret: 'a secret for your sessions'
+  }
+  return config;
+})();
+```
 
+## Feel free to get in touch

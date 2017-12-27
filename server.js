@@ -8,6 +8,7 @@ const http       = require('http'),
       mongoose   = require('mongoose'),
       MongoStore = require('connect-mongo')(session),
       cookieParser = require('cookie-parser'),
+      config     = require('./server/config/config'),
 	PORT_NUM   = '4200',
       app        = express();
 
@@ -16,7 +17,7 @@ app.use(cookieParser());
 require('./server/config/mongoose.js');
 const db = mongoose.connection;
 app.use(session({
-  secret: '921994BZMN',
+  secret: config.sessionSecret,
   saveUninitialized: true,
   resave: true,
   store: new MongoStore({ mongooseConnection: db })

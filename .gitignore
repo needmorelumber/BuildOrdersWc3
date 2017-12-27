@@ -1,4 +1,4 @@
-server/config/**
+server/config/config.js
 dist/
 node_modules/**
 .vscode/**

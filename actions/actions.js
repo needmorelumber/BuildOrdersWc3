@@ -301,6 +301,7 @@ export function fetchAndUpdateUser() {
         )
         .then(user=>{
             if(user){
+                
                 dispatch(updateUser(user))
             }
         })
