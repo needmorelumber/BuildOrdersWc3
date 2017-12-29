@@ -4,19 +4,33 @@ import NextOrder from './NextOrder';
 import CurrentOrder from './CurrentOrder';
 import AddOrder from './../BuildSingle/AddOrder';
 import LoadingPlaceholder from './../loadingAnimation';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 class GameHelper extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      build_map: this.mapOrdersIntoObjectForTimer(this.props.justOrders),
       curPos: 0,
       currentOrder: false,
       nextOrder: false,
       ownedByLooker: false,
       orderDifference: 0,
+      ordersSeen: 0,
       timeStampSeconds: new Date(0, 0, 0, 0, 0, 0, 0)
     }
+  }
+  
+  componentWillMount() {
+    this.props.fetchById(this.getIdFromPathname()); 
+  }
+  componentWillUnmount() {
+    if(this.state.timerInterval){
+      window.clearInterval(this.state.timerInterval)
+    }
+  }
+  
+  getIdFromPathname(){
+      return(this.props.match.params.id);
   }
   mapOrdersIntoObjectForTimer(justOrders) {
     let mapToReturn = {};
@@ -28,41 +42,50 @@ class GameHelper extends Component {
     }
     return mapToReturn;
   }
-  findAndUpdateNextOrder(currIndex) {
-    const orders = this.props.justOrders;
-    const currentOrder = this.props.justOrders[currIndex];
-    const nextOrder = this.props.justOrders[currIndex + 1];
-    let difference = 0;
-    if(nextOrder && currentOrder){
-      console.log(nextOrder)
-      difference = nextOrder.order.time - currentOrder.order.time;
+  findAndUpdateNextOrder(currIndex, build_map) {
+    const ordersArray = this.props.justOrders;
+    const allSecondsArray = this.props.currentVisibleBuild.item.build.build_list;
+    if (allSecondsArray[currIndex].order) {
+      let currentOrder = allSecondsArray[currIndex];
+      const dataOfUnitFromMap = build_map[currIndex]
+      const newOrderCount = this.state.ordersSeen;
+      if (ordersArray[newOrderCount + 1]) {
+        let nextOrder = ordersArray[newOrderCount + 1];
+        if (nextOrder.order) {
+          this.setState({
+            nextOrder: nextOrder
+          })
+        } 
+      } else {
+        this.setState({ nextOrder: false })
+      }
+      if (currentOrder.order) {
+        this.setState({ currentOrder: currentOrder })
+      }
+      this.setState({
+        ordersSeen: newOrderCount + 1,
+      })
     }
-    this.setState({
-      currentOrder: currentOrder,
-      nextOrder: nextOrder,
-      orderDifference: difference
-    })
   }
   startWalkthrough() {
-    console.log(this.props)
-    this.props.fetchById(this.props.id);
+    const build_map = this.mapOrdersIntoObjectForTimer(this.props.currentVisibleBuild.item.build.build_list);
     this.setState({
       currentlyTicking: true
     })
     this.setState({
       timerInterval:
+      //EVERY SECOND THIS HAPPENS
       window.setInterval(() => {
         let curpos = this.state.curPos
         if (curpos === this.props.totalLength) {
-          console.log(this.props.totalLength)
-          window.clearInterval(this.state.timerInterval)
+          this.resetWalkthrough()
         }
-        if (this.state.build_map[curpos]) {
-          this.findAndUpdateNextOrder(curpos);
+        if (this.props.currentVisibleBuild.item.build.build_list[curpos]) {
+          this.findAndUpdateNextOrder(curpos, build_map);
         }
         this.setState({
           curPos: curpos + 1,
-          timeStampSeconds: new Date(0, 0, 0, 0, 0, curpos, 0)
+          timeStampSeconds: new Date(0, 0, 0, 0, 0, curpos + 1, 0)
         })
       }, 1000)
     })
@@ -80,6 +103,7 @@ class GameHelper extends Component {
       possInWalk: false,
       currentlyTicking: false,
       curPos: 0,
+      ordersSeen: 0,
       timeStampSeconds: new Date(0, 0, 0, 0, 0, 0, 0)
     })
     window.clearInterval(this.state.timerInterval);
@@ -92,12 +116,16 @@ class GameHelper extends Component {
         return (
           <div>
             <Timer timeInGame={this.state.timeStampSeconds} />
-            <div className="columns">
-              <div className="columns">
-                <CurrentOrder race={this.props.currentVisibleBuild.item.build.race} currentOrder={this.state.currentOrder} />
-                <NextOrder difference={this.state.orderDifference}race={this.props.currentVisibleBuild.item.build.race} currentOrder={this.state.nextOrder} />
-              </div>
-              <div className="row level">
+              <div className="rows">
+                <div className="row">
+                  <CurrentOrder race={this.props.currentVisibleBuild.item.build.race} currentOrder=
+                  {this.state.currentOrder} />
+                </div>
+                <div className="row">
+                  <NextOrder pos={this.state.curPos} race={this.props.currentVisibleBuild.item.build.race} currentOrder={this.state.nextOrder} />
+                </div>
+            </div>
+            <div className="level section column">
                 <div className="level-left">
                   {!this.state.currentlyTicking
                     ?
@@ -112,33 +140,12 @@ class GameHelper extends Component {
                   <button className="button is-warning level-item" type="" onClick={() => this.resetWalkthrough()}>Reset</button>
                 </div>
               </div>
-            </div>
           </div>
         )
       }
       return (
-        user._id == build.ownerId
-          ?
           <div>
-            {
-              this.props.isEdit === false
-                ?
-                <div className="columns">
-                  <div className="column container section">
-                    <button className="button is-block is-large is-dark level-item" onClick={() => this.startWalkthrough()}>Start In Game walkthrough!</button>
-                  </div>
-                  <div className="column">
-                    <p className="subtitle">This is your build, edit it here.</p>
-                    <AddOrder addOrder={this.props.addOrder} id={this.props.id} fetchById={this.props.fetchById} />
-                  </div>
-                </div>
-                :
-                <p>View the whole Timeline to start timer</p>
-            }
-          </div>
-          :
-          <div>
-            <div className="row level">
+            <div className="row level hero">
               <div className="level-left">
                 {!this.state.currentlyTicking
                   ?

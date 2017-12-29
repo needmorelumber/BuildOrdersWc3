@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Timeline from './../Timeline/Timeline'
 import path from 'path';
-import { Redirect } from 'react-router-dom';
+import { Redirect,Link } from 'react-router-dom';
 import LoadingPlaceholder from './../loadingAnimation';
 
 
@@ -10,7 +10,6 @@ class BuildSingle extends Component {
     componentWillMount() {
        this.props.fetchById(this.getIdFromPathname());    
     }
-    
     getIdFromPathname(){
         return(this.props.match.params.id);
     }
@@ -34,6 +33,12 @@ class BuildSingle extends Component {
                                 </h1>
                                 <p className="row subtitle">{race}</p>
                             </div>
+                        </div>
+                        <div className="level-item">
+                            <Link to={this.props.match.url + '/playing'}><button className="button is-block is-dark is-large">Real Time walkthrough</button></Link>
+                        </div>
+                        <div className="level-item">
+                        <Link to={this.props.match.url + '/edit'}><button className="button is-block is-dark is-large"> Edit your own version</button></Link>
                         </div>
                         </div>  
                      </section>

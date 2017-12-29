@@ -16,6 +16,8 @@ import RegisterPage from './../RegisterPage';
 import UserPage from './../UserPage';
 import AddOrder from './../../components/BuildSingle/AddOrder';
 import Home from './../../components/Home';
+import InGameHelper from './../InGameHelper';
+import EditBuildPage from './../EditBuildPage';
 
 
 const RouteAndSub = (route) => (
@@ -46,6 +48,7 @@ class App extends Component {
         },
         {
           path: '/build/:id',
+          exact: true,
           component: TimeLineContainer,
         },
         {
@@ -59,7 +62,15 @@ class App extends Component {
         {
           path: '/user/profile',
           component: UserPage
-        }
+        },
+        {
+          path: '/build/:id/playing',
+          component: InGameHelper
+        },
+        {
+          path: '/build/:id/edit',
+          component: EditBuildPage
+        },
       ]
     }
   }

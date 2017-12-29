@@ -13,7 +13,7 @@ class Timeline extends Component {
             timeline: this.props.build.build_list,
             most_recent_timeline: [],
             isEdit: false,
-            id: this.props.build._id,
+            id: this.props.build._id
         }
         this.addOrder = this.addOrder.bind(this);
     }
@@ -25,65 +25,10 @@ class Timeline extends Component {
             })
         }
     }
-    
-    updateTimeline(updated){
-        this.setState({
-            timeline: updated
-        })
-    }
-    renderErrorMessage(message) {
-        this.setState({
-            message: message
-        })
-        window.setTimeout(()=>{
-            this.setState({
-                message: ""
-            })
-        }, 2800)
-
-    }
-    returnJustOrders(buildList) {
-        let newTimeline = [];
-            for (let i = 0; i < buildList.length; i++) {
-                let order = buildList[i].order;
-                if(order){
-                    newTimeline.push(buildList[i])
-                }
-            }
-            return newTimeline
-    } 
-    toggleEmptyLogic(timeline) {
-    const isEdit=this.state.isEdit;
-    if (isEdit) {
-        this.setState({
-            justOrders: this.state.timeline,
-            timeline: this.state.most_recent_timeline,
-            most_recent_timeline: [],
-            isEdit: false
-            })
-    } else {
-    let newTimeline = [];
-          for (let i = 0; i < timeline.length; i++) {
-              let order = timeline[i].order;
-              if(order){
-                  newTimeline.push(timeline[i])
-              }
-          }
-          this.setState({
-              justOrders: newTimeline,
-              most_recent_timeline: timeline,
-              timeline: newTimeline,
-              isEdit: true
-          })
-    }
-    }
     render() {
         // Assign the build from props
         return (
             <div className="rows">
-                <div className="row is-6 container section fixed ">
-                    <InGameHelper id={this.state.id} addOrder={this.addOrder} isEdit={this.state.isEdit} justOrders={this.state.justOrders} totalLength={this.state.timeline.length}/> 
-                </div>
                 <div className="row section">
                     <div className="panel">
                         <p className="panel-heading"> Timeline Controls </p>
@@ -122,6 +67,61 @@ class Timeline extends Component {
                 </div>
             </div>
         );
+    }
+        updateTimeline(updated){
+        this.setState({
+            timeline: updated
+        })
+    }
+    renderErrorMessage(message) {
+        this.setState({
+            message: message
+        })
+        window.setTimeout(()=>{
+            this.setState({
+                message: ""
+            })
+        }, 2800)
+
+    }
+    setTimeLineToLength(lengthInMinutes) {
+        let newTimeline = [];
+        
+    }
+    returnJustOrders(buildList) {
+        let newTimeline = [];
+            for (let i = 0; i < buildList.length; i++) {
+                let order = buildList[i].order;
+                if(order){
+                    newTimeline.push(buildList[i])
+                }
+            }
+            return newTimeline
+    } 
+    toggleEmptyLogic(timeline) {
+    const isEdit=this.state.isEdit;
+    if (isEdit) {
+        this.setState({
+            justOrders: this.state.timeline,
+            timeline: this.state.most_recent_timeline,
+            most_recent_timeline: [],
+            isEdit: false
+            })
+    } else {
+    let newTimeline = [];
+          for (let i = 0; i < timeline.length; i++) {
+              let order = timeline[i].order;
+              if(order){
+                  newTimeline.push(timeline[i])
+              }
+          }
+          this.setState({
+              justOrders: newTimeline,
+              most_recent_timeline: timeline,
+              timeline: newTimeline,
+              isEdit: true
+          })
+    }
     }
     addSecond() {
         let timeline;

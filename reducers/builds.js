@@ -19,55 +19,6 @@ const initialStateReference = {
     isFetching: false,
     items: []
 }
-export function builds(state=initialStateReference, action) {
-    switch (action.type) {
-        case REQUEST_BUILDS:
-            return Object.assign({}, state, {
-                isFetching: true
-            })
-        case RECEIVE_BUILDS:
-            return Object.assign({}, state, {
-                isFetching: false,
-                items: action.payload.items,
-                lastUpdated: action.payload.receivedAt
-            })
-        case SET_VISIBILITY_FILTER:
-            return Object.assign({}, state, {
-                visibilityFilter: action.filter
-            })
-        default:
-            return state
-    }
-
-}
-const buildStateReference = {
-    isFetching: false,
-    isEdit: false,
-    ordersArray: [],
-    item: {
-        build: false
-    }
-}
-export function currentVisibleBuild(state = buildStateReference, action) {
-    switch (action.type) {
-        case REQUEST_BUILD_ID:
-            return Object.assign({}, state, {
-                isFetching: true
-            })
-        case UPDATE_CURRENT_BUILD:
-            return Object.assign({}, state, {
-                isFetching: false,
-                item: action.payload.item
-            })
-        case TOGGLE_EMPTY:
-            return Object.assign({}, state, {
-                isEdit: action.payload.isEdit,
-                item: action.payload.item
-            })
-        default:
-            return state
-    }
-}
 const buildFormStateReference = {
   inputs:
     {
@@ -135,6 +86,56 @@ const buildFormStateReference = {
     isFetching: false
 
 }
+const buildStateReference = {
+    isFetching: false,
+    isEdit: false,
+    ordersArray: [],
+    item: {
+        build: false
+    }
+}
+export function builds(state=initialStateReference, action) {
+    switch (action.type) {
+        case REQUEST_BUILDS:
+            return Object.assign({}, state, {
+                isFetching: true
+            })
+        case RECEIVE_BUILDS:
+            return Object.assign({}, state, {
+                isFetching: false,
+                items: action.payload.items,
+                lastUpdated: action.payload.receivedAt
+            })
+        case SET_VISIBILITY_FILTER:
+            return Object.assign({}, state, {
+                visibilityFilter: action.filter
+            })
+        default:
+            return state
+    }
+
+}
+export function currentVisibleBuild(state = buildStateReference, action) {
+    switch (action.type) {
+        case REQUEST_BUILD_ID:
+            return Object.assign({}, state, {
+                isFetching: true
+            })
+        case UPDATE_CURRENT_BUILD:
+            return Object.assign({}, state, {
+                isFetching: false,
+                item: action.payload.item
+            })
+        case TOGGLE_EMPTY:
+            return Object.assign({}, state, {
+                isEdit: action.payload.isEdit,
+                item: action.payload.item
+            })
+        default:
+            return state
+    }
+}
+
 export function newBuildForm(state=buildFormStateReference, action) {
     switch (action.type) {
         case BEGIN_BUILD_UPLOAD:

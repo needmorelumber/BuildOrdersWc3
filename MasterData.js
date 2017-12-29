@@ -1,7 +1,7 @@
 var path = require('path')
 const returnImageString = (race, building) => {
   //Buildings are lowercase
- var imgPath = path.resolve(`./assets/buildings/${race}/${building}.gif`)
+ var imgPath = path.resolve(`./assets/buildings/${race}/${building}.png`)
  return imgPath;
 };
 const data = {

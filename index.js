@@ -7,7 +7,6 @@ import './index.sass';
 import Root from './containers/Root'
 import warcraftApp from './reducers/index'
 import configureStore from './store/configureStore'
-import { fetchBuilds }from './actions/actions'
 
 
 let store = configureStore(warcraftApp);

@@ -3,6 +3,7 @@ import Input from './../Input';
 import { connect } from 'react-redux';
 import { newOrder } from './../../actions/actions';
 import data from './../../MasterData';
+import './buildSingle.css'
 
 class AddOrder extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class AddOrder extends Component {
   render() {
     const inputsArray = Object.entries(this.state.inputs);
     return (
-      <div className="row">
+    <div className="row section AddOrder">
       <div className="panel">
       <p className="panel-heading">Add Command</p>
         <div className="panel-block">

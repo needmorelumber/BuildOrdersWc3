@@ -170,12 +170,15 @@ export function updateLoginMessage(message){
 
 //VISIBILITY FILTERS
 export const VisibilityFilters = {
-  SHOW_ALL: 'SHOW_ALL'
+  SHOW_ALL: 'SHOW_ALL',
+  SORT_BY_RACE: 'SORT_BY_RACE'
+  
 }
 export function setVisibilityFilter(filter) {
+    console.log(filter)
     return {
         type: SET_VISIBILITY_FILTER,
-        payload: {filter}
+        payload: filter
     }
 }
 export function updateLoginMessageTimed(message){
@@ -301,7 +304,6 @@ export function fetchAndUpdateUser() {
         )
         .then(user=>{
             if(user){
-                
                 dispatch(updateUser(user))
             }
         })

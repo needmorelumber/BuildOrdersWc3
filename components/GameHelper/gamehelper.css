@@ -1,0 +1,26 @@
+.currentOrder{
+  width: 85%;
+  height: 100%;
+  min-width: 85%;
+  min-height: 100%;
+  margin: 0 auto;
+}
+.currentOrderContainer{
+  min-width: 50vw;
+  min-height: 50vh;
+  height: 50vh;
+  width: 50vw;
+}
+.nextOrder{
+  width: 85%;
+  height: 100%;
+  min-width: 85%;
+  min-height: 100%;
+  margin: 0 auto;
+}
+.nextOrderContainer{
+  min-width: 50vw;
+  min-height: 50vh;
+  height: 50vh;
+  width: 50vw;
+}
