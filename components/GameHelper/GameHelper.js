@@ -109,7 +109,7 @@ class GameHelper extends Component {
     window.clearInterval(this.state.timerInterval);
   }
   render() {
-    if (this.props.userState.user && this.props.currentVisibleBuild.item.build) {
+    if (this.props.currentVisibleBuild.item.build) {
       let user = this.props.userState.user.user;
       let build = this.props.currentVisibleBuild.item.build;
       if (this.state.currentlyTicking) {

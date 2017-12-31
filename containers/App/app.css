@@ -1,8 +1,4 @@
 
-html,body {
-  font-family: 'Open Sans', serif;
-  font-size: 16px;
-}
 .hero.is-success {
   background: #F2F6FA;
 }
@@ -18,7 +14,6 @@ html,body {
   padding-bottom: 20px;
 }
 .avatar img {
-  
   background: grey;
   width: 150px;
   height: 128px;

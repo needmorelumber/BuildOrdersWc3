@@ -28,18 +28,7 @@ class Timeline extends Component {
     render() {
         // Assign the build from props
         return (
-            <div className="rows">
-                <div className="row section">
-                    <div className="panel">
-                        <p className="panel-heading"> Timeline Controls </p>
-                        <div className="panel-block">
-                            <p className="help is-danger">{this.state.message}</p>
-                        </div>
-                        <div className="panel-block">
-                            <button className="button is-link is-outlined" onClick={()=>{this.toggleEmptyLogic(this.state.timeline)}}> {this.state.isEdit === true ? 'Show' : 'Hide'} orderless seconds </button>
-                            <button className="button is-link is-outlined" onClick={()=>{this.addSecond()}}> Add Second </button>
-                        </div>     
-                    </div>
+            <div className="section">
                     <table className="table is-fullwidth is-hoverable is-bordered">
                         <thead>
                             <tr>
@@ -64,7 +53,6 @@ class Timeline extends Component {
                             })}
                         </tbody>
                     </table>
-                </div>
             </div>
         );
     }

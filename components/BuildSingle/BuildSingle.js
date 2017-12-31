@@ -16,6 +16,7 @@ class BuildSingle extends Component {
     render() {
         const build = this.props.currentVisibleBuild.item.build;
         const state = this.props.currentVisibleBuild;
+        const user = this.props.userState.user;
         if(build){
             const race = this.props.currentVisibleBuild.item.build.race;
             const iconString = path.join('/assets/icons/', race + '.jpg')
@@ -37,9 +38,14 @@ class BuildSingle extends Component {
                         <div className="level-item">
                             <Link to={this.props.match.url + '/playing'}><button className="button is-block is-dark is-large">Real Time walkthrough</button></Link>
                         </div>
+                        { user.user._id === this.props.currentVisibleBuild.item.build.ownerId
+                        ?
                         <div className="level-item">
-                        <Link to={this.props.match.url + '/edit'}><button className="button is-block is-dark is-large"> Edit your own version</button></Link>
+                            <Link to={this.props.match.url + '/edit'}><button className="button is-block is-dark is-large"> Edit</button></Link>
                         </div>
+                        :
+                        null
+                        }
                         </div>  
                      </section>
                      <Timeline build={this.props.currentVisibleBuild.item.build} 

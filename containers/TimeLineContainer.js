@@ -4,7 +4,8 @@ import { updateBuildById,fetchBuildById, toggleEmpty } from './../actions/action
 
 const mapStateToProps = (state) => {
   return {
-    currentVisibleBuild: state.currentVisibleBuild
+    currentVisibleBuild: state.currentVisibleBuild,
+    userState: state.userState
   }
 }
 

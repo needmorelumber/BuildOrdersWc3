@@ -88,7 +88,7 @@ module.exports = (() => {
         const user = session.user;
         res.json({user: user});
         }else{
-          res.json({user:false})
+          res.json(false)
         }
         }
       else {
