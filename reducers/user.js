@@ -5,7 +5,7 @@ import {TRY_LOGIN,
         UPDATE_USER, 
         UPDATE_REG_MESSAGE,
         UPDATE_LOGIN_MESSAGE
-} from './../actions/actions.js'
+} from './../actions/user'
 
 const loginFormStateReference = {
   isFetching: false,

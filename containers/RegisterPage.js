@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { registerNewUser,updateRegMessage } from './../actions/actions'
+import { registerNewUser,updateRegMessage,updateRegMessageTimed } from './../actions/user'
 import Register from '../components/Register/Register';
 
 const mapStateToProps = (state) => {
@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(registerNewUser(user))
     },
     updateRegMessage: message => {
-      dispatch(updateRegMessage(message))
+      dispatch(updateRegMessageTimed(message))
     }
   }
 }

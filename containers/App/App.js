@@ -18,6 +18,7 @@ import AddOrder from './../../components/BuildSingle/AddOrder';
 import Home from './../../components/Home';
 import InGameHelper from './../InGameHelper';
 import EditBuildPage from './../EditBuildPage';
+import Footer from './../../components/Footer/Footer';
 
 
 const RouteAndSub = (route) => (
@@ -90,7 +91,8 @@ class App extends Component {
           })}
         <Route component={NoMatch} />
         </Switch>
-      </div>
+        <Footer />
+      </div> 
     );
   }
 

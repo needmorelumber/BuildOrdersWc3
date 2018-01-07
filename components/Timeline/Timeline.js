@@ -10,21 +10,13 @@ class Timeline extends Component {
         super(props)
         this.state = {
             message: "",
-            timeline: this.props.build.build_list,
-            most_recent_timeline: [],
-            isEdit: false,
             id: this.props.build._id
         }
-        this.addOrder = this.addOrder.bind(this);
+    }
+    componentWillReceiveProps(nextProps) {
+        console.log('here')
     }
     
-    componentWillMount() {
-        if(this.props.build.build_list){
-            this.setState({
-                justOrders: this.returnJustOrders(this.props.build.build_list)
-            })
-        }
-    }
     render() {
         // Assign the build from props
         return (
@@ -37,7 +29,7 @@ class Timeline extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.timeline.map((second, i) => {
+                            {this.props.build.build_list.map((second, i) => {
                                 return (
                                     <tr key={i + 1}>
                                         <td>
@@ -56,60 +48,10 @@ class Timeline extends Component {
             </div>
         );
     }
-        updateTimeline(updated){
+    updateTimeline(updated){
         this.setState({
             timeline: updated
         })
-    }
-    renderErrorMessage(message) {
-        this.setState({
-            message: message
-        })
-        window.setTimeout(()=>{
-            this.setState({
-                message: ""
-            })
-        }, 2800)
-
-    }
-    setTimeLineToLength(lengthInMinutes) {
-        let newTimeline = [];
-        
-    }
-    returnJustOrders(buildList) {
-        let newTimeline = [];
-            for (let i = 0; i < buildList.length; i++) {
-                let order = buildList[i].order;
-                if(order){
-                    newTimeline.push(buildList[i])
-                }
-            }
-            return newTimeline
-    } 
-    toggleEmptyLogic(timeline) {
-    const isEdit=this.state.isEdit;
-    if (isEdit) {
-        this.setState({
-            justOrders: this.state.timeline,
-            timeline: this.state.most_recent_timeline,
-            most_recent_timeline: [],
-            isEdit: false
-            })
-    } else {
-    let newTimeline = [];
-          for (let i = 0; i < timeline.length; i++) {
-              let order = timeline[i].order;
-              if(order){
-                  newTimeline.push(timeline[i])
-              }
-          }
-          this.setState({
-              justOrders: newTimeline,
-              most_recent_timeline: timeline,
-              timeline: newTimeline,
-              isEdit: true
-          })
-    }
     }
     addSecond() {
         let timeline;
@@ -134,44 +76,7 @@ class Timeline extends Component {
         timeline.splice(lastSecond, 1);
         this.saveTimelineToDatabase();
     }
-    addOrder(order){
-        const isEdit = this.state.isEdit;
-        let timeline;
-        switch(isEdit) {
-            case true:
-                timeline = this.state.most_recent_timeline;
 
-            case false:
-                timeline = this.state.timeline;
-
-        }
-            // Check that the timeline is long enough
-        if(order.second === 0) {
-            this.renderErrorMessage("Game doesn't have 0 second")
-            return;
-        }
-        if(order.second === "" || order.second === undefined) {
-            this.renderErrorMessage("Need to specify a second")
-            return;
-        }
-
-        if(parseInt(order.second) > timeline.length + 1){
-            this.renderErrorMessage("Please Make timeline longer")
-            return;
-        }
-        const arrPosOfSecond = order.second - 1;
-        const formatttedOrderToPush = {
-            race_unit: order.race_unit,
-            count: order.count,
-            time: order.second,
-            notes: order.notes,
-            supply_cost: order.supply_cost,
-            }
-            timeline[arrPosOfSecond].order=formatttedOrderToPush;
-        this.saveTimelineToDatabase();
-        window.location.reload()
-        
-    }
     setupTimeline(vals) {
         let max = 0;
         for (let i = 0; i < vals.length; i++) {
@@ -208,20 +113,7 @@ class Timeline extends Component {
         })
         this.setState({ most_recent_timeline: oldTimeline });
     }
-    saveTimelineToDatabase() {
-        let buildToSend;
-        const id = this.state.id;
-        if(this.state.isEdit === true) {
-            buildToSend = this.state.most_recent_timeline;
-            this.props.updateBuild(buildToSend, id)
-            this.updateTimeline(buildToSend);
-        } else {
-            buildToSend = this.state.timeline;
-            this.props.updateBuild(buildToSend, id)
-            this.updateTimeline(buildToSend);
-        }
-        
-    }
+
 
 }
 export default Timeline;

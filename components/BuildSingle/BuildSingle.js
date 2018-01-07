@@ -21,7 +21,7 @@ class BuildSingle extends Component {
             const race = this.props.currentVisibleBuild.item.build.race;
             const iconString = path.join('/assets/icons/', race + '.jpg')
             return(
-                <div>
+                <div className="section">
                      <section className="hero">
                         <div className="hero-body level"> 
                         <div className="level-left">
@@ -38,11 +38,15 @@ class BuildSingle extends Component {
                         <div className="level-item">
                             <Link to={this.props.match.url + '/playing'}><button className="button is-block is-dark is-large">Real Time walkthrough</button></Link>
                         </div>
-                        { user.user._id === this.props.currentVisibleBuild.item.build.ownerId
+                        {user.user
                         ?
-                        <div className="level-item">
-                            <Link to={this.props.match.url + '/edit'}><button className="button is-block is-dark is-large"> Edit</button></Link>
-                        </div>
+                            user.user._id === this.props.currentVisibleBuild.item.build.ownerId
+                            ?
+                            <div className="level-item">
+                                <Link to={this.props.match.url + '/edit'}><button className="button is-block is-dark is-large"> Edit</button></Link>
+                            </div>
+                            :
+                            null
                         :
                         null
                         }

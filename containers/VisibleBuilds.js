@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import {requestBuilds, fetchBuildById, fetchBuilds} from './../actions/actions'
+import {requestBuilds, fetchBuildById, fetchBuilds} from './../actions/build'
 import BuildList from '../components/BuildList/BuildList'
 
 

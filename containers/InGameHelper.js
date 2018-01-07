@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
 import GameHelper from './../components/GameHelper/GameHelper'
-import { updateBuildById,fetchBuildById, toggleEmpty, fetchAndUpdateUser } from './../actions/actions'
+import { fetchAndUpdateUser } from './../actions/user'
+import { updateBuildById,fetchBuildById, toggleEmpty } from './../actions/build'
+
 
 
 const returnJustOrders=(buildList)=>{

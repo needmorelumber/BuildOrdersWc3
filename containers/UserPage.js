@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import {fetchAndUpdateUser} from './../actions/actions'
+import {fetchAndUpdateUser} from './../actions/user'
 import User from './../components/UserProfile/User'
 
 

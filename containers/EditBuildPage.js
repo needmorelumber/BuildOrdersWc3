@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
-import { fetchBuildById,fetchAndUpdateUser,updateBuildById,toggleEmpty }from './../actions/actions'
+import {fetchAndUpdateUser }from './../actions/user'
+import { fetchBuildById, toggleEmpty, restoreBuild, updateBuildById }from './../actions/build'
 import EditBuild from '../components/EditBuild/EditBuild'
 
 const mapStateToProps = (state) => {
@@ -8,6 +9,7 @@ const mapStateToProps = (state) => {
     userState: state.userState
   }
 }
+
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchById: id => {
@@ -21,6 +23,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     toggleEmpty: (build) => {
       dispatch(toggleEmpty(build))
+    },
+    restoreBuild: () => {
+      dispatch(restoreBuild())
     }
 
   }

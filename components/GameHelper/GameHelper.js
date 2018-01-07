@@ -5,6 +5,7 @@ import CurrentOrder from './CurrentOrder';
 import AddOrder from './../BuildSingle/AddOrder';
 import LoadingPlaceholder from './../loadingAnimation';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import './gamehelper.css';
 
 class GameHelper extends Component {
   constructor(props) {
@@ -67,6 +68,7 @@ class GameHelper extends Component {
       })
     }
   }
+  
   startWalkthrough() {
     const build_map = this.mapOrdersIntoObjectForTimer(this.props.currentVisibleBuild.item.build.build_list);
     this.setState({
@@ -114,15 +116,19 @@ class GameHelper extends Component {
       let build = this.props.currentVisibleBuild.item.build;
       if (this.state.currentlyTicking) {
         return (
-          <div>
+          <div className="section">
             <Timer timeInGame={this.state.timeStampSeconds} />
-              <div className="rows">
-                <div className="row">
-                  <CurrentOrder race={this.props.currentVisibleBuild.item.build.race} currentOrder=
-                  {this.state.currentOrder} />
+              <div className="columns">
+                <div className="column">
+                  <CurrentOrder 
+                    race={this.props.currentVisibleBuild.item.build.race} 
+                    currentOrder={this.state.currentOrder} />
                 </div>
-                <div className="row">
-                  <NextOrder pos={this.state.curPos} race={this.props.currentVisibleBuild.item.build.race} currentOrder={this.state.nextOrder} />
+                <div className="column">
+                  <NextOrder 
+                    pos={this.state.curPos} 
+                    race={this.props.currentVisibleBuild.item.build.race} 
+                    currentOrder={this.state.nextOrder} />
                 </div>
             </div>
             <div className="level section column">
@@ -130,7 +136,7 @@ class GameHelper extends Component {
                   {!this.state.currentlyTicking
                     ?
                     <div>
-                      <button className="button is-dark level-item" type="" onClick={() => this.startWalkthrough()}>Start</button>
+                      <button className="button is-info level-item" type="" onClick={() => this.startWalkthrough()}>Start</button>
                     </div>
                     :
                     <div>
@@ -143,31 +149,26 @@ class GameHelper extends Component {
           </div>
         )
       }
-      return (
-          <div>
-            <div className="row level hero">
-              <div className="level-left">
-                {!this.state.currentlyTicking
-                  ?
-                  <div>
-                    <button className="button is-block is-large is-dark level-item" onClick={() => this.startWalkthrough()}>Start In Game walkthrough!</button>
-                  </div>
-                  :
-                  <div>
-                    <button className="button is-info level-item" type="" onClick={() => this.pauseWalkthrough()}>Pause</button>
-                  </div>
-                }
+        return (
+            <div>
+              <div className="">
+                <div className="">
+                    <div className="">
+                      <button 
+                        className="title is-3 button is-block is-large is-black  startWalkthroughButton" 
+                        onClick={() => this.startWalkthrough()}>
+                         Start In Game walkthrough!
+                      </button>
+                      <h3 className="subtitle is-3 createdBy has-text-white"> Build Created by {this.props.currentVisibleBuild.item.build.ownerUsername} </h3>
+                    </div>
+                </div>
               </div>
             </div>
-            <div className="container section content">
-              <h3> Created by {this.props.currentVisibleBuild.item.build.ownerUsername} </h3>
-            </div>
-          </div>
-      );
-    } else {
-      return (
-        <LoadingPlaceholder />
-      )
+        );
+      } else {
+        return (
+          <LoadingPlaceholder />
+        )
     }
   }
 }

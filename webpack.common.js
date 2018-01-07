@@ -2,16 +2,15 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './index.html',
-  filename: 'index.html',
-  inject: 'body'
+  title: "Need More Lumber",
+  template: "./index.html"
 })
 module.exports = {
   entry: './index.js',
   output: {
-    publicPath: '/',
-    path: path.resolve( __dirname + 'dist'),
-    filename: 'index_bundle.js'
+    path:  __dirname,
+    publicPath: "/",
+    filename: 'bundle.js'
   },
   module: {
     loaders: [
@@ -20,7 +19,18 @@ module.exports = {
         use: [ 'style-loader', 'css-loader' ]
       },
       {
-            test: /\.sass$/,
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
+      },
+      {
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      use: [
+        'url-loader?limit=10000',
+        'img-loader'
+      ]
+      },
+      {
+      test: /\.sass$/,
             use: [{
                 loader: "style-loader" // creates style nodes from JS strings
             }, {

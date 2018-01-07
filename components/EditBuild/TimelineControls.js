@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import {
+  toggleEmpty,
+  restoreBuild,
+  updateBuildById
+} from './../../actions/build.js'
 
 
 
 class ControlsPanel extends Component {
   render() {
+    const isToggled = this.props.isToggled
     return (
       <div className="section">
           <nav className="panel">
@@ -12,7 +18,12 @@ class ControlsPanel extends Component {
               Main Controls
             </p>
             <div className="panel-block">
-              <button className="is-success is-block button"> Toggle Empty Seconds</button>
+            { isToggled === true
+              ?
+                <button className="is-success is-block button" onClick={()=>{this.props.restoreBuild()}}> Restore Timeline </button>
+              :
+                <button className="is-success is-block button" onClick={()=>{this.props.toggleEmpty()}}> Toggle Empty Seconds</button>
+            }
             </div>
             <div className="panel-block">
               <button className="is-success is-block button"> Set Time </button>
@@ -30,7 +41,9 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-
+      updateBuild: (build, id) => {
+        dispatch(updateBuildById(build, id))
+      }
   }
 }
 

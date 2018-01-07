@@ -12,10 +12,7 @@ class LoginForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   rendermessage(message, time){
-    this.props.updateLoginMessage(message)
-    window.setTimeout(() =>{
-      this.props.updateLoginMessage("")
-    }, 3000)
+    this.props.updateLoginMessage(message, time)
   }
   handleChange(event) {
         const target = event.target;

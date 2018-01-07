@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import data from './../../MasterData'
-import {fetchAndUpdateUser,logOut} from './../../actions/actions'
+import {fetchAndUpdateUser,logOut} from './../../actions/user'
 class Header extends Component {
     constructor(props) {
         super(props)

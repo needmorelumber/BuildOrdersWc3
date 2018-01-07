@@ -1,4 +1,7 @@
-import { UPDATE_CURRENT_BUILD } from './../actions/actions'
+import { UPDATE_CURRENT_BUILD,
+         BEGIN_BUILD_UPDATE,
+         RESOLVE_BUILD_UPDATE,
+         UPDATE_ADD_ORDER_MESSAGE } from './../actions/build'
 import data from './../MasterData';
 const addOrderStateReference = {
     inputs:
@@ -37,6 +40,7 @@ const addOrderStateReference = {
         }
     },
     message: "",
+    isFetching: false
 
 }
 export function addOrderForm(state = addOrderStateReference, action) {
@@ -86,6 +90,18 @@ export function addOrderForm(state = addOrderStateReference, action) {
 
                     }
                 }
+            })
+        case BEGIN_BUILD_UPDATE:
+            return Object.assign({}, state, {
+                isFetching: true
+            })
+        case RESOLVE_BUILD_UPDATE:
+            return Object.assign({}, state, {
+                isFetching: false
+            })
+        case UPDATE_ADD_ORDER_MESSAGE:
+            return Object.assign({}, state, {
+                message: action.payload.message
             })
         default:
             return state

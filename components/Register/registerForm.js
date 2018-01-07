@@ -12,10 +12,7 @@ class RegisterForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   rendermessage(message, time){
-    this.props.updateRegMessage(message)
-    window.setTimeout(() =>{
-      this.props.updateRegMessage("")
-    }, 3000)
+    this.props.updateRegMessage(message, time)
   }
   handleChange(event) {
         const target = event.target;

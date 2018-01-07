@@ -1,11 +1,10 @@
 import { connect } from 'react-redux'
 import BuildSingle from './../components/BuildSingle/BuildSingle'
-import { updateBuildById,fetchBuildById, toggleEmpty } from './../actions/actions'
+import { updateBuildById,fetchBuildById, toggleEmpty } from './../actions/build'
 
 const mapStateToProps = (state) => {
   return {
-    currentVisibleBuild: state.currentVisibleBuild,
-    userState: state.userState
+    ...state
   }
 }
 

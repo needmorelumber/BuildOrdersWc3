@@ -21,9 +21,12 @@ class EditBuild extends Component {
     if(build && user){
       if(build.ownerId !== user._id){
         return (
-          <Redirect to='/builds' />
+          <LoadingPlaceholder />
         )
       }
+    const isToggled=this.props.currentVisibleBuild.isToggledOrders;
+    const toggleEmpty=this.props.toggleEmpty;
+    const restoreBuild=this.props.restoreBuild;
     return (
       <div className="columns">
       <StickyContainer className="column">
@@ -37,15 +40,15 @@ class EditBuild extends Component {
               distanceFromBottom,
               calculatedHeight,
               topOffset
-      
             }) => {
               return (
                      <div style={style} >
                         <div className="AddOrder"> 
-                          <AddOrder id={this.props.match.params.id} fetchById={this.props.fetchById} />
+                          <AddOrder 
+                          updateBuild={this.props.updateBuild}/>
                         </div>
                         <div className="TimelineControls">
-                          <TimelineControls />
+                          <TimelineControls toggleEmpty={toggleEmpty} isToggled={isToggled} restoreBuild={restoreBuild}/>
                         </div>  
                     </div>
               )
@@ -54,10 +57,9 @@ class EditBuild extends Component {
         </Sticky>
       </StickyContainer>
       <div className="column">
-        <Timeline             build={this.props.currentVisibleBuild.item.build} 
-                              updateBuild={this.props.updateBuild} 
-                              toggleEmpty={this.props.toggleEmpty}
-                              fetchById={this.props.fetchById}/>
+        <Timeline             
+        build={this.props.currentVisibleBuild.item.build} 
+        fetchById={this.props.fetchById}/>
       </div>
       </div>
     );

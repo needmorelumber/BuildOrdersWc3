@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link,  Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import {newBuild,fetchAndUpdateUser } from '../actions/actions'
+import {newBuild} from '../actions/build'
+import {fetchAndUpdateUser} from '../actions/user'
 import Input from './Input'
 import './custom.sass';
 

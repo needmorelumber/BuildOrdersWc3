@@ -632,7 +632,7 @@ const data = {
       "Portrait": returnImageString('Orc', 'spiritlodge')
     },
     "Tauren Totem": {
-      "Unit": "Blacksmith",
+      "Unit": "Tauren Totem",
       "Gold": "135",
       "Lumber": "155",
       "Build Time": "70",
@@ -1262,7 +1262,7 @@ const data = {
         "Build Time": "70"
       },
         "Tauren Totem": {
-        "Unit": "Blacksmith",
+        "Unit": "Tauren Totem",
         "Gold": "135",
         "Lumber": "155",
         "Build Time": "70"
