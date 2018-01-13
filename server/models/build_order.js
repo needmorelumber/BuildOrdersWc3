@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 var build_order_schema = new mongoose.Schema({
     name: {type: String, required: true},
-    race: {type: String, required: true},
+    race: String,
     opposing_race: String,
     build_type: String,
     title_unit: String,

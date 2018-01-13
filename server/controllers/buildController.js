@@ -13,10 +13,35 @@ const parseError = (err, res) => {
 
 module.exports = (() => {
 var buildController = {};
+    buildController.getBuildPage = (req, res) => {
+        var perPage = 11;
+        var page = req.params.page;
+        var totalBuilds = 11;
+        build_order.find((err, builds) => {
+             if (!err) {
+                 totalBuilds = builds.length
+             }
+        })
+        build_order
+          .find({})
+          .skip((perPage * page) - perPage)
+          .limit(perPage)
+          .exec((err, builds) => {
+              if(!err){
+                  res.json({builds,
+                            totalBuilds: totalBuilds});
+              }
+          })
+    }
     buildController.allBuilds = (req, res) => {
          build_order.find((err, builds) => {
              if (!err) {
-                 res.json(builds);
+                setTimeout(()=>{
+                    res.json(builds);
+                }, 2000)
+                 
+             } else {
+                 res.status(404).send('Could not load builds from database')
              }
          })
     }
@@ -32,6 +57,9 @@ var buildController = {};
         })
     }
     buildController.newBuild = (req, res) => {
+        if(req.body){
+            console.log(req.body)
+        }
         const newBuild = new build_order(req.body);
         newBuild.save((error) => {
             if(!error) {

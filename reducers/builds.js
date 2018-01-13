@@ -9,6 +9,7 @@ import {
   TOGGLE_EMPTY,
   RESTORE_BUILD,
   RESOLVE_BUILD_UPDATE,
+  FAILED_LOADING_BUILDS,
   VisibilityFilters
 } from './../actions/build'
 // Reducer for Builds 
@@ -19,6 +20,8 @@ import {
 const initialStateReference = {
   visibilityFilter: VisibilityFilters.SHOW_ALL,
   isFetching: false,
+  totalBuilds: 11,
+  page: 1,
   items: []
 }
 const buildFormStateReference = {
@@ -93,12 +96,13 @@ const buildStateReference = {
   isEdit: false,
   isToggledOrders: false,
   mostRecentBuild: false,
+  failedToLoad: false,
   item: {
     build: null
   }
 }
  const toggleEmptyLogic = (timeline) => {
-    let item =[]
+    let item=[]
           for (let i = 0; i < timeline.length; i++) {
               let order = timeline[i].order;
               if(order){
@@ -111,14 +115,21 @@ export function builds(state = initialStateReference, action) {
   switch (action.type) {
     case REQUEST_BUILDS:
       return Object.assign({}, state, {
-        isFetching: true
+        isFetching: true,
+        page: action.payload.page
       })
     case RECEIVE_BUILDS:
       return Object.assign({}, state, {
         isFetching: false,
-        items: action.payload.items,
+        items: action.payload.items.builds,
+        totalBuilds: action.payload.items.totalBuilds,
         lastUpdated: action.payload.receivedAt
       })
+    case FAILED_LOADING_BUILDS:
+    return Object.assign({}, state, {
+      failedToLoad: true,
+      isFetching: false 
+    })
     case SET_VISIBILITY_FILTER:
       return Object.assign({}, state, {
         visibilityFilter: action.filter

@@ -19,11 +19,18 @@ const returnJustOrders=(buildList)=>{
 }
 
 const mapStateToProps = (state) => {
-  return {
-    currentVisibleBuild: state.currentVisibleBuild,
-    userState: state.userState,
-    justOrders: returnJustOrders(state.currentVisibleBuild.item.build.build_list),
-    totalLength: state.currentVisibleBuild.item.build.build_list ? state.currentVisibleBuild.item.build.build_list.length : null
+  if(state.currentVisibleBuild.item.build){
+    return {
+      currentVisibleBuild: state.currentVisibleBuild,
+      userState: state.userState,
+      justOrders: returnJustOrders(state.currentVisibleBuild.item.build.build_list),
+      totalLength: state.currentVisibleBuild.item.build.build_list ? state.currentVisibleBuild.item.build.build_list.length : null
+    }
+  } else {
+    return {
+      currentVisibleBuild: state.currentVisibleBuild,
+      userState: state.userState,
+    }
   }
 }
 const mapDispatchToProps = (dispatch) => {

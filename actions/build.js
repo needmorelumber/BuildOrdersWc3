@@ -87,9 +87,12 @@ function resolveBuildUpload(json) {
     }
 }
 export const REQUEST_BUILDS = 'REQUEST_BUILDS';
-function requestBuilds() {
+function requestBuilds(page) {
     return {
-        type: REQUEST_BUILDS
+        type: REQUEST_BUILDS,
+        payload: {
+            page: page
+        }
     }
 }
 export const RECEIVE_BUILDS = 'RECEIVE_BUILDS';
@@ -121,16 +124,33 @@ function updateCurrentBuild(json) {
         }
     }
 }
-export function fetchBuilds() {
+export const NEXT_PAGE_BUILDS = "NEXT_PAGE_BUILDS"
+function nextPage(currPage) {
+    return {
+        type: NEXT_PAGE_BUILDS,
+        payload: {
+            nextPage: currPage + 1
+        }
+    }
+}
+export const FAILED_LOADING_BUILDS = 'FAILED_LOADING_BUILDS';
+function failedLoadingBuilds() {
+    return {
+        type: FAILED_LOADING_BUILDS
+    }
+}
+export function fetchBuilds(currPage) {
     return function (dispatch) {
-        dispatch(requestBuilds())
-        return axios.get(`/api/all_builds`)
+        dispatch(requestBuilds(currPage))
+        return axios.get(`/api/builds_by_page/${currPage}`)
             .then(
-            res => (res.data),
-            err => console.log(err)
+                res => (res.data),
             )
             .then(json => {
                 dispatch(receiveBuilds(json))
+            })
+            .catch((err)=>{
+                console.log(err)
             })
     }
 }
@@ -140,10 +160,12 @@ export function fetchBuildById(id) {
         return axios.post(`/api/get_by_id`, { id })
             .then(
             res => (res.data),
-            err => console.log(err)
             )
             .then(json => {
                 dispatch(updateCurrentBuild(json))
+            })
+            .catch((err)=>{
+                console.log(err)
             })
     }
 }

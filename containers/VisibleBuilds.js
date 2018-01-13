@@ -14,8 +14,8 @@ const mapDispatchToProps = (dispatch) => {
     onBuildClick: id => {
       dispatch(fetchBuildById(id))
     },
-    fetchBuilds: () => {
-      dispatch(fetchBuilds())
+    fetchBuilds: (page) => {
+      dispatch(fetchBuilds(page))
     }
     
   }

@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools, devToolsEnhancer } from 'redux-devtools-extension';
-import api from './../api'
 import warcraftApp from '../reducers'
 import DevTools from '../containers/DevTools'
 import thunkMiddleware from 'redux-thunk'

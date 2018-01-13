@@ -1,84 +1,95 @@
 var path = require('path')
 const returnImageString = (race, building) => {
   //Buildings are lowercase
- var imgPath = path.resolve(`./assets/buildings/${race}/${building}.png`)
- return imgPath;
+  var imgPath = path.resolve(`./assets/buildings/${race}/${building}.png`)
+  return imgPath;
 };
+
 const data = {
   "Human": {
-    "Buildings": {
-      "Town Hall": {
-        "Unit": "Town Hall",
-        "Gold": "385",
-        "Lumber": "205",
-        "Build Time": "180"
-      },
-        "Keep": {
-        "Unit": "Keep",
-        "Gold": "320",
-        "Lumber": "210",
-        "Build Time": "140"
-      },
-        "Castle": {
-        "Unit": "Castle",
-        "Gold": "360",
-        "Lumber": "210",
-        "Build Time": "140"
-      },
-        "Barracks": {
-        "Unit": "Barracks",
-        "Gold": "160",
-        "Lumber": "60",
-        "Build Time": "60"
-      },
-        "Farm": {
-        "Unit": "Farm",
-        "Gold": "80",
-        "Lumber": "20",
-        "Build Time": "35"
-      },
-        "Altar of Kings": {
-        "Unit": "Town Hall",
-        "Gold": "180",
-        "Lumber": "50",
-        "Build Time": "180"
-      },
-        "Lumber Mill": {
-        "Unit": "Lumber Mill",
-        "Gold": "120",
-        "Lumber": "0",
-        "Build Time": "60"
-      },
-        "Scout Tower": {
-        "Unit": "Farm",
-        "Gold": "30",
-        "Lumber": "20",
-        "Build Time": "35"
-      },
-        "Blacksmith": {
-        "Unit": "Blacksmith",
-        "Gold": "140",
-        "Lumber": "60",
-        "Build Time": "70"
-      },
-        "Workshop": {
-        "Unit": "Workshop",
-        "Gold": "140",
-        "Lumber": "140",
-        "Build Time": "60"
-      },
-        "Arcane Sanctum": {
-        "Unit": "Farm",
-        "Gold": "150",
-        "Lumber": "140",
-        "Build Time": "70"
-      },
-        "Gryphon Avlary": {
-        "Unit": "Farm",
-        "Gold": "140",
-        "Lumber": "150",
-        "Build Time": "75"
-      },
+    "Town Hall": {
+      "Unit": "Town Hall",
+      "Gold": "385",
+      "Lumber": "205",
+      "Build Time": "180",
+      "Portrait": returnImageString('Human', 'townhall')
+    },
+    "Keep": {
+      "Unit": "Keep",
+      "Gold": "320",
+      "Lumber": "210",
+      "Build Time": "140",
+      "Portrait": returnImageString('Human', 'keep')
+    },
+    "Castle": {
+      "Unit": "Castle",
+      "Gold": "360",
+      "Lumber": "210",
+      "Build Time": "140",
+      "Portrait": returnImageString('Human', 'castle')
+    },
+    "Barracks": {
+      "Unit": "Barracks",
+      "Gold": "160",
+      "Lumber": "60",
+      "Build Time": "60",
+      "Portrait": returnImageString('Human', 'barracks')
+    },
+    "Farm": {
+      "Unit": "Farm",
+      "Gold": "80",
+      "Lumber": "20",
+      "Build Time": "35",
+      "Portrait": returnImageString('Human', 'farm')
+    },
+    "Altar of Kings": {
+      "Unit": "Town Hall",
+      "Gold": "180",
+      "Lumber": "50",
+      "Build Time": "180",
+      "Portrait": returnImageString('Human', 'altarofkings')
+    },
+    "Lumber Mill": {
+      "Unit": "Lumber Mill",
+      "Gold": "120",
+      "Lumber": "0",
+      "Build Time": "60",
+      "Portrait": returnImageString('Human', 'lumbermill')
+    },
+    "Scout Tower": {
+      "Unit": "Farm",
+      "Gold": "30",
+      "Lumber": "20",
+      "Build Time": "35",
+      "Portrait": returnImageString('Human', 'scouttower')
+    },
+    "Blacksmith": {
+      "Unit": "Blacksmith",
+      "Gold": "140",
+      "Lumber": "60",
+      "Build Time": "70",
+      "Portrait": returnImageString('Human', 'blacksmith')
+    },
+    "Workshop": {
+      "Unit": "Workshop",
+      "Gold": "140",
+      "Lumber": "140",
+      "Build Time": "60",
+      "Portrait": returnImageString('Human', 'workshop')
+    },
+    "Arcane Sanctum": {
+      "Unit": "Farm",
+      "Gold": "150",
+      "Lumber": "140",
+      "Build Time": "70",
+      "Portrait": returnImageString('Human', 'arcanesanctum')
+    },
+    "Gryphon Avlary": {
+      "Unit": "Farm",
+      "Gold": "140",
+      "Lumber": "150",
+      "Build Time": "75",
+      "Portrait": returnImageString('Human', 'gryphonavlary')
     },
     "Peasant": {
       "Unit": "Peasant",
@@ -576,25 +587,25 @@ const data = {
   },
   "Orc": {
     "Great Hall": {
-    "Unit": "Great Hall",
-    "Gold": "385",
-    "Lumber": "185",
-    "Build Time": "150",
-    "Portrait": returnImageString('Orc', 'greathall')
+      "Unit": "Great Hall",
+      "Gold": "385",
+      "Lumber": "185",
+      "Build Time": "150",
+      "Portrait": returnImageString('Orc', 'greathall')
     },
     "Stronghold": {
       "Unit": "Stronghold",
       "Gold": "315",
       "Lumber": "190",
       "Build Time": "140",
-       "Portrait": returnImageString('Orc', 'stronghold')
+      "Portrait": returnImageString('Orc', 'stronghold')
     },
     "Fortress": {
       "Unit": "Fortress",
       "Gold": "325",
       "Lumber": "190",
       "Build Time": "140",
-       "Portrait": returnImageString('Orc', 'fortress')
+      "Portrait": returnImageString('Orc', 'fortress')
     },
     "Barracks": {
       "Unit": "Barracks",
@@ -1212,79 +1223,88 @@ const data = {
     }
   },
   "Undead": {
-    "Buildings": {
-      "Great Hall": {
-        "Unit": "Great Hall",
-        "Gold": "385",
-        "Lumber": "185",
-        "Build Time": "150"
-      },
-        "Stronghold": {
-        "Unit": "Stronghold",
-        "Gold": "315",
-        "Lumber": "190",
-        "Build Time": "140"
-      },
-        "Fortress": {
-        "Unit": "Fortress",
-        "Gold": "325",
-        "Lumber": "190",
-        "Build Time": "140"
-      },
-        "Barracks": {
-        "Unit": "Barracks",
-        "Gold": "180",
-        "Lumber": "50",
-        "Build Time": "60"
-      },
-        "Altar of Storms": {
-        "Unit": "Altar of Storms",
-        "Gold": "180",
-        "Lumber": "50",
-        "Build Time": "60"
-      },
-        "War Mill": {
-        "Unit": "War Mill",
-        "Gold": "205",
-        "Lumber": "0",
-        "Build Time": "70"
-      },
-        "Beastiary": {
-        "Unit": "Beastiary",
-        "Gold": "145",
-        "Lumber": "140",
-        "Build Time": "60"
-      },
-        "Spirit Lodge": {
-        "Unit": "Spirit Lodge",
-        "Gold": "150",
-        "Lumber": "150",
-        "Build Time": "70"
-      },
-        "Tauren Totem": {
-        "Unit": "Tauren Totem",
-        "Gold": "135",
-        "Lumber": "155",
-        "Build Time": "70"
-      },
-        "Voodoo Lounge": {
-        "Unit": "Voodoo Lounge",
-        "Gold": "130",
-        "Lumber": "30",
-        "Build Time": "60"
-      },
-        "Burrow": {
-        "Unit": "Burrow",
-        "Gold": "160",
-        "Lumber": "40",
-        "Build Time": "50"
-      },
-        "Watch Tower": {
-        "Unit": "Watch Tower",
-        "Gold": "110",
-        "Lumber": "80",
-        "Build Time": "55"
+    "Necropolis": {
+      "Unit": "Necropolis",
+      "Gold": "255",
+      "Lumber": "220",
+      "Build Time": "100",
+      "Portrait": returnImageString('Undead', 'necropolis')
     },
+    "Halls of the dead": {
+      "Unit": "Halls of the Dead",
+      "Gold": "320",
+      "Lumber": "210",
+      "Build Time": "100",
+      "Portrait": returnImageString('Undead', 'hallsofthedead')
+    },
+    "Black Citadel": {
+      "Unit": "Black Citadel",
+      "Gold": "325",
+      "Lumber": "230",
+      "Build Time": "140",
+      "Portrait": returnImageString('Undead', 'blackcitadel')
+    },
+    "Crypt": {
+      "Unit": "Crypt",
+      "Gold": "200",
+      "Lumber": "50",
+      "Build Time": "140",
+      "Portrait": returnImageString('Undead', 'crypt')
+    },
+    "Ziggurat": {
+      "Unit": "Ziggurat",
+      "Gold": "150",
+      "Lumber": "50",
+      "Build Time": "50",
+      "Portrait": returnImageString('Undead', 'ziggurat')
+    },
+    "Altar of Darkness": {
+      "Unit": "Altar of Darkness",
+      "Gold": "180",
+      "Lumber": "50",
+      "Build Time": "60",
+      "Portrait": returnImageString('Undead', 'altarofdarkness')
+    },
+    "Graveyard": {
+      "Unit": "Graveyard",
+      "Gold": "215",
+      "Lumber": "0",
+      "Build Time": "60",
+      "Portrait": returnImageString('Undead', 'graveyard')
+    },
+    "Slaughterhouse": {
+      "Unit": "Slaughterhouse",
+      "Gold": "140",
+      "Lumber": "135",
+      "Build Time": "60",
+      "Portrait": returnImageString('Undead', 'slaughterhouse')
+    },
+    "Temple of the Damned": {
+      "Unit": "Temple of the Damned",
+      "Gold": "155",
+      "Lumber": "140",
+      "Build Time": "60",
+      "Portrait": returnImageString('Undead', 'templeofthedamned')
+    },
+    "Sacrificial Pit": {
+      "Unit": "Sacrificial Pit",
+      "Gold": "75",
+      "Lumber": "150",
+      "Build Time": "45",
+      "Portrait": returnImageString('Undead', 'sacrificialpit')
+    },
+    "Boneyard": {
+      "Unit": "Boneyard",
+      "Gold": "175",
+      "Lumber": "200",
+      "Build Time": "70",
+      "Portrait": returnImageString('Undead', 'boneyard')
+    },
+    "Tomb of Relics": {
+      "Unit": "Tomb of Relics",
+      "Gold": "130",
+      "Lumber": "30",
+      "Build Time": "60"
     },
     "Acolyte": {
       "Unit": "Acolyte",
@@ -1810,9 +1830,90 @@ const data = {
     }
   },
   "Night Elf": {
-    "Buildings": [
-
-    ],
+    "Tree of Life": {
+      "Unit": "Tree of life",
+      "Gold": "340",
+      "Lumber": "185",
+      "Build Time": "120",
+      "Portrait": returnImageString('Night Elf', 'treeoflife')
+    },
+    "Tree of Ages": {
+      "Unit": "Tree of Ages",
+      "Gold": "320",
+      "Lumber": "180",
+      "Build Time": "140",
+      "Portrait": returnImageString('Night Elf', 'treeofages')
+    },
+    "Tree of Eternity": {
+      "Unit": "Tree of Eternity",
+      "Gold": "330",
+      "Lumber": "200",
+      "Build Time": "140",
+      "Portrait": returnImageString('Night Elf', 'treeofeternity')
+    },
+    "Ancient of War": {
+      "Unit": "Ancient Of War",
+      "Gold": "150",
+      "Lumber": "60",
+      "Build Time": "60",
+      "Portrait": returnImageString('Night Elf', 'ancientofwar')
+    },
+    "Ancient of Lore": {
+      "Unit": "Ancient of Lore",
+      "Gold": "155",
+      "Lumber": "145",
+      "Build Time": "70",
+      "Portrait": returnImageString('Night Elf', 'ancientoflore')
+    },
+    "Ancient of Wind": {
+      "Unit": "Ancient of Wind",
+      "Gold": "150",
+      "Lumber": "140",
+      "Build Time": "60",
+      "Portrait": returnImageString('Night Elf', 'ancientofwind')
+    },
+    "Ancient of Wonders": {
+      "Unit": "Ancient of Wonders",
+      "Gold": "90",
+      "Lumber": "30",
+      "Build Time": "60",
+      // "Portrait": returnImageString('Night Elf', 'ancientofwar')
+    },
+    "Moon Well": {
+      "Unit": "Moon Well",
+      "Gold": "180",
+      "Lumber": "40",
+      "Build Time": "50",
+      "Portrait": returnImageString('Night Elf', 'moonwell')
+    },
+    "Altar of Elders": {
+      "Unit": "Altar of Elders",
+      "Gold": "180",
+      "Lumber": "155",
+      "Build Time": "60",
+      "Portrait": returnImageString('Night Elf', 'altarofelders')
+    },
+    "Hunters Hall": {
+      "Unit": "Hunters Hall",
+      "Gold": "180",
+      "Lumber": "100",
+      "Build Time": "60",
+      "Portrait": returnImageString('Night Elf', 'huntershall')
+    },
+    "Chimaera Roost": {
+      "Unit": "Chimaera Roost",
+      "Gold": "140",
+      "Lumber": "190",
+      "Build Time": "80",
+      "Portrait": returnImageString('Night Elf', 'chimaeraroost')
+    },
+    "Watch Tower": {
+      "Unit": "Watch Tower",
+      "Gold": "110",
+      "Lumber": "80",
+      "Build Time": "55",
+      "Portrait": returnImageString('Night Elf', 'watchtower')
+    },
     "Wisp": {
       "Unit": "Wisp",
       "Gold": "60",
@@ -2307,6 +2408,12 @@ const data = {
       "Portrait": "http://classic.battle.net/war3/images/nightelf/units/portraits/spiritofvengeance.gif"
     }
   }
-  }
-  
+}
+
+//  const racearray = Object.entries(data['Undead']['Buildings']);
+// for (let i = 0; i < racearray.length; i++) {
+//           let building = racearray[i][0].replace(" ", "").replace(" ", "").toLowerCase();
+//           window.open(`http://classic.battle.net/war3/undead/buildings/${building}.shtml`,'_blank');
+
+//     }  
 export default data;

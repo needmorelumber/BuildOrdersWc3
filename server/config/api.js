@@ -6,11 +6,12 @@ const buildController = require('./../controllers/buildController'),
 
 /////// API ////////
 
-// Get All 
+routes.get('/builds_by_page/:page', (req, res) => {
+    buildController.getBuildPage(req, res);
+})
 routes.get('/all_builds', (req, res) => {
     buildController.allBuilds(req, res);
 })
-// New Build
 routes.post('/new_build', (req, res) => {
     buildController.newBuild(req, res);
 })

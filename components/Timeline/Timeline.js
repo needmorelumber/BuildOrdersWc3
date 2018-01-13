@@ -13,10 +13,6 @@ class Timeline extends Component {
             id: this.props.build._id
         }
     }
-    componentWillReceiveProps(nextProps) {
-        console.log('here')
-    }
-    
     render() {
         // Assign the build from props
         return (

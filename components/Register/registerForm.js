@@ -24,6 +24,7 @@ class RegisterForm extends Component {
   }
   handleSubmit(event) {
         const state = this.state;
+        var passReg = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$');
           if(!state.username){
             event.preventDefault();
             this.rendermessage("Please enter a Username", 3000);
@@ -36,6 +37,9 @@ class RegisterForm extends Component {
         } else if(state.password !== state.confirmPassword){
             event.preventDefault();
             this.rendermessage("Passwords do not match", 3000); 
+        } else if (!state.password.match(passReg)[0]){
+            event.preventDefault();
+            this.rendermessage("Password must be at least 8 letters long, and contain a number, a (capitol) letter, and a special character", 3000);
         }
         else {
             const buildFormToSubmit = this.state;

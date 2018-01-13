@@ -6,7 +6,7 @@ class NoMatch extends Component {
     return (
       <div className="container section content">
        <h1> Wha' is it? Page can not be found </h1>
-       <Link to="/Builds"> Go Back to browsing builds </Link>  
+       <Link to="/builds"> Go Back to browsing builds </Link>  
       </div>
     );
   }

@@ -17,12 +17,11 @@ module.exports = (() => {
       eMail: body.credentials.eMail
       }, (err, userFound) => {
         if (err) {
-          res.status(404).send({
-            Message: err
-          });
+          res.status(500).send('Database Error');
           return;
         }
         if (userFound) {
+          // Indicates that the E-mail is already in use
           res.status(200).send({
             Message: 'Invalid E-mail'
           });
@@ -100,6 +99,9 @@ module.exports = (() => {
       const user = req.session.user ? req.session.user : null
       req.session.user = {};
       res.json({loggedOut: true})
+    },
+    getBuildsForUser(req, res) {
+      const user = req.session.user ? req.session.user : null
     }
   }
 })();

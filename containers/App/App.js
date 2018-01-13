@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Link, Redirect, Switch,CSSTransitionGroup } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './app.css';
-import api from './../../api';
 import BuildsPage from '../BuildsPage';
 import HomePage from '../HomePage';
 import { normalize, schema } from 'normalizr';

@@ -19,6 +19,7 @@ class GameHelper extends Component {
       ordersSeen: 0,
       timeStampSeconds: new Date(0, 0, 0, 0, 0, 0, 0)
     }
+    console.log(this.props)
   }
   
   componentWillMount() {
@@ -72,7 +73,8 @@ class GameHelper extends Component {
   startWalkthrough() {
     const build_map = this.mapOrdersIntoObjectForTimer(this.props.currentVisibleBuild.item.build.build_list);
     this.setState({
-      currentlyTicking: true
+      currentlyTicking: true,
+      nextOrder: this.props.justOrders[0]
     })
     this.setState({
       timerInterval:
@@ -101,7 +103,7 @@ class GameHelper extends Component {
   resetWalkthrough() {
     this.setState({
       currentOrder: false,
-      nextOrder: false,
+      nextOrder: this.props.justOrders[0],
       possInWalk: false,
       currentlyTicking: false,
       curPos: 0,
