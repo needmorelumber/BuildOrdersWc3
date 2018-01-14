@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import data from './../../MasterData';
-import './gamehelper.css'
+import './gamehelper.sass'
 
 class CurrentOrder extends Component {
   render() {

@@ -10,9 +10,10 @@ import {
 
 class ControlsPanel extends Component {
   render() {
+    const build = this.props.currentVisibleBuild.item.build;
     const isToggled = this.props.isToggled
     return (
-      <div className="section">
+      <div className="">
           <nav className="panel">
             <p className="panel-heading">
               Main Controls
@@ -26,7 +27,7 @@ class ControlsPanel extends Component {
             }
             </div>
             <div className="panel-block">
-              <button className="is-success is-block button"> Set Time </button>
+              <button onClick={()=>{this.props.addMinute(build)}}className="is-success is-block button"> Add Minute </button>
             </div>
           </nav>
       </div>

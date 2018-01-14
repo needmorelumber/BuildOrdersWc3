@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Input from './../Input';
 import { Redirect } from 'react-router-dom';
 
+
 class LoginForm extends Component {
   constructor(props){
     super(props)
@@ -22,7 +23,7 @@ class LoginForm extends Component {
                 [name]: value
             });
   }
-
+  
   handleSubmit(event) {
         const state = this.state;
         if (!state.eMail){
@@ -43,7 +44,7 @@ class LoginForm extends Component {
     const inputsArray = Object.entries(this.props.inputs);
     const fireRedirect = this.state.fireRedirect
     return (
-          <form onSubmit={this.handleSubmit} className="go-bottom">
+          <form onSubmit={this.handleSubmit} id="loginForm" className="go-bottom">
             {
               inputsArray.map((inp, index)=>{
                 return (

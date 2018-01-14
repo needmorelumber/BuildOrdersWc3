@@ -30,7 +30,10 @@ var buildController = {};
               if(!err){
                   res.json({builds,
                             totalBuilds: totalBuilds});
-              }
+                // console.log(builds)
+              } else {
+                 res.status(404).send('Could not load builds from database')
+             }
           })
     }
     buildController.allBuilds = (req, res) => {

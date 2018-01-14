@@ -5,15 +5,19 @@ import Timeline from './../Timeline/Timeline';
 import AddOrder from './../BuildSingle/AddOrder';
 import TimelineControls from './TimelineControls';
 import { StickyContainer, Sticky} from 'react-sticky';
-
-import './editbuild.css';
+import './editbuild.sass';
 
 class EditBuild extends Component {
   
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchById(this.props.match.params.id);
     this.props.fetchAndUpdateUser();
   }
+componentWillUpdate(nextProps, nextState) {
+  console.log(nextProps)
+}
+
+ 
   
   render() {
     let user=this.props.userState.user.user;
@@ -27,6 +31,7 @@ class EditBuild extends Component {
     const isToggled=this.props.currentVisibleBuild.isToggledOrders;
     const toggleEmpty=this.props.toggleEmpty;
     const restoreBuild=this.props.restoreBuild;
+    const addMinute=this.props.addMinute;
     return (
       <div className="columns">
       <StickyContainer className="column">
@@ -48,7 +53,7 @@ class EditBuild extends Component {
                           updateBuild={this.props.updateBuild}/>
                         </div>
                         <div className="TimelineControls">
-                          <TimelineControls toggleEmpty={toggleEmpty} isToggled={isToggled} restoreBuild={restoreBuild}/>
+                          <TimelineControls toggleEmpty={toggleEmpty} isToggled={isToggled} restoreBuild={restoreBuild} addMinute={addMinute}/>
                         </div>  
                     </div>
               )

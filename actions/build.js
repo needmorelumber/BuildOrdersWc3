@@ -22,6 +22,12 @@ export function toggleEmpty() {
         }
     }
 }
+export const ADD_MINUTE = "ADD_MINUTE"
+export function addMinute() {
+    return {
+        type: ADD_MINUTE
+    }
+}
 export const RESTORE_BUILD = "RESTORE_BUILD";
 export function restoreBuild() {
     return {
@@ -139,6 +145,15 @@ function failedLoadingBuilds() {
         type: FAILED_LOADING_BUILDS
     }
 }
+export const UPDATE_ADD_ORDER_MESSAGE = "UPDATE_ADD_ORDER_MESSAGE";
+export function updateAddOrderMessage(message){
+    return{
+        type: UPDATE_ADD_ORDER_MESSAGE,
+        payload: {
+            message: message
+        }
+    }
+}
 export function fetchBuilds(currPage) {
     return function (dispatch) {
         dispatch(requestBuilds(currPage))
@@ -150,7 +165,7 @@ export function fetchBuilds(currPage) {
                 dispatch(receiveBuilds(json))
             })
             .catch((err)=>{
-                console.log(err)
+                dispatch(failedLoadingBuilds())
             })
     }
 }
@@ -196,15 +211,6 @@ export function updateBuildById(build, id) {
             .then(json => {
                 dispatch(resolveBuildUpdate(json));
             })
-    }
-}
-export const UPDATE_ADD_ORDER_MESSAGE = "UPDATE_ADD_ORDER_MESSAGE";
-export function updateAddOrderMessage(message){
-    return{
-        type: UPDATE_ADD_ORDER_MESSAGE,
-        payload: {
-            message: message
-        }
     }
 }
 export function updateLoginMessageTimed(message){

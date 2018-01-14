@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link, Redirect, Switch,CSSTransitionGroup } from 'react-router-dom';
 import { connect } from 'react-redux';
-import './app.css';
 import BuildsPage from '../BuildsPage';
 import HomePage from '../HomePage';
 import { normalize, schema } from 'normalizr';
@@ -18,6 +17,7 @@ import Home from './../../components/Home';
 import InGameHelper from './../InGameHelper';
 import EditBuildPage from './../EditBuildPage';
 import Footer from './../../components/Footer/Footer';
+import './app.sass';
 
 
 const RouteAndSub = (route) => (
@@ -79,18 +79,20 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Switch>  
-      <Route exact path="/" render={() => (
-          <Redirect to="/builds"/>
-        )}/>
-          {this.state.routes.map((route, i) => {
-            return (
-                <RouteAndSub key={i} {...route}/>
-            )
-          })}
-        <Route component={NoMatch} />
-        </Switch>
-        <Footer />
+        <div className="mainContent">
+          <Switch>  
+            <Route exact path="/" render={() => (
+                <Redirect to="/builds"/>
+              )}/>
+                {this.state.routes.map((route, i) => {
+                  return (
+                      <RouteAndSub key={i} {...route}/>
+                  )
+                })}
+              <Route component={NoMatch} />
+          </Switch>
+        </div>
+      
       </div> 
     );
   }

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import data from './../../MasterData'
-import './gamehelper.css'
+import './gamehelper.sass'
 
 class NextOrder extends Component {
   render() {
     const order = this.props.currentOrder;
-    if (order.order) {
+    if (order) {
       const unit = order.order.race_unit;
       const time = order.order.time;
       const unitData = data[this.props.race][unit];

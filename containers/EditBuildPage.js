@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import {fetchAndUpdateUser }from './../actions/user'
-import { fetchBuildById, toggleEmpty, restoreBuild, updateBuildById }from './../actions/build'
+import { fetchBuildById, toggleEmpty, restoreBuild, updateBuildById, addMinute }from './../actions/build'
 import EditBuild from '../components/EditBuild/EditBuild'
 
 const mapStateToProps = (state) => {
@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, state) => {
   return {
     fetchById: id => {
       dispatch(fetchBuildById(id))
@@ -26,6 +26,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     restoreBuild: () => {
       dispatch(restoreBuild())
+    },
+    addMinute: () => {
+      dispatch(addMinute())
     }
 
   }

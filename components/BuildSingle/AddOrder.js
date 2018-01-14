@@ -3,7 +3,7 @@ import Input from './../Input';
 import { connect } from 'react-redux';
 import { updateAddOrderMessage } from './../../actions/build';
 import data from './../../MasterData';
-import './buildSingle.css'
+import './buildSingle.sass'
 
 class AddOrder extends Component {
   constructor(props) {

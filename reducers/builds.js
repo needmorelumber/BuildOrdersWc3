@@ -10,7 +10,9 @@ import {
   RESTORE_BUILD,
   RESOLVE_BUILD_UPDATE,
   FAILED_LOADING_BUILDS,
-  VisibilityFilters
+  ADD_MINUTE,
+  VisibilityFilters,
+
 } from './../actions/build'
 // Reducer for Builds 
 // Each case is assesing the 'type' key of the action object. 
@@ -160,6 +162,33 @@ export function currentVisibleBuild(state = buildStateReference, action) {
         mostRecentBuild: state.item,
         item: newItemToggle
       })
+    case ADD_MINUTE:
+    var newMinute = [];
+    var currlist = state.item.build.build_list;
+    var currlistsecond;
+    if(currlist.length > 1){
+      currlistsecond = currlist[currlist.length -1];
+    } else {
+      currlistsecond = {
+        second: 0
+      }
+    }
+    for(let i=0; i<60; i++){
+      newMinute.push({
+        second: currlistsecond.second + 1,
+        order:{}
+      })
+      currlistsecond.second++
+      }
+      var newBuildList = currlist.concat(newMinute);
+      let newItemPlusMinute = Object.assign({}, state.item, {
+        build: Object.assign({},state.item.build,{build_list: newBuildList})
+      });
+      return Object.assign({}, state, {
+        item: newItemPlusMinute
+      })
+    // case REMOVE_MINUTE:
+    //   var currlist = state.item.build.build_list;
     case RESTORE_BUILD:
       return Object.assign({}, state, {
         isToggledOrders: action.payload.isToggledOrders,

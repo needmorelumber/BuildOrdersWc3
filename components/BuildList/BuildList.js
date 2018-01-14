@@ -6,6 +6,7 @@ import fetchBuilds from './../../actions/actions'
 import LoadingAnimation from './../loadingAnimation';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ReactPaginate from 'react-paginate';
+import FilterPanel from './FilterPanel';
 
 
 
@@ -45,6 +46,7 @@ export default class BuildList extends React.Component {
          <div className="section">
             <h1 className="title">Warcraft 3 RoC build orders</h1>
             <p className="subtitle">Select to view in detail</p>
+            <FilterPanel />
             {
                 !isFetching
                 ?

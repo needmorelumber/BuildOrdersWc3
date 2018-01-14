@@ -5,7 +5,7 @@ import CurrentOrder from './CurrentOrder';
 import AddOrder from './../BuildSingle/AddOrder';
 import LoadingPlaceholder from './../loadingAnimation';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import './gamehelper.css';
+import './gamehelper.sass';
 
 class GameHelper extends Component {
   constructor(props) {
@@ -161,7 +161,7 @@ class GameHelper extends Component {
                         onClick={() => this.startWalkthrough()}>
                          Start In Game walkthrough!
                       </button>
-                      <h3 className="subtitle is-3 createdBy has-text-white"> Build Created by {this.props.currentVisibleBuild.item.build.ownerUsername} </h3>
+                      <h3 className="subtitle is-3 createdBy "> Build Created by {this.props.currentVisibleBuild.item.build.ownerUsername} </h3>
                     </div>
                 </div>
               </div>
