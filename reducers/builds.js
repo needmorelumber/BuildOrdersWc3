@@ -107,7 +107,7 @@ const buildStateReference = {
     let item=[]
           for (let i = 0; i < timeline.length; i++) {
               let order = timeline[i].order;
-              if(order){
+              if(order && order.race_unit){
                 item.push(timeline[i])
               }
           }
@@ -123,7 +123,7 @@ export function builds(state = initialStateReference, action) {
     case RECEIVE_BUILDS:
       return Object.assign({}, state, {
         isFetching: false,
-        items: action.payload.items.builds,
+        items: action.payload.items.builds, 
         totalBuilds: action.payload.items.totalBuilds,
         lastUpdated: action.payload.receivedAt
       })
@@ -154,6 +154,7 @@ export function currentVisibleBuild(state = buildStateReference, action) {
         item: action.payload.item
       })
     case TOGGLE_EMPTY:
+    console.log(state.item)
       let newItemToggle = Object.assign({}, state.item, {
         build: Object.assign({},state.item.build,{build_list: toggleEmptyLogic(state.item.build.build_list)})
       });
@@ -163,29 +164,8 @@ export function currentVisibleBuild(state = buildStateReference, action) {
         item: newItemToggle
       })
     case ADD_MINUTE:
-    var newMinute = [];
-    var currlist = state.item.build.build_list;
-    var currlistsecond;
-    if(currlist.length > 1){
-      currlistsecond = currlist[currlist.length -1];
-    } else {
-      currlistsecond = {
-        second: 0
-      }
-    }
-    for(let i=0; i<60; i++){
-      newMinute.push({
-        second: currlistsecond.second + 1,
-        order:{}
-      })
-      currlistsecond.second++
-      }
-      var newBuildList = currlist.concat(newMinute);
-      let newItemPlusMinute = Object.assign({}, state.item, {
-        build: Object.assign({},state.item.build,{build_list: newBuildList})
-      });
       return Object.assign({}, state, {
-        item: newItemPlusMinute
+        isFetching: true
       })
     // case REMOVE_MINUTE:
     //   var currlist = state.item.build.build_list;
@@ -199,7 +179,8 @@ export function currentVisibleBuild(state = buildStateReference, action) {
         build: Object.assign({},state.item.build,{build_list: action.payload.item.data})
       });
      return Object.assign({}, state, {
-       item: newItemResolve
+       item: newItemResolve,
+       isFetching: false
      })
     default:
       return state

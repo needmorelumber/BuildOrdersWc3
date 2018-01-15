@@ -14,11 +14,8 @@ class EditBuild extends Component {
     this.props.fetchAndUpdateUser();
   }
 componentWillUpdate(nextProps, nextState) {
-  console.log(nextProps)
-}
-
- 
   
+} 
   render() {
     let user=this.props.userState.user.user;
     let build=this.props.currentVisibleBuild.item.build;
@@ -31,6 +28,7 @@ componentWillUpdate(nextProps, nextState) {
     const isToggled=this.props.currentVisibleBuild.isToggledOrders;
     const toggleEmpty=this.props.toggleEmpty;
     const restoreBuild=this.props.restoreBuild;
+    const removeItem=this.props.removeItem;
     const addMinute=this.props.addMinute;
     return (
       <div className="columns">
@@ -47,13 +45,17 @@ componentWillUpdate(nextProps, nextState) {
               topOffset
             }) => {
               return (
-                     <div style={style} >
-                        <div className="AddOrder"> 
+                     <div className="columns sideMenu" style={style} >
+                        <div className="AddOrder column"> 
                           <AddOrder 
                           updateBuild={this.props.updateBuild}/>
                         </div>
-                        <div className="TimelineControls">
-                          <TimelineControls toggleEmpty={toggleEmpty} isToggled={isToggled} restoreBuild={restoreBuild} addMinute={addMinute}/>
+                        <div className="TimelineControls column">
+                          <TimelineControls 
+                          toggleEmpty={toggleEmpty} 
+                          isToggled={isToggled} 
+                          restoreBuild={restoreBuild} 
+                          addMinute={addMinute}/>
                         </div>  
                     </div>
               )
@@ -64,7 +66,9 @@ componentWillUpdate(nextProps, nextState) {
       <div className="column">
         <Timeline             
         build={this.props.currentVisibleBuild.item.build} 
-        fetchById={this.props.fetchById}/>
+        fetchById={this.props.fetchById}
+        editing={true}
+        removeItem={removeItem}/>
       </div>
       </div>
     );

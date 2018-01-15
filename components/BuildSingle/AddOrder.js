@@ -10,32 +10,44 @@ class AddOrder extends Component {
     super(props)
     // State of this componenet can be found in the timeline reducer('/reducers/timeline.js') that handles the http calls of the timeline;
     // Functions that operate on the timeline will be contianed within Timeline.js
-    this.state = props.addOrderForm;
+    this.state = Object.assign(props.userState, props.addOrderForm, {
+      errorMessage: "",
+      Form: {}
+    })
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  renderErrorMessage(messageContent, time) {
+        this.setState({
+            errorMessage: messageContent
+        })
+        window.setTimeout(()=>{
+            this.setState({
+                errorMessage: ""
+            })
+        }, time)
+    }
   handleChange(event) {
         const target = event.target;
-        const value = target.value;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
+        const nextFormState = {...this.state.Form, [name]: value}
         this.setState({
-                [name]: value
+                Form: nextFormState
             });
   }
   handleSubmit(event) {
-    event.preventDefault()
-    this.setState({
-      second: "",
-      race_unit: "",
-      count: "",
-      notes: "",
-    })
+    event.preventDefault();
     this.saveCurrentVisible()
+  }
+  removeOrder(index){
+    console.log(index)
+    console.log(this.props)
   }
   render() {
     const inputsArray = Object.entries(this.state.inputs);
     return (
-    <div className="row section AddOrder">
+    <div className="row AddOrder">
       <div className="panel">
       <p className="panel-heading">Add Command</p>
         <div className="panel-block">
@@ -60,26 +72,25 @@ class AddOrder extends Component {
             <input className="button" type="submit" value="Submit" />
           </form>
         </div>
-        <p className="help is-danger">{this.props.addOrderForm.message}</p>
-      </div>
+         <p className="subtitle help is-danger"> {this.props.addOrderForm.message} </p>
+        </div>
       </div>
     );
   }
   rendermessage(message, time){
-    console.log(this.props)
     this.props.updateAddOrderMessage(message)
     window.setTimeout(() =>{
       this.props.updateAddOrderMessage("")
     }, time)
   }
   saveCurrentVisible() {
-    let order = this.state;
+    let order = this.state.Form;
     const renderErrorMessage=this.props.updateAddOrderMessage
     if(order.second === 0) {
         this.rendermessage("Game doesn't have 0 second", 3000)
         return;
     }
-    if(order.second === "" || order.second === undefined) {
+    if(order.second === " " || order.second === undefined) {
         this.rendermessage("Need to specify a second", 3000)
         return;
     }
@@ -101,8 +112,8 @@ class AddOrder extends Component {
         }
     buildList[arrPosOfSecond].order=formatttedOrderToPush;
     this.props.updateBuild(buildList, id);
-
   }
+
 }
 
 const mapStateToProps = (state) => {

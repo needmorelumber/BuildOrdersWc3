@@ -221,3 +221,16 @@ export function updateLoginMessageTimed(message){
         }, 2800)
     }
 }
+export function addMinuteApi(build, id) {
+    return function (dispatch) {
+        dispatch(addMinute())
+        return axios.post(`/api/add_minute`, { id: id, timeline: build })
+        .then(
+            res => (res.data),
+            err => console.log(err)
+        )
+        .then(json => {
+            dispatch(resolveBuildUpdate(json));
+        })
+    }
+}

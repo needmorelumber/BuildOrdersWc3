@@ -42,21 +42,18 @@ class NewBuild extends Component {
             });
     }
     handleSubmit(event) {
+        event.preventDefault();
         const state = this.state.Form;
         state.ownerId = this.props.userState.user.user._id;
         state.ownerUsername =  this.props.userState.user.user.username;
         if (!state.name){
-            event.preventDefault();
             this.renderErrorMessage("Please name the build", 3000);
         } else if (!state.description){
-            event.preventDefault();
             this.renderErrorMessage("Please provide a description", 3000);
         } else if (!state.race){
-            event.preventDefault();
             this.renderErrorMessage("Race is required", 3000);
         } else {
             const buildFormToSubmit = this.state.Form;
-            event.preventDefault();
             this.props.dispatch(newBuild(buildFormToSubmit))
             this.setState({ fireRedirect: true })
         }

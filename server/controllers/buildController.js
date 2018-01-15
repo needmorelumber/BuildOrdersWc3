@@ -100,6 +100,41 @@ var buildController = {};
         })
 
     }
+    buildController.addMinute = (req, res) => {
+        const body = req.body;
+        const id = body.id
+        const timeline = body.timeline;
+        if(timeline.length >= 2700){
+            res.status(200).send('Too Long')
+        }
+        build_order.findById(id, (err, build) => {
+            if(!err && build) {
+            var newMinute = [];
+            var currlist = timeline.build_list;
+            var currlistsecond;
+            if(currlist.length > 1){
+            currlistsecond = currlist.length + 1;
+            } else {
+            currlistsecond = 1;
+            }
+            for(let i=0; i<60; i++){
+            newMinute.push({
+                second: currlistsecond,
+                order:{}
+            })
+            currlistsecond++
+            }
+            var newBuildList = currlist.concat(newMinute);        
+            build.build_list = newBuildList;
+            build.save();
+            res.json({data: build.build_list})
+            } else {
+                res.json({err})
+            }
+        })
+
+    }
+    
     
 return buildController;
 })();

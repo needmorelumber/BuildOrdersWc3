@@ -5,6 +5,7 @@ import {
   restoreBuild,
   updateBuildById
 } from './../../actions/build.js'
+import './editbuild.sass';
 
 
 
@@ -16,19 +17,24 @@ class ControlsPanel extends Component {
       <div className="">
           <nav className="panel">
             <p className="panel-heading">
-              Main Controls
+              Timeline Controls
             </p>
             <div className="panel-block">
             { isToggled === true
               ?
-                <button className="is-success is-block button" onClick={()=>{this.props.restoreBuild()}}> Restore Timeline </button>
+                <button className="is-success is-block button is-outlined is-hovered is-large is-fullwidth" onClick={()=>{this.props.restoreBuild()}}> Restore Timeline </button>
               :
-                <button className="is-success is-block button" onClick={()=>{this.props.toggleEmpty()}}> Toggle Empty Seconds</button>
+                <button className="is-success is-block button is-outlined is-hovered is-large is-fullwidth" onClick={()=>{this.props.toggleEmpty()}}> Toggle Empty Seconds</button>
             }
             </div>
-            <div className="panel-block">
-              <button onClick={()=>{this.props.addMinute(build)}}className="is-success is-block button"> Add Minute </button>
-            </div>
+            { isToggled === true
+              ?
+              null
+              :
+              <div className="panel-block">
+                <button onClick={()=>{this.props.addMinute(build, build._id)}}className="is-success is-block button is-large is-fullwidth is-hovered is-outlined"> Add Minute </button>
+              </div>
+            }
           </nav>
       </div>
     );

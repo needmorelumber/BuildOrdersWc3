@@ -18,6 +18,9 @@ routes.post('/new_build', (req, res) => {
 routes.post('/update_build', (req, res) => {
     buildController.updateBuild(req, res);
 })
+routes.post('/add_minute', (req, res) => {
+buildController.addMinute(req, res);
+})
 routes.post('/get_by_id', (req, res) => {
     buildController.getById(req, res);
 })

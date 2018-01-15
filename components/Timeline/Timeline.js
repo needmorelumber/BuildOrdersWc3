@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AddOrder from './../BuildSingle/AddOrder';
 import InGameHelper from './../../containers/InGameHelper';
 import { Redirect } from 'react-router-dom'
-import './timeline.css'
+import './timeline.sass'
 
 
 class Timeline extends Component {
@@ -14,21 +14,37 @@ class Timeline extends Component {
         }
     }
     render() {
+        const editingProp=this.props.editing;
+        const build=this.props.build.build_list;
+        const id=this.props.build._id;
         // Assign the build from props
         return (
             <div className="section">
                     <table className="table is-fullwidth is-hoverable is-bordered">
                         <thead>
                             <tr>
-                                <th>Second in Game</th>
+                                <th className="optionsRow">Edit</th>
+                                <th className="secondsRow">Second in Game</th>
                                 <th>Order</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {this.props.build.build_list.map((second, i) => {
+                            {build.map((second, i) => {
                                 return (
                                     <tr key={i + 1}>
-                                        <td>
+                                    { editingProp
+                                            ?
+                                                <td className="optionsRow">
+                                                    <button onClick={() => this.props.removeItem(build, id, i)} className="button">
+                                                        <span className="icon">
+                                                        <i className="fa fa-trash"></i>
+                                                        </span>
+                                                    </button>
+                                                </td>
+                                            :
+                                            <td>Add Non Editing Options Here</td>
+                                    }
+                                        <td className="secondsRow">
                                             <p>
                                                 {second.second}
                                             </p>
