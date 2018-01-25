@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import { connect } from 'react-redux'
 import {
   toggleEmpty,
@@ -26,7 +27,7 @@ class ControlsPanel extends Component {
               :
                 <button className="is-success is-block button is-outlined is-hovered is-large is-fullwidth" onClick={()=>{this.props.toggleEmpty()}}> Toggle Empty Seconds</button>
             }
-            </div>
+            </div> 
             { isToggled === true
               ?
               null
@@ -35,6 +36,9 @@ class ControlsPanel extends Component {
                 <button onClick={()=>{this.props.addMinute(build, build._id)}}className="is-success is-block button is-large is-fullwidth is-hovered is-outlined"> Add Minute </button>
               </div>
             }
+            <div className="panel-block">
+  <Link className="is-success is-block button is-outlined is-hovered is-large is-fullwidth" to={'/build/' + build._id + '/playing'}>In game walkthrough</Link>
+            </div>
           </nav>
       </div>
     );

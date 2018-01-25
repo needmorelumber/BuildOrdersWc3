@@ -61,7 +61,7 @@ var buildController = {};
     }
     buildController.newBuild = (req, res) => {
         if(req.body){
-            console.log(req.body)
+            // console.log(req.body)
         }
         const newBuild = new build_order(req.body);
         newBuild.save((error) => {
@@ -75,12 +75,12 @@ var buildController = {};
                         user.save();
                         res.json({data: true});        
                     }else {
-                       console.log(err)
+                    //    console.log(err)
                     }
                 })
                 
             } else {
-                console.log(error)
+                // console.log(error)
                 parseError(error, res);
             }
         })

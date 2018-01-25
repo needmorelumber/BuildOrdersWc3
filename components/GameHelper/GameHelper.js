@@ -19,7 +19,6 @@ class GameHelper extends Component {
       ordersSeen: 0,
       timeStampSeconds: new Date(0, 0, 0, 0, 0, 0, 0)
     }
-    console.log(this.props)
   }
   
   componentWillMount() {

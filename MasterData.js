@@ -6,6 +6,34 @@ const returnImageString = (race, building) => {
 };
 
 const data = {
+  "N/A": {    
+      "Gold": "N/A",
+      "Lumber": "N/A",
+      "Supply": "N/A",
+      "Hit Points": "N/A",
+      "Maximum Hit Points": "N/A",
+      "Armor Type": "N/A",
+      "Armor": "N/A",
+      "Maximum Armor": "N/A",
+      "Day Sight": "N/A",
+      "Night Sight": "N/A",
+      "Speed": "N/A",
+      "Build Time": "N/A",
+      "Attack Type": "N/A",
+      "Weapon Type": "N/A",
+      "Ground Attack": "N/A",
+      "Maximum Ground Attack": "N/A",
+      "Second Ground Attack": "None",
+      "Maximum Second Ground Attack": "None",
+      "Air Attack": "None",
+      "Maximum Air Attack": "None",
+      "Cooldown": "N/A",
+      "Range": "N/A",
+      "Maximum Range": "N/A",
+      "Race": "N/A",
+      "Animation": "",
+      "Portrait": ""
+  },
   "Human": {
     "Town Hall": {
       "Unit": "Town Hall",

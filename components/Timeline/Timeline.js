@@ -42,7 +42,7 @@ class Timeline extends Component {
                                                     </button>
                                                 </td>
                                             :
-                                            <td>Add Non Editing Options Here</td>
+                                            <td></td>
                                     }
                                         <td className="secondsRow">
                                             <p>

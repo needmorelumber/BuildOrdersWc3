@@ -7,7 +7,7 @@ class CurrentOrder extends Component {
     const order = this.props.currentOrder;
     if (order.order) {
       const unit = order.order.race_unit;
-      const unitData = data[this.props.race][unit];
+      const unitData = data[this.props.race][unit] || {...data["N/A"], "Unit":order.order.race_unit};
       return (
         <div className="currentOrderContainer">
           <div className="card currentOrder">

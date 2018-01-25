@@ -8,7 +8,7 @@ class NextOrder extends Component {
     if (order) {
       const unit = order.order.race_unit;
       const time = order.order.time;
-      const unitData = data[this.props.race][unit];
+      const unitData = data[this.props.race][unit] || {...data["N/A"], "Unit":order.order.race_unit};
       return (
           <div className="nextOrderContainer">
             <div className="card nextOrder">
@@ -40,7 +40,6 @@ class NextOrder extends Component {
                         </div>
                       )
                       }
-
                     </div>
                   </div>
                 </div>

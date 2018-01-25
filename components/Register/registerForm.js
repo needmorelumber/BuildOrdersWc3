@@ -39,7 +39,7 @@ class RegisterForm extends Component {
             this.rendermessage("Passwords do not match", 3000); 
         } else if (!state.password.match(passReg)[0]){
             event.preventDefault();
-            this.rendermessage("Password must be at least 8 letters long, and contain a number, a (capitol) letter, and a special character", 3000);
+            this.rendermessage("Password must be at least 8 letters long, and contain a number, a (capital) letter, and a special character", 3000);
         }
         else {
             const buildFormToSubmit = this.state;
