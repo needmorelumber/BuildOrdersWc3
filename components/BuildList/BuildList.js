@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom'
 import fetchBuilds from './../../actions/actions'
 import LoadingAnimation from './../loadingAnimation';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import ReactPaginate from 'react-paginate';
+import Pagination from './Pagination';
+
 
 
 
@@ -13,16 +14,27 @@ export default class BuildList extends React.Component {
     constructor(props) {
         super(props)
           this.handlePageClick = this.handlePageClick.bind(this);
+          this.onChangePage = this.onChangePage.bind(this);
+          this.state = {
+            pageOfItems: []
+          }
     }
     componentDidMount() {
-        const page = this.props.builds.page;
-        this.props.fetchBuilds(page);
+        this.props.fetchBuilds();
     }
     nextPage(page){
         this.props.fetchBuilds(page + 1);
     }
     handlePageClick(data)  {
-        this.nextPage(data.selected)
+        let selected = data.selected;
+        let offset = Math.ceil(selected * this.props.perPage);
+      this.setState({offset: offset}, () => {
+        this.loadCommentsFromServer();
+        });
+    }
+    onChangePage(pageOfItems) {
+        // update state with new page of items
+        this.setState({ pageOfItems: pageOfItems });
     }
     render() {
         const p = this.props,
@@ -33,7 +45,7 @@ export default class BuildList extends React.Component {
               likeBuild = p.likeBuild,
               failedToLoadCheck = b.failedToLoad,
               isFetching = b.isFetching,
-              builds = b.visible_items.map((build, index) => {
+              builds = this.state.pageOfItems.map((build, index) => {
                 return (
                     <article key={index} className="post" onClick={()=>onBuildClick(build._id)}>
                         <h4>{build.name}</h4>
@@ -64,9 +76,10 @@ export default class BuildList extends React.Component {
                 ?
                     !failedToLoadCheck
                     ? 
-                        <div>
+                    <div>
                         {builds}
-                        </div>
+                        <Pagination items={b.visible_items} onChangePage={this.onChangePage}/>
+                    </div>
                     :
                     <div>Sorry, something went wrong, builds can not be loaded</div>
                 : 
@@ -74,17 +87,6 @@ export default class BuildList extends React.Component {
             }
             <hr />
             <br />
-         <ReactPaginate previousLabel={"<<"}
-                        pageRangeDisplayed={5}
-                        nextLabel={">>"}
-                        breakLabel={<a href="">...</a>}
-                        pageCount={this.props.builds.totalBuilds / 10}
-                        marginPagesDisplayed={2}
-                        pageClassName={"page"}
-                        onPageChange={this.handlePageClick}
-                        containerClassName={"pagination"}
-                        subContainerClassName={"pages"}
-                        activeClassName={"active"} />
         </div>
         )
     }

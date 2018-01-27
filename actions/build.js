@@ -6,7 +6,8 @@ export const VisibilityFilters = {
     SHOW_ORC: 'SHOW_ORC',
     SHOW_HUMAN: 'SHOW_HUMAN',
     SHOW_UNDEAD: 'SHOW_UNDEAD',
-    SHOW_NIGHTELF: 'SHOW_NIGHTELF'
+    SHOW_NIGHTELF: 'SHOW_NIGHTELF',
+    SHOW_POPULAR: 'SHOW_POPULAR'
 
 }
 export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER"
@@ -151,9 +152,9 @@ export function updateAddOrderMessage(message) {
 }
 export function fetchBuilds(currPage) {
     return function (dispatch) {
-        dispatch(requestBuilds(currPage))
+        dispatch(requestBuilds())
         return axios
-            .get(`/api/builds_by_page/${currPage}`)
+            .get(`/api/all_builds`)
             .then(res => (res.data),)
             .then(json => {
                 dispatch(receiveBuilds(json))
@@ -231,10 +232,13 @@ export function likeBuild(id, currPage) {
     return function (dispatch) {
         return axios
             .post(`/api/like_build`, {id: id})
-            .then(res => (res.data), err => console.log(err))
             .then(res => {
-                console.log(res)
-                dispatch(fetchBuilds(currPage))
+                if(res.data !== 'Already Liked'){ 
+                    dispatch(fetchBuilds())
+                }
+            })
+            .catch(err=>{
+                console.error(err)
             })
     }
 }

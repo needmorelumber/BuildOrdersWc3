@@ -156,7 +156,6 @@ module.exports = (() => {
         }, (err, like) => {
             if (!err) {
                 if (like.length < 1) {
-                    console.log('no like')
                     build_order.findById(buildToLike, (err, build) => {
                         if (!err && build) {
                             const addingLike = new Like({
@@ -166,14 +165,16 @@ module.exports = (() => {
                             addingLike.save();
                             build.likes += 1;
                             build.save();
+                            res.status(200).send('Liked')
                         } else {
                             res
-                                .status(200)
+                                .status(400)
                                 .send('Database Error');
                         }
                     } 
                     )
                 }
+                else
                 res
                     .status(200)
                     .send('Already Liked')

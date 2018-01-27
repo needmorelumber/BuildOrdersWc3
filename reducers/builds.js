@@ -24,7 +24,8 @@ const initialStateReference = {
   isFetching: false,
   totalBuilds: 11,
   page: 1,
-  items: []
+  items: [],
+  visible_items: []
 }
 const buildFormStateReference = {
   inputs:
@@ -123,8 +124,9 @@ export function builds(state = initialStateReference, action) {
     case RECEIVE_BUILDS:
       return Object.assign({}, state, {
         isFetching: false,
-        items: action.payload.items.builds, 
-        totalBuilds: action.payload.items.totalBuilds,
+        page: state.page,
+        items: action.payload.items, 
+        totalBuilds: action.payload.items.length,
         lastUpdated: action.payload.receivedAt
       })
     case FAILED_LOADING_BUILDS:
