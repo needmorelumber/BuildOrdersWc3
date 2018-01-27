@@ -1,23 +1,15 @@
 .example-enter 
   opacity: 0.01
-
-
 .example-enter.example-enter-active 
   opacity: 1
   transition: opacity 500ms ease-in
-
-
 .example-leave 
   opacity: 1
-
-
 .example-leave.example-leave-active 
   opacity: 0.01
   transition: opacity 300ms ease-in
-
 .example-appear 
   opacity: 0.01
-
 .example-appear.example-appear-active 
   opacity: 1
   transition: opacity 1s ease-in
@@ -33,9 +25,9 @@
   flex-flow: row nowrap
   justify-content: space-between
 .active
- background-color: green
+//  background-color: green
  text-decoration: none
- font-size: 1.4em
+//  font-size: 1.4em
 .page a
  display: inline-block
  padding: 8px 16px
@@ -43,5 +35,58 @@
  text-decoration: none
 .page a.active 
   background-color: green
-  text-decoration: none;
+  text-decoration: none
   color: white
+  font-family: 'Open Sans', serif
+  background: #F2F6FA
+
+footer 
+  background-color: #F2F6FA !important
+
+.topNav 
+  border-top: 5px solid #3498DB
+
+.topNav .container 
+  border-bottom: 1px solid #E6EAEE
+
+.container .columns 
+  margin: 3rem 0
+
+.navbar-menu .navbar-item 
+  padding: 0 2rem
+
+aside.menu 
+  padding-top: 3rem
+
+aside.menu .menu-list 
+  line-height: 1.5
+
+aside.menu .menu-label 
+  padding-left: 10px
+  font-weight: 700
+
+.button.is-success.is-alt 
+  background: -webkit-linear-gradient(to bottom, green, darkgreen)
+  background: linear-gradient(to bottom, green, darkgreen)
+
+.media-left img 
+  border-radius: 50%
+
+.media-content p 
+  font-size: 14px
+  line-height: 2.3
+  font-weight: 700
+  color: #8F99A3
+
+article.post 
+  margin: 1rem
+  padding-bottom: 1rem
+  border-bottom: 1px solid #E6EAEE
+
+article.post:last-child 
+  padding-bottom: 0
+  border-bottom: none
+
+.title
+  text-align: center
+  font-size: 2em

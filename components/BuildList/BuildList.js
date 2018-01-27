@@ -6,7 +6,6 @@ import fetchBuilds from './../../actions/actions'
 import LoadingAnimation from './../loadingAnimation';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ReactPaginate from 'react-paginate';
-import FilterPanel from './FilterPanel';
 
 
 
@@ -28,52 +27,56 @@ export default class BuildList extends React.Component {
     render() {
         const p = this.props,
               b = p.builds,
+              page = p.builds.page,
               lastUpdated = new Date(b.lastUpdated).toLocaleTimeString(),
               onBuildClick = p.onBuildClick,
+              likeBuild = p.likeBuild,
               failedToLoadCheck = b.failedToLoad,
               isFetching = b.isFetching,
-              builds = b.items.map((build, index) => (
-                                // 2nd 'arg' Takes the build of current iteration and copies the object to props
-                                <tr key={index} onClick={()=>onBuildClick(build._id)}>
-                                    <td>{build.race}</td>
-                                    <td>{build.name}</td>
-                                    <td>{build.build_type}</td>
-                                    <td>{build.ownerUsername}</td>
-                                    <td>"liked/viewed x times"</td>
-                                </tr>
-                            ))
+              builds = b.visible_items.map((build, index) => {
+                return (
+                    <article key={index} className="post" onClick={()=>onBuildClick(build._id)}>
+                        <h4>{build.name}</h4>
+                        <span className="pull-right has-text-grey-light"><i onClick={()=>likeBuild(build._id, page)}className="fa fa-thumbs-up"></i> {build.likes}</span>
+                        <div className="media">
+                        <div className="media-left">
+                            <span className="icon"><i className="fa fa-user"></i></span>
+                        </div>
+                        <div className="media-content">
+                            <div className="content">
+                            <p>
+                           Posted by {build.ownerUsername}  &nbsp; 
+                                <span className="tag">{build.race}</span>
+                                <span className="tag">{build.build_type}</span>
+                            </p>
+                            </div>
+                        </div>
+                        </div>
+                    </article>
+              )
+              })
         return (
          <div className="section">
-            <h1 className="title">Warcraft 3 RoC build orders</h1>
+            <h1 className="title">All Builds</h1>
             <p className="subtitle">Select to view in detail</p>
-            <FilterPanel />
             {
                 !isFetching
                 ?
                     !failedToLoadCheck
-                    ?  
-                        <table className="table is-fullwidth is-hoverable allBuilds">
-                            <thead>
-                                <tr>
-                                    <th> Race </th>
-                                    <th> Name </th>
-                                    <th> Style </th>
-                                    <th> Author </th>
-                                    <th> Public Stats </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {builds}
-                            </tbody>
-                        </table>
+                    ? 
+                        <div>
+                        {builds}
+                        </div>
                     :
                     <div>Sorry, something went wrong, builds can not be loaded</div>
                 : 
                 <LoadingAnimation />
             }
-         <ReactPaginate previousLabel={"previous"}
+            <hr />
+            <br />
+         <ReactPaginate previousLabel={"<<"}
                         pageRangeDisplayed={5}
-                        nextLabel={"next"}
+                        nextLabel={">>"}
                         breakLabel={<a href="">...</a>}
                         pageCount={this.props.builds.totalBuilds / 10}
                         marginPagesDisplayed={2}

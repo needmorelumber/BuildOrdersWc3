@@ -20,10 +20,15 @@ class Timeline extends Component {
         // Assign the build from props
         return (
             <div className="section">
-                    <table className="table is-fullwidth is-hoverable is-bordered">
+                    <table className="table tableContainer is-hoverable is-bordered">
                         <thead>
                             <tr>
+                            { editingProp
+                                ?
                                 <th className="optionsRow">Edit</th>
+                                :
+                                null
+                            }
                                 <th className="secondsRow">Second in Game</th>
                                 <th>Order</th>
                             </tr>
@@ -42,7 +47,7 @@ class Timeline extends Component {
                                                     </button>
                                                 </td>
                                             :
-                                            <td></td>
+                                            null
                                     }
                                         <td className="secondsRow">
                                             <p>

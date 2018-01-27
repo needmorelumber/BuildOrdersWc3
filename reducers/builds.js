@@ -134,7 +134,7 @@ export function builds(state = initialStateReference, action) {
     })
     case SET_VISIBILITY_FILTER:
       return Object.assign({}, state, {
-        visibilityFilter: action.filter
+        visibilityFilter: action.payload
       })
     default:
       return state

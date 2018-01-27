@@ -8,6 +8,7 @@ const http       = require('http'),
       mongoose   = require('mongoose'),
       MongoStore = require('connect-mongo')(session),
       cookieParser = require('cookie-parser'),
+      compression = require('compression'),
       config     = require('./server/config/config'),
 	PORT_NUM   = '4200',
       app        = express();
@@ -26,7 +27,7 @@ app.use(session({
 
 const api = require('./server/config/api.js');
 
-
+app.use(compression());
 
 app.use(helmet());
 app.use(bodyParser.json());

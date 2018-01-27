@@ -13,6 +13,7 @@ var build_order_schema = new mongoose.Schema({
     patch: String,
     ownerId: String,
     ownerUsername: String,
-    build_list: [] // Of build_units
+    build_list: [], // Of build_units,
+    likes: {type: Number, default: 0}
 });
 mongoose.model('build_order', build_order_schema);

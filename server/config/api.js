@@ -12,6 +12,9 @@ routes.get('/builds_by_page/:page', (req, res) => {
 routes.get('/all_builds', (req, res) => {
     buildController.allBuilds(req, res);
 })
+routes.post('/like_build', (req, res) => {
+    buildController.likeBuild(req, res);
+})
 routes.post('/new_build', (req, res) => {
     buildController.newBuild(req, res);
 })
