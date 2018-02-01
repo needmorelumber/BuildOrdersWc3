@@ -17,6 +17,7 @@ class Timeline extends Component {
         const editingProp=this.props.editing;
         const build=this.props.build.build_list;
         const id=this.props.build._id;
+        const getCurrentOrder = this.props.getCurrentOrder;
         // Assign the build from props
         return (
             <div className="section">
@@ -51,10 +52,11 @@ class Timeline extends Component {
                                     }
                                         <td className="secondsRow">
                                             <p>
-                                                {second.second}
+                                                {this.minuteString(second.second)}
                                             </p>
                                         </td>
-                                            <td>
+                                            <td onMouseOver={()=>this.handleHover(second.order)}>
+                                           
                                                 {Object.assign({}, second.order).race_unit}
                                             </td>
                                     </tr>
@@ -64,6 +66,12 @@ class Timeline extends Component {
                     </table>
             </div>
         );
+    }
+    minuteString(seconds) {
+        var min = new Date(null);
+        min.setSeconds(seconds);
+        var result = min.toISOString().substr(14,5)
+        return result;
     }
     updateTimeline(updated){
         this.setState({
@@ -93,7 +101,9 @@ class Timeline extends Component {
         timeline.splice(lastSecond, 1);
         this.saveTimelineToDatabase();
     }
-
+    handleHover(data){
+        this.props.updateOrder(data);
+    }
     setupTimeline(vals) {
         let max = 0;
         for (let i = 0; i < vals.length; i++) {

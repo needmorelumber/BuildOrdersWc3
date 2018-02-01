@@ -83,7 +83,7 @@ class App extends Component {
         <div className="mainContent">
           <Switch>  
             <Route exact path="/" render={() => (
-                <Redirect to="/builds"/>
+                <Redirect to="/home"/>
               )}/>
                 {this.state.routes.map((route, i) => {
                   return (

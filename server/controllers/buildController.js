@@ -13,42 +13,45 @@ const parseError = (err, res) => {
 
 module.exports = (() => {
     var buildController = {};
-    buildController.getBuildPage = (req, res) => {
-        var perPage = 11;
-        var page = req.params.page;
-        var totalBuilds = 11;
-        build_order.find((err, builds) => {
-            if (!err) {
-                totalBuilds = builds.length
-            }
-        })
-        build_order
-            .find({})
-            .skip((perPage * page) - perPage)
-            .limit(perPage)
-            .exec((err, builds) => {
-                if (!err) {
-                    res.json({builds, totalBuilds: totalBuilds});
-                    // console.log(builds)
-                } else {
-                    res
-                        .status(404)
-                        .send('Could not load builds from database')
-                }
-            })
-    }
+    // buildController.getBuildPage = (req, res) => {
+    //     var perPage = 11;
+    //     var page = req.params.page;
+    //     var totalBuilds = 11;
+    //     build_order.find((err, builds) => {
+    //         if (!err) {
+    //             totalBuilds = builds.length
+    //         }
+    //     })
+    //     build_order
+    //         .find({})
+    //         .skip((perPage * page) - perPage)
+    //         .limit(perPage)
+    //         .exec((err, builds) => {
+    //             if (!err) {
+    //                 res.json({builds, totalBuilds: totalBuilds});
+    //                 // console.log(builds)
+    //             } else {
+    //                 res
+    //                     .status(404)
+    //                     .send('Could not load builds from database')
+    //             }
+    //         })
+    // }
     buildController.allBuilds = (req, res) => {
         build_order.find((err, builds) => {
-            if (!err) {
-                setTimeout(() => {
-                    res.json(builds);
-                }, 2000)
-
+            if (!err) {          
+                res.json(builds);
             } else {
                 res
                     .status(404)
                     .send('Could not load builds from database')
             }
+        })
+    }
+    buildController.buildsforUser = (req, res) => {
+        const userId = req.session.user._id;
+        build_order.find({userId: userId},(err, builds) => {
+            console.log(builds)
         })
     }
     buildController.getById = (req, res) => {

@@ -37,31 +37,34 @@ class Header extends Component {
     render() {
         const user=this.props.userState.user.user;
         return (
-            <nav className="navbar is-transparent">
-                <div className="navbar-brand"> 
-                    <Link className="navbar-item" to="/home">
-                    { !user
-                        ?
-                        <h1 className="title is-5">NeedMoreLumber</h1>
-                        :                        
-                        <p className="title is-5"> Logged in as {user.username}</p>
-                    }
-                    </Link>
+            <nav className="navbar">
+                <div className="container">
+                    <div className="navbar-brand">
+                    <a className="navbar-item" href="../">
+                        <img src="./../../assets/warcraft.svg" alt="Logo" className="logo" />
+                        <p className="title navbar-item"> Need More Lumber? </p>    
+                    </a>
+                    
                     <button className="button is-dark navbar-burger" data-target="navMenu" onClick={this.toggleMenuMobile}>
                         <span></span>
                         <span></span>
                         <span></span>
-                        </button>    
-                </div>
-                
-                <div className="navbar-menu" id="navMenu">
-                    <div className="navbar-start">
+                    </button>
+                    </div>
+                    <div id="navMenu" className="navbar-end navMenu">
                     {this.navBarItems().map((item, index) => (
                         // to "item" works because of react router object assesment for "to" prop
                         <Link className="navbar-item" key={index} to={item} >
                                 {item.display}
                         </Link>
                     ))}
+                    <div className="navbar-end">
+                      { !user
+                        ?
+                        <Link to='/user/profile' className="navbar-item title is-5">NeedMoreLumber</Link>
+                        :                        
+                        <Link to='/user/profile' className="navbar-item title is-5"> Logged in as {user.username}</Link>
+                    }
                     </div>
                     <div className="navbar-end">
                     
@@ -71,19 +74,7 @@ class Header extends Component {
                             :
                                 <Link className="navbar-item" to={'/home'} onClick={this.props.logOut}>Logout</Link>
                         }
-                        { !user
-                            ?
-                            null
-                            :
-                                <Link className="navbar-item" user={user._id} to={'/builds/new'} >Create a new Build</Link>
-                        } 
-                        { !user
-                            ?
-                            null
-                            :
-                                <Link className="navbar-item" user={user._id} to={'/user/profile'}>Your Profile</Link>
-                        } 
-                            
+                    </div>
                     </div>
                 </div>
             </nav>

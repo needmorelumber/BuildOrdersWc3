@@ -13,7 +13,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchAndUpdateUser: () => {
       dispatch(fetchAndUpdateUser())
-    }
+    },
+    
   }
 }
 

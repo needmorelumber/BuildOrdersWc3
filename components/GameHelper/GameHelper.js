@@ -109,6 +109,7 @@ class GameHelper extends Component {
       ordersSeen: 0,
       timeStampSeconds: new Date(0, 0, 0, 0, 0, 0, 0)
     })
+    window.location.reload()
     window.clearInterval(this.state.timerInterval);
   }
   render() {
@@ -117,22 +118,9 @@ class GameHelper extends Component {
       let build = this.props.currentVisibleBuild.item.build;
       if (this.state.currentlyTicking) {
         return (
-          <div className="section">
+          <div className="container has-text-centered">
             <Timer timeInGame={this.state.timeStampSeconds} />
-              <div className="columns">
-                <div className="column">
-                  <CurrentOrder 
-                    race={this.props.currentVisibleBuild.item.build.race} 
-                    currentOrder={this.state.currentOrder} />
-                </div>
-                <div className="column">
-                  <NextOrder 
-                    pos={this.state.curPos} 
-                    race={this.props.currentVisibleBuild.item.build.race} 
-                    currentOrder={this.state.nextOrder} />
-                </div>
-            </div>
-            <div className="level section column">
+             <div className="level section column">
                 <div className="level-left">
                   {!this.state.currentlyTicking
                     ?
@@ -147,18 +135,36 @@ class GameHelper extends Component {
                   <button className="button is-warning level-item" type="" onClick={() => this.resetWalkthrough()}>Reset</button>
                 </div>
               </div>
+              <div className="columns is-vcentered">
+                <div className="column is-6">
+                <p>Build right now...</p>
+                  <CurrentOrder 
+                    race={this.props.currentVisibleBuild.item.build.race} 
+                    currentOrder={this.state.currentOrder} />
+                </div>
+                <div className="column is-6">
+                <p>Upcoming...</p>
+                  <NextOrder 
+                    pos={this.state.curPos} 
+                    race={this.props.currentVisibleBuild.item.build.race} 
+                    currentOrder={this.state.nextOrder} />
+                </div>
+            </div>
           </div>
         )
       }
         return (
             <div>
-              <div className="">
+              <div className="container has-text-centered">
                 <div className="">
                     <div className="">
                       <button 
-                        className="title is-3 button is-block is-large is-black  startWalkthroughButton" 
+                        className="title is-3 button is-block is-large is-success is-outlined startWalkthroughButton" 
                         onClick={() => this.startWalkthrough()}>
-                         Start In Game walkthrough!
+                          Start In Game walkthrough!
+                          <span className="icon is-small playIcon">
+                            <i className="fa fa-play"></i>
+                          </span>
                       </button>
                       <h3 className="subtitle is-3 createdBy "> Build Created by {this.props.currentVisibleBuild.item.build.ownerUsername} </h3>
                     </div>

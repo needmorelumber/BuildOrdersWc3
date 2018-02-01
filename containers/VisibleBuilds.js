@@ -3,11 +3,7 @@ import * as _ from 'lodash'
 import {requestBuilds, fetchBuildById, fetchBuilds, likeBuild} from './../actions/build'
 import BuildList from '../components/BuildList/BuildList'
 
-const getPageArray = (builds, page) => {
-  
-}
-const getVisibleBuilds = (builds, filter, page) => {
-  var pageArray = getPageArray(builds, page)
+const getVisibleBuilds = (builds, filter, query) => {
   switch (filter) {
     case 'SHOW_ORC':
       return builds.filter(b => {
@@ -43,19 +39,30 @@ const getVisibleBuilds = (builds, filter, page) => {
       })
     case 'SHOW_POPULAR':
      return builds.sort(function (a, b) {
-      return a.likes - b.likes;
-      });
+      return b.likes - a.likes;
+      })
+    case 'SHOW_NEW':
+     return builds.sort(function (a, b) {
+      return a.created_at - b.created_at;
+    });
+    case 'SEARCH_BOX':
+    return filterItems(builds, query)
     case 'SHOW_ALL':
     default:
       return builds
   }
 }
+const filterItems = (builds, query) => {
+  if(builds==='' || builds===' '|| builds===undefined){return};
+    return builds.filter((el) =>
+    el.name.toLowerCase().indexOf(query.toLowerCase()) > -1
+  );
+}
 const mapStateToProps = (state) => {
   const newBuilds = Object.assign(state.builds, {}, {
-    visible_items: getVisibleBuilds(state.builds.items, state.builds.visibilityFilter, state.builds.page),
+    visible_items: getVisibleBuilds(state.builds.items, state.builds.visibilityFilter, state.builds.searchQuery),
     page: state.builds.page
   })
-  console.log(newBuilds)
   return {
     builds: newBuilds,
     ...state

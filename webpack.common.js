@@ -6,12 +6,6 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: "./index.html"
 })
 module.exports = {
-  entry: './index.js',
-  output: {
-    path:  __dirname,
-    publicPath: "/",
-    filename: 'bundle.js'
-  },
   module: {
     loaders: [
       {
@@ -23,9 +17,9 @@ module.exports = {
         loader: 'svg-inline-loader'
       },
       {
-      test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
+      test: /\.(eot|woff|woff2|ttf|svg|png|jpeg|gif)(\?\S*)?$/,
       use: [
-        'url-loader?limit=10000',
+        // 'url-loader',
         'img-loader'
       ]
       },
@@ -37,7 +31,10 @@ module.exports = {
             loader: "css-loader" // translates CSS into CommonJS
         }, {
             loader: "sass-loader" // compiles Sass to CSS
-        }]
+        },{
+            loader: 'resolve-url-loader' // translates CSS into CommonJS
+        }
+        ]
       },
       {
         test: /\.sass$/,
@@ -45,6 +42,8 @@ module.exports = {
                   loader: "style-loader" // creates style nodes from JS strings
               }, {
                   loader: "css-loader" // translates CSS into CommonJS
+              }, {
+                  loader: 'resolve-url-loader' // translates CSS into CommonJS
               }, {
                   loader: "sass-loader" // compiles Sass to CSS
       }]},

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Input from './../Input';
 import { Redirect } from 'react-router-dom';
+import LoadingPlaceholder from './../loadingAnimation';
 
 
 class LoginForm extends Component {
@@ -67,7 +68,7 @@ class LoginForm extends Component {
                 ? 
                <button type="submit" className="button is-large is-dark is-block">Login</button>
                 :
-                <div>Loading...</div>
+                <LoadingPlaceholder />
                 
               }
               <p className="card-footer-item">{this.props.message}</p>

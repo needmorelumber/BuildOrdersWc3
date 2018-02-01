@@ -6,9 +6,6 @@ const buildController = require('./../controllers/buildController'),
 
 /////// API ////////
 
-routes.get('/builds_by_page/:page', (req, res) => {
-    buildController.getBuildPage(req, res);
-})
 routes.get('/all_builds', (req, res) => {
     buildController.allBuilds(req, res);
 })

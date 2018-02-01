@@ -19,8 +19,8 @@ class PreviewBuild extends Component {
             <div className="section">
             { build._id
             ? 
-                <div className="card preview-card">
-                    <div className="card-header">
+                <div className="card">
+                    <div className="card-header preview-card">
                         <div className="card-header-icon">
                             <Link to= { buildsRoute + build._id }>  <img src={iconString} alt="" /> </Link>
                         </div>
@@ -45,7 +45,8 @@ class PreviewBuild extends Component {
                             </div>
                             <div className="row">
                                 <label className="label" htmlFor="Vod Link"> VOD </label>
-                                    <p>{build.vod_link}</p>
+                                <a rel="noopener noreferrer" target="_blank" href={build.vod_link}>{build.vod_link!=='No Vod' ? 'Link to Vod' : null}</a>
+
                             </div>
                             <div className="row">
                                 <label className="label" htmlFor="Build race"> Race </label>

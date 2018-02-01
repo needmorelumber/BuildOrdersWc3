@@ -10,6 +10,8 @@ class LoadingPlaceholder extends Component {
         <div className="rect3"></div>
         <div className="rect4"></div>
         <div className="rect5"></div>
+        <div className="rect6"></div>
+        <div className="rect7"></div>
       </div>
     );
   }

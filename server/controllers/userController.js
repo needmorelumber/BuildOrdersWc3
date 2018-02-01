@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt')
 const User = mongoose.model('user');
+const build_order = mongoose.model('build_order');
 
 module.exports = (() => {
   return {
@@ -85,9 +86,14 @@ module.exports = (() => {
       if(session.user){
         if(session.user._id){
         const user = session.user;
-        res.json({user: user});
+        build_order.find({ownerId: user._id},(err,builds)=>{
+          if(!err){
+          user.userBuilds = builds;
+          res.json({user:user})
+          }
+        })
         }else{
-          res.json(false)
+          res.json({user: false})
         }
         }
       else {

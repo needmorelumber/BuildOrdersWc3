@@ -27,25 +27,25 @@ class RegisterForm extends Component {
         var passReg = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$');
           if(!state.username){
             event.preventDefault();
-            this.rendermessage("Please enter a Username", 3000);
+            this.rendermessage("Please enter a Username", 15000);
         } else if (!state.eMail){
             event.preventDefault();
-            this.rendermessage("Please enter an Email", 3000);
+            this.rendermessage("Please enter an Email", 15000);
         } else if (!state.password || !state.confirmPassword){
             event.preventDefault();
-            this.rendermessage("Enter password and confirm", 3000);
+            this.rendermessage("Enter password and confirm", 15000);
         } else if(state.password !== state.confirmPassword){
             event.preventDefault();
-            this.rendermessage("Passwords do not match", 3000); 
-        } else if (!state.password.match(passReg)[0]){
+            this.rendermessage("Passwords do not match", 15000); 
+        } else if(state.password.length < 6){
             event.preventDefault();
-            this.rendermessage("Password must be at least 8 letters long, and contain a number, a (capital) letter, and a special character", 3000);
+            this.rendermessage("Password needs to be at least 6 long", 15000); 
         }
         else {
             const buildFormToSubmit = this.state;
             event.preventDefault();
             this.props.registerNewUser(buildFormToSubmit);
-            // this.setState({ fireRedirect: true })
+            this.setState({ fireRedirect: true })
         }
 
   } 
@@ -75,7 +75,7 @@ class RegisterForm extends Component {
                 <button type="submit" value="Submit" className="button is-success is-large is-block">Submit</button> 
                 :
                 <div>
-                Thanks for registering!
+                <LoadingPlaceholder />
                 </div>
                 
               } 

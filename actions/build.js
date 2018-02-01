@@ -7,14 +7,18 @@ export const VisibilityFilters = {
     SHOW_HUMAN: 'SHOW_HUMAN',
     SHOW_UNDEAD: 'SHOW_UNDEAD',
     SHOW_NIGHTELF: 'SHOW_NIGHTELF',
-    SHOW_POPULAR: 'SHOW_POPULAR'
+    SHOW_POPULAR: 'SHOW_POPULAR',
+    SHOW_ALL: 'SHOW_ALL'
 
 }
 export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER"
 export function setVisibilityFilter(filter) {
     return {type: SET_VISIBILITY_FILTER, payload: filter}
 }
-
+export const SET_SEARCH_QUERY = "SET_SEARCH_QUERY";
+export function setSearchQuery(query) {
+    return {type: SET_SEARCH_QUERY, payload: query}
+}
 export const TOGGLE_EMPTY = "TOGGLE_EMPTY";
 export function toggleEmpty() {
     return {
@@ -150,6 +154,15 @@ export function updateAddOrderMessage(message) {
         }
     }
 }
+export const UPDATE_CURRENT_ORDER = "UPDATE_CURRENT_ORDER";
+export function updateCurrentOrder(order) {
+    return {
+        type: UPDATE_CURRENT_ORDER,
+        payload: {
+            order : order
+        } 
+    }
+}
 export function fetchBuilds(currPage) {
     return function (dispatch) {
         dispatch(requestBuilds())
@@ -233,11 +246,11 @@ export function likeBuild(id, currPage) {
         return axios
             .post(`/api/like_build`, {id: id})
             .then(res => {
-                if(res.data !== 'Already Liked'){ 
+                if (res.data !== 'Already Liked') {
                     dispatch(fetchBuilds())
                 }
             })
-            .catch(err=>{
+            .catch(err => {
                 console.error(err)
             })
     }

@@ -7,6 +7,7 @@ import {
   updateBuildById
 } from './../../actions/build.js'
 import './editbuild.sass';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
 
 
 
@@ -37,7 +38,7 @@ class ControlsPanel extends Component {
               </div>
             }
             <div className="panel-block">
-  <Link className="is-success is-block button is-outlined is-hovered is-large is-fullwidth" to={'/build/' + build._id + '/playing'}>In game walkthrough</Link>
+            <Link className="is-success is-block button is-outlined is-hovered is-large is-fullwidth" to={'/build/' + build._id + '/playing'}>In game walkthrough</Link>
             </div>
           </nav>
       </div>

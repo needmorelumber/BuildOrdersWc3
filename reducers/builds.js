@@ -11,6 +11,8 @@ import {
   RESOLVE_BUILD_UPDATE,
   FAILED_LOADING_BUILDS,
   ADD_MINUTE,
+  SET_SEARCH_QUERY,
+  UPDATE_CURRENT_ORDER,
   VisibilityFilters,
 
 } from './../actions/build'
@@ -19,12 +21,13 @@ import {
 // TO-DO: Think about default conditions for having payload/error.  
 
 // Pass initialState as a default argument
-const initialStateReference = {
+const buildsStateReference = {
   visibilityFilter: VisibilityFilters.SHOW_ALL,
   isFetching: false,
   totalBuilds: 11,
   page: 1,
   items: [],
+  currentOrder: null,
   visible_items: []
 }
 const buildFormStateReference = {
@@ -114,7 +117,7 @@ const buildStateReference = {
           }
     return item;
   };
-export function builds(state = initialStateReference, action) {
+export function builds(state = buildsStateReference, action) {
   switch (action.type) {
     case REQUEST_BUILDS:
       return Object.assign({}, state, {
@@ -138,6 +141,10 @@ export function builds(state = initialStateReference, action) {
       return Object.assign({}, state, {
         visibilityFilter: action.payload
       })
+    case SET_SEARCH_QUERY:
+      return Object.assign({}, state, {
+        searchQuery: action.payload
+      })
     default:
       return state
   }
@@ -156,7 +163,6 @@ export function currentVisibleBuild(state = buildStateReference, action) {
         item: action.payload.item
       })
     case TOGGLE_EMPTY:
-    console.log(state.item)
       let newItemToggle = Object.assign({}, state.item, {
         build: Object.assign({},state.item.build,{build_list: toggleEmptyLogic(state.item.build.build_list)})
       });
@@ -184,6 +190,10 @@ export function currentVisibleBuild(state = buildStateReference, action) {
        item: newItemResolve,
        isFetching: false
      })
+    case UPDATE_CURRENT_ORDER:
+      return Object.assign({}, state, {
+        currentOrder: action.payload
+      })
     default:
       return state
   }

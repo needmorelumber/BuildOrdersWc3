@@ -33,7 +33,7 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use('/api', api);
 
-// app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname)));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/dist/index.html'));
 });
