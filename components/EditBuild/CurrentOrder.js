@@ -10,9 +10,6 @@ class CurrentOrder extends Component {
       data: props.data
     }
   }
-  componentDidMount() {
-    console.log(this.props)
-  }
   componentWillReceiveProps(nextProps) {
     if(nextProps.data !== undefined){
       this.setState({data: nextProps.data.order});
@@ -26,7 +23,10 @@ class CurrentOrder extends Component {
         <div className="panel-block">
         { this.state.data
           ?
-          <p>{this.state.data.race_unit}</p>
+          <div>
+            <p>{this.state.data.race_unit}</p>
+            <p>{this.state.data.notes}</p>
+          </div>
           :
           null
         }

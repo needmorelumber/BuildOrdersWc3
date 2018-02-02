@@ -59,7 +59,7 @@ module.exports = (() => {
           eMail: loginInfo.eMail
           }, (err, userFound) => {
           if (!loginInfo.eMail || !loginInfo.password) {
-            res.status(200).send({Message: "missing field sneaky"})
+            res.status(404).send({Message: "missing field sneaky"})
           } else if (userFound) {
             bcrypt.compare(loginInfo.password, userFound.password, (err, bcryptRes) => {
               if (bcryptRes === true) {

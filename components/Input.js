@@ -80,6 +80,17 @@ class Input extends Component {
                         <p className="help is-success">{info.message}</p>
                     </div>
                 )
+            case 'time':
+                return (
+                    <div className="field">
+                        <div className="control">
+                            <label className="label">{info.label}</label>
+                            <input required placeholder={info.label} className={info.class} name={info.name} type={info.type} onChange={info.handleChange} />
+                            
+                        </div>
+                        <p className="help is-success">{info.message}</p>
+                    </div>
+                )
             case 'datalist':
                 return (
                     <div className="field">

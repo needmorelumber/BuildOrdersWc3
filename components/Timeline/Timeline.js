@@ -14,10 +14,13 @@ class Timeline extends Component {
         }
     }
     render() {
-        const editingProp=this.props.editing;
-        const build=this.props.build.build_list;
-        const id=this.props.build._id;
-        const getCurrentOrder = this.props.getCurrentOrder;
+        console.log(this.props)
+        const   editingProp=this.props.editing,
+                build=this.props.build.build_list,
+                id=this.props.build._id,
+                getCurrentOrder=this.props.getCurrentOrder,
+                isAdding=this.props.isAdding
+                
         // Assign the build from props
         return (
             <div className="section">
@@ -26,11 +29,11 @@ class Timeline extends Component {
                             <tr>
                             { editingProp
                                 ?
-                                <th className="optionsRow">Edit</th>
+                                <th className="optionsRow">Edit order</th>
                                 :
                                 null
                             }
-                                <th className="secondsRow">Second in Game</th>
+                                <th className="secondsRow">Time</th>
                                 <th>Order</th>
                             </tr>
                         </thead>
@@ -39,9 +42,14 @@ class Timeline extends Component {
                                 return (
                                     <tr key={i + 1}>
                                     { editingProp
-                                            ?
-                                                <td className="optionsRow">
-                                                    <button onClick={() => this.props.removeItem(build, id, i)} className="button">
+                                        ?
+                                                <td className="optionsRow ">
+                                                    <button onClick={!isAdding?() => this.props.toggleAddingOrder(true):() => this.props.toggleAddingOrder(false)} className=" button editButton is-small">
+                                                        <span className="icon">
+                                                        <i className={!isAdding?"fa fa-plus":"fa fa-minus"}></i>
+                                                        </span>
+                                                    </button>
+                                                    <button onClick={() => this.props.removeItem(build, id, i)} className=" button editButton is-small">
                                                         <span className="icon">
                                                         <i className="fa fa-trash"></i>
                                                         </span>

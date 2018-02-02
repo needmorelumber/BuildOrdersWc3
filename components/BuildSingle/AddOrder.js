@@ -40,10 +40,6 @@ class AddOrder extends Component {
     event.preventDefault();
     this.saveCurrentVisible()
   }
-  removeOrder(index){
-    console.log(index)
-    console.log(this.props)
-  }
   render() {
     const inputsArray = Object.entries(this.state.inputs);
     return (
@@ -62,7 +58,7 @@ class AddOrder extends Component {
                               message={inp[1].message}
                               userType={inp[1].userType}
                               list={inp[1].list}
-                              class={inp[1].class + " " + "is-large is-block"}
+                              class={inp[1].class + " " + "is-large is-block" + " " + "without_ampm"}
                               handleChange={this.handleChange}
                               key={index}
                       />

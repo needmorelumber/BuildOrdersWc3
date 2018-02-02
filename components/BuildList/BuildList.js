@@ -43,7 +43,7 @@ export default class BuildList extends React.Component {
                         >
                     <article className="post" onClick={()=>onBuildClick(build._id)}>
                         <h4>{build.name}</h4>
-                        <span className="pull-right has-text-grey-light"><i onClick={()=>likeBuild(build._id, page)}className="fa fa-thumbs-up"></i> {build.likes}</span>
+                        <span className="pull-right likebuild has-text-grey-light"><i onClick={()=>likeBuild(build._id, page)}className="fa fa-thumbs-up"></i> {build.likes}</span>
                         <div className="media">
                         <div className="media-left">
                             <span className="icon"><i className="fa fa-user"></i></span>

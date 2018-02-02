@@ -163,6 +163,15 @@ export function updateCurrentOrder(order) {
         } 
     }
 }
+export const TOGGLE_ADDING_ORDER = "TOGGLE_ADDING_ORDER";
+export function toggleAddingOrder(bool) {
+    return {
+        type: TOGGLE_ADDING_ORDER,
+        payload: {
+            bool
+        }
+    }
+}
 export function fetchBuilds(currPage) {
     return function (dispatch) {
         dispatch(requestBuilds())

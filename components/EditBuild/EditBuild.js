@@ -26,16 +26,16 @@ class EditBuild extends Component {
           <Redirect></Redirect>
         )
       }
-    const isToggled=this.props.currentVisibleBuild.isToggledOrders;
-    const toggleEmpty=this.props.toggleEmpty;
-    const restoreBuild=this.props.restoreBuild;
-    const removeItem=this.props.removeItem;
-    const addMinute=this.props.addMinute;
-    const updateOrder=this.props.updateOrder;
-    const order=this.props.currentVisibleBuild.currentOrder;
-    var pStyle = {
-      marginTop: '5%',
-    };
+    const isToggled=this.props.currentVisibleBuild.isToggledOrders,
+          toggleEmpty=this.props.toggleEmpty,
+          restoreBuild=this.props.restoreBuild,
+          removeItem=this.props.removeItem,
+          addMinute=this.props.addMinute,
+          toggleOrder=this.props.toggleAddingOrder,
+          updateOrder=this.props.updateOrder,
+          order=this.props.currentVisibleBuild.currentOrder,
+          isAdding=this.props.isAdding
+
     return (
       <div className="columns">
       <StickyContainer className="column">
@@ -53,8 +53,13 @@ class EditBuild extends Component {
               return (
                      <div className="columns sideMenu" style={style} >
                         <div className="AddOrder column"> 
+                        { isAdding
+                          ?
                           <AddOrder 
                           updateBuild={this.props.updateBuild}/>
+                          :
+                          null
+                        }
                         </div>
                         <div className="TimelineControls column">
                           <TimelineControls 
@@ -83,7 +88,9 @@ class EditBuild extends Component {
         fetchById={this.props.fetchById}
         editing={true}
         updateOrder={updateOrder}
-        removeItem={removeItem}/>
+        removeItem={removeItem}
+        toggleAddingOrder={toggleOrder}
+        isAdding={isAdding}/>
       </div>
       </div>
     );

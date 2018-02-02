@@ -1,12 +1,13 @@
 import { connect } from 'react-redux'
 import {fetchAndUpdateUser }from './../actions/user'
-import { fetchBuildById, toggleEmpty, restoreBuild, updateBuildById, addMinuteApi, removeItem, updateCurrentOrder }from './../actions/build'
+import { fetchBuildById, toggleEmpty, restoreBuild, updateBuildById, addMinuteApi, removeItem, updateCurrentOrder, toggleAddingOrder }from './../actions/build'
 import EditBuild from '../components/EditBuild/EditBuild'
 
 const mapStateToProps = (state) => {
   return {
     currentVisibleBuild: state.currentVisibleBuild,
-    userState: state.userState
+    userState: state.userState,
+    isAdding: state.addOrderForm.isShowing
   }
 }
 
@@ -38,6 +39,9 @@ const mapDispatchToProps = (dispatch, state) => {
     },
     updateOrder: (order) => {
       dispatch(updateCurrentOrder(order))
+    },
+    toggleAddingOrder: (bool) => {
+      dispatch(toggleAddingOrder(bool))
     }
 
   }

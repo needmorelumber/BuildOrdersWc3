@@ -46,7 +46,7 @@ const getVisibleBuilds = (builds, filter, query) => {
       return a.created_at - b.created_at;
     });
     case 'SEARCH_BOX':
-    return filterItems(builds, query)
+      return filterItems(builds, query)
     case 'SHOW_ALL':
     default:
       return builds

@@ -13,6 +13,7 @@ import {
   ADD_MINUTE,
   SET_SEARCH_QUERY,
   UPDATE_CURRENT_ORDER,
+  TOGGLE_ADDING_ORDER,
   VisibilityFilters,
 
 } from './../actions/build'
@@ -100,6 +101,7 @@ const buildFormStateReference = {
 const buildStateReference = {
   isFetching: false,
   isEdit: false,
+  isAddingOrder: false,
   isToggledOrders: false,
   mostRecentBuild: false,
   failedToLoad: false,
@@ -186,7 +188,7 @@ export function currentVisibleBuild(state = buildStateReference, action) {
       let newItemResolve = Object.assign({}, state.item, {
         build: Object.assign({},state.item.build,{build_list: action.payload.item.data})
       });
-     return Object.assign({}, state, {
+      return Object.assign({}, state, {
        item: newItemResolve,
        isFetching: false
      })

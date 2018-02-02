@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import BuildSingle from './../components/BuildSingle/BuildSingle'
-import { updateBuildById,fetchBuildById, toggleEmpty, updateCurrentOrder } from './../actions/build'
+import { updateBuildById,fetchBuildById, toggleEmpty, updateCurrentOrder, toggleAddingOrder } from './../actions/build'
 
 const mapStateToProps = (state) => {
   return {
