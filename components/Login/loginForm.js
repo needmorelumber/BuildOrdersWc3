@@ -7,22 +7,22 @@ import LoadingPlaceholder from './../loadingAnimation';
 class LoginForm extends Component {
   constructor(props){
     super(props)
-        this.state = Object.assign({}, props.login,{
-            fireRedirect : false
-        })
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+      this.state = Object.assign({}, props.login,{
+          fireRedirect : false
+      })
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
   }
   rendermessage(message, time){
     this.props.updateLoginMessage(message, time)
   }
   handleChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        this.setState({
-                [name]: value
-            });
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({
+            [name]: value
+        });
   }
   
   handleSubmit(event) {

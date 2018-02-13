@@ -27,7 +27,12 @@ class BuildsPageComp extends Component {
                 </div>
                 <div className="navbar-end">
                 <div className="navbar-item"> 
-                    <input className="input" ref={(input) => this.input = input} onChange={()=>this.handleChange(event)}type="text" placeholder="Search builds...." />
+                    <input className="input" 
+                    ref={(input) => this.input = input} 
+                    onChange={()=>this.handleChange(event)}
+                    type="text" 
+                    placeholder="Search builds...." 
+                    />
                 </div>
                 </div>
             </div>

@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import AddOrder from './../BuildSingle/AddOrder';
 import InGameHelper from './../../containers/InGameHelper';
-import { Redirect } from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import './timeline.sass'
 
-
 class Timeline extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             message: "",
@@ -14,103 +13,88 @@ class Timeline extends Component {
         }
     }
     render() {
-        console.log(this.props)
-        const   editingProp=this.props.editing,
-                build=this.props.build.build_list,
-                id=this.props.build._id,
-                getCurrentOrder=this.props.getCurrentOrder,
-                isAdding=this.props.isAdding
-                
+        const editingProp = this.props.editing,
+              build = this.props.build.build_list,
+							id = this.props.build._id,
+							getCurrentOrder = this.props.getCurrentOrder,
+							isAdding = this.props.isAdding
+
         // Assign the build from props
         return (
             <div className="section">
-                    <table className="table tableContainer is-hoverable is-bordered">
-                        <thead>
-                            <tr>
-                            { editingProp
-                                ?
-                                <th className="optionsRow">Edit order</th>
-                                :
-                                null
-                            }
-                                <th className="secondsRow">Time</th>
-                                <th>Order</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {build.map((second, i) => {
-                                return (
-                                    <tr key={i + 1}>
-                                    { editingProp
-                                        ?
-                                                <td className="optionsRow ">
-                                                    <button onClick={!isAdding?() => this.props.toggleAddingOrder(true):() => this.props.toggleAddingOrder(false)} className=" button editButton is-small">
-                                                        <span className="icon">
-                                                        <i className={!isAdding?"fa fa-plus":"fa fa-minus"}></i>
-                                                        </span>
-                                                    </button>
-                                                    <button onClick={() => this.props.removeItem(build, id, i)} className=" button editButton is-small">
-                                                        <span className="icon">
-                                                        <i className="fa fa-trash"></i>
-                                                        </span>
-                                                    </button>
-                                                </td>
-                                            :
-                                            null
-                                    }
-                                        <td className="secondsRow">
-                                            <p>
-                                                {this.minuteString(second.second)}
-                                            </p>
-                                        </td>
-                                            <td onMouseOver={()=>this.handleHover(second.order)}>
-                                           
-                                                {Object.assign({}, second.order).race_unit}
-                                            </td>
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </table>
+                <table className="table tableContainer is-hoverable is-bordered">
+                    <thead>
+                        <tr>
+                            <th className="secondsRow">Time</th>
+                            <th>Order</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {build.map((second, i) => {
+                            return (
+                                <tr key={i + 1}>
+                                  
+                                    <td className="secondsRow">
+                                        <p>
+                                            {this.minuteString(second.second)}
+                                        </p>
+                                    </td>
+                                    <td onClick={() => this.handleClick(second.order)}>
+                                        {Object.assign({}, second.order).race_unit}
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
             </div>
         );
     }
     minuteString(seconds) {
         var min = new Date(null);
         min.setSeconds(seconds);
-        var result = min.toISOString().substr(14,5)
+        var result = min
+            .toISOString()
+            .substr(14, 5)
         return result;
     }
-    updateTimeline(updated){
-        this.setState({
-            timeline: updated
-        })
+    updateTimeline(updated) {
+        this.setState({timeline: updated})
     }
     addSecond() {
         let timeline;
-         if(!this.state.isEdit) {
-             timeline = this.state.timeline;
-         } else {
-             this.setState({isEdit:false});
-             timeline = this.state.most_recent_timeline;
-         };
+        if (!this.state.isEdit) {
+            timeline = this.state.timeline;
+        } else {
+            this.setState({isEdit: false});
+            timeline = this.state.most_recent_timeline;
+        };
         const nextSecond = timeline.length + 1;
-        const newSecond = { second: nextSecond };
+        const newSecond = {
+            second: nextSecond
+        };
         timeline.push(newSecond);
         this.saveTimelineToDatabase();
     }
     removeSecond() {
-         if(!this.state.isEdit) {
-             const timeline = this.state.timeline;
-         } else {
-             const timeline = this.state.most_recent_timeline;
-         };
+        if (!this.state.isEdit) {
+            const timeline = this.state.timeline;
+        } else {
+            const timeline = this.state.most_recent_timeline;
+        };
         const lastSecond = timeline.length - 1;
         timeline.splice(lastSecond, 1);
         this.saveTimelineToDatabase();
     }
-    handleHover(data){
-        this.props.updateOrder(data);
+    handleClick(data) {
+			console.log('clicking')
+			console.log(data)
+        this
+            .props
+            .updateOrder(data);
+				this
+						.props
+						.toggleAddingOrder()
     }
     setupTimeline(vals) {
         let max = 0;
@@ -146,9 +130,8 @@ class Timeline extends Component {
         timeline.map(order => {
             return oldTimeline.push(order);
         })
-        this.setState({ most_recent_timeline: oldTimeline });
+        this.setState({most_recent_timeline: oldTimeline});
     }
-
 
 }
 export default Timeline;

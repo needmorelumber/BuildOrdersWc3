@@ -10,6 +10,7 @@ class CurrentOrder extends Component {
       const unitData = data[this.props.race][unit] || {...data["N/A"], "Unit":order.order.race_unit};
       return (
         <div className="currentOrderContainer">
+        <p className="title is-3">Build this now!</p>
           <div className="card currentOrder">
           <div className="card-header">
             <div className="card-header-title title is-1">

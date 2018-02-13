@@ -30,13 +30,14 @@ class BuildSingle extends Component {
 								<div className="section">
 										<div className="columns">
 												<Timeline
-														className="column"
+														className="column is-3"
 														build={this.props.currentVisibleBuild.item.build}
 														updateBuild={this.props.updateBuild}
 														toggleEmpty={this.props.toggleEmpty}
 														updateOrder={updateOrder}
-														fetchById={this.props.fetchById}/>
-												<StickyContainer className="column">
+														fetchById={this.props.fetchById}
+												/>
+												<StickyContainer className="column is-9">
 														<Sticky >
 																{({
 																		style,

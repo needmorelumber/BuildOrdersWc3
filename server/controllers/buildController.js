@@ -13,30 +13,6 @@ const parseError = (err, res) => {
 
 module.exports = (() => {
     var buildController = {};
-    // buildController.getBuildPage = (req, res) => {
-    //     var perPage = 11;
-    //     var page = req.params.page;
-    //     var totalBuilds = 11;
-    //     build_order.find((err, builds) => {
-    //         if (!err) {
-    //             totalBuilds = builds.length
-    //         }
-    //     })
-    //     build_order
-    //         .find({})
-    //         .skip((perPage * page) - perPage)
-    //         .limit(perPage)
-    //         .exec((err, builds) => {
-    //             if (!err) {
-    //                 res.json({builds, totalBuilds: totalBuilds});
-    //                 // console.log(builds)
-    //             } else {
-    //                 res
-    //                     .status(404)
-    //                     .send('Could not load builds from database')
-    //             }
-    //         })
-    // }
     buildController.allBuilds = (req, res) => {
         build_order.find((err, builds) => {
             if (!err) {          
@@ -72,9 +48,6 @@ module.exports = (() => {
         })
     }
     buildController.newBuild = (req, res) => {
-        if (req.body) {
-            // console.log(req.body)
-        }
         const newBuild = new build_order(req.body);
         newBuild.save((error) => {
             if (!error) {
@@ -114,7 +87,6 @@ module.exports = (() => {
                 res.json({err})
             }
         })
-
     }
     buildController.addMinute = (req, res) => {
         const body = req.body;
@@ -148,6 +120,25 @@ module.exports = (() => {
             }
         })
 
+    }
+    buildController.updateOrderInBuild = (req, res) => {
+        // Here we check the index of the order and validate that we are seeing the same order, 
+        // Then we will update that order and save to database assuming no issues...
+        const body = req.body;
+        const id = body.id
+        const orderIndex = body.index;
+        const timeline = body.timeline;
+        build_order.findById(id, (err, build) => {
+            if (!err && build) {
+                console.log('below me is the index sent back from the body for the buildlist of' + id + 'this id')
+                console.log(build.build_list[orderIndex])
+                build.build_list = timeline;
+                build.save();
+                res.json({data: build.build_list})
+            } else {
+                res.json({err})
+            }
+        })
     }
     buildController.likeBuild = (req, res) => {
         const body = req.body;

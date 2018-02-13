@@ -11,9 +11,10 @@ class AddOrder extends Component {
     // State of this componenet can be found in the timeline reducer('/reducers/timeline.js') that handles the http calls of the timeline;
     // Functions that operate on the timeline will be contianed within Timeline.js
     this.state = Object.assign(props.userState, props.addOrderForm, {
-      errorMessage: "",
+      errorMessage: "",      
       Form: {}
     })
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }

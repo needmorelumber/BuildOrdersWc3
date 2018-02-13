@@ -36,22 +36,22 @@ export default class BuildList extends React.Component {
               isFetching = b.isFetching,
               builds = this.state.pageOfItems.map((build, index) => {
                 return (
-                      <CSSTransition
-                            key={index}
-                            timeout={800}
-                            classNames="buildCard"
-                        >
+                    <CSSTransition
+                        key={index}
+                        timeout={800}
+                        classNames="buildCard"
+                    >
                     <article className="post" onClick={()=>onBuildClick(build._id)}>
                         <h4>{build.name}</h4>
                         <span className="pull-right likebuild has-text-grey-light"><i onClick={()=>likeBuild(build._id, page)}className="fa fa-thumbs-up"></i> {build.likes}</span>
                         <div className="media">
-                        <div className="media-left">
+                        <div className="media-left" style={{margin:0,padding:0,marginTop:'.5%'}}>
                             <span className="icon"><i className="fa fa-user"></i></span>
                         </div>
                         <div className="media-content">
                             <div className="content">
                             <p>
-                                Posted by {build.ownerUsername}  &nbsp; 
+                                <span className="postedBy">Posted by {build.ownerUsername}</span>
                                 <span className="tag">{build.race}</span>
                                 <span className="tag">{build.build_type}</span>
                             </p>

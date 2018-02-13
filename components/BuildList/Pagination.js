@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import * as _ from 'lodash';
+import './buildList.sass';
 
 
 const defaultProps = {
@@ -92,7 +93,7 @@ class Pagination extends React.Component {
             return null;
         }
         return (
-            <ul className="pagination">
+            <ul className="pagination" style={{ 'listStyle': 'none', padding: 0, margin: 0 }}>
                 <li className={pager.currentPage === 1 ? 'disabled' : ''}>
                     <a onClick={() => this.setPage(1)}>First</a>
                 </li>

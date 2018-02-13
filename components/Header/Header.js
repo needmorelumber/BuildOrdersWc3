@@ -40,10 +40,10 @@ class Header extends Component {
             <nav className="navbar">
                 <div className="container">
                     <div className="navbar-brand">
-                    <a className="navbar-item" href="../">
+                    <Link className="navbar-item" to="/home">
                         <img src="./../../assets/warcraft.svg" alt="Logo" className="logo" />
                         <p className="title navbar-item"> Need More Lumber? </p>    
-                    </a>
+                    </Link>
                     
                     <button className="button is-dark navbar-burger" data-target="navMenu" onClick={this.toggleMenuMobile}>
                         <span></span>
@@ -61,7 +61,7 @@ class Header extends Component {
                     <div className="navbar-end">
                       { !user
                         ?
-                        <Link to='/user/profile' className="navbar-item title is-5">NeedMoreLumber</Link>
+                        null
                         :                        
                         <Link to='/user/profile' className="navbar-item title is-5"> Logged in as {user.username}</Link>
                     }
@@ -70,7 +70,10 @@ class Header extends Component {
                     
                         { !user
                             ?
-                                <Link className="navbar-item" to={'/login'}>Login</Link>
+                                <div className="navbar-item">
+                                    <Link className="navbar-item" to={'/login'}>Login</Link>
+                                    <Link className="navbar-item" to={'/register'}>Register</Link>
+                                </div>
                             :
                                 <Link className="navbar-item" to={'/home'} onClick={this.props.logOut}>Logout</Link>
                         }

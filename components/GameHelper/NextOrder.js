@@ -11,6 +11,7 @@ class NextOrder extends Component {
       const unitData = data[this.props.race][unit] || {...data["N/A"], "Unit":order.order.race_unit};
       return (
           <div className="nextOrderContainer">
+          <p className="title is-3">Your next order to build.. in {time - this.props.pos} seconds!  </p>
             <div className="card nextOrder">
               <div className="card-header">
                 <div className="card-header-title title is-1 ">{unitData.Unit}</div>
@@ -26,7 +27,7 @@ class NextOrder extends Component {
                     <div className="media-content">
                     </div>
                     <div className="content">
-                      <p>Your next order to build.. in {time - this.props.pos} seconds!  </p>
+                      
                       {unitData && (
                         <div>
                           <label className="label" htmlFor="Gold">Gold Cost</label>

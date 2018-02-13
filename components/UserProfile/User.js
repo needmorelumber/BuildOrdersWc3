@@ -17,23 +17,27 @@ class User extends Component {
       builds=user.userBuilds.map((build, index)=>{
         return (
           // Render the builds if we need too
-          <Link  key={index} to={'/build/' + build._id}>
-           <article className="post">
-                        <h4>{build.name}</h4>
-                        <div className="media">
-                        <div className="media-left">
-                        </div>
-                        <div className="media-content">
-                            <div className="content">
-                            <p>
-                                <span className="tag">{build.race}</span>
-                                <span className="tag">{build.build_type}</span>
-                            </p>
-                            </div>
-                        </div>
-                        </div>
-                    </article>
-          </Link>
+          
+           <article   key={index} className="post">
+               <Link to={'/build/' + build._id}> 
+                <h4>{build.name}</h4> 
+              </Link>
+                <div className="media">
+                <div className="media-left">
+                </div>
+                <div className="media-content">
+                    <div className="content">
+                    <p>
+                        <span className="tag">{build.race}</span>
+                        <span className="tag">{build.build_type}</span>
+                    </p>
+                    </div>
+                </div>
+                </div>
+                <div>
+                  <Link to={'/build/' + build._id + '/edit'}>Edit</Link>
+                </div>
+            </article>
         )
       })
     }

@@ -24,9 +24,9 @@ class ControlsPanel extends Component {
             <div className="panel-block">
             { isToggled === true
               ?
-                <button className="is-success is-block button is-outlined is-hovered is-large is-fullwidth" onClick={()=>{this.props.restoreBuild()}}> Restore Timeline </button>
+                <button className="is-success is-block button is-outlined is-hovered is-small is-fullwidth" onClick={()=>{this.props.restoreBuild()}}> Restore Timeline </button>
               :
-                <button className="is-success is-block button is-outlined is-hovered is-large is-fullwidth" onClick={()=>{this.props.toggleEmpty()}}> Toggle Empty Seconds</button>
+                <button className="is-success is-block button is-outlined is-hovered is-small is-fullwidth" onClick={()=>{this.props.toggleEmpty()}}> Toggle Empty Seconds</button>
             }
             </div> 
             { isToggled === true
@@ -34,11 +34,11 @@ class ControlsPanel extends Component {
               null
               :
               <div className="panel-block">
-                <button onClick={()=>{this.props.addMinute(build, build._id)}}className="is-success is-block button is-large is-fullwidth is-hovered is-outlined"> Add Minute </button>
+                <button onClick={()=>{this.props.addMinute(build, build._id)}}className="is-success is-block button is-small is-fullwidth is-hovered is-outlined"> Add Minute </button>
               </div>
             }
             <div className="panel-block">
-            <Link className="is-success is-block button is-outlined is-hovered is-large is-fullwidth" to={'/build/' + build._id + '/playing'}>In game walkthrough</Link>
+            <Link className="is-success is-block button is-outlined is-hovered is-small is-fullwidth" to={'/build/' + build._id + '/playing'}>In game walkthrough</Link>
             </div>
           </nav>
       </div>
