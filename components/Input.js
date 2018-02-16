@@ -11,7 +11,7 @@ class Input extends Component {
                     <div className="field">
                         <div className="control">
                             <label className="label">{info.label}</label>
-                            <input required className={info.class} type={info.type} name={info.name} placeholder={info.label} onChange={info.handleChange} />                        
+                            <input required className={info.class} type={info.type} name={info.name} placeholder={info.placeholder} onChange={info.handleChange} />                        
                         </div>
                         <p className="help is-success">{info.message}</p>
                     </div>
@@ -21,7 +21,7 @@ class Input extends Component {
                     <div className="field">
                         <div className="control">
                             <label className="label">{info.label}</label>
-                            <textarea className={info.class} type={info.type} name={info.name} placeholder={info.label} onChange={info.handleChange} />
+                            <textarea className={info.class} type={info.type} name={info.name} placeholder={info.placeholder} onChange={info.handleChange} />
                             
                         </div>
                         <p className="help is-success">{info.message}</p>
@@ -54,7 +54,7 @@ class Input extends Component {
                     <div className="field">
                         <div className="control">
                             <label className="label">{info.label}</label>
-                            <input required className={info.class} name={info.name} min="1" type={info.type} onChange={info.handleChange} />                             
+                            <input required className={info.class} name={info.name} min="1" type={info.type} onChange={info.handleChange} placeholder={info.placeholder}/>                             
                         </div>
                         <p className="help is-success">{info.message}</p>
                     </div>
@@ -96,7 +96,7 @@ class Input extends Component {
                     <div className="field">
                         <div className="control">
                             <label className="label">{info.label}</label>
-                            <input required className={info.class} name={info.name} type={info.type} onChange={info.handleChange} list={info.list} />
+                            <input required className={info.class} name={info.name} type={info.type} onChange={info.handleChange} list={info.list} placeholder={info.placeholder}/>
                             <datalist id={info.list}>
                                 {
                                     info.options.map((o, i) => {

@@ -11,9 +11,12 @@ import {
   RESOLVE_BUILD_UPDATE,
   FAILED_LOADING_BUILDS,
   ADD_MINUTE,
+  REMOVE_MINUTE,
   SET_SEARCH_QUERY,
   UPDATE_CURRENT_ORDER,
   TOGGLE_ADDING_ORDER,
+  BEGIN_DELETE_BUILD,
+  RESOLVE_DELETE_BUILD,
   VisibilityFilters,
 
 } from './../actions/build'
@@ -177,8 +180,10 @@ export function currentVisibleBuild(state = buildStateReference, action) {
       return Object.assign({}, state, {
         isFetching: true
       })
-    // case REMOVE_MINUTE:
-    //   var currlist = state.item.build.build_list;
+      case REMOVE_MINUTE:
+      return Object.assign({}, state, {
+        isFetching: true
+      })
     case RESTORE_BUILD:
       return Object.assign({}, state, {
         isToggledOrders: action.payload.isToggledOrders,
@@ -196,6 +201,14 @@ export function currentVisibleBuild(state = buildStateReference, action) {
       return Object.assign({}, state, {
         currentOrder: action.payload
       })
+    case BEGIN_DELETE_BUILD:
+      return {...state, 
+        isFetching: true
+      }
+    case RESOLVE_DELETE_BUILD:
+      return {...state, 
+        isFetching: false
+      }
     default:
       return state
   }

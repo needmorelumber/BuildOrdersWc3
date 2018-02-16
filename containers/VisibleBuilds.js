@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import * as _ from 'lodash'
 import {requestBuilds, fetchBuildById, fetchBuilds, likeBuild} from './../actions/build'
-import BuildList from '../components/BuildList/BuildList'
+import BuildList from '../components/BuildList/BuildList';
 
 const getVisibleBuilds = (builds, filter, query) => {
   switch (filter) {
@@ -38,13 +38,9 @@ const getVisibleBuilds = (builds, filter, query) => {
         }
       })
     case 'SHOW_POPULAR':
-     return builds.sort(function (a, b) {
-      return b.likes - a.likes;
-      })
+     return builds.sort(compareLikes);
     case 'SHOW_NEW':
-     return builds.sort(function (a, b) {
-      return a.created_at - b.created_at;
-    });
+     return builds.sort(compareCreatedDate);
     case 'SEARCH_BOX':
       return filterItems(builds, query)
     case 'SHOW_ALL':
@@ -52,10 +48,24 @@ const getVisibleBuilds = (builds, filter, query) => {
       return builds
   }
 }
+const compareLikes = (a, b) => {
+  if(a.likes > b.likes)
+    return -1;
+  if(a.likes < b.likes)
+    return 1;
+  return 0
+}
+const compareCreatedDate = (a, b) => {
+  if(a.created_at > b.created_at)
+    return -1;
+  if(a.created_at < b.created_at)
+    return 1;
+  return 0  
+}
 const filterItems = (builds, query) => {
   if(builds==='' || builds===' '|| builds===undefined){return};
-    return builds.filter((el) =>
-    el.name.toLowerCase().indexOf(query.toLowerCase()) > -1
+    return builds.filter((build) =>
+    build.name.toLowerCase().indexOf(query.toLowerCase()) > -1
   );
 }
 const mapStateToProps = (state) => {

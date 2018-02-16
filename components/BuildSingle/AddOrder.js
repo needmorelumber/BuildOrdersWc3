@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Input from './../Input';
 import { connect } from 'react-redux';
-import { updateAddOrderMessage } from './../../actions/build';
+import { updateAddOrderMessage, toggleAddingOrder} from './../../actions/build';
 import data from './../../MasterData';
 import './buildSingle.sass'
 
@@ -12,9 +12,9 @@ class AddOrder extends Component {
     // Functions that operate on the timeline will be contianed within Timeline.js
     this.state = Object.assign(props.userState, props.addOrderForm, {
       errorMessage: "",      
-      Form: {}
+      Form: {},
+      activeOrder: false
     })
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -29,24 +29,70 @@ class AddOrder extends Component {
         }, time)
     }
   handleChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
+        const target = event.target,
+              value = target.type === 'checkbox' ? target.checked : target.value,
+              name = target.name;
         const nextFormState = {...this.state.Form, [name]: value}
         this.setState({
-                Form: nextFormState
-            });
+          Form: nextFormState
+        });
   }
   handleSubmit(event) {
     event.preventDefault();
+    event.target.reset()
     this.saveCurrentVisible()
   }
+  minuteString(seconds) {
+				var min = new Date(null);
+				min.setSeconds(seconds);
+				var result = min
+						.toISOString()
+						.substr(14, 5)
+				return result;
+		}
+    
+  componentWillMount() {
+    if(this.props.currentVisibleBuild.currentOrder.order.race_unit) {
+      const order = this.props.currentVisibleBuild.currentOrder.order;
+      const unit = order.race_unit,
+            notes = order.notes,
+            count = order.count,
+            nextFormState = { 
+              race_unit: unit,
+              notes: notes,
+              count: count
+            }
+      this.setState({
+        activeOrder: true,
+        Form: nextFormState
+      })
+    }else{this.setState({activeOrder:false})}  
+    }
+    
+    componentWillReceiveProps(nextProps) {
+    if(nextProps.currentVisibleBuild.currentOrder.order.race_unit) {
+      const order = nextProps.currentVisibleBuild.currentOrder.order;
+      const unit = order.race_unit,
+            notes = order.notes,
+            count = order.count,
+            nextFormState = { 
+              race_unit: unit,
+              notes: notes,
+              count: count
+            }
+      this.setState({
+        activeOrder: true,
+        Form: nextFormState
+      })
+    }else{this.setState({activeOrder:false})}
+    }
+    
   render() {
     const inputsArray = Object.entries(this.state.inputs);
     return (
-    <div className="row AddOrder">
+    <div className="AddOrder">
       <div className="panel">
-      <p className="panel-heading">Add Command</p>
+      <p className="panel-heading"> <i onClick={() => this.props.toggleAddingOrder(false)} className="fa fa-close" style={{marginRight: '1%'}}></i>Add Command for {this.minuteString(this.props.currentVisibleBuild.currentOrder.order.second)}</p>
         <div className="panel-block">
           <form onSubmit={this.handleSubmit}>
           {
@@ -62,6 +108,7 @@ class AddOrder extends Component {
                               class={inp[1].class + " " + "is-large is-block" + " " + "without_ampm"}
                               handleChange={this.handleChange}
                               key={index}
+                              placeholder={this.state.activeOrder ? this.state.Form[inp[1].name]:inp[1].label}
                       />
                   )
               })
@@ -82,20 +129,21 @@ class AddOrder extends Component {
   }
   saveCurrentVisible() {
     let order = this.state.Form;
+    order.second = this.props.currentVisibleBuild.currentOrder.order.second
     const renderErrorMessage=this.props.updateAddOrderMessage
     if(order.second === 0) {
         this.rendermessage("Game doesn't have 0 second", 3000)
         return;
     }
-    if(order.second === " " || order.second === undefined) {
+    else if(order.second === " " || order.second === undefined) {
         this.rendermessage("Need to specify a second", 3000)
         return;
     }
 
-    if(parseInt(order.second) > this.props.currentVisibleBuild.item.build.build_list.length + 1){
+    else if(parseInt(order.second) > this.props.currentVisibleBuild.item.build.build_list.length + 1){
         this.rendermessage("Please Make timeline longer", 3000)
         return;
-    }
+    }else {
     const build = this.props.currentVisibleBuild.item.build
     const buildList = this.props.currentVisibleBuild.item.build.build_list;
     const id = build._id;
@@ -103,12 +151,13 @@ class AddOrder extends Component {
     const formatttedOrderToPush = {
           race_unit: order.race_unit,
           count: order.count,
-          time: order.second,
+          second: order.second,
           notes: order.notes,
           supply_cost: order.supply_cost,
         }
     buildList[arrPosOfSecond].order=formatttedOrderToPush;
     this.props.updateBuild(buildList, id);
+    }
   }
 
 }
@@ -122,6 +171,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateAddOrderMessage: (message) => {
       dispatch(updateAddOrderMessage(message))
+    },
+    toggleAddingOrder: (bool) => {
+      dispatch(toggleAddingOrder(bool))
     }
   }
 }

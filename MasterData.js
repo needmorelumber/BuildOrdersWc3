@@ -71,7 +71,7 @@ const data = {
       "Portrait": returnImageString('Human', 'farm')
     },
     "Altar of Kings": {
-      "Unit": "Town Hall",
+      "Unit": "Altar of Kings",
       "Gold": "180",
       "Lumber": "50",
       "Build Time": "180",

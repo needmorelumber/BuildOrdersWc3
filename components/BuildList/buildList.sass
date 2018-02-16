@@ -61,7 +61,8 @@ article.post
   margin: 1rem
   padding-bottom: 1rem
   border-bottom: 1px solid #E6EAEE
-
+  &:hover
+   cursor: pointer
 article.post:last-child 
   padding-bottom: 1rem
   border-bottom: none
@@ -74,8 +75,10 @@ article.post:last-child
   cursor: pointer
   transition: .4s ease-out
   transform: scale(1.5)
+ul.pagination a
+ color: black
 ul.pagination .active
- background-color: rgba(0, 0, 100, .4)
+ background-color: rgba(0, 100, 0, .4)
  padding: 10px
  border-radius: 10px
 .postedBy

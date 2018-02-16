@@ -7,13 +7,6 @@ import data from './../MasterData';
 const addOrderStateReference = {
     inputs:
     {
-        "second": {
-            name: "second",
-            label: "Second in Game to build",
-            type: "number",
-            userType: "textarea",
-            class: "input"
-        },
         "race_unit": {
             name: "race_unit",
             label: "Unit to Build",
@@ -59,13 +52,6 @@ export function addOrderForm(state = addOrderStateReference, action) {
             }
             return Object.assign({}, state, {
                 inputs: {
-                    "second": {
-                        name: "second",
-                        label: "Second in Game to build",
-                        type: "number",
-                        userType: "number",
-                        class: "input"
-                    },
                     "race_unit": {
                         name: "race_unit",
                         label: "Unit to Build",

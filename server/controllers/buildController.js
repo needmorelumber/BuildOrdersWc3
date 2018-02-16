@@ -88,6 +88,17 @@ module.exports = (() => {
             }
         })
     }
+    buildController.deleteBuild = (req, res) => {
+        const body = req.body;
+        const id = body.id;
+        build_order.findOneAndRemove(id, (err, build) => {
+            if(!err && build) {
+                res.status(200).json({deleted: true})
+            } else {
+                res.status(200).json({deleted: false})
+            }
+        })
+    }
     buildController.addMinute = (req, res) => {
         const body = req.body;
         const id = body.id
@@ -108,11 +119,32 @@ module.exports = (() => {
                     currlistsecond = 1;
                 }
                 for (let i = 0; i < 60; i++) {
-                    newMinute.push({second: currlistsecond, order: {}})
+                    newMinute.push({second: currlistsecond, order: {second:currlistsecond}})
                     currlistsecond++
                 }
                 var newBuildList = currlist.concat(newMinute);
                 build.build_list = newBuildList;
+                build.save();
+                res.json({data: build.build_list})
+            } else {
+                res.json({err})
+            }
+        })
+
+    }
+    buildController.removeMinute = (req, res) => {
+        const body = req.body;
+        const id = body.id
+        const timeline = body.timeline;
+        if (timeline.length == 0) {
+            res
+                .status(200)
+                .send('Too Short')
+        }
+        build_order.findById(id, (err, build) => {
+            if (!err && build) {
+                var currlist = timeline.build_list;
+                build.build_list = timeline.build_list.slice(0, timeline.build_list.length - 60)
                 build.save();
                 res.json({data: build.build_list})
             } else {

@@ -15,11 +15,17 @@ routes.post('/like_build', (req, res) => {
 routes.post('/new_build', (req, res) => {
     buildController.newBuild(req, res);
 })
+routes.post('/delete_build', (req, res) => {
+    buildController.deleteBuild(req, res);
+})
 routes.post('/update_build', (req, res) => {
     buildController.updateBuild(req, res);
 })
 routes.post('/add_minute', (req, res) => {
-buildController.addMinute(req, res);
+    buildController.addMinute(req, res);
+})
+routes.post('/remove_minute', (req, res) => {
+    buildController.removeMinute(req, res);
 })
 routes.post('/get_by_id', (req, res) => {
     buildController.getById(req, res);
