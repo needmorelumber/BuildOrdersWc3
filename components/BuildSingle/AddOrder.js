@@ -7,17 +7,24 @@ import './buildSingle.sass'
 
 class AddOrder extends Component {
   constructor(props) {
+
     super(props)
     // State of this componenet can be found in the timeline reducer('/reducers/timeline.js') that handles the http calls of the timeline;
     // Functions that operate on the timeline will be contianed within Timeline.js
+    const order = this.props.currentVisibleBuild.currentOrder;
     this.state = Object.assign(props.userState, props.addOrderForm, {
       errorMessage: "",      
-      Form: {},
+      Form: {
+        race_unit: order.order?order.order.race_unit:'',
+        count: order.order?order.order.count:'',
+        notes: order.order?order.order.notes:''
+      },
       activeOrder: false
     })
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   renderErrorMessage(messageContent, time) {
         this.setState({
             errorMessage: messageContent
@@ -92,7 +99,7 @@ class AddOrder extends Component {
     return (
     <div className="AddOrder">
       <div className="panel">
-      <p className="panel-heading"> <i onClick={() => this.props.toggleAddingOrder(false)} className="fa fa-close" style={{marginRight: '1%'}}></i>Add Command for {this.minuteString(this.props.currentVisibleBuild.currentOrder.order.second)}</p>
+      <p className="panel-heading"> <i onClick={() => this.props.toggleAddingOrder(false)} className="fa fa-close" style={{marginRight: '1%'}}></i>{!this.state.activeOrder? 'Adding' : 'Editing'} Command for {this.minuteString(this.props.currentVisibleBuild.currentOrder.order.second)}</p>
         <div className="panel-block">
           <form onSubmit={this.handleSubmit}>
           {
@@ -108,7 +115,7 @@ class AddOrder extends Component {
                               class={inp[1].class + " " + "is-large is-block" + " " + "without_ampm"}
                               handleChange={this.handleChange}
                               key={index}
-                              placeholder={this.state.activeOrder ? this.state.Form[inp[1].name]:inp[1].label}
+                              placeholder={inp[1].label}
                       />
                   )
               })

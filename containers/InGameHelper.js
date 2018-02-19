@@ -10,7 +10,7 @@ const returnJustOrders=(buildList)=>{
   let newTimeline = [];
       for (let i = 0; i < buildList.length; i++) {
           let order = buildList[i].order;
-          if(order){
+          if(order.race_unit){
               newTimeline.push(buildList[i])
           }
       }

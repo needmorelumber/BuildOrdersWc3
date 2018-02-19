@@ -246,6 +246,7 @@ export function deleteBuild(id) {
 							})
 							.then(res=>{
 								if(res.deleted){
+									fetchBuilds()
 									dispatch(resolveDeleteBuild())
 								}
 							})

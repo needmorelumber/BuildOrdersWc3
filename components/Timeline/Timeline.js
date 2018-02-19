@@ -3,14 +3,23 @@ import AddOrder from './../BuildSingle/AddOrder';
 import InGameHelper from './../../containers/InGameHelper';
 import {Redirect} from 'react-router-dom'
 import './timeline.sass'
+import ReactTooltip from 'react-tooltip'
 
 class Timeline extends Component {
 		constructor(props) {
 				super(props)
 				this.state = {
 						message: "",
-						id: this.props.build._id
+						id: this.props.build._id,
+						currRow: null
 				}
+		}
+		handleRowHover(e, i) {
+				const currrow = "row" + i;
+				this.setState({currRow: i})
+		}
+		handleMouseLeave() {
+				this.setState({currRow: null})
 		}
 		render() {
 				const editingProp = this.props.editing,
@@ -32,13 +41,39 @@ class Timeline extends Component {
 										<tbody>
 												{build.map((second, i) => {
 														return (
-																<tr key={i + 1}>
-																		<td className="secondsRow">
-																				<p>
-																						{this.minuteString(second.second)}
-																				</p>
-																		</td>
-																		<td onClick={() => this.handleClick(second.order, i)}>
+																<tr
+																		key={i + 1}
+																		onMouseLeave={() => this.handleMouseLeave()}
+																		onMouseOver={() => this.handleRowHover(event, i)}>
+																		{this.state.currRow === i && editingProp
+																				? <td data-tip="Add order">
+																								<div className="field is-grouped">
+																										<p
+																												className="control has-text-centered"
+																												onClick={() => this.handleClick(second.order, i)}>
+																												<a className="button">
+																														<span className="icon is-small">
+																																<i className={!build[i].order.race_unit?"fa fa-plus":"fa fa-edit"}></i>
+																														</span>
+																												</a>
+																										</p>
+																										<p className="control has-text-centered"
+																											 onClick={() => this.props.removeItem(build, id, i)}>
+																												<a className="button">
+																														<span className="icon is-small">
+																																<i className="fa fa-trash"></i>
+																														</span>
+																												</a>
+																										</p>
+																								</div>
+																						</td>
+																				: <td className="secondsRow">
+																						<p>
+																								{this.minuteString(second.second)}
+																						</p>
+																				</td>
+}
+																		<td>
 																				{Object.assign({}, second.order).race_unit}
 																		</td>
 																</tr>
@@ -75,50 +110,26 @@ class Timeline extends Component {
 				timeline.push(newSecond);
 				this.saveTimelineToDatabase();
 		}
-		removeSecond() {
-				if (!this.state.isEdit) {
-						const timeline = this.state.timeline;
-				} else {
-						const timeline = this.state.most_recent_timeline;
-				};
-				const lastSecond = timeline.length - 1;
-				timeline.splice(lastSecond, 1);
-				this.saveTimelineToDatabase();
-		}
 		handleClick(data, i) {
-			this.props.updateOrder(data);
-			this.props.editing === true ?	this.props.toggleAddingOrder(true):null
+				this
+						.props
+						.updateOrder(data);
+				this.props.editing === true
+						? this
+								.props
+								.toggleAddingOrder(true)
+						: null
 		}
-		// setupTimeline(vals) {
-		// 		let max = 0;
-		// 		for (let i = 0; i < vals.length; i++) {
-		// 				if (vals[i].second * 1000 > max) {
-		// 						max = vals[i].second * 1000;
-		// 				}
-		// 		}
-		// 		let cells = max / 1000;
-		// 		let timeline = [];
-		// 		let values = vals
-		// 		for (let i = 0; i < cells; i++) {
-		// 				let oneSecond = {
-		// 						second: i + 1,
-		// 						order: {second: i + 1}
-		// 				}
-		// 				timeline.push(oneSecond);
-		// 		}
-		// 		//create object map of second values and use that instead
-		// 		for (let i = 0; i < timeline.length; i++) {
-		// 				for (let k = 0; k < values.length; k++) {
-		// 						if (values[k].second === timeline[i].second) {
-		// 								const order = values[k].order;
-		// 								timeline[i].order = order;
-
-		// 						}
-		// 				}
-		// 		}
-		// 		console.log(timeline)
-		// 		return timeline;
-		// }
+		// setupTimeline(vals) { 		let max = 0; 		for (let i = 0; i < vals.length; i++)
+		// { 				if (vals[i].second * 1000 > max) { 						max = vals[i].second * 1000;
+		// 				} 		} 		let cells = max / 1000; 		let timeline = []; 		let values = vals
+		// 		for (let i = 0; i < cells; i++) { 				let oneSecond = { 						second: i +
+		// 1, 						order: {second: i + 1} 				} 				timeline.push(oneSecond); 		}
+		// 		//create object map of second values and use that instead 		for (let i = 0;
+		// i < timeline.length; i++) { 				for (let k = 0; k < values.length; k++) {
+		// 						if (values[k].second === timeline[i].second) { 								const order =
+		// values[k].order; 								timeline[i].order = order; 						} 				} 		}
+		// 		console.log(timeline) 		return timeline; }
 		saveCurrentTimeline(timeline) {
 				let oldTimeline = []
 				timeline.map(order => {

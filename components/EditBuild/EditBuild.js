@@ -46,7 +46,9 @@ class EditBuild extends Component {
       return (
         <div className="container">
           <div className="section columns">
-            <div>
+            <div className={isAdding
+              ? "column is-8 timelineContainer"
+              : "column is-12 timelineContainer"}>
               <TimelineControls
                 toggleEmpty={toggleEmpty}
                 isToggled={isToggled}
@@ -54,6 +56,7 @@ class EditBuild extends Component {
                 addMinute={addMinute}
                 removeMinute={removeMinute}/>
               <Timeline
+                className="timelineContainer" 
                 build={this.props.currentVisibleBuild.item.build}
                 fetchById={this.props.fetchById}
                 editing={true}
@@ -64,7 +67,7 @@ class EditBuild extends Component {
             </div>
             <StickyContainer
               className={isAdding
-              ? "column is-9 addOrderContainer"
+              ? "column is-5 addOrderContainer"
               : "column is-0 addOrderContainer"}>
               <Sticky >
                 {({

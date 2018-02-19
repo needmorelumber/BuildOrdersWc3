@@ -8,7 +8,6 @@ import Root from './containers/Root'
 import warcraftApp from './reducers/index'
 import configureStore from './store/configureStore'
 
-
 let store = configureStore(warcraftApp);
 ReactDOM.render(
     <BrowserRouter>

@@ -9,6 +9,7 @@ import {
 } from './../../actions/build.js'
 import './editbuild.sass';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
+import ReactTooltip from 'react-tooltip'
 
 
 
@@ -25,36 +26,57 @@ class ControlsPanel extends Component {
     const isToggled = this.props.isToggled
     return (
       <div className="">
-          <nav className="panel">
-            <p className="panel-heading">
-              Timeline Controls
-            </p>
-            <div className="panel-block">
-            { isToggled === true
+          <ReactTooltip place="top" effect="solid"/>
+          <nav className="controlsCard">
+            <div className="buttonGroups field is-grouped">
+            { isToggled
               ?
               <p className="control">
-                <a className="is-success is-block button is-outlined is-hovered is-small " onClick={()=>{this.props.restoreBuild()}}> Restore Timeline </a>
+                <a className="is-success is-block button is-outlined is-hovered is-small " onClick={()=>{this.props.restoreBuild()}}> 
+                <span className="icon is-small">
+                  <i className="fa fa-eye"></i>
+                </span>
+               <span>Restore Timeline</span> </a>
               </p>
               :
-              <div className="field-is-grouped">
+              <div className="field is-grouped">
+              <p className="control" data-tip="Helps you in game!">
+                <Link className="button timelinebutton is-success is-block button is-outlined is-hovered is-small "  title="Helps you in game!" to={'/build/' + build._id + '/playing'}>
+                <span className="icon is-small">
+                  <i className="fa fa-play"></i>
+                </span>
+                <span>In game walkthrough</span></Link>
+              </p>
                 <p className="control">
-                  <a className="is-success is-block button is-outlined is-hovered is-small " onClick={()=>{this.props.toggleEmpty()}}> Toggle Empty Seconds</a>
+                  <a className="button is-success is-block button is-outlined is-hovered is-small " onClick={()=>{this.props.toggleEmpty()}} data-tip="Hide all seconds without an order"> 
+                <span className="icon is-small">
+                  <i className="fa fa-cut"></i>
+                </span>
+                <span>Toggle Empty Seconds</span></a>
                 </p>
                 <p className="control">
-                  <a onClick={()=>{this.props.addMinute(build, build._id)}}className="is-success is-block button is-small is-hovered is-outlined"> Add Minute </a>
+                  <a onClick={()=>{this.props.addMinute(build, build._id)}}className="is-success is-block button is-small is-hovered is-outlined" data-tip="Add 60 seconds to total time"> 
+                <span className="icon is-small">
+                  <i className="fa fa-plus-circle"></i>
+                </span><span>Add Minute</span> </a>
                 </p>
                 <p className="control">
-                  <a onClick={()=>{this.props.removeMinute(build, build._id)}}className="is-success is-block button is-small is-hovered is-outlined"> Remove Minute </a>
+                  <a onClick={()=>{this.props.removeMinute(build, build._id)}}className="is-success is-block button is-small is-hovered is-outlined" data-tip="Remove 60 seconds from total time (will delete all orders in this time)">
+                <span className="icon is-small">
+                  <i className="fa fa-minus-circle"></i>
+                </span> <span>Remove Minute </span></a>
                 </p>
               </div>
             }
-            <div className="field-is-grouped">
+            <div className="field is-grouped deleteButton">
               <p className="control">
-                <Link className="is-success is-block button is-outlined is-hovered is-small " to={'/build/' + build._id + '/playing'}>In game walkthrough</Link>
+                <a onClick={()=>{this.toggleDelete(build.name, true)}}className=" is-danger is-block button is-small is-hovered is-outlined" data-tip="Delete build forever">
+                <span className="icon is-small">
+                  <i className="fa fa-trash"></i>
+                </span><span>Delete Build</span></a>            
               </p>
-              <p className="control">
-                <a onClick={()=>{this.toggleDelete(build.name, true)}}className="is-danger is-block button is-small is-hovered is-outlined"> Delete Build </a>            
-              </p>
+            </div>
+              <div>
             </div>
             </div> 
           </nav>
@@ -65,9 +87,9 @@ class ControlsPanel extends Component {
             <div className="modal-background" onClick={()=>{this.toggleDelete(null, false)}}></div>
             <div className="modal-card">
             <div className="modal-card-head"> Are you sure? </div>
-            <section className="modal-card-body">
-              <button onClick={()=>{this.toggleDelete(null, false)}}className="is-success is-block button is-small is-hovered is-outlined"> No, take me back to safety</button>   
-              <button onClick={()=>{this.props.deleteBuild(build._id)}}className="is-danger is-block button is-small is-hovered is-outlined"> <Link to="/builds">Yes, delete {this.state.currentlyDeleting} forever </Link></button>   
+            <section className="modal-card-body field is-grouped">
+              <button onClick={()=>{this.toggleDelete(null, false)}}className="deleteButton is-success is-block button is-large is-hovered is-outlined"> No, take me back to safety</button>   
+              <Link to="/builds"><button onClick={()=>{this.props.deleteBuild(build._id)}}className="deleteButton is-danger is-block button is-small is-hovered is-outlined"> Yes, delete {this.state.currentlyDeleting} forever</button> </Link>  
             </section>
             </div>
             <button onClick={()=>{this.toggleDelete(null, false)}}className="modal-close is-large" aria-label="close"></button>

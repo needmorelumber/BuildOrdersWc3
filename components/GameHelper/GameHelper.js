@@ -46,7 +46,7 @@ class GameHelper extends Component {
   findAndUpdateNextOrder(currIndex, build_map) {
     const ordersArray = this.props.justOrders;
     const allSecondsArray = this.props.currentVisibleBuild.item.build.build_list;
-    if (allSecondsArray[currIndex].order) {
+    if (allSecondsArray[currIndex].order.race_unit) {
       let currentOrder = allSecondsArray[currIndex];
       const dataOfUnitFromMap = build_map[currIndex]
       const newOrderCount = this.state.ordersSeen;

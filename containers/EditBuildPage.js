@@ -35,8 +35,11 @@ const mapDispatchToProps = (dispatch, state) => {
       dispatch(removeMinuteApi(build, id))
     },
     removeItem: (build, id, index) => {
+      console.log(build)
       if(build[index].order){
-        build[index].order = {};
+        build[index].order = {
+          second: index+1
+        };
         dispatch(updateBuildById(build, id));
       }
     },
