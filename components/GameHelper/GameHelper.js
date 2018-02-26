@@ -116,7 +116,6 @@ class GameHelper extends Component {
     if (this.props.currentVisibleBuild.item.build) {
       let user = this.props.userState.user.user;
       let build = this.props.currentVisibleBuild.item.build;
-      if (this.state.currentlyTicking) {
         return (
           <div className="container has-text-centered">
             <Timer timeInGame={this.state.timeStampSeconds} />
@@ -152,26 +151,6 @@ class GameHelper extends Component {
             </div>
           </div>
         )
-      }
-        return (
-            <div>
-              <div className="container has-text-centered">
-                <div className="">
-                    <div className="">
-                      <button 
-                        className="title is-3 button is-block is-large is-success is-outlined startWalkthroughButton" 
-                        onClick={() => this.startWalkthrough()}>
-                          Start In Game walkthrough!
-                          <span className="icon is-small playIcon">
-                            <i className="fa fa-play"></i>
-                          </span>
-                      </button>
-                      <h3 className="subtitle is-3 createdBy "> Build Created by {this.props.currentVisibleBuild.item.build.ownerUsername} </h3>
-                    </div>
-                </div>
-              </div>
-            </div>
-        );
       } else {
         return (
           <LoadingPlaceholder />

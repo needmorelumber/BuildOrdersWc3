@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import fetchBuilds from './../../actions/actions'
 import LoadingAnimation from './../loadingAnimation';
 import Pagination from './Pagination';
+import data from './../../MasterData';
+import path from 'path';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 
@@ -22,9 +24,9 @@ export default class BuildList extends React.Component {
         this.props.fetchBuilds();
     }
     onChangePage(pageOfItems) {
-        // update state with new page of items
         this.setState({ pageOfItems: pageOfItems });
     }
+		
     render() {
         const p = this.props,
               b = p.builds,
@@ -35,6 +37,8 @@ export default class BuildList extends React.Component {
               failedToLoadCheck = b.failedToLoad,
               isFetching = b.isFetching,
               builds = this.state.pageOfItems.map((build, index) => {
+								const race = build.race,
+								iconString = path.join('/assets/icons/', race + '.jpg');
                 return (
                     <CSSTransition
                         key={index}
@@ -42,6 +46,7 @@ export default class BuildList extends React.Component {
                         classNames="buildCard"
                     >
                     <article className="post" onClick={()=>onBuildClick(build._id)}>
+												<img src={iconString} alt="" />
                         <h4>{build.name}</h4>
                         <span className="pull-right likebuild has-text-grey-light"><i onClick={()=>likeBuild(build._id, page)}className="fa fa-thumbs-up"></i> {build.likes}</span>
                         <div className="media">
@@ -52,7 +57,7 @@ export default class BuildList extends React.Component {
                             <div className="content">
                             <p>
                                 <span className="postedBy">Posted by {build.ownerUsername}</span>
-                                <span className="tag">{build.race}</span>
+																<span className="tag">{build.race} vs. {build.opposing_race}</span>
                                 <span className="tag">{build.build_type}</span>
                             </p>
                             </div>

@@ -11,13 +11,17 @@ export const VisibilityFilters = {
 		SHOW_ALL: 'SHOW_ALL'
 
 }
-export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER"
+export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER";
 export function setVisibilityFilter(filter) {
 		return {type: SET_VISIBILITY_FILTER, payload: filter}
 }
 export const SET_SEARCH_QUERY = "SET_SEARCH_QUERY";
 export function setSearchQuery(query) {
 		return {type: SET_SEARCH_QUERY, payload: query}
+}
+export const SET_SORT_TYPE = "SET_SORT_TYPE";
+export function setSortType(sortType) {
+		return {type: SET_SORT_TYPE, payload: sortType}
 }
 export const TOGGLE_EMPTY = "TOGGLE_EMPTY";
 export function toggleEmpty() {
@@ -241,18 +245,16 @@ export function deleteBuild(id) {
 		return function (dispatch) {
 				dispatch(beginDeleteBuild())
 				return axios
-							.post(`/api/delete_build`, {
-								id:id
-							})
-							.then(res=>{
-								if(res.deleted){
-									fetchBuilds()
-									dispatch(resolveDeleteBuild())
+						.post(`/api/delete_build`, {id: id})
+						.then(res => {
+								if (res.deleted) {
+										fetchBuilds()
+										dispatch(resolveDeleteBuild())
 								}
-							})
-							.catch(err=>{
+						})
+						.catch(err => {
 								console.error(err)
-							})
+						})
 		}
 }
 export function updateLoginMessageTimed(message) {

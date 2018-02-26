@@ -41,27 +41,25 @@ class Timeline extends Component {
 										<tbody>
 												{build.map((second, i) => {
 														return (
-																<tr
+																<tr 
 																		key={i + 1}
 																		onMouseLeave={() => this.handleMouseLeave()}
 																		onMouseOver={() => this.handleRowHover(event, i)}>
 																		{this.state.currRow === i && editingProp
-																				? <td data-tip="Add order">
+																				? <td>
 																								<div className="field is-grouped">
-																										<p
-																												className="control has-text-centered"
-																												onClick={() => this.handleClick(second.order, i)}>
+																								<ReactTooltip />
+																										<p className="control" onClick={() => this.handleClick(second.order, i)} data-tip={!build[i].order.race_unit?"Add Order":"Edit Order"}>
 																												<a className="button">
 																														<span className="icon is-small">
 																																<i className={!build[i].order.race_unit?"fa fa-plus":"fa fa-edit"}></i>
 																														</span>
 																												</a>
 																										</p>
-																										<p className="control has-text-centered"
-																											 onClick={() => this.props.removeItem(build, id, i)}>
+																										<p className="control" onClick={() => this.props.removeItem(build, id, i)} data-tip="Remove Order">
 																												<a className="button">
 																														<span className="icon is-small">
-																																<i className="fa fa-trash"></i>
+																																<i className="fa fa-trash" ></i>
 																														</span>
 																												</a>
 																										</p>
@@ -73,7 +71,7 @@ class Timeline extends Component {
 																						</p>
 																				</td>
 }
-																		<td>
+																		<td onClick={() => this.handleClick(second.order, i)}>
 																				{Object.assign({}, second.order).race_unit}
 																		</td>
 																</tr>

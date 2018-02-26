@@ -11,7 +11,7 @@ class Input extends Component {
                     <div className="field">
                         <div className="control">
                             <label className="label">{info.label}</label>
-                            <input required className={info.class} type={info.type} name={info.name} value={info.initialValue} placeholder={info.placeholder} onChange={info.handleChange} />                        
+                            <input required className={info.class} type={info.type} name={info.name} defaultValue={info.initialValue} placeholder={info.placeholder} onChange={info.handleChange} />                        
                         </div>
                         <p className="help is-success">{info.message}</p>
                     </div>
@@ -21,7 +21,7 @@ class Input extends Component {
                     <div className="field">
                         <div className="control">
                             <label className="label">{info.label}</label>
-                            <textarea className={info.class} type={info.type} name={info.name} value={info.initialValue} placeholder={info.placeholder} onChange={info.handleChange} />
+                            <textarea className={info.class} type={info.type} name={info.name} defaultValue={info.initialValue} placeholder={info.placeholder} onChange={info.handleChange} />
                             
                         </div>
                         <p className="help is-success">{info.message}</p>
@@ -54,7 +54,7 @@ class Input extends Component {
                     <div className="field">
                         <div className="control">
                             <label className="label">{info.label}</label>
-                            <input required className={info.class} name={info.name} min="1" type={info.type} value={info.initialValue} onChange={info.handleChange} placeholder={info.placeholder}/>                             
+                            <input required className={info.class} name={info.name} min="1" type={info.type} defaultValue={info.initialValue} onChange={info.handleChange} placeholder={info.placeholder}/>                             
                         </div>
                         <p className="help is-success">{info.message}</p>
                     </div>
@@ -96,7 +96,7 @@ class Input extends Component {
                     <div className="field">
                         <div className="control">
                             <label className="label">{info.label}</label>
-                            <input required className={info.class} value={info.initialValue} name={info.name} type={info.type} onChange={info.handleChange} list={info.list} placeholder={info.placeholder}/>
+                            <input required className={info.class} defaultValue={info.initialValue} name={info.name} type={info.type} onChange={info.handleChange} list={info.list} placeholder={info.placeholder}/>
                             <datalist id={info.list}>
                                 {
                                     info.options.map((o, i) => {
@@ -106,6 +106,23 @@ class Input extends Component {
                                     })
                                 }
                             </datalist>
+                        </div>
+                    </div>
+                )
+            case 'radio':
+                return (
+                    <div className="field">
+                        <div className="control">
+                         <label className="label">{info.label}</label>
+                        {
+                            info.options.map((o,i) => {
+                                return (
+                                <label key={i} className="radio">
+                                    <input type="radio" className={info.class} value={o} name={info.name} onChange={info.handleChange} type={info.type}/><p>{o}</p>
+                                </label>
+                                )
+                            })
+                        }
                         </div>
                     </div>
                 )

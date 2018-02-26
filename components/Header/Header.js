@@ -41,7 +41,6 @@ class Header extends Component {
                 <div className="container">
                     <div className="navbar-brand">
                     <Link className="navbar-item" to="/home">
-                        <img src="./../../assets/warcraft.svg" alt="Logo" className="logo" />
                         <p className="title navbar-item"> Need More Lumber? </p>    
                     </Link>
                     

@@ -3,56 +3,65 @@ import * as _ from 'lodash'
 import {requestBuilds, fetchBuildById, fetchBuilds, likeBuild} from './../actions/build'
 import BuildList from '../components/BuildList/BuildList';
 
-const getVisibleBuilds = (builds, filter, query) => {
+const getVisibleBuilds = (builds, filter, query, sortType) => {
   switch (filter) {
     case 'SHOW_ORC':
-      return builds.filter(b => {
+      return applySort(sortType, builds.filter(b => {
         if (b.race === 'Orc') {;
           return true
         } else {
           return false
         }
-      })
+      }))
     case 'SHOW_NIGHTELF':
-      return builds.filter(b => {
+      return applySort(sortType, builds.filter(b => {
         if (b.race === 'Night Elf') {;
           return true
         } else {
           return false
         }
-      })
+      }))
     case 'SHOW_HUMAN':
-      return builds.filter(b => {
+      return applySort(sortType, builds.filter(b => {
         if (b.race === 'Human') {;
           return true
         } else {
           return false
         }
-      })
+      }))
     case 'SHOW_UNDEAD':
-      return builds.filter(b => {
+      return applySort(sortType, builds.filter(b => {
         if (b.race === 'Undead') {;
           return true
         } else {
           return false
         }
-      })
-    case 'SHOW_POPULAR':
-     return builds.sort(compareLikes);
-    case 'SHOW_NEW':
-     return builds.sort(compareCreatedDate);
+      }))
     case 'SEARCH_BOX':
       return filterItems(builds, query)
     case 'SHOW_ALL':
     default:
-      return builds
+      return applySort(sortType, builds)
   }
 }
+const applySort = (sortType, builds) => {
+  if(!sortType || sortType === undefined) {
+    console.log('No sort')
+    return builds;
+  }
+    switch(sortType) {    
+      case 'POPULARITY':
+        return builds.sort(compareLikes)
+      case 'CREATED_ON':
+        return builds.sort(compareCreatedDate)
+    }
+  return builds;
+} 
 const compareLikes = (a, b) => {
   if(a.likes > b.likes)
-    return -1;
-  if(a.likes < b.likes)
     return 1;
+  if(a.likes < b.likes)
+    return -1;
   return 0
 }
 const compareCreatedDate = (a, b) => {
@@ -70,7 +79,7 @@ const filterItems = (builds, query) => {
 }
 const mapStateToProps = (state) => {
   const newBuilds = Object.assign(state.builds, {}, {
-    visible_items: getVisibleBuilds(state.builds.items, state.builds.visibilityFilter, state.builds.searchQuery),
+    visible_items: getVisibleBuilds(state.builds.items, state.builds.visibilityFilter, state.builds.searchQuery, state.builds.sortType),
     page: state.builds.page
   })
   return {

@@ -15,9 +15,9 @@ class AddOrder extends Component {
     this.state = Object.assign(props.userState, props.addOrderForm, {
       errorMessage: "",      
       Form: {
-        race_unit: order.order?order.order.race_unit:'',
-        count: order.order?order.order.count:'',
-        notes: order.order?order.order.notes:''
+        race_unit: order.order.race_unit||'',
+        count: order.order.count||'',
+        notes: order.order.notes||''
       },
       activeOrder: false
     })
@@ -58,41 +58,41 @@ class AddOrder extends Component {
 				return result;
 		}
     
-  componentWillMount() {
-    if(this.props.currentVisibleBuild.currentOrder.order.race_unit) {
-      const order = this.props.currentVisibleBuild.currentOrder.order;
-      const unit = order.race_unit,
-            notes = order.notes,
-            count = order.count,
-            nextFormState = { 
-              race_unit: unit,
-              notes: notes,
-              count: count
-            }
-      this.setState({
-        activeOrder: true,
-        Form: nextFormState
-      })
-    }else{this.setState({activeOrder:false})}  
-    }
+  // componentWillMount() {
+  //   if(this.props.currentVisibleBuild.currentOrder.order.race_unit) {
+  //     const order = this.props.currentVisibleBuild.currentOrder.order;
+  //     const unit = order.race_unit,
+  //           notes = order.notes,
+  //           count = order.count,
+  //           nextFormState = { 
+  //             race_unit: unit,
+  //             notes: notes,
+  //             count: count
+  //           }
+  //     this.setState({
+  //       activeOrder: true,
+  //       Form: nextFormState
+  //     })
+  //   }else{this.setState({activeOrder:false, Form: {}})}  
+  //   }
     
-    componentWillReceiveProps(nextProps) {
-    if(nextProps.currentVisibleBuild.currentOrder.order.race_unit) {
-      const order = nextProps.currentVisibleBuild.currentOrder.order;
-      const unit = order.race_unit,
-            notes = order.notes,
-            count = order.count,
-            nextFormState = { 
-              race_unit: unit,
-              notes: notes,
-              count: count
-            }
-      this.setState({
-        activeOrder: true,
-        Form: nextFormState
-      })
-    }else{this.setState({activeOrder:false})}
-    }
+  //   componentWillReceiveProps(nextProps) {
+  //   if(nextProps.currentVisibleBuild.currentOrder.order.race_unit) {
+  //     const order = nextProps.currentVisibleBuild.currentOrder.order;
+  //     const unit = order.race_unit,
+  //           notes = order.notes,
+  //           count = order.count,
+  //           nextFormState = { 
+  //             race_unit: unit,
+  //             notes: notes,
+  //             count: count
+  //           }
+  //     this.setState({
+  //       activeOrder: true,
+  //       Form: nextFormState
+  //     })
+  //   }else{this.setState({activeOrder:false, Form: {}})}
+  //   }
     
   render() {
     const inputsArray = Object.entries(this.state.inputs);
@@ -114,13 +114,14 @@ class AddOrder extends Component {
                               list={inp[1].list}
                               class={inp[1].class + " " + "is-large is-block" + " " + "without_ampm"}
                               handleChange={this.handleChange}
+                              // initialValue={this.state.Form[inp[1].name]}
                               key={index}
                               placeholder={inp[1].label}
                       />
                   )
               })
           }        
-            <input className="button" type="submit" value="Submit" />
+            <input className="button" type="submit" value={this.state.activeOrder?"Save Edit":"Add Order"} />
           </form>
         </div>
          <p className="subtitle help is-danger"> {this.props.addOrderForm.message} </p>
@@ -134,6 +135,7 @@ class AddOrder extends Component {
       this.props.updateAddOrderMessage("")
     }, time)
   }
+  
   saveCurrentVisible() {
     let order = this.state.Form;
     order.second = this.props.currentVisibleBuild.currentOrder.order.second

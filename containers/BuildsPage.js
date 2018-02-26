@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import VisibleBuilds from './VisibleBuilds';
 import {Link} from 'react-router-dom';
 import CurrentBuild from './CurrentBuild';
-import {setVisibilityFilter, setSearchQuery} from './../actions/build';
+import {setVisibilityFilter, setSearchQuery, setSortType} from './../actions/build';
 import './../components/custom.sass';
 
 class BuildsPageComp extends Component {
@@ -24,7 +24,20 @@ class BuildsPageComp extends Component {
           <div className="container">
             <div className="navbar-menu">
               <div className="navbar-start">
-                <div className="navbar-item">
+                {user
+                                ? <Link
+                                    to="/builds/new">
+                                    <p className="control button is-success is-rounded is-block is-alt is-large is-hoverable">
+                                    <span className="icon is-small">
+                                      <i className="fa fa-plus"></i>
+                                    </span><span> New Build </span> 
+                                    </p>
+                                    </Link>
+                                : null
+                }
+              </div>
+              <div className="navbar-end">
+               <div className="navbar-item">
                   <input
                     className="input"
                     ref={(input) => this.input = input}
@@ -33,21 +46,15 @@ class BuildsPageComp extends Component {
                     placeholder="Search builds...."/>
                 </div>
               </div>
-              <div className="navbar-end"></div>
             </div>
           </div>
         </nav>
         <section className="container">
           <div className="columns">
-            <div className="column is-4 rows">
-              {user
-                ? <Link
-                    className="button is-success is-block is-alt is-large is-hoverable"
-                    to="/builds/new">Create a new build</Link>
-                : null
-}
-            <div className="row columns">
-              <aside className="column menu">
+            <div className="column is-2 rows">
+            
+            <div className="row rows">
+              <aside className="row menu">
                 <p className="menu-label">
                   Filter by Race
                 </p>
@@ -69,21 +76,29 @@ class BuildsPageComp extends Component {
                   </li>
                 </ul>
               </aside>
-              <aside className="column menu">
+              <aside className="row menu">
                 <p className="menu-label">
-                  Filter by...
+                  Sort By
                 </p>
+                <ul className="filter-race-menu menu-list">
+                  <li onClick={() => this.props.setSortType("POPULARITY")}>
+                    <a>Popularity</a>
+                  </li>
+                  <li onClick={() => this.props.setSortType("CREATED_ON")}>
+                    <a>Date Created</a>
+                  </li>
+                </ul>
               </aside>
             </div>
-              <aside className="row">
-                <CurrentBuild/>
-              </aside>
             </div>
-            <div className="column is-8">
+            <div className="column is-6">
               <div className="box content builds-container">
                 <VisibleBuilds/>
               </div>
             </div>
+              <aside className="column ">
+                <CurrentBuild/>
+              </aside>
           </div>
         </section>
       </div>
@@ -101,6 +116,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     setSearchQuery: query => {
       dispatch(setSearchQuery(query))
+    },
+    setSortType: sortType => {
+      dispatch(setSortType(sortType))
     }
   }
 }

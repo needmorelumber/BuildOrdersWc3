@@ -24,7 +24,8 @@ class BuildSingle extends Component {
 						updateOrder = this.props.updateCurrentOrder,
 						order = this.props.currentVisibleBuild.currentOrder;
 				if (build) {
-						const race = this.props.currentVisibleBuild.item.build.race;
+						const race = this.props.currentVisibleBuild.item.build.race,
+									opposing = this.props.currentVisibleBuild.item.build.opposing_race;
 						const iconString = path.join('/assets/icons/', race + '.jpg')
 						return (
 								<div className="section">
@@ -61,7 +62,7 @@ class BuildSingle extends Component {
 																																{this.props.currentVisibleBuild.item.build.name}
 																														</h1>
 																														<p className="row subtitle">
-																																{race}
+																																{race} vs. {opposing}
 																														</p>
 																												</div>
 																										</div>

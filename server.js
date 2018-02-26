@@ -7,6 +7,7 @@ const http       = require('http'),
       bcrypt     = require('bcrypt'),
       mongoose   = require('mongoose'),
       MongoStore = require('connect-mongo')(session),
+      nev        = require('email-verification')(mongoose),
       cookieParser = require('cookie-parser'),
       compression = require('compression'),
       config     = require('./server/config/config'),
@@ -23,7 +24,7 @@ app.use(session({
   resave: true,
   store: new MongoStore({ mongooseConnection: db })
 }))
-
+const User = mongoose.model('user');
 
 const api = require('./server/config/api.js');
 

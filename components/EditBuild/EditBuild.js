@@ -5,6 +5,7 @@ import Timeline from './../Timeline/Timeline';
 import AddOrder from './../BuildSingle/AddOrder';
 import TimelineControls from './TimelineControls';
 import {StickyContainer, Sticky} from 'react-sticky';
+import ReactTooltip from 'react-tooltip'
 import './editbuild.sass';
 
 class EditBuild extends Component {
@@ -33,15 +34,15 @@ class EditBuild extends Component {
         )
       }
       const isToggled = this.props.currentVisibleBuild.isToggledOrders,
-        toggleEmpty = this.props.toggleEmpty,
-        restoreBuild = this.props.restoreBuild,
-        removeItem = this.props.removeItem,
-        addMinute = this.props.addMinute,
-        removeMinute = this.props.removeMinute,
-        toggleOrder = this.props.toggleAddingOrder,
-        updateOrder = this.props.updateOrder,
-        order = this.props.currentVisibleBuild.currentOrder,
-        isAdding = this.props.isAdding
+            toggleEmpty = this.props.toggleEmpty,
+            restoreBuild = this.props.restoreBuild,
+            removeItem = this.props.removeItem,
+            addMinute = this.props.addMinute,
+            removeMinute = this.props.removeMinute,
+            toggleOrder = this.props.toggleAddingOrder,
+            updateOrder = this.props.updateOrder,
+            order = this.props.currentVisibleBuild.currentOrder,
+            isAdding = this.props.isAdding
 
       return (
         <div className="container">

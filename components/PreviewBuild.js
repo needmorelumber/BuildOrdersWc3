@@ -20,13 +20,18 @@ class PreviewBuild extends Component {
             { build._id
             ? 
                 <div className="card">
+                <Link to= { buildsRoute + build._id }>  
                     <div className="card-header preview-card">
                         <div className="card-header-icon">
-                            <Link to= { buildsRoute + build._id }>  <img src={iconString} alt="" /> </Link>
+                           <img src={iconString} alt="" />
                         </div>
-                        <Link className="card-header-title" to= { buildsRoute + build._id }> <u>{build.name}</u></Link>
+                        <div className="rows">
+                            <p className="card-header-title row">{build.name}</p>
+                            <p className="card-header-subtitle row">{build.race} vs. {build.opposing_race}</p>
+                        </div>
                     </div>
-                    <div className="card-content rows">
+                </Link>
+                    <div className="card-content rows cardFields">
                             <div className="row">
                                 <label className="label" htmlFor="Build Name"> Name </label>
                                     <p>{build.name}</p>

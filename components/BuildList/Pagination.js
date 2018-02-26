@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import * as _ from 'lodash';
 import './buildList.sass';
 
@@ -7,7 +7,7 @@ const defaultProps = {
     initialPage: 1
 }
 
-class Pagination extends React.Component {
+class Pagination extends Component {
     constructor(props) {
         super(props);
         this.state = { pager: {} };
@@ -44,7 +44,8 @@ class Pagination extends React.Component {
         // update state
         this.setState({ pager: pager });
 
-        // call change page function in parent component
+        // call change page function in parent componentDidUpdate
+				console.log(items.slice(pager.startIndex, pager.endIndex + 1))
         this.props.onChangePage(pageOfItems);
     }
 

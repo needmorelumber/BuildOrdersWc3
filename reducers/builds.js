@@ -17,6 +17,7 @@ import {
   TOGGLE_ADDING_ORDER,
   BEGIN_DELETE_BUILD,
   RESOLVE_DELETE_BUILD,
+  SET_SORT_TYPE,
   VisibilityFilters,
 
 } from './../actions/build'
@@ -27,6 +28,7 @@ import {
 // Pass initialState as a default argument
 const buildsStateReference = {
   visibilityFilter: VisibilityFilters.SHOW_ALL,
+  sortType: null,
   isFetching: false,
   totalBuilds: 11,
   page: 1,
@@ -45,12 +47,37 @@ const buildFormStateReference = {
       class: "input"
 
     },
+    "race": {
+      name: "race",
+      label: "Race",
+      type: "select",
+      userType: "select",
+      options: [
+        "Orc", "Human", "Night Elf", "Undead"
+      ],
+      class: "select"
+
+    },
+    "opposing_race": {
+      name: "opposing_race",
+      label: "Opposing Race",
+      type: "select",
+      userType: "select",
+      options: [
+        "Orc", "Human", "Night Elf", "Undead"
+      ],
+      class: "select"
+
+    },
     "build_type": {
       name: "build_type",
       label: "Build Type",
-      type: "text",
-      userType: "text",
-      class: "input"
+      type: "radio",
+      userType: "radio",
+      class: "radio",
+      options: [
+        'All in', 'Economic', 'co-op', 'Timing Attack'
+      ]
 
     },
     "description": {
@@ -83,17 +110,6 @@ const buildFormStateReference = {
       type: "text",
       userType: "text",
       class: "input"
-
-    },
-    "race": {
-      name: "race",
-      label: "Race",
-      type: "select",
-      userType: "select",
-      options: [
-        "Orc", "Human", "Night Elf", "Undead"
-      ],
-      class: "select"
 
     }
 
@@ -149,6 +165,10 @@ export function builds(state = buildsStateReference, action) {
     case SET_SEARCH_QUERY:
       return Object.assign({}, state, {
         searchQuery: action.payload
+      })
+    case SET_SORT_TYPE: 
+      return Object.assign({}, state, {
+        sortType: action.payload
       })
     default:
       return state
