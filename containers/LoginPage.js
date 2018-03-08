@@ -12,7 +12,7 @@ const mapDispatchToProps = (dispatch) => {
     loginToServer: user => {
       dispatch(loginToServer(user))
     },
-    updateLoginMessage: message => {
+    updateLoginMessage: (message, time) => {
       dispatch(updateLoginMessageTimed(message, time))
     }
   }

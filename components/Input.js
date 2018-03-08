@@ -11,7 +11,7 @@ class Input extends Component {
                     <div className="field">
                         <div className="control">
                             <label className="label">{info.label}</label>
-                            <input required className={info.class} type={info.type} name={info.name} defaultValue={info.initialValue} placeholder={info.placeholder} onChange={info.handleChange} />                        
+                            <input required className={info.class} type={info.type} name={info.name} placeholder={info.placeholder} onChange={info.handleChange} />                        
                         </div>
                         <p className="help is-success">{info.message}</p>
                     </div>
@@ -21,7 +21,7 @@ class Input extends Component {
                     <div className="field">
                         <div className="control">
                             <label className="label">{info.label}</label>
-                            <textarea className={info.class} type={info.type} name={info.name} defaultValue={info.initialValue} placeholder={info.placeholder} onChange={info.handleChange} />
+                            <textarea className={info.class} type={info.type} name={info.name} placeholder={info.placeholder} onChange={info.handleChange} />
                             
                         </div>
                         <p className="help is-success">{info.message}</p>
@@ -101,7 +101,7 @@ class Input extends Component {
                                 {
                                     info.options.map((o, i) => {
                                         return (
-                                            <option value={o} key={i}>{o}</option>
+                                            <option value={o} key={i}></option>
                                         )
                                     })
                                 }

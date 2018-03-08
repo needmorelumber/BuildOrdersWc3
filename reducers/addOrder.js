@@ -53,6 +53,7 @@ export function addOrderForm(state = addOrderStateReference, action) {
             return Object.assign({}, state, {
                 inputs: {
                     "race_unit": {
+                        race: action.payload.item.build.race,
                         name: "race_unit",
                         label: "Unit to Build",
                         options: namesarray,

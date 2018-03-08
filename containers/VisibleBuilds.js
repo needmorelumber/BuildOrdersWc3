@@ -46,7 +46,6 @@ const getVisibleBuilds = (builds, filter, query, sortType) => {
 }
 const applySort = (sortType, builds) => {
   if(!sortType || sortType === undefined) {
-    console.log('No sort')
     return builds;
   }
     switch(sortType) {    
@@ -59,9 +58,9 @@ const applySort = (sortType, builds) => {
 } 
 const compareLikes = (a, b) => {
   if(a.likes > b.likes)
-    return 1;
-  if(a.likes < b.likes)
     return -1;
+  if(a.likes < b.likes)
+    return 1;
   return 0
 }
 const compareCreatedDate = (a, b) => {

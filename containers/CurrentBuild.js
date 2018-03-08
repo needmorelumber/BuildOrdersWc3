@@ -7,7 +7,7 @@ const mapStateToProps = (state) => {
     currentVisibleBuild: state.currentVisibleBuild
   }
 }
-const mapDispatchToProps = (state) => {
+const mapDispatchToProps = (state, dispatch) => {
   return {
     fetchById: id => {
       dispatch(fetchBuildById(id))

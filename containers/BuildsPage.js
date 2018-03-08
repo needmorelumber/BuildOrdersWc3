@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import VisibleBuilds from './VisibleBuilds';
 import {Link} from 'react-router-dom';
 import CurrentBuild from './CurrentBuild';
+import BuildListControls from './../components/BuildList/BuildListControls';
 import {setVisibilityFilter, setSearchQuery, setSortType} from './../actions/build';
 import './../components/custom.sass';
 
@@ -17,7 +18,9 @@ class BuildsPageComp extends Component {
     event.preventDefault();
   }
   render() {
-    const user = this.props.user.user.user;
+    const user = this.props.user.user.user,
+          setFilter = this.props.setFilter,
+          setSortType = this.props.setSortType
     return (
       <div>
         <nav className="navbar is-white">
@@ -25,19 +28,22 @@ class BuildsPageComp extends Component {
             <div className="navbar-menu">
               <div className="navbar-start">
                 {user
-                                ? <Link
-                                    to="/builds/new">
-                                    <p className="control button is-success is-rounded is-block is-alt is-large is-hoverable">
-                                    <span className="icon is-small">
-                                      <i className="fa fa-plus"></i>
-                                    </span><span> New Build </span> 
-                                    </p>
-                                    </Link>
-                                : null
-                }
+                  ? <Link to="/builds/new">
+                      <p
+                        className="control button is-success is-rounded is-block is-alt is-large is-hoverable">
+                        <span className="icon is-small">
+                          <i className="fa fa-plus"></i>
+                        </span>
+                        <span>
+                          New Build
+                        </span>
+                      </p>
+                    </Link>
+                  : null
+}
               </div>
               <div className="navbar-end">
-               <div className="navbar-item">
+                <div className="navbar-item">
                   <input
                     className="input"
                     ref={(input) => this.input = input}
@@ -52,64 +58,28 @@ class BuildsPageComp extends Component {
         <section className="container">
           <div className="columns">
             <div className="column is-2 rows">
-            
-            <div className="row rows">
-              <aside className="row menu">
-                <p className="menu-label">
-                  Filter by Race
-                </p>
-                <ul className="filter-race-menu menu-list">
-                  <li onClick={() => this.props.setFilter("SHOW_ALL")}>
-                    <a>All Races</a>
-                  </li>
-                  <li onClick={() => this.props.setFilter("SHOW_ORC")}>
-                    <a>Orc</a>
-                  </li>
-                  <li onClick={() => this.props.setFilter("SHOW_HUMAN")}>
-                    <a>Human</a>
-                  </li>
-                  <li onClick={() => this.props.setFilter("SHOW_UNDEAD")}>
-                    <a>Undead</a>
-                  </li>
-                  <li onClick={() => this.props.setFilter("SHOW_NIGHTELF")}>
-                    <a>Nightelf</a>
-                  </li>
-                </ul>
-              </aside>
-              <aside className="row menu">
-                <p className="menu-label">
-                  Sort By
-                </p>
-                <ul className="filter-race-menu menu-list">
-                  <li onClick={() => this.props.setSortType("POPULARITY")}>
-                    <a>Popularity</a>
-                  </li>
-                  <li onClick={() => this.props.setSortType("CREATED_ON")}>
-                    <a>Date Created</a>
-                  </li>
-                </ul>
-              </aside>
+                <BuildListControls 
+                  setFilter = {setFilter}
+                  setSortType = {setSortType}
+                />
             </div>
-            </div>
-            <div className="column is-6">
+            <div className="column">
               <div className="box content builds-container">
                 <VisibleBuilds/>
               </div>
             </div>
-              <aside className="column ">
-                <CurrentBuild/>
-              </aside>
           </div>
-        </section>
+        </section> 
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
+  console.log(state.builds)
   return {user: state.userState, builds: state.builds}
 }
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (state, dispatch) => {
   return {
     setFilter: filter => {
       dispatch(setVisibilityFilter(filter))

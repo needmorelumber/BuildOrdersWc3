@@ -20,30 +20,23 @@ class PreviewBuild extends Component {
             { build._id
             ? 
                 <div className="card">
-                <Link to= { buildsRoute + build._id }>  
-                    <div className="card-header preview-card">
-                        <div className="card-header-icon">
-                           <img src={iconString} alt="" />
-                        </div>
-                        <div className="rows">
-                            <p className="card-header-title row">{build.name}</p>
-                            <p className="card-header-subtitle row">{build.race} vs. {build.opposing_race}</p>
-                        </div>
-                    </div>
-                </Link>
                     <div className="card-content rows cardFields">
-                            <div className="row">
-                                <label className="label" htmlFor="Build Name"> Name </label>
-                                    <p>{build.name}</p>
+                        <div className="columns">
+                             <div className="column">
+                                <div className="row">
+                                    <label className="label" htmlFor="Build Name"> Name </label>
+                                        <p>{build.name}</p>
+                                </div>
+                                <div className="row">
+                                    <label className="label" htmlFor="Build type"> Build Type </label>
+                                        <p>{build.build_type}</p>
+                                </div>
+                                <div className="row">
+                                    <label className="label" htmlFor="Build description"> Description </label>
+                                    <p>{build.description}</p>
+                                </div>
                             </div>
-                            <div className="row">
-                                <label className="label" htmlFor="Build type"> Build Type </label>
-                                    <p>{build.build_type}</p>
-                            </div>
-                            <div className="row">
-                                <label className="label" htmlFor="Build description"> Description </label>
-                                <p>{build.description}</p>
-                            </div>
+                        <div className="column">
                             <div className="row">
                                 <label className="label" htmlFor="Build analysis"> Analysis </label>
                                     <p>{build.analysis}</p>
@@ -54,17 +47,23 @@ class PreviewBuild extends Component {
 
                             </div>
                             <div className="row">
-                                <label className="label" htmlFor="Build race"> Race </label>
-                                    <p>{build.race}</p>
+                                <label className="label" htmlFor="Build race"> Match-Up </label>
+                                    <p>{build.race} vs. {build.opposing_race}</p>
                             </div>
-  
+                        </div>
+                    </div>
+                  <Link to= { buildsRoute + build._id }>  
+                    <div className="card-header preview-card">
+                            <p className="card-header-title">Look at the orders, and play in real time</p>
+                        <div className="card-header-icon">
+                          <span className="icon"><i className="fa fa-arrow-circle-right"></i></span>
+                        </div>
+                    </div>
+                </Link>
                     </div>
                 </div>
             :
-                <div >
-                 <p className="title">  Check out some builds! </p> 
-                 <p className="help">  Click a build to view in detail... </p> 
-                </div>
+            null
             }
             </div>
         );

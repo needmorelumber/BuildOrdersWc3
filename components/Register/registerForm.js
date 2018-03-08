@@ -39,7 +39,7 @@ class RegisterForm extends Component {
             this.rendermessage("Passwords do not match", 15000); 
         } else if(state.password.length < 6){
             event.preventDefault();
-            this.rendermessage("Password needs to be at least 6 long", 15000); 
+            this.rendermessage("Password needs to be at least 6 letters long", 15000); 
         }
         else {
             const buildFormToSubmit = this.state;

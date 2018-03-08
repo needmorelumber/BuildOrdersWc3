@@ -1,6 +1,7 @@
 import React from 'react'
 import './buildList.sass'
 import BuildSingle from '../BuildSingle/BuildSingle'
+import CurrentBuild from './../../containers/CurrentBuild';
 import { Link } from 'react-router-dom'
 import fetchBuilds from './../../actions/actions'
 import LoadingAnimation from './../loadingAnimation';
@@ -17,7 +18,8 @@ export default class BuildList extends React.Component {
         super(props)
           this.onChangePage = this.onChangePage.bind(this);
           this.state = {
-            pageOfItems: []
+            pageOfItems: [],
+            expandedItem: false
           }
     }
     componentDidMount() {
@@ -26,7 +28,25 @@ export default class BuildList extends React.Component {
     onChangePage(pageOfItems) {
         this.setState({ pageOfItems: pageOfItems });
     }
-		
+    handleExpandItem(index) {
+        if(index === false) {
+            this.setState({
+                expandedItem: false
+            })
+				} else if(index === this.state.expandedItem){
+            this.setState({
+                expandedItem: false
+            })
+        } else {
+					this.setState({
+						expandedItem: index
+					})
+				}
+    }
+		onBuildClick(id, index){
+			this.handleExpandItem(index);
+			this.props.onBuildClick(id);
+		}
     render() {
         const p = this.props,
               b = p.builds,
@@ -36,6 +56,7 @@ export default class BuildList extends React.Component {
               likeBuild = p.likeBuild,
               failedToLoadCheck = b.failedToLoad,
               isFetching = b.isFetching,
+
               builds = this.state.pageOfItems.map((build, index) => {
 								const race = build.race,
 								iconString = path.join('/assets/icons/', race + '.jpg');
@@ -45,24 +66,32 @@ export default class BuildList extends React.Component {
                         timeout={800}
                         classNames="buildCard"
                     >
-                    <article className="post" onClick={()=>onBuildClick(build._id)}>
-												<img src={iconString} alt="" />
-                        <h4>{build.name}</h4>
+                    <article className="post" onClick={()=>this.onBuildClick(build._id, index)}>
                         <span className="pull-right likebuild has-text-grey-light"><i onClick={()=>likeBuild(build._id, page)}className="fa fa-thumbs-up"></i> {build.likes}</span>
                         <div className="media">
                         <div className="media-left" style={{margin:0,padding:0,marginTop:'.5%'}}>
-                            <span className="icon"><i className="fa fa-user"></i></span>
+                        <figure className="image is-50x50">
+                            <img src={iconString} alt="" />
+                        </figure>
                         </div>
                         <div className="media-content">
                             <div className="content">
+                            <h4>{build.name}</h4>
                             <p>
                                 <span className="postedBy">Posted by {build.ownerUsername}</span>
-																<span className="tag">{build.race} vs. {build.opposing_race}</span>
+							    <span className="tag">{build.race} vs. {build.opposing_race}</span>
                                 <span className="tag">{build.build_type}</span>
                             </p>
                             </div>
                         </div>
                         </div>
+                        {
+                          this.state.expandedItem === index ?
+                          <CurrentBuild/>
+                          :
+                          null
+                        }
+                        
                     </article>
                     </CSSTransition>
                 )

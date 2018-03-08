@@ -58,41 +58,41 @@ class AddOrder extends Component {
 				return result;
 		}
     
-  // componentWillMount() {
-  //   if(this.props.currentVisibleBuild.currentOrder.order.race_unit) {
-  //     const order = this.props.currentVisibleBuild.currentOrder.order;
-  //     const unit = order.race_unit,
-  //           notes = order.notes,
-  //           count = order.count,
-  //           nextFormState = { 
-  //             race_unit: unit,
-  //             notes: notes,
-  //             count: count
-  //           }
-  //     this.setState({
-  //       activeOrder: true,
-  //       Form: nextFormState
-  //     })
-  //   }else{this.setState({activeOrder:false, Form: {}})}  
-  //   }
+  componentWillMount() {
+    if(this.props.currentVisibleBuild.currentOrder.order.race_unit) {
+      const order = this.props.currentVisibleBuild.currentOrder.order;
+      const unit = order.race_unit,
+            notes = order.notes,
+            count = order.count,
+            nextFormState = { 
+              race_unit: unit,
+              notes: notes,
+              count: count
+            }
+      this.setState({
+        activeOrder: true,
+        Form: nextFormState
+      })
+    }else{this.setState({activeOrder:false, Form: {}})}  
+    }
     
-  //   componentWillReceiveProps(nextProps) {
-  //   if(nextProps.currentVisibleBuild.currentOrder.order.race_unit) {
-  //     const order = nextProps.currentVisibleBuild.currentOrder.order;
-  //     const unit = order.race_unit,
-  //           notes = order.notes,
-  //           count = order.count,
-  //           nextFormState = { 
-  //             race_unit: unit,
-  //             notes: notes,
-  //             count: count
-  //           }
-  //     this.setState({
-  //       activeOrder: true,
-  //       Form: nextFormState
-  //     })
-  //   }else{this.setState({activeOrder:false, Form: {}})}
-  //   }
+    componentWillReceiveProps(nextProps) {
+    if(nextProps.currentVisibleBuild.currentOrder.order.race_unit) {
+      const order = nextProps.currentVisibleBuild.currentOrder.order;
+      const unit = order.race_unit,
+            notes = order.notes,
+            count = order.count,
+            nextFormState = { 
+              race_unit: unit,
+              notes: notes,
+              count: count
+            }
+      this.setState({
+        activeOrder: true,
+        Form: nextFormState
+      })
+    }else{this.setState({activeOrder:false, Form: {}})}
+    }
     
   render() {
     const inputsArray = Object.entries(this.state.inputs);
