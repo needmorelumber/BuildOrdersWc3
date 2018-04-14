@@ -140,6 +140,16 @@ function updateCurrentBuild(json) {
 				}
 		}
 }
+export const UPDATE_ONE_BUILD = 'UPDATE_ONE_BUILD';
+function updateOneBuild(json, index) {
+	return {
+		type: UPDATE_ONE_BUILD,
+		payload: {
+			index: index,
+			item: json
+		}
+	}
+}
 export const BEGIN_DELETE_BUILD = 'BEGIN_DELETE_BUILD';
 function beginDeleteBuild() {
 		return {type: BEGIN_DELETE_BUILD}
@@ -293,13 +303,14 @@ export function removeMinuteApi(build, id) {
 						})
 		}
 }
-export function likeBuild(id, currPage) {
+export function likeBuild(id, currPage, index) {
 		return function (dispatch) {
 				return axios
-						.post(`/api/like_build`, {id: id})
+						.post(`/api/like_build`, {id: id, index: index})
 						.then(res => {
 								if (res.data !== 'Already Liked') {
 										dispatch(fetchBuilds())
+										dispatch(updateOneBuild(res.data.build, res.data.index))
 								}
 						})
 						.catch(err => {

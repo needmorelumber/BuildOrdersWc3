@@ -91,13 +91,20 @@ module.exports = (() => {
     buildController.deleteBuild = (req, res) => {
         const body = req.body;
         const id = body.id;
-        build_order.findOneAndRemove(id, (err, build) => {
-            if(!err && build) {
-                res.status(200).json({deleted: true})
-            } else {
-                res.status(200).json({deleted: false})
-            }
-        })
+        if(id){
+        if(req.session.user.ownedTimelineIds.includes(id)){
+            const spliceFrom = req.session.user.ownedTimelineIds.indexOf(id)
+            const newIds = req.session.user.ownedTimelineIds.splice(spliceFrom, 1)
+            use
+            build_order.findOneAndRemove(id, (err, build) => {
+                if(!err && build) {
+                    res.status(200).json({deleted: true})
+                } else {
+                    res.status(200).json({deleted: false})
+                }
+            })
+        }
+        }
     }
     buildController.addMinute = (req, res) => {
         const body = req.body;
@@ -174,8 +181,9 @@ module.exports = (() => {
     }
     buildController.likeBuild = (req, res) => {
         const body = req.body;
-        const buildToLike = req.body.id;
+        const buildToLike = body.id;
         const userToLike = req.session.user._id;
+        const index = body.index;
         Like.find({
             'buildId': buildToLike,
             'userId': userToLike
@@ -191,7 +199,7 @@ module.exports = (() => {
                             addingLike.save();
                             build.likes += 1;
                             build.save();
-                            res.status(200).send('Liked')
+                            res.status(200).send({build, index})
                         } else {
                             res
                                 .status(400)

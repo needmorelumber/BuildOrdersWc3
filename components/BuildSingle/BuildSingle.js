@@ -3,7 +3,7 @@ import Timeline from './../Timeline/Timeline'
 import path from 'path';
 import {Redirect, Link} from 'react-router-dom';
 import LoadingPlaceholder from './../loadingAnimation';
-import CurrentOrder from '../EditBuild/CurrentOrder';
+import CurrentOrder from './CurrentOrder';
 import {StickyContainer, Sticky} from 'react-sticky';
 // import './buildSingle.sass';
 
@@ -85,7 +85,7 @@ class BuildSingle extends Component {
 																								</div>
 																						</section>
 																						{order
-																								? <CurrentOrder data={order}/>
+																								? <CurrentOrder data={order} race={race}/>
 																								: <CurrentOrder data={false}/>
 }
 																				</div>

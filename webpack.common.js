@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   title: "Need More Lumber",
-  template: "./index.html"
+  template: "index.html"
 })
 module.exports = {
   module: {

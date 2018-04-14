@@ -44,7 +44,6 @@ class NewBuild extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const state = this.state.Form;
-        console.log(state)
         state.ownerId = this.props.userState.user.user._id;
         state.ownerUsername =  this.props.userState.user.user.username;
         if (!state.name){

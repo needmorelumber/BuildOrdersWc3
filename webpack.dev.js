@@ -1,11 +1,18 @@
- const merge = require('webpack-merge');
- const path = require('path');
- const common = require('./webpack.common.js');
+const merge = require('webpack-merge');
+const path = require('path');
+const common = require('./webpack.common.js');
 const webpack = require('webpack')
  
 
  module.exports = merge(common, {
    devtool: 'inline-source-map',
+         entry: [
+          path.resolve('./index.js')
+      ],
+      output: {
+        path: path.resolve(__dirname, 'dist/js/'),
+        filename: 'bundle.js'
+      },
    devServer: {
     historyApiFallback: true,
     compress: false,
@@ -15,17 +22,6 @@ const webpack = require('webpack')
       }
     },
   devtool: 'eval',
-
-  entry: [
-    './index'
-  ],
-
-  output: {
-    path: path.join(__dirname, 'public'),
-    filename: 'bundle.js',
-    publicPath: '/'
-  },
-
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
   ],

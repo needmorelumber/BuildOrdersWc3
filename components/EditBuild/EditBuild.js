@@ -97,9 +97,7 @@ class EditBuild extends Component {
       );
     } else {
       return (
-        <div>
-          <Redirect to={'/builds'}/>
-        </div>
+       <LoadingPlaceholder />
       )
     }
   }

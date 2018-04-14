@@ -6,30 +6,27 @@
 
 
  module.exports = merge(common, {
-     devtool: 'source-map',
+  devtool: 'source-map',
+      entry: [
+        './index'
+      ],
 
-  entry: [
-    './index'
-  ],
-
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/dist/'
-  },
+      output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'js/bundle.js'
+      },
 
   plugins: [
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       compress: {
         warnings: false
       }
     }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    })
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     'NODE_ENV': JSON.stringify('production')
+    //   }
+    // })
   ],
  });

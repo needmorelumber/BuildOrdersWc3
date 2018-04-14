@@ -18,6 +18,7 @@ import {
   BEGIN_DELETE_BUILD,
   RESOLVE_DELETE_BUILD,
   SET_SORT_TYPE,
+  UPDATE_ONE_BUILD,
   VisibilityFilters,
 
 } from './../actions/build'
@@ -138,6 +139,15 @@ const buildStateReference = {
           }
     return item;
   };
+
+  const findWithAttr = (array, attr, value) => {
+      for(var i = 0; i < array.length; i += 1) {
+          if(array[i][attr] === value) {
+              return i;
+          }
+      }
+      return -1;
+  }
 export function builds(state = buildsStateReference, action) {
   switch (action.type) {
     case REQUEST_BUILDS:
@@ -158,6 +168,11 @@ export function builds(state = buildsStateReference, action) {
       failedToLoad: true,
       isFetching: false 
     })
+    case UPDATE_ONE_BUILD:
+      state.items.splice(findWithAttr(state.items, '_id', action.payload.item._id), 1, action.payload.item)
+      return Object.assign({}, state, {
+        items: state.items
+      })
     case SET_VISIBILITY_FILTER:
       return Object.assign({}, state, {
         visibilityFilter: action.payload

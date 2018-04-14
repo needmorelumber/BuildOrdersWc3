@@ -94,8 +94,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchBuilds: (page) => {
       dispatch(fetchBuilds())
     },
-    likeBuild: (id, page) => {
-      dispatch(likeBuild(id, page));
+    likeBuild: (id, page, index) => {
+      dispatch(likeBuild(id, page, index));
     }
   }
 }

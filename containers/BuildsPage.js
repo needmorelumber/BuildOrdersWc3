@@ -27,20 +27,6 @@ class BuildsPageComp extends Component {
           <div className="container">
             <div className="navbar-menu">
               <div className="navbar-start">
-                {user
-                  ? <Link to="/builds/new">
-                      <p
-                        className="control button is-success is-rounded is-block is-alt is-large is-hoverable">
-                        <span className="icon is-small">
-                          <i className="fa fa-plus"></i>
-                        </span>
-                        <span>
-                          New Build
-                        </span>
-                      </p>
-                    </Link>
-                  : null
-}
               </div>
               <div className="navbar-end">
                 <div className="navbar-item">
@@ -58,6 +44,20 @@ class BuildsPageComp extends Component {
         <section className="container">
           <div className="columns">
             <div className="column is-2 rows">
+            {  user
+                  ? <Link to="/builds/new">
+                      <p
+                        className="control button is-success is-rounded is-block is-alt is-large is-hoverable">
+                        <span className="icon is-small">
+                          <i className="fa fa-plus"></i>
+                        </span>
+                        <span>
+                          New Build
+                        </span>
+                      </p>
+                    </Link>
+                  : null
+                }
                 <BuildListControls 
                   setFilter = {setFilter}
                   setSortType = {setSortType}
@@ -76,10 +76,9 @@ class BuildsPageComp extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.builds)
   return {user: state.userState, builds: state.builds}
 }
-const mapDispatchToProps = (state, dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     setFilter: filter => {
       dispatch(setVisibilityFilter(filter))

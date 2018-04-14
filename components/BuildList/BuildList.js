@@ -28,6 +28,10 @@ export default class BuildList extends React.Component {
     onChangePage(pageOfItems) {
         this.setState({ pageOfItems: pageOfItems });
     }
+    componentWillReceiveProps(nextProps) {
+        // UPDATE SINGLE ARRAY POS
+    }
+    
     handleExpandItem(index) {
         if(index === false) {
             this.setState({
@@ -56,10 +60,9 @@ export default class BuildList extends React.Component {
               likeBuild = p.likeBuild,
               failedToLoadCheck = b.failedToLoad,
               isFetching = b.isFetching,
-
               builds = this.state.pageOfItems.map((build, index) => {
-								const race = build.race,
-								iconString = path.join('/assets/icons/', race + '.jpg');
+                        const race = build.race,
+                        iconString = path.join('/assets/icons/', race + '.jpg');
                 return (
                     <CSSTransition
                         key={index}
@@ -67,7 +70,12 @@ export default class BuildList extends React.Component {
                         classNames="buildCard"
                     >
                     <article className="post" onClick={()=>this.onBuildClick(build._id, index)}>
-                        <span className="pull-right likebuild has-text-grey-light"><i onClick={()=>likeBuild(build._id, page)}className="fa fa-thumbs-up"></i> {build.likes}</span>
+                    { p.userState.user.user !== false
+                        ? 
+                        <span className="pull-right likebuild has-text-grey-light"><i onClick={()=>likeBuild(build._id, page, index)}className="fa fa-thumbs-up"></i> {build.likes}</span>
+                        :
+                        null   
+                    }
                         <div className="media">
                         <div className="media-left" style={{margin:0,padding:0,marginTop:'.5%'}}>
                         <figure className="image is-50x50">

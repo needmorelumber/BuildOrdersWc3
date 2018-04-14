@@ -26,7 +26,7 @@ class BuildListControls extends Component {
             </li>
           </ul>
         </aside>
-        <aside className="row menu">
+        {/* <aside className="row menu">
           <p className="menu-label">
             Sort By
           </p>
@@ -38,7 +38,7 @@ class BuildListControls extends Component {
               <a>Date Created</a>
             </li>
           </ul>
-        </aside>
+        </aside> */}
       </div>
     );
   }
