@@ -13,39 +13,58 @@ class EditBuild extends Component {
     super(props)
     this.state = {
       user: this.props.userState.user.user,
-      build: this.props.currentVisibleBuild.item.build
+      build: this.props.currentVisibleBuild.item.build,
+      redirectFlag: false
     }
   }
-  componentDidMount() {
-    this
-      .props
-      .fetchById(this.props.match.params.id);
+  componentWillReceiveProps(nextProps){
     this.setState({
+      user: nextProps.userState.user.user,
+      build: nextProps.currentVisibleBuild.item.build,
       currentOrder: null
+    })
+    if(nextProps.currentVisibleBuild.item.build && nextProps.userState.user.user){
+      if (nextProps.currentVisibleBuild.item.build.ownerId !== nextProps.userState.user.user._id) {
+        this.setState({
+          redirectFlag: true
+        })
+      }
+    }
+  }
+  componentWillUnmount() {
+    this.setState({
+      redirectFlag: false
+    })
+  }
+  
+  componentDidMount() {
+    this.props.fetchById(this.props.match.params.id);
+    this.setState({
+      currentOrder: null,
+      build: this.props.currentVisibleBuild.item.build,
+      user: this.props.userState.user.user
     })
   }
   render() {
-    let user = this.state.user
-    let build = this.state.build
-    if (build && user) {
-      if (build.ownerId !== user._id) {
-        return (
-          <Redirect></Redirect>
-        )
-      }
-      const isToggled = this.props.currentVisibleBuild.isToggledOrders,
-            toggleEmpty = this.props.toggleEmpty,
-            restoreBuild = this.props.restoreBuild,
-            removeItem = this.props.removeItem,
-            addMinute = this.props.addMinute,
-            removeMinute = this.props.removeMinute,
-            toggleOrder = this.props.toggleAddingOrder,
-            updateOrder = this.props.updateOrder,
-            order = this.props.currentVisibleBuild.currentOrder,
-            isAdding = this.props.isAdding
-
+    if(this.state.redirectFlag === true){
+       return(
+        <Redirect to='/builds'/>
+       )
+    }
+    const isToggled = this.props.currentVisibleBuild.isToggledOrders,
+          toggleEmpty = this.props.toggleEmpty,
+          restoreBuild = this.props.restoreBuild,
+          removeItem = this.props.removeItem,
+          addMinute = this.props.addMinute,
+          removeMinute = this.props.removeMinute,
+          toggleOrder = this.props.toggleAddingOrder,
+          updateOrder = this.props.updateOrder,
+          order = this.props.currentVisibleBuild.currentOrder,
+          isAdding = this.props.isAdding
       return (
         <div className="container">
+        { this.state.build
+        ?
           <div className="section columns">
             <div className={isAdding
               ? "column is-8 timelineContainer"
@@ -58,7 +77,7 @@ class EditBuild extends Component {
                 removeMinute={removeMinute}/>
               <Timeline
                 className="timelineContainer" 
-                build={this.props.currentVisibleBuild.item.build}
+                build={this.props.currentVisibleBuild.item.build }
                 fetchById={this.props.fetchById}
                 editing={true}
                 updateOrder={updateOrder}
@@ -85,21 +104,20 @@ class EditBuild extends Component {
                       {isAdding
                         ? <AddOrder updateBuild={this.props.updateBuild}/>
                         : null
-}
+                      }
                     </div>
-                  )
-                }
-}
+                    )
+                  } 
+              }
               </Sticky>
             </StickyContainer>
           </div>
+          :
+          <LoadingPlaceholder />
+          }
         </div>
+        
       );
-    } else {
-      return (
-       <LoadingPlaceholder />
-      )
-    }
   }
 }
 

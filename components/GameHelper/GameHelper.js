@@ -119,22 +119,31 @@ class GameHelper extends Component {
         return (
           <div className="container has-text-centered">
             <Timer timeInGame={this.state.timeStampSeconds} />
-             <div className="level section column">
+             <div className="section column">
                 <div className="level-left">
-                  {!this.state.currentlyTicking
-                    ?
-                    <div>
-                      <button className="button is-info level-item" type="" onClick={() => this.startWalkthrough()}>Start</button>
-                    </div>
+                {!this.state.currentlyTicking
+                  ?
+                <div className="buttonContainer">
+                  <button className="button cbutton is-info level-item" type="" onClick={() => this.startWalkthrough()}>
+                      <span className="icon">
+                         <i className="fa fa-play"></i>
+                      </span></button>
+                </div>
                     :
-                    <div>
-                      <button className="button is-info level-item" type="" onClick={() => this.pauseWalkthrough()}>Pause</button>
+                <div className="buttonContainer">
+                  <button className="button cbutton is-info level-item" type="" onClick={() => this.pauseWalkthrough()}>                      
+                      <span className="icon">
+                         <i className="fa fa-pause"></i>
+                      </span></button>
                     </div>
                   }
-                  <button className="button is-warning level-item" type="" onClick={() => this.resetWalkthrough()}>Reset</button>
+                  <button className="button cbutton is-warning level-item" type="" onClick={() => this.resetWalkthrough()}>                      
+                      <span className="icon">
+                         <i className="fa fa-repeat"></i>
+                      </span></button>
                 </div>
               </div>
-              <div className="columns is-vcentered">
+              <div className="columns ">
                 <div className="column is-6">
                 <p>Build right now...</p>
                   <CurrentOrder 

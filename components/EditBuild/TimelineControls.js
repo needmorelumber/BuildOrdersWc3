@@ -15,7 +15,7 @@ class ControlsPanel extends Component {
     }
   }
   render() {
-    const build = this.props.currentVisibleBuild.item.build;
+    const build = this.props.currentVisibleBuild.item.build ;
     const isToggled = this.props.isToggled
     return (
       <div className="">
