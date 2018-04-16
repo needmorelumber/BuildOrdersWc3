@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import data from './../MasterData';
 import path from 'path';
 import './custom.sass';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 class PreviewBuild extends Component {
     render() {
@@ -19,6 +20,9 @@ class PreviewBuild extends Component {
             <div className="section">
             { build._id
             ? 
+                <CSSTransition
+                classNames="fade"
+                timeout={900}>
                 <div className="card">
                     <div className="card-content rows cardFields">
                         <Link to= { buildsRoute + build._id }>  
@@ -62,6 +66,7 @@ class PreviewBuild extends Component {
                     </div>
                     </div>
                 </div>
+                </CSSTransition>
             :
             null
             }

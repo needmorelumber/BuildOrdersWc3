@@ -13,6 +13,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 
 
+
 export default class BuildList extends React.Component {
     constructor(props) {
         super(props)
@@ -26,7 +27,8 @@ export default class BuildList extends React.Component {
         this.props.fetchBuilds();
     }
     onChangePage(pageOfItems) {
-        this.setState({ pageOfItems: pageOfItems });
+        this.setState({ pageOfItems: pageOfItems,
+                        expandedItem: false });
     }
     componentWillReceiveProps(nextProps) {
         // UPDATE SINGLE ARRAY POS
@@ -94,8 +96,9 @@ export default class BuildList extends React.Component {
                         </div>
                         </div>
                         {
-                          this.state.expandedItem === index ?
-                          <CurrentBuild/>
+                          this.state.expandedItem === index 
+                          ?
+                                <CurrentBuild/>
                           :
                           null
                         }
