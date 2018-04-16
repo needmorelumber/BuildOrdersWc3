@@ -64,7 +64,7 @@ export default class BuildList extends React.Component {
               isFetching = b.isFetching,
               builds = this.state.pageOfItems.map((build, index) => {
                         const race = build.race,
-                        iconString = path.join('/assets/icons/', race + '.jpg');
+                        iconString = path.join('https://s3.us-west-2.amazonaws.com/needmorelumberassets/icons/', race + '.jpg');
                 return (
                     <CSSTransition
                         key={index}
