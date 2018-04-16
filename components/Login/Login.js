@@ -18,7 +18,7 @@ class Login extends Component {
                 <p className="subtitle has-text-grey">Please login to proceed.</p>
                 <div className="box">
                   <figure className="avatar">
-                    <img src={path.resolve("/assets/Orc.png")}/>
+                    <img src={path.resolve("~/assets/Orc.png")}/>
                   </figure>
                     <LoginForm loginToServer={this.props.loginToServer} 
                                 inputs={this.props.login.inputs} 
