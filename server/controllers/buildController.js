@@ -49,13 +49,22 @@ module.exports = (() => {
     }
     buildController.newBuild = (req, res) => {
         const newBuild = new build_order(req.body);
+        console.log(newBuild)
+        if(!newBuild.name || !newBuild.race || !newBuild.description || !newBuild.build_type){
+            res.status(200).send({
+                Message: 'Invalid'
+              });
+        }
+        if(newBuild.name.length > 50 || newBuild.description.length > 500 || newBuild.analysis.length > 500){
+            res.status(200).send({
+                Message: 'Invalid'
+              });
+        }
         newBuild.save((error) => {
-            if (!error) {
+            if (!error) {        
                 let sessUser = req.session.user
                 let id = sessUser._id
-                sessUser
-                    .ownedTimelineIds
-                    .push(newBuild._id)
+                sessUser.ownedTimelineIds.push(newBuild._id)
                 User.findById(id, (err, user) => {
                     if (!err && user) {
                         user
@@ -91,20 +100,26 @@ module.exports = (() => {
     buildController.deleteBuild = (req, res) => {
         const body = req.body;
         const id = body.id;
-        if(id){
-        if(req.session.user.ownedTimelineIds.includes(id)){
-            const spliceFrom = req.session.user.ownedTimelineIds.indexOf(id)
-            const newIds = req.session.user.ownedTimelineIds.splice(spliceFrom, 1)
-            use
-            build_order.findOneAndRemove(id, (err, build) => {
-                if(!err && build) {
-                    res.status(200).json({deleted: true})
-                } else {
-                    res.status(200).json({deleted: false})
-                }
-            })
-        }
-        }
+        const userid = req.session.user._id;
+        User.findById(userid, (err, user) => {
+            if (!err && user) {
+                    console.log('user owns id')
+                 build_order.findByIdAndRemove(id, (err, build) => {
+                    if(!err && build) {
+                        let spliceindex = user.ownedTimelineIds.indexOf(id);
+                        user.ownedTimelineIds.splice(spliceindex, 1);
+                        user.save()
+                        build.save()
+                        res.status(200).json({deleted: true})
+                    } else {
+                        res.status(200).json({deleted: false})
+                    }
+                })
+                    } 
+                    else {
+                        res.status(200).json({Message:"invalid"})
+            } 
+        })
     }
     buildController.addMinute = (req, res) => {
         const body = req.body;

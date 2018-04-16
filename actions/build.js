@@ -257,8 +257,9 @@ export function deleteBuild(id) {
 				return axios
 						.post(`/api/delete_build`, {id: id})
 						.then(res => {
-								if (res.deleted) {
-										fetchBuilds()
+							console.log(res)
+								if (res.data.deleted) {
+										dispatch(fetchBuilds())
 										dispatch(resolveDeleteBuild())
 								}
 						})

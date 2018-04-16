@@ -76,7 +76,7 @@ class LoginForm extends Component {
                     this.props.message==="Success" && (
                       <Redirect to={'/builds'}/>
                     )
-                  }
+              }
             </form>
     );
   }

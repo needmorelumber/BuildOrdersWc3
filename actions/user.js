@@ -65,7 +65,7 @@ export function updateLoginMessageTimed(message){
         dispatch(updateLoginMessage(message))
         window.setTimeout(()=>{
             dispatch(updateLoginMessage(""))
-        }, 2800)
+        }, 4000)
     }
 }
 export function updateRegMessageTimed(message){
@@ -73,7 +73,7 @@ export function updateRegMessageTimed(message){
         dispatch(updateRegMessage(message))
         window.setTimeout(()=>{
             dispatch(updateRegMessage(""))
-        }, 2800)
+        }, 4000)
     }
 }
 export function loginToServer(credentials) {
@@ -120,7 +120,7 @@ export function registerNewUser(credentials) {
 }
 export function fetchAndUpdateUser() {
     return (dispatch) => {
-        return axios.get('/api/get_user')
+        return axios.get(`/api/get_user`)
         .then(
             res=>(res.data),
             err=>console.log(err)
@@ -134,13 +134,25 @@ export function fetchAndUpdateUser() {
 }
 export function logOut() {
     return(dispatch) => {
-        return axios.get('/api/logout')
+        return axios.get(`/api/logout`)
         .then(
             res=>(res.data),
             err=>console.log(err)
         )
         .then(res => {
             dispatch(updateUser(false))
+        })
+    }
+}
+export function deleteUser(password, id) {
+    return(dispatch) => {
+        return axios.post(`/api/delete_user`, {id: id, password: password})
+        .then(res => {
+            if(!res.data.Message){
+                dispatch(updateUser(false))
+            } else {
+                dispatch(updateRegMessageTimed(res.data.Message))
+            }
         })
     }
 }

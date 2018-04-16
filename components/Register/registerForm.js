@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Input from './../Input';
 import LoadingPlaceholder from './../loadingAnimation'
+import { Redirect } from 'react-router-dom';
 
 class RegisterForm extends Component {
   constructor(props){
@@ -51,6 +52,7 @@ class RegisterForm extends Component {
   } 
   render() {
     const inputsArray = Object.entries(this.props.inputs);
+    const fireRedirect = this.state.fireRedirect
     return (
           <form onSubmit={this.handleSubmit}>
             {
@@ -62,6 +64,7 @@ class RegisterForm extends Component {
                     type={inp[1].type}
                     userType={inp[1].userType}
                     class={inp[1].class}
+                    placeholder={inp[1].label}
                     handleChange={this.handleChange}
                     key={index}
                   />
@@ -80,6 +83,11 @@ class RegisterForm extends Component {
                 
               } 
             <p className="card-footer-item">{this.props.message}</p>
+            {
+                    this.props.message==="Success" && (
+                      <Redirect to={'/builds'}/>
+                    )
+              }
             </form>
     );
   }

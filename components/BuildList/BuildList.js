@@ -106,7 +106,7 @@ export default class BuildList extends React.Component {
               })
         return (
          <div className="section">
-            <h1 className="title">All Builds</h1>
+            <h1 className="title">All Warcraft 3 build guides</h1>
             <p className="subtitle">Select to view in detail</p>
             {
                 !isFetching

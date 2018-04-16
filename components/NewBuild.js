@@ -52,7 +52,14 @@ class NewBuild extends Component {
             this.renderErrorMessage("Please provide a description", 3000);
         } else if (!state.race){
             this.renderErrorMessage("Race is required", 3000);
-        } else {
+        } else if (state.name.length > 50){
+            this.renderErrorMessage("Please find an appropriate name size", 3000);
+        } else if (state.name.description > 500){
+            this.renderErrorMessage("Please find an appropriate description size", 3000);
+        } else if (state.name.analysis > 500){
+            this.renderErrorMessage("Please find an appropriate analysis size", 3000);
+        }
+        else {
             const buildFormToSubmit = this.state.Form;
             this.props.dispatch(newBuild(buildFormToSubmit))
             this.setState({ fireRedirect: true })

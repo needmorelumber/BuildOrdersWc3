@@ -106,8 +106,34 @@ module.exports = (() => {
       req.session.user = {};
       res.json({loggedOut: true})
     },
-    getBuildsForUser(req, res) {
-      const user = req.session.user ? req.session.user : null
+    deleteUser(req, res){
+      const user = req.session.user;
+      const id = req.body.id;
+      if(user._id === id) {
+        User.findOne({_id: user._id}, (err, userFromdb) => {
+          bcrypt.compare(req.body.password, userFromdb.password, (err, bcryptRes) => {
+            if (bcryptRes === true) {
+              // Loop all owned builds and remove
+              userFromdb.ownedTimelineIds.forEach((id)=>{
+                build_order.findByIdAndRemove(id,(err, build)=>{
+                  if(err){
+                    res.status(200).json({Message: 'Database Error, try again later'})
+                  }
+                })
+              })
+              // Remove the user
+              User.findByIdAndRemove(id, (err,user) => {
+                if(!err)
+                  res.status(200).json({removed: true})
+                else
+                  res.status(200).json({Message: 'Database Error, try again later'})
+              })
+            } else {
+              res.status(200).json({Message: 'Password does not match'})
+            }
+          });
+        })
+      }
     }
   }
-})();
+})(); 
