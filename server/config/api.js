@@ -36,6 +36,9 @@ routes.post('/new_user', (req, res) => {
 routes.post('/delete_user', (req, res) => {
     userController.deleteUser(req, res);
 })
+routes.post('/change_username', (req, res) => {
+    userController.changeUsername(req, res);
+})
 routes.post('/login', (req, res) => {
     userController.loginUser(req, res)
 })

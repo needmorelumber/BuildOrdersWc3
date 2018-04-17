@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Redirect,Link} from 'react-router-dom';
 import LoadingPlaceholder from './../loadingAnimation';
+import ChangeUsername from './ChangeUsername';
 import './user.sass';
 
 
@@ -9,6 +10,7 @@ class User extends Component {
     super(props)
     this.state = {
       deleteModalToggle: false,
+      changeUsernameModalToggle: '',
       confirmPasswordValue: ''
     }
     this.handleChange = this.handleChange.bind(this)
@@ -26,6 +28,9 @@ class User extends Component {
   }
   toggleDelete(bool) {
     this.setState({deleteModalToggle: bool})
+  }
+  toggleChangeuser(bool) {
+    this.setState({changeUsernameModalToggle: bool})
   }
   
   render() {
@@ -80,6 +85,17 @@ class User extends Component {
               :
               null
             }
+            {
+              this.state.changeUsernameModalToggle
+              ?
+              <div className="modal is-active">
+              <div onClick={()=>{this.toggleChangeuser(false)}} className="modal-background"></div>  
+              <ChangeUsername changeUsername={this.props.changeUsername} id={user._id}/>
+              <button onClick={()=>{this.toggleChangeuser(false)}} className="modal-close is-large" aria-label="close"></button>
+              </div>
+              :
+              null
+            }
               <div className="column is-half">
                 <p className="title is-4">{this.props.userState.user.user.username}'s Builds</p>
                 <div className="userBuildsContainer"> 
@@ -97,7 +113,7 @@ class User extends Component {
                 <nav className="panel userControls"> 
                   <p className="panel-heading">Account Settings</p>
                   <div className="panel-block userControlButtons">
-                    <a className="button is-info"> Change Username </a>
+                    <a className="button is-info" onClick={()=>{this.toggleChangeuser(true)}}> Change Username </a>
                     {/* <a className="button is-info"> Change Email </a> */}
                     <a className="button is-danger" onClick={()=>{this.toggleDelete(true)}}> Delete Account </a>
                   </div>

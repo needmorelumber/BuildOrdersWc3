@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const User = mongoose.model('user');
 const build_order = mongoose.model('build_order');
 
+
 module.exports = (() => {
   return {
     newUser(req, res) {
@@ -134,6 +135,23 @@ module.exports = (() => {
           });
         })
       }
+    },
+    changeUsername(req, res) {
+      const id = req.body.id;
+      const newUsername = req.body.username;
+      User.findById(id, (err, user) => {
+        if (err) res.status(200).json({Message: 'Database Error, try again later'});
+        user.username = newUsername;
+        user.save((err, updated) => {
+          req.session.user = updated;
+          build_order.find({ownerId: user._id},(err,builds)=>{
+          if(!err){
+          req.session.user.userBuilds = builds;
+          res.status(200).json({user:user})
+          }
+        })
+      })
+      })
     }
   }
 })(); 

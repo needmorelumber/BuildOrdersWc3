@@ -154,5 +154,24 @@ export function deleteUser(password, id) {
                 dispatch(updateRegMessageTimed(res.data.Message))
             }
         })
+        .catch(err => {
+            dispatch(updateRegMessageTimed('Sorry we had an error, please try again'))
+        })
+    }
+}
+export function changeUsername(id, username) {
+    return (dispatch) => {
+        return axios.post(`/api/change_username`, {id: id, username: username})
+        .then(res => {
+            if(!res.data.Message){
+                console.log(res.data.user)
+                dispatch(updateUser(res.data.user))
+            } else{
+                dispatch(updateRegMessageTimed(res.data.Message))
+            }
+        })
+        .catch(err => {
+            dispatch(updateRegMessageTimed('Sorry we had an error, please try again'))
+        })
     }
 }

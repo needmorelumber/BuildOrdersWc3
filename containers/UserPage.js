@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import {fetchAndUpdateUser, deleteUser} from './../actions/user'
+import {fetchAndUpdateUser, deleteUser, changeUsername} from './../actions/user'
 import User from './../components/UserProfile/User'
 
 
@@ -16,6 +16,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     deleteUser: (password, id) => {
       dispatch(deleteUser(password, id))
+    },
+    changeUsername: (id, username) => {
+      dispatch(changeUsername(id, username))
     }
   }
 }
