@@ -99,7 +99,7 @@ class User extends Component {
               <div className="column is-half">
                 <p className="title is-4">{this.props.userState.user.user.username}'s Builds</p>
                 <div className="userBuildsContainer"> 
-                  { builds.length > 0
+                  { builds
                     ?
                        builds
                     :
