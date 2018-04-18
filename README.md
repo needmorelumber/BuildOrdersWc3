@@ -2,7 +2,7 @@
 
 ## It's a place to create build orders for warcraft 3, and use those builds to help you in game!!
 
-## Not live yet. Check it out locally by cloning, and running npm install. Must have mongodb running. Next create a config file in /server/config called 'config.js'. Make that look like this... 
+## This site is live but might be broken. Send me issues!
 ```
 module.exports =  (() => {
   const config = {

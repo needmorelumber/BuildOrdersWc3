@@ -15,7 +15,7 @@ class Register extends Component {
                 <p className="subtitle has-text-grey">Thanks for signing up! </p>
                 <div className="box">
                   <figure className="avatar">
-                    <img src="./../../assets/Orc.png" />
+                    <img src="https://s3.us-west-2.amazonaws.com/needmorelumberassets/Orc.png" />
                   </figure>
                   <RegisterForm 
                     registerNewUser={this.props.registerNewUser}
