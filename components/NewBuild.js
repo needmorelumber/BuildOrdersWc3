@@ -69,6 +69,7 @@ class NewBuild extends Component {
     render() {
         const from = this.props.location.state || '/'
         const fireRedirect = this.state.fireRedirect
+        const isFetching = this.state.isFetching
         const inputsArray = Object.entries(this.state.inputs);
         return (
                 <div className="modal is-active" id="newBuildForm">
@@ -100,7 +101,7 @@ class NewBuild extends Component {
                                 <button type="submit" value="Submit" className="button is-success">Submit</button>
                             </form>
                             {
-                                fireRedirect && (
+                                (fireRedirect && this.props.newBuildForm.isFetching) && (
                                     <Redirect to={'/user/profile'}/>
                                 )
                             }
