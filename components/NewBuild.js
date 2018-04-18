@@ -101,7 +101,7 @@ class NewBuild extends Component {
                             </form>
                             {
                                 fireRedirect && (
-                                    <Redirect to={'/builds'}/>
+                                    <Redirect to={'/user/profile'}/>
                                 )
                             }
                             </section>
