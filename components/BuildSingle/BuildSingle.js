@@ -26,7 +26,7 @@ class BuildSingle extends Component {
 				if (build) {
 						const race = this.props.currentVisibleBuild.item.build.race,
 									opposing = this.props.currentVisibleBuild.item.build.opposing_race;
-						const iconString = path.join('/assets/icons/', race + '.jpg')
+						const iconString = path.join(path.join('https://s3.us-west-2.amazonaws.com/needmorelumberassets/icons/', race + '.jpg')
 						return (
 								<div className="section">
 										<div className="columns">
