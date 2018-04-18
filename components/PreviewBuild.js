@@ -14,7 +14,7 @@ class PreviewBuild extends Component {
             build = this.props.currentVisibleBuild.item.build; 
             var buildsRoute= "/build/";
             var race = build.race;
-            var iconString = path.join('https://s3.us-west-2.amazonaws.com/needmorelumberassets/icons/', race + '.jpg')
+            var iconString = `https://s3.us-west-2.amazonaws.com/needmorelumberassets/icons/${race}.jpg`
         }
         return (
             <div className="section">
