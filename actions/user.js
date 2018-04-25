@@ -175,3 +175,17 @@ export function changeUsername(id, username) {
         })
     }
 }
+export function callLambda() { 
+    return (dispatch) => {
+        return axios.get(`api/lambda`)
+        .then(res => {
+            if(res){
+                console.log('got res')
+            } else {
+                console.log('no res')
+            }
+            console.log(res)
+
+        }).catch(err=>console.log(err))
+    }
+}

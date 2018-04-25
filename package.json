@@ -8,7 +8,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"webpack-dev-server --open --config webpack.dev.js --inline\" \"nodemon server.js\"",
     "build": "webpack --config webpack.prod.js"
-    
   },
   "env": {
     "development": {

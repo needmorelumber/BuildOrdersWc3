@@ -2,6 +2,7 @@ const buildController = require('./../controllers/buildController'),
       userController = require('./../controllers/userController'),
       express = require('express'),
       routes  = express.Router(),
+      axios = require('axios'),
       Mongoosse = require('mongoose');
 
 /////// API ////////
@@ -47,5 +48,14 @@ routes.get('/get_user', (req, res) => {
 })    
 routes.get('/logout', (req, res) => {
     userController.logOut(req, res)
+})
+routes.get('/lambda', (req,res)=>{
+    axios.get('https://yqwdc7yna7.execute-api.us-east-1.amazonaws.com/production/ParseData')
+    .then((res)=>{
+        console.log(res)
+    })
+    .catch(err=>{
+        console.err(err)
+    })
 })
 module.exports = routes;

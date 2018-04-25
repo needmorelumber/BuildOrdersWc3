@@ -71,14 +71,21 @@ class GameHelper extends Component {
   
   startWalkthrough() {
     const build_map = this.mapOrdersIntoObjectForTimer(this.props.currentVisibleBuild.item.build.build_list);
+    if(!this.state.nextOrder){
     this.setState({
       currentlyTicking: true,
       nextOrder: this.props.justOrders[0]
     })
+    }else {
+      this.setState({
+        currentlyTicking: true
+      })
+    }
     this.setState({
       timerInterval:
       //EVERY SECOND THIS HAPPENS
       window.setInterval(() => {
+        if(this.state.currentlyTicking){
         let curpos = this.state.curPos
         if (curpos === this.props.totalLength) {
           this.resetWalkthrough()
@@ -90,6 +97,7 @@ class GameHelper extends Component {
           curPos: curpos + 1,
           timeStampSeconds: new Date(0, 0, 0, 0, 0, curpos + 1, 0)
         })
+      }
       }, 1000)
     })
   }
@@ -97,7 +105,7 @@ class GameHelper extends Component {
     this.setState({
       currentlyTicking: false
     })
-    window.clearInterval(this.state.timerInterval);
+    window.clearInterval(this.state.timerInterval)
   }
   resetWalkthrough() {
     this.setState({

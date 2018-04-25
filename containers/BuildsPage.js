@@ -18,7 +18,7 @@ class BuildsPageComp extends Component {
     event.preventDefault();
   }
   render() {
-    const user = this.props.user.user.user,
+    const { user } = this.props.user.user,
           setFilter = this.props.setFilter,
           setSortType = this.props.setSortType
     return (
