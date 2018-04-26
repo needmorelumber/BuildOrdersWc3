@@ -1,3 +1,4 @@
+@import './../../sass/media.sass'
 .buildText
   color: black 
   background: rgba(0,100,0,.4) 
@@ -18,11 +19,20 @@
   padding: 2%
   margin: 1%
 .userPost
-  height: 14%
   margin: 0 auto
-  width: 45%
+  width: 100%
   padding: 3%
+  margin-top: 5%
 .userBuildsContainer
   margin: 0 auto
 .userControlButtons .button
   margin: 2%
+.userProfileContainer
+  margin-top: 10%
++media('<=tablet')
+  .userPost
+    width: 80%
+    margin-top: 5%
+  .userControls
+    width: 85%
+    margin: 0 auto

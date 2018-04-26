@@ -11,10 +11,10 @@ class NextOrder extends Component {
       const unitData = data[this.props.race][unit] || {...data["N/A"], "Unit":order.order.race_unit};
       return (
           <div className="nextOrderContainer">
-          <p className="title is-3">Your next order to build.. in {time - this.props.pos} seconds!  </p>
+          <p className="">Your next order to build.. in {time - this.props.pos} seconds!  </p>
             <div className="card nextOrder">
               <div className="card-header">
-                <div className="card-header-title title is-1 ">{unitData.Unit}</div>
+                <div className="card-header-title">{unitData.Unit}</div>
                 <div className="card-header-icon">
                   <figure className="image is-64x64">
                     <img className="unitImage" src={unitData.Portrait} alt={unitData.Unit} />
@@ -52,7 +52,7 @@ class NextOrder extends Component {
     } else {
       return (
         <div className="section">
-          <p className="title is-4"> No order coming up...</p>
+          <p className=""> No order coming up...</p>
         </div>
       )
     }

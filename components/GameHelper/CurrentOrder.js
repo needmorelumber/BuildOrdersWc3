@@ -10,10 +10,10 @@ class CurrentOrder extends Component {
       const unitData = data[this.props.race][unit] || {...data["N/A"], "Unit":order.order.race_unit};
       return (
         <div className="currentOrderContainer">
-        <p className="title is-3">Build this now!</p>
+         <p className="">Build this now!</p>
           <div className="card currentOrder">
           <div className="card-header">
-            <div className="card-header-title title is-1">
+            <div className="card-header-title">
             {unitData.Unit}</div>
             <div className="card-header-icon">
                     <figure className="image is-64x64">
@@ -25,7 +25,6 @@ class CurrentOrder extends Component {
               <div className="media">
                 <div className="media-left">
                   <div className="media-content">
-                    <p className="title is-4"> Build {this.props.currentOrder.order.count} of these</p>
                   </div>
                   <div className="content">
                     {unitData && (
@@ -52,7 +51,7 @@ class CurrentOrder extends Component {
     } else {
       return (
         <div className="section">
-          <p className="title is-4"> Nothing to build right now...</p>
+          <p className=""> Nothing to build right now...</p>
         </div>
       )
     }

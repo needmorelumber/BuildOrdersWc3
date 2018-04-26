@@ -57,6 +57,7 @@
     "react-persist": "^1.0.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
+    "react-scroll-up-button": "^1.5.11",
     "react-sticky": "^6.0.1",
     "react-tooltip": "^3.4.0",
     "react-transition-group": "^2.2.1",

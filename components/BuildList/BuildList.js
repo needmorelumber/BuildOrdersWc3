@@ -74,27 +74,27 @@ export default class BuildList extends React.Component {
                         :
                         null   
                     }
-                        <div className="media">
-                        <div className="media-left" style={{margin:0,padding:0,marginTop:'.5%'}}>
-                        <figure className="image is-50x50">
-                            <img src={iconString} alt="" />
-                        </figure>
-                        </div>
-                        <div className="media-content">
-                            <div className="content">
-                            <h4>{build.name}</h4>
-                            <p>
-                                <span className="postedBy">Posted by {build.ownerUsername}</span>
-							    <span className="tag">{build.race} vs. {build.opposing_race}</span>
-                                <span className="tag">{build.build_type}</span>
-                            </p>
+                        <div className="media postmedia">
+                            <div className="media-left" style={{margin:0,padding:0,marginTop:'.5%'}}>
+                            <figure className="image is-50x50">
+                                <img src={iconString} alt="" />
+                            </figure>
                             </div>
-                        </div>
+                            <div className="media-content">
+                                <div className="content">
+                                    <h4>{build.name}</h4>
+                                    <span className="postedBy">Posted by {build.ownerUsername}</span>
+                                    <p>
+                                        <span className="tag">{build.race} vs. {build.opposing_race}</span>
+                                        <span className="tag">{build.build_type}</span>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                         {
                           this.state.expandedItem === index 
                           ?
-                                <CurrentBuild/>
+                                <CurrentBuild />
                           :
                           null
                         }

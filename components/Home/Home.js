@@ -11,7 +11,7 @@ class Home extends Component {
             <div className="columns is-vcentered mainHomeContainer">
               <div className="column is-6 is-offset-1">
                 <h1 className="title mainTitle">
-                 Need More Lumber ?
+                 Need More Lumber
                 </h1>
                 <hr/>
                 <h1 className="title mainTitle">

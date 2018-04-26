@@ -59,7 +59,7 @@ class User extends Component {
       })
     }
       return (
-        <div >
+        <div className="userProfileContainer">
           {
             !this.props.userState.user.user
             ? 
@@ -112,7 +112,7 @@ class User extends Component {
               <div className="column is-4">
                 <nav className="panel userControls"> 
                   <p className="panel-heading">Account Settings</p>
-                  <div className="panel-block userControlButtons">
+                  <div className="panel-block buttons userControlButtons">
                     <a className="button is-info" onClick={()=>{this.toggleChangeuser(true)}}> Change Username </a>
                     {/* <a className="button is-info"> Change Email </a> */}
                     <a className="button is-danger" onClick={()=>{this.toggleDelete(true)}}> Delete Account </a>

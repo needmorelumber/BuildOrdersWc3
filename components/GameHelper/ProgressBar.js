@@ -12,8 +12,6 @@ class ProgressBar extends Component {
       timerInterval: 
       window.setInterval(() => {
         // Check if done
-        console.log(this.state.currentTime)
-        console.log(this.props.max)
         if (this.state.currentTime !== this.props.max) {
           this.setState({
             currentTime: this.state.currentTime + 1

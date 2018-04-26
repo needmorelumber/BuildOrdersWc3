@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../EditBuild/editbuild.sass';
+import './buildSingle.sass';
 import data from './../../MasterData';
 import {updateCurrentOrder} from './../../actions/build'
 
@@ -33,8 +33,8 @@ class CurrentOrder extends Component {
             <div className="card-header-title title is-1">
             {unitData.Unit}</div>
             <div className="card-header-icon">
-                    <figure className="image is-64x64">
-                      <img className="unitImage" src={unitData.Portrait} alt={unitData.Unit} />
+                    <figure className="image">
+                      <img className="" src={unitData.Portrait} alt={unitData.Unit} />
                     </figure>
             </div>
           </div>

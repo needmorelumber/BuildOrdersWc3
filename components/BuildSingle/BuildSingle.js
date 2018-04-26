@@ -4,6 +4,7 @@ import path from 'path';
 import {Redirect, Link} from 'react-router-dom';
 import LoadingPlaceholder from './../loadingAnimation/loadingAnimation';
 import CurrentOrder from './CurrentOrder';
+import ScrollUpButton from "react-scroll-up-button";
 import {StickyContainer, Sticky} from 'react-sticky';
 // import './buildSingle.sass';
 
@@ -30,15 +31,7 @@ class BuildSingle extends Component {
 						return (
 								<div className="section">
 										<div className="columns">
-												<Timeline
-														className="column is-3"
-														build={this.props.currentVisibleBuild.item.build}
-														updateBuild={this.props.updateBuild}
-														toggleEmpty={this.props.toggleEmpty}
-														updateOrder={updateOrder}
-														fetchById={this.props.fetchById}
-												/>
-												<StickyContainer className="column is-9">
+										<StickyContainer className="column is-5">
 														<Sticky >
 																{({
 																		style,
@@ -51,38 +44,30 @@ class BuildSingle extends Component {
 																}) => {
 																		return (
 																				<div className="sideMenu" style={style}>
-																						<section className="hero">
-																								<div className="hero-body level">
-																										<div className="level-left">
-																												<figure className="image is-128x128 level-item">
-																														<img src={iconString}/>
+																						<section className="">
+																												<figure className="image raceImage is-128x128">
+																														<img className="" src={iconString}/>
 																												</figure>
-																												<div className="rows">
-																														<h1 className="title row">
+																														<h1 className="buildName">
 																																{this.props.currentVisibleBuild.item.build.name}
 																														</h1>
-																														<p className="row subtitle">
+																														<p className="">
 																																{race} vs. {opposing}
 																														</p>
-																												</div>
-																										</div>
-																										<div className="level-item">
-																												<Link to={this.props.match.url + '/playing'}>
-																														<button className="button is-block is-dark is-large">Real Time walkthrough</button>
-																												</Link>
-																										</div>
-																										{user.user
-																												? user.user._id === this.props.currentVisibleBuild.item.build.ownerId
-																														? <div className="level-item">
+																												<div className="buttons">
+																													<Link to={this.props.match.url + '/playing'}>
+																															<button className="button is-block is-dark is-large">Real Time walkthrough</button>
+																													</Link>
+																													{user.user
+																															? user.user._id === this.props.currentVisibleBuild.item.build.ownerId
+																																	? 
 																																		<Link to={this.props.match.url + '/edit'}>
-																																				<button className="button is-block is-dark is-large">
-																																						Edit</button>
+																																				<button className="button is-block is-dark is-large">Edit</button>
 																																		</Link>
-																																</div>
-																														: null
-																												: null
-}
-																								</div>
+																																	: null
+																															: null
+																													}
+																											</div>		
 																						</section>
 																						{order
 																								? <CurrentOrder data={order} race={race}/>
@@ -94,7 +79,17 @@ class BuildSingle extends Component {
 }
 														</Sticky>
 												</StickyContainer>
+												<Timeline
+														className="column"
+														build={this.props.currentVisibleBuild.item.build}
+														updateBuild={this.props.updateBuild}
+														toggleEmpty={this.props.toggleEmpty}
+														updateOrder={updateOrder}
+														fetchById={this.props.fetchById}
+												/>
+											
 										</div>
+										<ScrollUpButton />
 								</div>
 						)
 				} else {

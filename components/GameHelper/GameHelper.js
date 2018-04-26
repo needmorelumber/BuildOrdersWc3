@@ -74,7 +74,7 @@ class GameHelper extends Component {
         const race = this.props.currentVisibleBuild.item.build.race;
         const race_unit = currentOrder.order.race_unit;
         const unitData = data[race][race_unit] || {...data["N/A"], "Unit":order.order.race_unit};
-        this.startNewProgressBar(parseInt(unitData["Build Time"]))
+        // this.startNewProgressBar(parseInt(unitData["Build Time"]))
         this.setState({
           unitData: unitData,
           currentOrder: currentOrder,
@@ -143,14 +143,14 @@ class GameHelper extends Component {
         )
       })
       return (
-        <div className="container has-text-centered">
+        <div className="section">
           <Timer timeInGame={this.state.timeStampSeconds}/> 
           { this.state.currentOrder
             ? bars
             : null
           }
-          <div className="section column">
-            <div className="level-left">
+          <div className="column">
+            <div className="buttons">
               {!this.state.currentlyTicking
                 ? <div className="buttonContainer">
                     <button
@@ -183,14 +183,14 @@ class GameHelper extends Component {
               </button>
             </div>
           </div>
-          <div className="columns ">
-            <div className="column is-6">
+          <div className="columns is-mobile orderContainer level">
+            <div className="column is-6 level-item">
               <p>Build right now...</p>
               <CurrentOrder
                 race={this.props.currentVisibleBuild.item.build.race}
                 currentOrder={this.state.currentOrder}/>
             </div>
-            <div className="column is-6">
+            <div className="column is-6 level-item">
               <p>Upcoming...</p>
               <NextOrder
                 pos={this.state.curPos}
