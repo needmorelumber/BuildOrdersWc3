@@ -15,7 +15,7 @@ module.exports = (() => {
     var buildController = {};
     buildController.allBuilds = (req, res) => {
         build_order.find((err, builds) => {
-            if (!err) {          
+            if (!err) {
                 res.json(builds);
             } else {
                 res

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import data from './../MasterData';
+import data from './../../MasterData';
 import path from 'path';
-import './custom.sass';
+import './previewBuild.sass';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 class PreviewBuild extends Component {

@@ -2,85 +2,81 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import data from './../../MasterData'
+import Menu from 'react-burger-menu/lib/menus/slide'
 import {fetchAndUpdateUser,logOut} from './../../actions/user'
+import './header.sass'
 class Header extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            menuOpen: false
+        }
     }
+    handleStateChange (state) {
+        this.setState({menuOpen: state.isOpen})  
+      }
+      
+      // This can be used to close the menu, e.g. when a user clicks a menu item
+    closeMenu () {
+        this.setState({menuOpen: false})
+      }
     
+      // This can be used to toggle the menu, e.g. when using a custom icon
+      // Tip: You probably want to hide either/both default icons if using a custom icon
+      // See https://github.com/negomi/react-burger-menu#custom-icons
+    toggleMenu () {
+        this.setState({menuOpen: !this.state.menuOpen})
+      }
     componentWillMount() {
         this.props.fetchUser()
         // console.log(this.props)
-    }
-    toggleMenuMobile(){
-        let navMenu = document.getElementById('navMenu');
-        if(navMenu.classList.contains('is-active')){
-            navMenu.classList.remove('is-active')
-        }else {
-            navMenu.classList.add('is-active');
-        }        
     }
     
     navBarItems(){
         const navBarItems = [
             {   
                 pathname: "/home",
-                display: "Home"
+                display: "Home",
+                iconClass: "fa fa-home"
             },
             { 
                 pathname: "/builds",
-                display: "Browse Builds"
+                display: "Browse Builds",
+                iconClass: "fa fa-list"
             }
         ]
         return navBarItems
     }
     render() {
-        const user=this.props.userState.user.user;
+        const user=this.props.userState.user.user;    
         return (
-            <nav className="navbar">
-                <div className="container">
-                    <div className="navbar-brand">
-                    <Link className="navbar-item" to="/home">
-                        <p className="title navbar-item"> Need More Lumber? </p>    
-                    </Link>
-                    
-                    <button className="button is-dark navbar-burger" data-target="navMenu" onClick={this.toggleMenuMobile}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                    </div>
-                    <div id="navMenu" className="navbar-end navMenu">
-                    {this.navBarItems().map((item, index) => (
+            <div>
+              <Menu
+                isOpen={this.state.menuOpen}
+                onStateChange={(state) => this.handleStateChange(state)}
+              >
+              {this.navBarItems().map((item, index) => (
                         // to "item" works because of react router object assesment for "to" prop
-                        <Link className="navbar-item" key={index} to={item} >
+                        <Link className="navItem" onClick={() => this.closeMenu()} key={index} to={item}>
+                                <span className="icon"> <i className={item.iconClass}></i> </span>
                                 {item.display}
                         </Link>
                     ))}
-                    <div className="navbar-end">
-                      { !user
+                    { !user
                         ?
                         null
                         :                        
-                        <Link to='/user/profile' className="navbar-item title is-5"> Logged in as {user.username}</Link>
+                        <Link onClick={() => this.closeMenu()} to='/user/profile' className="navItem"><span className="icon"> <i className="fa fa-user"></i> </span>Your Profile</Link>
                     }
-                    </div>
-                    <div className="navbar-end">
-                    
-                        { !user
-                            ?
-                                <div className="navbar-item">
-                                    <Link className="navbar-item" to={'/login'}>Login</Link>
-                                    <Link className="navbar-item" to={'/register'}>Register</Link>
-                                </div>
-                            :
-                                <Link className="navbar-item" to={'/home'} onClick={this.props.logOut}>Logout</Link>
+                    { !user
+                        ?
+                        <Link onClick={() => this.closeMenu()} className="navItem" to={'/login'}> <span className="icon"> <i className="fa fa-sign-in-alt"></i> </span> Login</Link>
+                        :
+                        <Link onClick={() => this.closeMenu()} className="navItem" to={'/home'} onClick={this.props.logOut}><span className="icon"> <i className="fa fa-sign-out"></i> </span>Logout</Link>
                         }
-                    </div>
-                    </div>
-                </div>
-            </nav>
-        )
+              </Menu>
+            </div>
+          )
     }
 }
 const mapStateToProps = (state) => {

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import {requestBuilds,fetchBuildById }from './../actions/build'
-import PreviewBuild from '../components/PreviewBuild'
+import PreviewBuild from '../components/PreviewBuild/PreviewBuild'
 
 const mapStateToProps = (state) => {
   return {

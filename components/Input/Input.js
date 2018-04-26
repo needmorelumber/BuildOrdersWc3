@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import data from './../MasterData';
+import data from './../../MasterData';
 
 class Input extends Component {
     render() {

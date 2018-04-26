@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
-import LoadingPlaceholder from './../../components/loadingAnimation';
+import LoadingPlaceholder from './../../components/loadingAnimation/loadingAnimation';
 import Timeline from './../Timeline/Timeline';
 import AddOrder from './../BuildSingle/AddOrder';
 import TimelineControls from './TimelineControls';

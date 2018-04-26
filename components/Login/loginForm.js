@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Input from './../Input';
+import Input from './../Input/Input';
 import { Redirect } from 'react-router-dom';
-import LoadingPlaceholder from './../loadingAnimation';
+import LoadingPlaceholder from './../loadingAnimation/loadingAnimation';
 
 
 class LoginForm extends Component {

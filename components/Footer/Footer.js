@@ -10,32 +10,26 @@ class Footer extends Component {
         footerLinksData:
         [
           {
-            route:"/home",
-            text:"Home"
-          },
-          {
             route:"/login",
-            text:"Login"
-          },
-          {
-            route:"/register",
-            text:"Register"
+            text:"Login",
+            icon:"user"
           }
         ]
       }
     }
   returnFooterLinks(){
      return this.state.footerLinksData.map((link, i) => (
-        <li key={i}><Link to={link.route}>{link.text}</Link></li>
+          <li className="footerItem" key={i}><span className="icon"><i className={"fa fa-" + link.icon}></i></span><Link to={link.route}>{link.text}</Link></li>
       ))
   }
   render() {
     const links=this.returnFooterLinks();
     return (
       <footer className="footer">
-        Need More Lumber
+        <p className="footerBrand"> Need More Lumber </p>
         <ul className="footerLinks">
           {links}
+          <li className="footerItem"><span className="icon"><i className="fa fa-github"></i></span><a target="_blank" rel="noopener noreferrer" href="https://github.com/LJunghansCode/BuildOrdersWc3">Check out this project here</a></li>
         </ul>
       </footer>
     );

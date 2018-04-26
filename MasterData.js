@@ -1,7 +1,7 @@
 var path = require('path')
 const returnImageString = (race, building) => {
   //Buildings are lowercase
-  var imgPath = `https://s3.us-west-2.amazonaws.com/needmorelumberassets/buildings/${race}/${building}.png`
+  var imgPath = `https://s3.us-west-2.amazonaws.com/needmorelumberassets/buildings/${race.toLowerCase()}/${building}.png`
   return imgPath;
 };
 

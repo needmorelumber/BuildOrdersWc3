@@ -1,2 +1,71 @@
-.logo
- padding 20px
+@import './../../sass/media.sass'
++media('>=desktop')
+  .bm-burger-button 
+    position: fixed
+    width: 36px
+    height: 30px
+    left: 1%
+    top: 1%
+  .bm-burger-bars 
+    background: #373a47
+  .bm-cross-button 
+    height: 24px
+    width: 24px
+  .bm-cross 
+    background: #bdc3c7
+  .bm-menu 
+    background: rgba(255,255,255,0.9)
+    padding: 2.5em 1.5em 0
+    font-size: 1.15em
+  .bm-morph-shape 
+    fill: #373a47
+  .bm-item-list
+    color: black
+    display: flex
+    flex-direction: column
+    transition: .6s
+  .navItem
+    font-size: 1.3em
+    margin-top: 20%
+    padding: 5%
+    transition: .6s
+    &:hover
+     color: white
+     background-color: black
+  .navItem
+    .icon
+      margin-right: 5%
+
++media('<=tablet')
+  .bm-burger-button 
+    position: fixed
+    width: 36px
+    height: 30px
+    left: 1%
+    top: 1%
+  .bm-burger-bars 
+    background: #373a47
+  .bm-cross-button 
+    height: 24px
+    width: 24px
+  .bm-cross 
+    background: #bdc3c7
+    height: 4em
+    width: 4em
+  .bm-menu 
+    background: rgba(255,255,255,0.9)
+    padding: 2.5em 1.5em 0
+    font-size: 1.15em
+  .bm-morph-shape 
+    fill: #373a47
+  .bm-item-list
+    color: black
+    display: flex
+    flex-direction: column
+  .navItem
+    font-size: 1.3em
+    margin-top: 20%
+    padding: 5%
+  .navItem
+    .icon
+      margin-right: 5%

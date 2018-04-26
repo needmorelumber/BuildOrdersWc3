@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import CurrentBuild from './CurrentBuild';
 import BuildListControls from './../components/BuildList/BuildListControls';
 import {setVisibilityFilter, setSearchQuery, setSortType} from './../actions/build';
-import './../components/custom.sass';
+import './../components/BuildList/buildList.sass';
 
 class BuildsPageComp extends Component {
   handleChange(event) {
@@ -23,36 +23,14 @@ class BuildsPageComp extends Component {
           setSortType = this.props.setSortType
     return (
       <div>
-        <nav className="navbar is-white">
-          <div className="container">
-            <div className="navbar-menu">
-              <div className="navbar-start">
-              </div>
-              <div className="navbar-end">
-                <div className="navbar-item">
-                  <input
-                    className="input"
-                    ref={(input) => this.input = input}
-                    onChange={() => this.handleChange(event)}
-                    type="text"
-                    placeholder="Search builds...."/>
-                </div>
-              </div>
-            </div>
-          </div>
-        </nav>
-        <section className="container">
+        <section className="container-fluid buildsPageContainer">
           <div className="columns">
             <div className="column is-2 rows">
             {  user
                   ? <Link to="/builds/new">
-                      <p
-                        className="control button is-success is-rounded is-block is-alt is-large is-hoverable">
+                      <p className=" button is-primary newBuildButton">
                         <span className="icon is-small">
                           <i className="fa fa-plus"></i>
-                        </span>
-                        <span>
-                          New Build
                         </span>
                       </p>
                     </Link>
@@ -62,11 +40,15 @@ class BuildsPageComp extends Component {
                   setFilter = {setFilter}
                   setSortType = {setSortType}
                 />
+                  <input
+                      className="input searchBox"
+                      ref={(input) => this.input = input}
+                      onChange={() => this.handleChange(event)}
+                      type="text"
+                      placeholder="Search builds...."/>
             </div>
             <div className="column">
-              <div className="box content builds-container">
                 <VisibleBuilds/>
-              </div>
             </div>
           </div>
         </section> 

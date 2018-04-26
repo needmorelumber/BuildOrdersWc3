@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Input from './../Input';
-import LoadingPlaceholder from './../loadingAnimation'
+import Input from './../Input/Input';
+import LoadingPlaceholder from './../loadingAnimation/loadingAnimation';
 import { Redirect } from 'react-router-dom';
 
 class RegisterForm extends Component {

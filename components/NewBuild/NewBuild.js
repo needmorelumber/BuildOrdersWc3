@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link,  Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import {newBuild} from '../actions/build'
-import {fetchAndUpdateUser} from '../actions/user'
-import Input from './Input'
-import './custom.sass';
+import {newBuild} from './../../actions/build'
+import {fetchAndUpdateUser} from './../../actions/user'
+import Input from './../Input/Input';
+import './newBuild.sass';
 
 
 class NewBuild extends Component {

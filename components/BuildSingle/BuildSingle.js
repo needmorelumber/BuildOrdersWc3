@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Timeline from './../Timeline/Timeline'
 import path from 'path';
 import {Redirect, Link} from 'react-router-dom';
-import LoadingPlaceholder from './../loadingAnimation';
+import LoadingPlaceholder from './../loadingAnimation/loadingAnimation';
 import CurrentOrder from './CurrentOrder';
 import {StickyContainer, Sticky} from 'react-sticky';
 // import './buildSingle.sass';

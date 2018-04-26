@@ -5,7 +5,7 @@ import ReactTooltip from 'react-tooltip';
 import BuildsPage from '../BuildsPage';
 import { normalize, schema } from 'normalizr';
 import Header from './../../components/Header/Header';
-import NewBuild from './../../components/NewBuild';
+import NewBuild from './../../components/NewBuild/NewBuild';
 import CurrentBuild from './../CurrentBuild';
 import TimeLineContainer from './../TimeLineContainer';
 import NoMatch from './../../components/noMatch';
@@ -13,7 +13,7 @@ import LoginPage from './../LoginPage';
 import RegisterPage from './../RegisterPage';
 import UserPage from './../UserPage';
 import AddOrder from './../../components/BuildSingle/AddOrder';
-import Home from './../../components/Home';
+import Home from './../../components/Home/Home';
 import InGameHelper from './../InGameHelper';
 import EditBuildPage from './../EditBuildPage';
 import Footer from './../../components/Footer/Footer';
@@ -80,7 +80,7 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <div className="mainContent">
+        <div className="container">
           <Switch>  
             <Route exact path="/" render={() => (
                 <Redirect to="/home"/>
@@ -93,6 +93,7 @@ class App extends Component {
               <Route component={NoMatch} />
           </Switch>
         </div>
+        <Footer />
       </div> 
     );
   }

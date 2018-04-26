@@ -4,16 +4,12 @@ import BuildSingle from '../BuildSingle/BuildSingle'
 import CurrentBuild from './../../containers/CurrentBuild';
 import { Link } from 'react-router-dom'
 import fetchBuilds from './../../actions/actions'
-import LoadingAnimation from './../loadingAnimation';
+import LoadingAnimation from './../loadingAnimation/loadingAnimation';
 import Pagination from './Pagination';
 import data from './../../MasterData';
 import path from 'path';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
-
-
-
-
+ 
 export default class BuildList extends React.Component {
     constructor(props) {
         super(props)
@@ -108,7 +104,7 @@ export default class BuildList extends React.Component {
                 )
               })
         return (
-         <div className="section">
+         <div className="buildsSection has-text-centered">
             <h1 className="title">All Warcraft 3 build guides</h1>
             <p className="subtitle">Select to view in detail</p>
             {

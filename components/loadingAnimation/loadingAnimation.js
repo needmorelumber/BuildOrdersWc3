@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './custom.sass'
+import './loadingAnimation.sass'
 
 class LoadingPlaceholder extends Component {
   render() {

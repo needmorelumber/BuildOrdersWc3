@@ -1,9 +1,23 @@
-.footer
-  background-color: rgba(0, 100, 0, 1)
-.footer ul li
-  // display: inline
-  text-decoration: none
-  color: black
-  padding: 30px
-.footerLinks > *
-  color: white
+@import './../../sass/media.sass'
+
+.footerLinks
+  font-style: none
+  display: flex
+  flex-direction: column
+  font-size: 1.2em
+.footerItem
+  margin-top: 1em
+  font-size: 1.2em
+.footerLinks
+  .icon
+    margin-right: 1em
++media('>=desktop')
+  .footerLinks
+    margin: 0 auto
+    font-style: none
+    display: flex
+    flex-direction: column
+    font-size: 1.2em
+  .footerItem
+    margin-right: 2em
+    font-size: 1.1em

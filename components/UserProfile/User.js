@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Redirect,Link} from 'react-router-dom';
-import LoadingPlaceholder from './../loadingAnimation';
+import LoadingPlaceholder from './../loadingAnimation/loadingAnimation';
 import ChangeUsername from './ChangeUsername';
 import './user.sass';
 
@@ -59,7 +59,7 @@ class User extends Component {
       })
     }
       return (
-        <div>
+        <div >
           {
             !this.props.userState.user.user
             ? 

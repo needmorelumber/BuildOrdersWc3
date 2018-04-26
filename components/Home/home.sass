@@ -1,0 +1,35 @@
+@import '../../sass/media.sass'
+.mainHero
+  +media('>=desktop')
+    background-image: url('https://s3.us-west-2.amazonaws.com/needmorelumberassets/arthbg.svg')
+    background-size: contain
+    background-position-x: center
+    background-repeat: no-repeat
+  +media('<=tablet')
+    &::after
+      content: ""
+      background: url('https://s3.us-west-2.amazonaws.com/needmorelumberassets/arthbg.svg')
+      background-size: cover
+      background-position-x: right
+      background-repeat: no-repeat
+      opacity: 0.5
+      top: 0
+      left: 0
+      bottom: 0
+      right: 0
+      position: absolute
+      z-index: -1    
+.buildsButton
+  margin: 1%
+  width: 100%
++media('>=desktop')
+  .mainTitle
+    font-size: 4em
+  .buildsButton
+    font-size: 3em
++media('<=tablet')
+  .mainTitle
+    font-size: 3em
+    background-color: rgba(255,255,255,0.6)
+  .buildsButton
+    font-size: 1.3em

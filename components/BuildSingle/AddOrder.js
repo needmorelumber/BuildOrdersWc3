@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Input from './../Input';
+import Input from './../Input/Input';
 import { connect } from 'react-redux';
 import { updateAddOrderMessage, toggleAddingOrder} from './../../actions/build';
 import data from './../../MasterData';

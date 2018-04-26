@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-
+import './buildList.sass'
 class BuildListControls extends Component {
   render() {
     return (
       <div className="row rows">
-        <aside className="row menu">
-          <p className="menu-label">
+        <aside className="row">
+          <p className="">
             Filter by Race
           </p>
-          <ul className="filter-race-menu menu-list">
+          <ul className="filter-race-menu">
             <li onClick={() => this.props.setFilter("SHOW_ALL")}>
               <a>All Races</a>
             </li>
