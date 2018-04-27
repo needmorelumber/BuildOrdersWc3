@@ -15,11 +15,13 @@ class Home extends Component {
                 </h1>
                 <hr/>
                 <h1 className="title mainTitle">
-                 Time to shine
+                 Time to shine in game
                 </h1>
                 <hr/> 
                 <h2 className="subtitle has-text-centered">
-                  Be your own warcraft 3 commander with orders every second
+                  Be your own warcraft 3 commander with orders every second,
+                  just create a build, then run it in real time during the game!
+                  Never miss the next unit to build!
                 </h2>
                 <br/>
                 <p className="">
