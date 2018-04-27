@@ -30,7 +30,7 @@ class CurrentOrder extends Component {
           ?
           <div className="card">
           <div className="card-header">
-            <div className="card-header-title title is-1">
+            <div className="card-header-title unitName">
             {unitData.Unit}</div>
             <div className="card-header-icon">
                     <figure className="image">
