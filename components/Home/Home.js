@@ -28,7 +28,7 @@ class Home extends Component {
                   <Link className="button is-info buildsButton" to="/builds">
                     Check out all the builds
                   </Link>
-                  <Link className="button is-primary buildsButton" to="/builds">
+                  <Link className="button is-primary buildsButton" to="/register">
                     Get registered and create
                   </Link>
                 </p>
