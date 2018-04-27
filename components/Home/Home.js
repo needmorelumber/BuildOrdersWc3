@@ -37,6 +37,16 @@ class Home extends Component {
           </div>
         </div>
         <div className="hero-foot">
+        <div className="container has-text-centered">
+          <p class="control">
+            <a class="button" href="https://github.com/LJunghansCode/BuildOrdersWc3" target="_blank" rel="noopener">
+              <span class="icon is-small">
+                <i class="fa fa-github"></i>
+              </span>
+              <span>Check out the project</span>
+            </a>
+          </p>
+        </div>
         </div>
       </div>
     );
