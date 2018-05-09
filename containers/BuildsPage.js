@@ -23,7 +23,7 @@ class BuildsPageComp extends Component {
           setSortType = this.props.setSortType
     return (
       <div>
-        <section className="container-fluid buildsPageContainer">
+        <section className="container buildsPageContainer">
           <div className="columns">
             <div className="column is-2 rows">
             {  user
@@ -36,7 +36,7 @@ class BuildsPageComp extends Component {
                     </Link>
                   : null
                 }
-                <BuildListControls 
+                <BuildListControls
                   setFilter = {setFilter}
                   setSortType = {setSortType}
                 />

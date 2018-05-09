@@ -62,19 +62,14 @@ class EditBuild extends Component {
           order = this.props.currentVisibleBuild.currentOrder,
           isAdding = this.props.isAdding
       return (
-        <div className="container">
+        <div className="">
         { this.state.build
         ?
-          <div className="section columns">
+          <div className=" columns is-mobile">
             <div className={isAdding
-              ? "column is-8 timelineContainer"
+              ? "column is-3 timelineContainer"
               : "column is-12 timelineContainer"}>
-              <TimelineControls
-                toggleEmpty={toggleEmpty}
-                isToggled={isToggled}
-                restoreBuild={restoreBuild}
-                addMinute={addMinute}
-                removeMinute={removeMinute}/>
+
               <Timeline
                 className="timelineContainer" 
                 build={this.props.currentVisibleBuild.item.build }
@@ -87,7 +82,7 @@ class EditBuild extends Component {
             </div>
             <StickyContainer
               className={isAdding
-              ? "column is-5 addOrderContainer"
+              ? "column is-9 addOrderContainer"
               : "column is-0 addOrderContainer"}>
               <Sticky >
                 {({
@@ -101,6 +96,12 @@ class EditBuild extends Component {
                 }) => {
                   return (
                     <div style={style} className="addOrder">
+                     <TimelineControls
+                      toggleEmpty={toggleEmpty}
+                      isToggled={isToggled}
+                      restoreBuild={restoreBuild}
+                      addMinute={addMinute}
+                      removeMinute={removeMinute}/>
                       {isAdding
                         ? <AddOrder updateBuild={this.props.updateBuild}/>
                         : null

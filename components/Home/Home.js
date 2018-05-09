@@ -14,9 +14,6 @@ class Home extends Component {
                  Need More Lumber
                 </h1>
                 <hr/>
-                <h1 className="title mainTitle">
-                 Time to shine in game
-                </h1>
                 <hr/> 
                 <h2 className="subtitle has-text-centered">
                   Be your own warcraft 3 commander with orders every second,
@@ -38,10 +35,10 @@ class Home extends Component {
         </div>
         <div className="hero-foot">
         <div className="container has-text-centered">
-          <p class="control">
-            <a class="button" href="https://github.com/LJunghansCode/BuildOrdersWc3" target="_blank" rel="noopener">
-              <span class="icon is-small">
-                <i class="fa fa-github"></i>
+          <p className="control">
+            <a className="button" href="https://github.com/LJunghansCode/BuildOrdersWc3" target="_blank" rel="noopener">
+              <span className="icon is-small">
+                <i className="fa fa-github"></i>
               </span>
               <span>Check out the project</span>
             </a>

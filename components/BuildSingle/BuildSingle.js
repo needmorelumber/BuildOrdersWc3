@@ -31,20 +31,12 @@ class BuildSingle extends Component {
 						return (
 								<div className="section">
 										<div className="columns">
-										<StickyContainer className="column is-5">
-														<Sticky >
-																{({
-																		style,
-																		isSticky,
-																		wasSticky,
-																		distanceFromTop,
-																		distanceFromBottom,
-																		calculatedHeight,
-																		topOffset
-																}) => {
+										<StickyContainer className="column is-5 sideMenu">
+														<Sticky topOffset={-100}>
+																{({ style }) => {
 																		return (
-																				<div className="sideMenu" style={style}>
-																						<section className="">
+																				<div style={{...style, padding:2}}>
+																						<section>
 																												<figure className="image raceImage is-128x128">
 																														<img className="" src={iconString}/>
 																												</figure>
@@ -72,11 +64,10 @@ class BuildSingle extends Component {
 																						{order
 																								? <CurrentOrder data={order} race={race}/>
 																								: <CurrentOrder data={false}/>
-}
+																							}
 																				</div>
 																		)
-																}
-}
+																}}
 														</Sticky>
 												</StickyContainer>
 												<Timeline

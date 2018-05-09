@@ -4,10 +4,13 @@ class ProgressBar extends Component {
   constructor(props){
     super(props)
     this.state = {
-      currentTime: 0
+      currentTime: 0,
+      name: this.props.order.order.race_unit,
+      max: this.props.max
     }
   }
   componentDidMount(){
+    const unit = this.props.order.order.race_unit
     this.setState({
       timerInterval: 
       window.setInterval(() => {
@@ -20,7 +23,7 @@ class ProgressBar extends Component {
         // Done
         else {
           window.clearInterval(this.state.timerInterval);
-          this.props.killTimer(this.props.index)
+          this.props.killTimer(this.props.index);
         }
       }, 1000)
     })
@@ -28,7 +31,10 @@ class ProgressBar extends Component {
 
   render() {    
     return (
-      <progress className="progress is-primary" value={this.state.currentTime} max={this.props.max}>Building...</progress>
+      <div> 
+      <p>Building...{this.state.name}</p>
+        <progress className="progress is-primary" value={this.state.currentTime} max={this.state.max}></progress>
+      </div>
     );
   }
 }

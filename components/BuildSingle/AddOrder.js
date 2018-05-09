@@ -99,7 +99,7 @@ class AddOrder extends Component {
     return (
     <div className="AddOrder">
       <div className="panel">
-      <p className="panel-heading"> <i onClick={() => this.props.toggleAddingOrder(false)} className="fa fa-close" style={{marginRight: '1%'}}></i>{!this.state.activeOrder? 'Adding' : 'Editing'} Command for {this.minuteString(this.props.currentVisibleBuild.currentOrder.order.second)}</p>
+      <p className="panel-heading">{!this.state.activeOrder? 'Adding' : 'Editing'} Command for {this.minuteString(this.props.currentVisibleBuild.currentOrder.order.second)}<i onClick={() => this.props.toggleAddingOrder(false)} className="fa fa-close closeButton" style={{marginRight: '1%'}}></i></p>
         <div className="panel-block">
           <form onSubmit={this.handleSubmit}>
           {

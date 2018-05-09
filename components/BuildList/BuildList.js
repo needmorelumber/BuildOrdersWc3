@@ -104,7 +104,7 @@ export default class BuildList extends React.Component {
                 )
               })
         return (
-         <div className="buildsSection has-text-centered">
+         <div className="buildsSection has-text-centered section">
             <h1 className="title">All Warcraft 3 build guides</h1>
             <p className="subtitle">Select to view in detail</p>
             {

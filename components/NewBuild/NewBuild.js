@@ -78,7 +78,7 @@ class NewBuild extends Component {
                         <div className="modal-card">
                             <header className="modal-card-head"> 
                                 <p className="modal-card-title"> Submit a new build </p>
-                                <Link to="/builds"><button className="delete" aria-label="close"></button></Link>
+                                <Link to="/builds"><button className="delete is-large" aria-label="close"></button></Link>
                             </header>
                             <section className="modal-card-body">
                             <form onSubmit={this.handleSubmit}>

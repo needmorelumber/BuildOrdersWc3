@@ -41,7 +41,5 @@ app.get('*', (req, res) => {
 const port = process.env.PORT || PORT_NUM;
 app.set('port', port);
 
-const server = http.createServer(app);
-
-server.listen(port, () => console.log(` API running on localhost: ${ port } `));
+app.listen(port, () => console.log(` API running on localhost: ${ port } `));
 

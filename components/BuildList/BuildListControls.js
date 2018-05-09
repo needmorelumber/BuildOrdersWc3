@@ -3,7 +3,7 @@ import './buildList.sass'
 class BuildListControls extends Component {
   render() {
     return (
-      <div className="row rows">
+      <div className="row rows" style={{marginTop:100}}>
         <aside className="row">
           <p className="">
             Filter by Race

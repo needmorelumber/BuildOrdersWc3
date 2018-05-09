@@ -25,7 +25,7 @@ class CurrentOrder extends Component {
     }
     return (
       <div>
-        <div className="panel currentOrder">
+        <div className="currentOrder">
         { unitData 
           ?
           <div className="card">
@@ -33,7 +33,7 @@ class CurrentOrder extends Component {
             <div className="card-header-title unitName">
             {unitData.Unit}</div>
             <div className="card-header-icon">
-                    <figure className="image">
+                    <figure className="image is-64x64">
                       <img className="" src={unitData.Portrait} alt={unitData.Unit} />
                     </figure>
             </div>

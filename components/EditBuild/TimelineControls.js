@@ -18,10 +18,10 @@ class ControlsPanel extends Component {
     const build = this.props.currentVisibleBuild.item.build ;
     const isToggled = this.props.isToggled
     return (
-      <div className="">
+      <div className="buttons">
         <ReactTooltip place="top" effect="solid"/>
-        <nav className="controlsCard">
-          <div className="buttonGroups field is-grouped">
+        <nav className=" buttons">
+          <div className="field buttons is-grouped">
             {isToggled
               ? <p className="control">
                   <a
@@ -37,7 +37,7 @@ class ControlsPanel extends Component {
                     <span>Restore Timeline</span>
                   </a>
                 </p>
-              : <div className="field is-grouped">
+              : <div className="field buttons is-grouped">
                 <p className="control" data-tip="Helps you in game!">
                   <Link
                     className="button timelinebutton is-info is-block button is-outlined is-hovered is-small "
@@ -93,9 +93,8 @@ class ControlsPanel extends Component {
                     </span>
                   </a>
                 </p>
-              </div>
-}
-            <div className="field is-grouped deleteButton">
+              
+
               <p className="control">
                 <a
                   onClick={() => {
@@ -108,7 +107,8 @@ class ControlsPanel extends Component {
                   <span>Delete Build</span>
                 </a>
               </p>
-            </div>
+              </div>
+            }
             <div></div>
           </div>
         </nav>

@@ -36,11 +36,18 @@ class GameHelper extends Component {
     }
   }
   startNewProgressBar(max) {
-    const newBar = <ProgressBar max={max} killTimer={()=>this.killProgressBar} />
+    const newBar = {
+      max: max
+    }
     this.state.progressBars.push(newBar)
   }
   killProgressBar(index){
-    this.state.progressBars.splice(index, 1);
+    const newBars = this.state.progressBars;
+    newBars.splice(index, 1)
+    console.log(newBars)
+    this.setState({
+      progressBars: newBars
+    })
   }
   getIdFromPathname() {
     return (this.props.match.params.id);
@@ -139,16 +146,12 @@ class GameHelper extends Component {
       let build = this.props.currentVisibleBuild.item.build;
       let bars = this.state.progressBars.map((bar, index) => {
         return (
-          bar
+          <ProgressBar max={bar.max} killTimer={()=>this.killProgressBar()} key={index} index={index} order={this.state.currentOrder}/>
         )
       })
       return (
         <div className="section">
           <Timer timeInGame={this.state.timeStampSeconds}/> 
-          { this.state.currentOrder
-            ? bars
-            : null
-          }
           <div className="column">
             <div className="buttons">
               {!this.state.currentlyTicking
@@ -172,7 +175,7 @@ class GameHelper extends Component {
                     </span>
                   </button>
                 </div>
-}
+              }
               <button
                 className="button cbutton is-warning level-item"
                 type=""
@@ -198,6 +201,10 @@ class GameHelper extends Component {
                 currentOrder={this.state.nextOrder}/>
             </div>
           </div>
+          { this.state.currentOrder
+            ? bars
+            : null
+          }
         </div>
       )
     } else {

@@ -27,38 +27,38 @@ class PreviewBuild extends Component {
                     <div className="card-content rows cardFields">
                         <Link to= { buildsRoute + build._id }>  
                         <div className="card-header preview-card">
-                                <p className="card-header-title">Look at the build and play in real time</p>
+                                <p className="card-header-title"> {build.name} Walkthrough</p>
                             <div className="card-header-icon">
-                            <span className="icon nextIcon"><i className="fa fa-arrow-circle-right"></i></span>
+                             <span className="icon"> <i className="fa fa-eye"></i> </span> <span className="icon nextIcon"><i className="fa fa-arrow-circle-right"></i></span>
                             </div>
                         </div>
                         </Link>
                         <div className="columns">
                              <div className="column">
                                 <div className="row">
-                                    <label className="label" htmlFor="Build Name"> Name </label>
+                                    <label className="label cardLabel" htmlFor="Build Name"> Name </label>
                                         <p className="cardInfo">{build.name}</p>
                                 </div>
                                 <div className="row">
-                                    <label className="label" htmlFor="Build type"> Build Type </label>
+                                    <label className="label cardLabel" htmlFor="Build type"> Build Type </label>
                                         <p className="cardInfo">{build.build_type}</p>
                                 </div>
                                 <div className="row">
-                                    <label className="label" htmlFor="Build description"> Description </label>
+                                    <label className="label cardLabel" htmlFor="Build description"> Description </label>
                                     <p className="cardInfo">{build.description}</p>
                                 </div>
                             </div>
                         <div className="column">
                             <div className="row">
-                                <label className="label" htmlFor="Build analysis"> Analysis </label>
+                                <label className="label cardLabel" htmlFor="Build analysis"> Analysis </label>
                                     <p className="cardInfo">{build.analysis}</p>
                             </div>
                             <div className="row">
-                                <label className="label" htmlFor="Build race"> Match-Up </label>
+                                <label className="label cardLabel" htmlFor="Build race"> Match-Up </label>
                                     <p className="cardInfo">{build.race} vs. {build.opposing_race}</p>
                             </div>
                             <div className="row">
-                                <label className="label" htmlFor="Vod Link"> VOD </label>
+                                <label className="label cardLabel" htmlFor="Vod Link"> VOD </label>
                                 <a rel="noopener noreferrer" target="_blank" href={build.vod_link}>{build.vod_link!=='No Vod' ? 'Link to Vod' : null}</a>
 
                             </div>

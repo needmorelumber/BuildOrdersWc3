@@ -21,7 +21,6 @@
   "license": "ISC",
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.4",
-    "animejs": "^2.2.0",
     "axios": "^0.17.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
@@ -34,7 +33,6 @@
     "concurrently": "^3.5.1",
     "connect-mongo": "^2.0.1",
     "cookie-parser": "^1.4.3",
-    "email-verification": "^0.4.6",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "express-sessions": "^1.0.6",
@@ -63,7 +61,13 @@
     "react-transition-group": "^2.2.1",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "webpack-hot-middleware": "^2.21.2"
+    "webpack-hot-middleware": "^2.21.2",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.19.1",
+    "svg-inline-loader": "^0.8.0",
+    "node-sass": "^4.7.2",
+    "css-loader": "^0.28.10",
+    "img-loader": "^2.0.1"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.18",
