@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import CurrentBuild from './CurrentBuild';
 import BuildListControls from './../components/BuildList/BuildListControls';
 import {setVisibilityFilter, setSearchQuery, setSortType} from './../actions/build';
+import ReactTooltip from 'react-tooltip';
 import './../components/BuildList/buildList.sass';
 
 class BuildsPageComp extends Component {
@@ -24,11 +25,12 @@ class BuildsPageComp extends Component {
     return (
       <div>
         <section className="container buildsPageContainer">
+        <ReactTooltip place="right" effect="solid"/>
           <div className="columns">
             <div className="column is-2 rows">
             {  user
                   ? <Link to="/builds/new">
-                      <p className=" button is-primary newBuildButton">
+                      <p className=" button is-primary newBuildButton" data-tip="New Build">
                         <span className="icon is-small">
                           <i className="fa fa-plus"></i>
                         </span>

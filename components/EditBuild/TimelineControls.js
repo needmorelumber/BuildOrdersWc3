@@ -19,7 +19,7 @@ class ControlsPanel extends Component {
     const isToggled = this.props.isToggled
     return (
       <div className="buttons">
-        <ReactTooltip place="top" effect="solid"/>
+        <ReactTooltip place="right" effect="solid"/>
         <nav className=" buttons">
           <div className="field buttons is-grouped">
             {isToggled

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link, Redirect, Switch,CSSTransitionGroup } from 'react-router-dom';
 import { connect } from 'react-redux';
-import ReactTooltip from 'react-tooltip';
 import BuildsPage from '../BuildsPage';
 import { normalize, schema } from 'normalizr';
 import Header from './../../components/Header/Header';
@@ -81,6 +80,7 @@ class App extends Component {
       <div>
         <Header />
         <div className="container">
+        
           <Switch>  
             <Route exact path="/" render={() => (
                 <Redirect to="/home"/>

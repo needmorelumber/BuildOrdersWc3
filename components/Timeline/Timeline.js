@@ -48,7 +48,7 @@ class Timeline extends Component {
 																		{this.state.currRow === i && editingProp
 																				? <td>
 																								<div className="field is-grouped">
-																								<ReactTooltip />
+																								<ReactTooltip place="right" effect="solid"/>
 																										<p className="control" onClick={() => this.handleClick(second.order, i)} data-tip={!build[i].order.race_unit?"Add Order":"Edit Order"}>
 																												<a className="button">
 																														<span className="icon is-small">
