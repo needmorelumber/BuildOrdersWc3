@@ -70,7 +70,7 @@ class Header extends Component {
                     }
                     { !user
                         ?
-                        <Link onClick={() => this.closeMenu()} className="navItem" to={'/login'}> <span className="icon"> <i className="fa fa-sign-in-alt"></i> </span> Login</Link>
+                        <Link onClick={() => this.closeMenu()} className="navItem" to={'/login'}> <span className="icon"> <i className="fa fa-sign-in"></i> </span> Login</Link>
                         :
                         <Link onClick={() => this.closeMenu()} className="navItem" to={'/home'} onClick={this.props.logOut}><span className="icon"> <i className="fa fa-sign-out"></i> </span>Logout</Link>
                         }
