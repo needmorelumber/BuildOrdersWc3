@@ -7,47 +7,23 @@ Feel free to open issues or pull requests. See below for how to get this running
 
 ## Getting Started
 
-### Dependencies
-You need Node and npm. Let's make sure you have the latest versions.
-To install the latest LTS release, use this ppa:
+### Install Docker
+[Installation instructions can be found here.](https://docs.docker.com/engine/installation/). For convenience:
 
-```bash
-curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
-```
+* [Mac installation](https://docs.docker.com/docker-for-mac/install/)
+* [Windows installation](https://docs.docker.com/docker-for-windows/install/)
+* [Ubuntu installation](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
 
-then install npm and node via:
-
-```bash
-sudo apt install nodejs
-```
-
-You will also need MongoDB installed. See https://docs.mongodb.com/manual/installation/#tutorial-installation
-and follow the instructions for your OS.
-
-If your installation has gone successfully, you should be able to start the service using
-
-```bash
-sudo service mongod start
-```
+### Install Docker Compose
+Mac and Windows' docker installation comes with docker-compose preinstalled. For linux
+Follow the [instructions here](https://docs.docker.com/compose/install/#install-compose).
 
 ### Booting up your local
 
-First go to `./server/config/config.js-replace-me` and follow the instructions there to
-build your .gitignore'd config.js file.
+From root, run
 
-Next run `npm install` in the root directory to build your node_modules. If that succeeds,
-run from root directory:
-
-```bash
-npm start
+```
+docker-compose up
 ```
 
-Now going to http://localhost:4200 should bring you to your own local needmorelumber.com
-
-### edit your hosts file (Optional)
-If on mac or ubuntu, edit `/etc/hosts` and add the line:
-```
-127.0.0.1:3000 dev.needmorelumber.com
-```
-
-so that you can visit your local site at dev.needmorelumber.com
+after this has completed you should be able to visit http://localhost:3000/ and your local is set up.

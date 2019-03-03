@@ -1,0 +1,20 @@
+version: "2"
+services:
+  needmorelumber:
+    container_name: needmorelumber
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/app
+    links:
+      - mongo
+    working_dir: /usr/src/app/
+    command: 'bash -c "npm start"'
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db

@@ -4,8 +4,8 @@
 
 module.exports =  (() => {
   const config = {
-    dbURI: `Your mongoose connection string`,
-    sessionSecret: 'a secret for your sessions'
+    dbURI: `mongodb://mongo:27017`,
+    sessionSecret: 'abcdefg12345'
   }
   return config;
 })();

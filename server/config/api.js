@@ -3,7 +3,7 @@ const buildController = require('./../controllers/buildController'),
       express = require('express'),
       routes  = express.Router(),
       axios = require('axios'),
-      Mongoosse = require('mongoose');
+      Mongoose = require('mongoose');
 
 /////// API ////////
 
@@ -45,7 +45,7 @@ routes.post('/login', (req, res) => {
 })
 routes.get('/get_user', (req, res) => {
     userController.getCurrentUserCookie(req, res)
-})    
+})
 routes.get('/logout', (req, res) => {
     userController.logOut(req, res)
 })
