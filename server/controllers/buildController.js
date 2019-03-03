@@ -61,7 +61,7 @@ module.exports = (() => {
               });
         }
         newBuild.save((error) => {
-            if (!error) {        
+            if (!error) {
                 let sessUser = req.session.user
                 let id = sessUser._id
                 sessUser.ownedTimelineIds.push(newBuild._id)
@@ -115,10 +115,10 @@ module.exports = (() => {
                         res.status(200).json({deleted: false})
                     }
                 })
-                    } 
+                    }
                     else {
                         res.status(200).json({Message:"invalid"})
-            } 
+            }
         })
     }
     buildController.addMinute = (req, res) => {
@@ -176,7 +176,7 @@ module.exports = (() => {
 
     }
     buildController.updateOrderInBuild = (req, res) => {
-        // Here we check the index of the order and validate that we are seeing the same order, 
+        // Here we check the index of the order and validate that we are seeing the same order,
         // Then we will update that order and save to database assuming no issues...
         const body = req.body;
         const id = body.id
@@ -220,7 +220,7 @@ module.exports = (() => {
                                 .status(400)
                                 .send('Database Error');
                         }
-                    } 
+                    }
                     )
                 }
                 else
