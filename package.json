@@ -33,6 +33,7 @@
     "concurrently": "^3.5.1",
     "connect-mongo": "^2.0.1",
     "cookie-parser": "^1.4.3",
+    "email-verification": "0.4.6",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "express-sessions": "^1.0.6",
