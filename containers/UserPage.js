@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { fetchAndUpdateUser, deleteUser, changeUsername } from '../actions/user';
+import { deleteBuild } from '../actions/build';
 import User from '../components/UserProfile/User';
 
 
@@ -16,6 +17,7 @@ const mapDispatchToProps = dispatch => ({
   changeUsername: (id, username) => {
     dispatch(changeUsername(id, username));
   },
+  deleteBuildOrder: id => dispatch(deleteBuild(id)),
 });
 
 const UserPage = connect(

@@ -26,7 +26,7 @@ class User extends Component {
     event.preventDefault();
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchAndUpdateUser();
   }
 
@@ -36,6 +36,11 @@ class User extends Component {
 
   toggleChangeuser(bool) {
     this.setState({ changeUsernameModalToggle: bool });
+  }
+
+  deleteBuild(id) {
+    this.props.deleteBuildOrder(id);
+    this.props.fetchAndUpdateUser();
   }
 
   render() {
@@ -57,7 +62,7 @@ class User extends Component {
               </p>
             </div>
             <Link className="button editButton is-info" to={`/build/${build._id}/edit`}> <p className="editText"> Edit</p> </Link>
-            <Link className="button editButton is-danger" to={`/build/${build._id}/edit`}> <p className="editText"> Delete</p> </Link>
+            <button onClick={() => { this.deleteBuild(build._id); }} className="button editButton is-danger" to='#'> <p className="editText"> Delete</p> </button>
           </article>
         ));
       }
