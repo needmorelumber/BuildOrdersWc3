@@ -2,12 +2,12 @@ const merge = require('webpack-merge');
 const path = require('path');
 const common = require('./webpack.common.js');
 const webpack = require('webpack')
- 
+
 
  module.exports = merge(common, {
    devtool: 'inline-source-map',
          entry: [
-          path.resolve('./index.js')
+          path.resolve('/usr/src/app/index.js')
       ],
       output: {
         path: path.resolve(__dirname, 'dist/js/'),

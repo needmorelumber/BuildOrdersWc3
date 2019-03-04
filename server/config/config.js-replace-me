@@ -1,0 +1,11 @@
+// HOW TO:
+// 1. Replace these configuration with your own
+// 2. Duplicate + rename to "config.js"
+
+module.exports =  (() => {
+  const config = {
+    dbURI: `mongodb://mongo:27017`,
+    sessionSecret: 'abcdefg12345'
+  }
+  return config;
+})();

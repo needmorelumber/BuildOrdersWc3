@@ -14,7 +14,7 @@ const http       = require('http'),
 	PORT_NUM   = '4200',
       app        = express();
 
-// Get our API routes -- This connects into back end Logic // 
+// Get our API routes -- This connects into back end Logic //
 app.use(cookieParser());
 require('./server/config/mongoose.js');
 const db = mongoose.connection;
@@ -42,4 +42,3 @@ const port = process.env.PORT || PORT_NUM;
 app.set('port', port);
 
 app.listen(port, () => console.log(` API running on localhost: ${ port } `));
-
