@@ -16,7 +16,21 @@ Follow the [instructions here](https://docs.docker.com/compose/install/#install-
 
 ### Booting up your local
 
-From root, run
+Check that your docker and docker-compose are actually installed!
+
+```
+$ docker-compose -v
+docker-compose version 1.17.0, build ac53b73
+
+$ docker -v
+Docker version 18.09.3, build 774a1f4
+
+```
+You should get output that looks like the above. The versions may differ but this shows
+you at least have the right things installed.
+
+
+Now for the magic. From root, run
 
 ```
 docker-compose up
