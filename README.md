@@ -8,11 +8,7 @@ Feel free to open issues or pull requests. See below for how to get this running
 ## Getting Started
 
 ### Install Docker
-[Installation instructions can be found here.](https://docs.docker.com/engine/installation/). For convenience:
-
-* [Mac installation](https://docs.docker.com/docker-for-mac/install/)
-* [Windows installation](https://docs.docker.com/docker-for-windows/install/)
-* [Ubuntu installation](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
+[Installation instructions can be found here.](https://docs.docker.com/engine/installation/)
 
 ### Install Docker Compose
 Mac and Windows' docker installation comes with docker-compose preinstalled. For linux
