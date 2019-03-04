@@ -1,23 +1,19 @@
-import { connect } from 'react-redux'
-import {requestBuilds,fetchBuildById }from './../actions/build'
-import PreviewBuild from '../components/PreviewBuild/PreviewBuild'
+import { connect } from 'react-redux';
+import { requestBuilds, fetchBuildById } from '../actions/build';
+import PreviewBuild from '../components/PreviewBuild/PreviewBuild';
 
-const mapStateToProps = (state) => {
-  return {
-    currentVisibleBuild: state.currentVisibleBuild
-  }
-}
-const mapDispatchToProps = (state, dispatch) => {
-  return {
-    fetchById: id => {
-      dispatch(fetchBuildById(id))
-    }
-  }
-}
+const mapStateToProps = state => ({
+  currentVisibleBuild: state.currentVisibleBuild,
+});
+const mapDispatchToProps = (state, dispatch) => ({
+  fetchById: id => {
+    dispatch(fetchBuildById(id));
+  },
+});
 
 const CurrentBuild = connect(
   mapStateToProps,
-  mapDispatchToProps
-)(PreviewBuild)
+  mapDispatchToProps,
+)(PreviewBuild);
 
 export default CurrentBuild;

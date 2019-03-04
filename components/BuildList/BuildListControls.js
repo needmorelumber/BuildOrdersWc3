@@ -1,27 +1,28 @@
-import React, {Component} from 'react';
-import './buildList.sass'
+import React, { Component } from 'react';
+import './buildList.sass';
+
 class BuildListControls extends Component {
   render() {
     return (
-      <div className="row rows" style={{marginTop:100}}>
+      <div className="row rows" style={{ marginTop: 100 }}>
         <aside className="row">
           <p className="">
             Filter by Race
           </p>
           <ul className="filter-race-menu">
-            <li onClick={() => this.props.setFilter("SHOW_ALL")}>
+            <li onClick={() => this.props.setFilter('SHOW_ALL')}>
               <a>All Races</a>
             </li>
-            <li onClick={() => this.props.setFilter("SHOW_ORC")}>
+            <li onClick={() => this.props.setFilter('SHOW_ORC')}>
               <a>Orc</a>
             </li>
-            <li onClick={() => this.props.setFilter("SHOW_HUMAN")}>
+            <li onClick={() => this.props.setFilter('SHOW_HUMAN')}>
               <a>Human</a>
             </li>
-            <li onClick={() => this.props.setFilter("SHOW_UNDEAD")}>
+            <li onClick={() => this.props.setFilter('SHOW_UNDEAD')}>
               <a>Undead</a>
             </li>
-            <li onClick={() => this.props.setFilter("SHOW_NIGHTELF")}>
+            <li onClick={() => this.props.setFilter('SHOW_NIGHTELF')}>
               <a>Nightelf</a>
             </li>
           </ul>

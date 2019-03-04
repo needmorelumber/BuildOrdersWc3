@@ -1,31 +1,26 @@
-import { connect } from 'react-redux'
-import {fetchAndUpdateUser, deleteUser, changeUsername} from './../actions/user'
-import User from './../components/UserProfile/User'
+import { connect } from 'react-redux';
+import { fetchAndUpdateUser, deleteUser, changeUsername } from '../actions/user';
+import User from '../components/UserProfile/User';
 
 
-
-const mapStateToProps = (state) => {
-  return {
-    ...state
-  }
-}
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchAndUpdateUser: () => {
-      dispatch(fetchAndUpdateUser())
-    },
-    deleteUser: (password, id) => {
-      dispatch(deleteUser(password, id))
-    },
-    changeUsername: (id, username) => {
-      dispatch(changeUsername(id, username))
-    }
-  }
-}
+const mapStateToProps = state => ({
+  ...state,
+});
+const mapDispatchToProps = dispatch => ({
+  fetchAndUpdateUser: () => {
+    dispatch(fetchAndUpdateUser());
+  },
+  deleteUser: (password, id) => {
+    dispatch(deleteUser(password, id));
+  },
+  changeUsername: (id, username) => {
+    dispatch(changeUsername(id, username));
+  },
+});
 
 const UserPage = connect(
   mapStateToProps,
-  mapDispatchToProps
-)(User)
+  mapDispatchToProps,
+)(User);
 
-export default UserPage
+export default UserPage;

@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router-dom';
 import LoginForm from './loginForm';
-import {Link} from 'react-router-dom';
 
 class Login extends Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     return (
       <div>
@@ -17,13 +18,15 @@ class Login extends Component {
                 <p className="subtitle has-text-grey">Please login to proceed.</p>
                 <div className="box">
                   <figure className="avatar">
-                    <img src="https://s3.us-west-2.amazonaws.com/needmorelumberassets/Orc.png"/>
+                    <img src="https://s3.us-west-2.amazonaws.com/needmorelumberassets/Orc.png" />
                   </figure>
-                    <LoginForm loginToServer={this.props.loginToServer} 
-                                inputs={this.props.login.inputs} 
-                                isFetching={this.props.login.isFetching}
-                                message={this.props.login.message}
-                                updateLoginMessage={this.props.updateLoginMessage}/>
+                  <LoginForm
+                    loginToServer={this.props.loginToServer}
+                    inputs={this.props.login.inputs}
+                    isFetching={this.props.login.isFetching}
+                    message={this.props.login.message}
+                    updateLoginMessage={this.props.updateLoginMessage}
+                  />
                 </div>
                 <p className="has-text-grey">
                   &nbsp;·&nbsp; <Link to="/register" className="link"> Sign Up </Link> &nbsp;·&nbsp;
@@ -32,9 +35,7 @@ class Login extends Component {
             </div>
           </div>
         </section>
-      <div className="container">
-         
-        </div>
+        <div className="container" />
       </div>
     );
   }

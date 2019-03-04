@@ -1,27 +1,27 @@
- const merge = require('webpack-merge');
- const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
- const common = require('./webpack.common.js');
- const webpack = require('webpack')
- const path = require('path')
+const merge = require('webpack-merge');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const webpack = require('webpack');
+const path = require('path');
+const common = require('./webpack.common.js');
 
 
- module.exports = merge(common, {
+module.exports = merge(common, {
   devtool: 'source-map',
-      entry: [
-        './index'
-      ],
+  entry: [
+    './index',
+  ],
 
-      output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'js/bundle.js'
-      },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'js/bundle.js',
+  },
 
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       compress: {
-        warnings: false
-      }
+        warnings: false,
+      },
     }),
     // new webpack.DefinePlugin({
     //   'process.env': {
@@ -29,4 +29,4 @@
     //   }
     // })
   ],
- });
+});

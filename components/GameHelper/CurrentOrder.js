@@ -1,31 +1,31 @@
 import React, { Component } from 'react';
-import data from './../../MasterData';
-import './gamehelper.sass'
+import data from '../../MasterData';
+import './gamehelper.sass';
 
 class CurrentOrder extends Component {
   render() {
     const order = this.props.currentOrder;
     if (order.order) {
       const unit = order.order.race_unit;
-      const unitData = data[this.props.race][unit] || {...data["N/A"], "Unit":order.order.race_unit};
+      const unitData = data[this.props.race][unit] || { ...data['N/A'], Unit: order.order.race_unit };
       return (
         <div className="currentOrderContainer">
-         <p className="">Build this now!</p>
+          <p className="">Build this now!</p>
           <div className="card currentOrder">
-          <div className="card-header">
-            <div className="card-header-title">
-            {unitData.Unit}</div>
-            <div className="card-header-icon">
-                    <figure className="image is-64x64">
-                      <img className="unitImage" src={unitData.Portrait} alt={unitData.Unit} />
-                    </figure>
+            <div className="card-header">
+              <div className="card-header-title">
+                {unitData.Unit}
+              </div>
+              <div className="card-header-icon">
+                <figure className="image is-64x64">
+                  <img className="unitImage" src={unitData.Portrait} alt={unitData.Unit} />
+                </figure>
+              </div>
             </div>
-          </div>
             <div className="card-content">
               <div className="media">
                 <div className="media-left">
-                  <div className="media-content">
-                  </div>
+                  <div className="media-content" />
                   <div className="content">
                     {unitData && (
                       <div>
@@ -36,9 +36,9 @@ class CurrentOrder extends Component {
                         <label className="label" htmlFor="Supply">Supply Cost</label>
                         <p>{unitData.Supply}</p>
                         <label className="label" htmlFor="Build Time">Build Time</label>
-                        <p>{unitData["Build Time"]} Seconds</p>
-                    </div>
-                     )
+                        <p>{unitData['Build Time']} Seconds</p>
+                      </div>
+                    )
                     }
                   </div>
                 </div>
@@ -48,13 +48,12 @@ class CurrentOrder extends Component {
           </div>
         </div>
       );
-    } else {
-      return (
-        <div className="section">
-          <p className=""> Nothing to build right now...</p>
-        </div>
-      )
     }
+    return (
+      <div className="section">
+        <p className=""> Nothing to build right now...</p>
+      </div>
+    );
   }
 }
 

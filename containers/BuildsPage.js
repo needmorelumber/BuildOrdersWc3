@@ -1,80 +1,80 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import VisibleBuilds from './VisibleBuilds';
-import {Link} from 'react-router-dom';
-import CurrentBuild from './CurrentBuild';
-import BuildListControls from './../components/BuildList/BuildListControls';
-import {setVisibilityFilter, setSearchQuery, setSortType} from './../actions/build';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
-import './../components/BuildList/buildList.sass';
+import VisibleBuilds from './VisibleBuilds';
+import CurrentBuild from './CurrentBuild';
+import BuildListControls from '../components/BuildList/BuildListControls';
+import { setVisibilityFilter, setSearchQuery, setSortType } from '../actions/build';
+import '../components/BuildList/buildList.sass';
 
 class BuildsPageComp extends Component {
   handleChange(event) {
     this
       .props
-      .setFilter("SEARCH_BOX");
+      .setFilter('SEARCH_BOX');
     this
       .props
-      .setSearchQuery(this.input.value)
+      .setSearchQuery(this.input.value);
     event.preventDefault();
   }
+
   render() {
-    const { user } = this.props.user.user,
-          setFilter = this.props.setFilter,
-          setSortType = this.props.setSortType
+    const { user } = this.props.user.user;
+    const { setFilter } = this.props;
+    const { setSortType } = this.props;
     return (
       <div>
         <section className="container buildsPageContainer">
-        <ReactTooltip place="right" effect="solid"/>
+          <ReactTooltip place="right" effect="solid" />
           <div className="columns">
             <div className="column is-2 rows">
-            {  user
-                  ? <Link to="/builds/new">
-                      <p className=" button is-primary newBuildButton" data-tip="New Build">
-                        <span className="icon is-small">
-                          <i className="fa fa-plus"></i>
-                        </span>
-                      </p>
-                    </Link>
-                  : null
+              { user
+                ? (
+                  <Link to="/builds/new">
+                    <p className=" button is-primary newBuildButton" data-tip="New Build">
+                      <span className="icon is-small">
+                        <i className="fa fa-plus" />
+                      </span>
+                    </p>
+                  </Link>
+                )
+                : null
                 }
-                <BuildListControls
-                  setFilter = {setFilter}
-                  setSortType = {setSortType}
-                />
-                  <input
-                      className="input searchBox"
-                      ref={(input) => this.input = input}
-                      onChange={() => this.handleChange(event)}
-                      type="text"
-                      placeholder="Search builds...."/>
+              <BuildListControls
+                setFilter={setFilter}
+                setSortType={setSortType}
+              />
+              <input
+                className="input searchBox"
+                ref={input => this.input = input}
+                onChange={() => this.handleChange(event)}
+                type="text"
+                placeholder="Search builds...."
+              />
             </div>
             <div className="column">
-                <VisibleBuilds/>
+              <VisibleBuilds />
             </div>
           </div>
-        </section> 
+        </section>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {user: state.userState, builds: state.builds}
-}
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setFilter: filter => {
-      dispatch(setVisibilityFilter(filter))
-    },
-    setSearchQuery: query => {
-      dispatch(setSearchQuery(query))
-    },
-    setSortType: sortType => {
-      dispatch(setSortType(sortType))
-    }
-  }
-}
-const BuildsPage = connect(mapStateToProps, mapDispatchToProps)(BuildsPageComp)
+const mapStateToProps = state => ({ user: state.userState, builds: state.builds });
+const mapDispatchToProps = dispatch => ({
+  setFilter: filter => {
+    dispatch(setVisibilityFilter(filter));
+  },
+  setSearchQuery: query => {
+    dispatch(setSearchQuery(query));
+  },
+  setSortType: sortType => {
+    dispatch(setSortType(sortType));
+  },
+});
+const BuildsPage = connect(mapStateToProps, mapDispatchToProps)(BuildsPageComp);
 
 export default BuildsPage;

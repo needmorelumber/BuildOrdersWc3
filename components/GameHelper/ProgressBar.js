@@ -1,39 +1,40 @@
 import React, { Component } from 'react';
 
 class ProgressBar extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       currentTime: 0,
       name: this.props.order.order.race_unit,
-      max: this.props.max
-    }
+      max: this.props.max,
+    };
   }
-  componentDidMount(){
-    const unit = this.props.order.order.race_unit
+
+  componentDidMount() {
+    const unit = this.props.order.order.race_unit;
     this.setState({
-      timerInterval: 
+      timerInterval:
       window.setInterval(() => {
         // Check if done
         if (this.state.currentTime !== this.props.max) {
           this.setState({
-            currentTime: this.state.currentTime + 1
-          })
-        } 
+            currentTime: this.state.currentTime + 1,
+          });
+        }
         // Done
         else {
           window.clearInterval(this.state.timerInterval);
           this.props.killTimer(this.props.index);
         }
-      }, 1000)
-    })
+      }, 1000),
+    });
   }
 
-  render() {    
+  render() {
     return (
-      <div> 
-      <p>Building...{this.state.name}</p>
-        <progress className="progress is-primary" value={this.state.currentTime} max={this.state.max}></progress>
+      <div>
+        <p>Building...{this.state.name}</p>
+        <progress className="progress is-primary" value={this.state.currentTime} max={this.state.max} />
       </div>
     );
   }

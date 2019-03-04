@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './home.sass';
 
 class Home extends Component {
@@ -13,14 +13,14 @@ class Home extends Component {
                 <h1 className="title mainTitle">
                  Need More Lumber
                 </h1>
-                <hr/>
-                <hr/> 
+                <hr />
+                <hr />
                 <h2 className="subtitle has-text-centered">
                   Be your own warcraft 3 commander with orders every second,
                   just create a build, then run it in real time during the game!
                   Never miss the next unit to build!
                 </h2>
-                <br/>
+                <br />
                 <p className="">
                   <Link className="button is-info buildsButton" to="/builds">
                     Check out all the builds
@@ -34,16 +34,16 @@ class Home extends Component {
           </div>
         </div>
         <div className="hero-foot">
-        <div className="container has-text-centered">
-          <p className="control">
-            <a className="button" href="https://github.com/LJunghansCode/BuildOrdersWc3" target="_blank" rel="noopener">
-              <span className="icon is-small">
-                <i className="fa fa-github"></i>
-              </span>
-              <span>Check out the project</span>
-            </a>
-          </p>
-        </div>
+          <div className="container has-text-centered">
+            <p className="control">
+              <a className="button" href="https://github.com/LJunghansCode/BuildOrdersWc3" target="_blank" rel="noopener">
+                <span className="icon is-small">
+                  <i className="fa fa-github" />
+                </span>
+                <span>Check out the project</span>
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     );

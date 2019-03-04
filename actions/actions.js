@@ -1,7 +1,7 @@
 
 
 // // These are actions that reducers will process
-// // The action is the returned object | the function is the 'action creator' 
+// // The action is the returned object | the function is the 'action creator'
 // // Actions will look like have only these four fields { type, payload, error, meta }.
 
 // //  isFetching  === talking to server
@@ -72,7 +72,7 @@
 // }
 // export const BEGIN_BUILD_UPDATE = "BEGIN_BUILD_UPDATE";
 // function beginBuildUpdate() {
-//     return { 
+//     return {
 //         type: BEGIN_BUILD_UPDATE,
 //         payload: {
 //             isFetching: true
@@ -81,7 +81,7 @@
 // }
 // export const RESOLVE_BUILD_UPDATE = "RESOLVE_BUILD_UPDATE";
 // function resolveBuildUpdate() {
-//     return{   
+//     return{
 //         type: RESOLVE_BUILD_UPDATE,
 //         payload: {
 //             isFetching: false
@@ -121,7 +121,7 @@
 // function resolveLogin() {
 //     return{
 //         type: RESOLVE_LOGIN,
-        
+
 //     }
 // }
 // export const TRY_REGISTER = "TRY_REGISTER";
@@ -188,7 +188,7 @@
 // //Thunk action creators... returns a function
 // export function fetchBuilds() {
 //     return function(dispatch) {
-//        dispatch(requestBuilds()) 
+//        dispatch(requestBuilds())
 //        return axios.get(`/api/all_builds`)
 //         .then(
 //             res => ( res.data ),
@@ -249,7 +249,7 @@
 //             res => (res.data),
 //             err => dispatch(resolveLogin(err))
 //         )
-//         .then(user => {  
+//         .then(user => {
 //             if(user.Message){
 //                 dispatch(updateLoginMessageTimed(user.Message))
 //                 dispatch(resolveLogin(user))
@@ -259,7 +259,7 @@
 //                 dispatch(resolveLogin(user))
 //             }
 
-            
+
 //         })
 //     }
 // }

@@ -1,32 +1,35 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link, Redirect, Switch,CSSTransitionGroup } from 'react-router-dom';
+import { BrowserRouter, Route, Link, Redirect, Switch, CSSTransitionGroup } from 'react-router-dom';
 import { connect } from 'react-redux';
-import BuildsPage from '../BuildsPage';
 import { normalize, schema } from 'normalizr';
-import Header from './../../components/Header/Header';
-import NewBuild from './../../components/NewBuild/NewBuild';
-import CurrentBuild from './../CurrentBuild';
-import TimeLineContainer from './../TimeLineContainer';
-import NoMatch from './../../components/noMatch';
-import LoginPage from './../LoginPage';
-import RegisterPage from './../RegisterPage';
-import UserPage from './../UserPage';
-import AddOrder from './../../components/BuildSingle/AddOrder';
-import Home from './../../components/Home/Home';
-import InGameHelper from './../InGameHelper';
-import EditBuildPage from './../EditBuildPage';
-import Footer from './../../components/Footer/Footer';
 import { NavigationDrawer } from 'react-md';
+import BuildsPage from '../BuildsPage';
+import Header from '../../components/Header/Header';
+import NewBuild from '../../components/NewBuild/NewBuild';
+import CurrentBuild from '../CurrentBuild';
+import TimeLineContainer from '../TimeLineContainer';
+import NoMatch from '../../components/noMatch';
+import LoginPage from '../LoginPage';
+import RegisterPage from '../RegisterPage';
+import UserPage from '../UserPage';
+import AddOrder from '../../components/BuildSingle/AddOrder';
+import Home from '../../components/Home/Home';
+import InGameHelper from '../InGameHelper';
+import EditBuildPage from '../EditBuildPage';
+import Footer from '../../components/Footer/Footer';
 import './app.sass';
 
 
-const RouteAndSub = (route) => (
+const RouteAndSub = route => (
 
-  <Route path={route.path} render={props => (
-      //nesting
-    <route.component {...props} routes={route.routes}/>
-  )}/>
-)
+  <Route
+    path={route.path}
+    render={props => (
+      // nesting
+      <route.component {...props} routes={route.routes} />
+    )}
+  />
+);
 class App extends Component {
   constructor(props) {
     super(props);
@@ -35,11 +38,11 @@ class App extends Component {
         {
           path: '/home',
           exact: true,
-          component: Home
+          component: Home,
         },
         {
           path: '/builds/new',
-          component: NewBuild
+          component: NewBuild,
         },
         {
           path: '/builds',
@@ -53,26 +56,26 @@ class App extends Component {
         },
         {
           path: '/login',
-          component: LoginPage
+          component: LoginPage,
         },
         {
           path: '/register',
-          component: RegisterPage
+          component: RegisterPage,
         },
         {
           path: '/user/profile',
-          component: UserPage
+          component: UserPage,
         },
         {
           path: '/build/:id/playing',
-          component: InGameHelper
+          component: InGameHelper,
         },
         {
           path: '/build/:id/edit',
-          component: EditBuildPage
+          component: EditBuildPage,
         },
-      ]
-    }
+      ],
+    };
   }
 
   render() {
@@ -80,24 +83,25 @@ class App extends Component {
       <div>
         <Header />
         <div className="container">
-        
-          <Switch>  
-            <Route exact path="/" render={() => (
-                <Redirect to="/home"/>
-              )}/>
-                {this.state.routes.map((route, i) => {
-                  return (
-                      <RouteAndSub key={i} {...route}/>
-                  )
-                })}
-              <Route component={NoMatch} />
+
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Redirect to="/home" />
+              )}
+            />
+            {this.state.routes.map((route, i) => (
+              <RouteAndSub key={i} {...route} />
+            ))}
+            <Route component={NoMatch} />
           </Switch>
         </div>
         {/* <Footer /> */}
-      </div> 
+      </div>
     );
   }
-
 }
 
 export default App;

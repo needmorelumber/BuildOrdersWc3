@@ -1,15 +1,15 @@
-import React from 'react'
-import { Provider } from 'react-redux'
-import DevTools from './DevTools'
-import { Route, BrowserRouter } from 'react-router-dom'
-import App from './App/App'
-import BuildsPage from './BuildsPage'
+import React from 'react';
+import { Provider } from 'react-redux';
+import { Route, BrowserRouter } from 'react-router-dom';
+import DevTools from './DevTools';
+import App from './App/App';
+import BuildsPage from './BuildsPage';
 
 const Root = ({ store }) => (
   <Provider store={store}>
-      <App />
+    <App />
   </Provider>
-)
+);
 
 
-export default Root
+export default Root;

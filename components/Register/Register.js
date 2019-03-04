@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import RegisterForm from './registerForm';
 import { Link } from 'react-router-dom';
+import RegisterForm from './registerForm';
 
 class Register extends Component {
   render() {
-    
     return (
       <div>
         <section className="hero is-fullheight">
@@ -17,12 +16,13 @@ class Register extends Component {
                   <figure className="avatar">
                     <img src="https://s3.us-west-2.amazonaws.com/needmorelumberassets/Orc.png" />
                   </figure>
-                  <RegisterForm 
+                  <RegisterForm
                     registerNewUser={this.props.registerNewUser}
                     inputs={this.props.register.inputs}
                     isFetching={this.props.register.isFetching}
                     updateRegMessage={this.props.updateRegMessage}
-                    message={this.props.register.message} />
+                    message={this.props.register.message}
+                  />
                 </div>
                 <p className="has-text-grey">
                   &nbsp;·&nbsp; <Link to="/login" className="link"> Already a user? Login here </Link> &nbsp;·&nbsp;
@@ -31,9 +31,7 @@ class Register extends Component {
             </div>
           </div>
         </section>
-        <div className="container">
-
-        </div>
+        <div className="container" />
       </div>
     );
   }
