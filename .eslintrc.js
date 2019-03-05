@@ -37,5 +37,6 @@ module.exports = {
     'react/require-default-props': 'off',
     'react/no-unsafe': [2, { checkAliases: true }],
     'react/destructuring-assignment': 'off',
+    'no-underscore-dangle': 'off',
   },
 };

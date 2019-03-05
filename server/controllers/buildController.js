@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const build_order = mongoose.model('build_order');
+const BuildOrder = mongoose.model('build_order');
 const User = mongoose.model('user');
 const Like = mongoose.model('likes');
 
@@ -8,48 +8,45 @@ const parseError = (err, res) => {
   switch (err.name) {
     case ('ValidationError'):
       res.json({ error: err.errors });
+      break;
+    default:
+      res.json({ error: 'something went wrong' });
   }
 };
 
 module.exports = (() => {
   const buildController = {};
-  buildController.allBuilds = (req, res) => {
-    build_order.find((err, builds) => {
-      if (!err) {
-        res.json(builds);
-      } else {
-        res
-          .status(404)
-          .send('Could not load builds from database');
-      }
-    });
-  };
-  buildController.buildsforUser = (req, res) => {
-    const userId = req.session.user._id;
-    build_order.find({ userId }, (err, builds) => {
-      console.log(builds);
-    });
-  };
+  buildController.allBuilds = (req, res) => BuildOrder.find((err, builds) => (!err
+    ? res.json(builds)
+    : res
+      .status(404)
+      .send('Could not load builds from database')));
+
+
+  buildController.buildsforUser = (req, res) => BuildOrder.find({ userId: req.session.user._id },
+    (err, builds) => (!err
+      ? res.json(builds)
+      : res
+        .status(404)
+        .send('Could not load builds from database')));
+
   buildController.getById = (req, res) => {
     const { id } = req.body;
     if (!id) {
       res.status(400);
     }
-    build_order.findById(id, (err, build) => {
-      if (!err && build) {
-        res
+    return BuildOrder.findById(id, (err, build) => (
+      !err && build
+        ? res
           .status(200)
-          .json({ build });
-      } else {
-        res
-          .status(200)
-          .json(false);
-      }
-    });
+          .json({ build })
+        : res
+          .status(404)
+          .send('Could not load build from database')));
   };
+
   buildController.newBuild = (req, res) => {
-    const newBuild = new build_order(req.body);
-    console.log(newBuild);
+    const newBuild = new BuildOrder(req.body);
     if (!newBuild.name || !newBuild.race || !newBuild.description || !newBuild.build_type) {
       res.status(200).send({
         Message: 'Invalid',
@@ -86,7 +83,7 @@ module.exports = (() => {
     const { body } = req;
     const { id } = body;
     const { timeline } = body;
-    build_order.findById(id, (err, build) => {
+    BuildOrder.findById(id, (err, build) => {
       if (!err && build) {
         build.build_list = timeline;
         build.save();
@@ -103,7 +100,7 @@ module.exports = (() => {
     User.findById(userid, (err, user) => {
       if (!err && user) {
         console.log('user owns id');
-        build_order.findByIdAndRemove(id, (err, build) => {
+        BuildOrder.findByIdAndRemove(id, (err, build) => {
           if (!err && build) {
             const spliceindex = user.ownedTimelineIds.indexOf(id);
             user.ownedTimelineIds.splice(spliceindex, 1);
@@ -128,7 +125,7 @@ module.exports = (() => {
         .status(200)
         .send('Too Long');
     }
-    build_order.findById(id, (err, build) => {
+    BuildOrder.findById(id, (err, build) => {
       if (!err && build) {
         const newMinute = [];
         const currlist = timeline.build_list;
@@ -160,7 +157,7 @@ module.exports = (() => {
         .status(200)
         .send('Too Short');
     }
-    build_order.findById(id, (err, build) => {
+    BuildOrder.findById(id, (err, build) => {
       if (!err && build) {
         const currlist = timeline.build_list;
         build.build_list = timeline.build_list.slice(0, timeline.build_list.length - 60);
@@ -178,7 +175,7 @@ module.exports = (() => {
     const { id } = body;
     const orderIndex = body.index;
     const { timeline } = body;
-    build_order.findById(id, (err, build) => {
+    BuildOrder.findById(id, (err, build) => {
       if (!err && build) {
         console.log(`below me is the index sent back from the body for the buildlist of${id}this id`);
         console.log(build.build_list[orderIndex]);
@@ -201,7 +198,7 @@ module.exports = (() => {
     }, (err, like) => {
       if (!err) {
         if (like.length < 1) {
-          build_order.findById(buildToLike, (err, build) => {
+          BuildOrder.findById(buildToLike, (err, build) => {
             if (!err && build) {
               const addingLike = new Like({
                 userId: userToLike,
