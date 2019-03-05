@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const likes_schema = new mongoose.Schema({
+const likesSchema = new mongoose.Schema({
   userId: String,
   buildId: String,
 
 });
-mongoose.model('likes', likes_schema);
+mongoose.model('likes', likesSchema);

@@ -2,11 +2,10 @@ const express = require('express');
 
 const routes = express.Router();
 const axios = require('axios');
-const Mongoose = require('mongoose');
 const userController = require('./../controllers/userController');
 const buildController = require('./../controllers/buildController');
 
-// ///// API ////////
+// API Routes
 
 routes.get('/all_builds', (req, res) => {
   buildController.allBuilds(req, res);
@@ -50,13 +49,5 @@ routes.get('/get_user', (req, res) => {
 routes.get('/logout', (req, res) => {
   userController.logOut(req, res);
 });
-routes.get('/lambda', (req, res) => {
-  axios.get('https://yqwdc7yna7.execute-api.us-east-1.amazonaws.com/production/ParseData')
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => {
-      console.err(err);
-    });
-});
+routes.get('/lambda', () => axios.get('https://yqwdc7yna7.execute-api.us-east-1.amazonaws.com/production/ParseData'));
 module.exports = routes;

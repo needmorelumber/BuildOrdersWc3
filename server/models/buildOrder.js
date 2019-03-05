@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const build_order_schema = new mongoose.Schema({
+const buildOrderSchema = new mongoose.Schema({
   name: { type: String, required: true },
   race: String,
   opposing_race: String,
@@ -17,4 +17,4 @@ const build_order_schema = new mongoose.Schema({
   likes: { type: Number, default: 0 },
   created_at: { type: Date, default: Date.now() },
 });
-mongoose.model('build_order', build_order_schema);
+mongoose.model('build_order', buildOrderSchema);
