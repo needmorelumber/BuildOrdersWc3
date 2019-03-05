@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const race_unit_schema = new mongoose.Schema({
+const raceUnit = new mongoose.Schema({
   name: String,
   gold_cost: Number,
   lumber_cost: Number,
@@ -8,4 +8,4 @@ const race_unit_schema = new mongoose.Schema({
   build_time: Number,
   race: String,
 });
-mongoose.model('race_unit', race_unit_schema);
+mongoose.model('race_unit', raceUnit);

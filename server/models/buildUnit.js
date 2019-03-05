@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const build_unit_schema = new mongoose.Schema({
+const buildUnitSchema = new mongoose.Schema({
   second: Number,
   order:
         {
@@ -13,4 +13,4 @@ const build_unit_schema = new mongoose.Schema({
 
 });
 
-mongoose.model('build_unit', build_unit_schema);
+mongoose.model('build_unit', buildUnitSchema);

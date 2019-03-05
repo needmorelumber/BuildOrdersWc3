@@ -1,13 +1,10 @@
-const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const path = require('path');
 const helmet = require('helmet');
-const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
-const nev = require('email-verification')(mongoose);
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
 const config = require('./server/config/config');
@@ -26,7 +23,6 @@ app.use(session({
   resave: true,
   store: new MongoStore({ mongooseConnection: db }),
 }));
-const User = mongoose.model('user');
 
 const api = require('./server/config/api.js');
 
@@ -43,4 +39,4 @@ app.get('*', (req, res) => {
 const port = process.env.PORT || PORT_NUM;
 app.set('port', port);
 
-app.listen(port, () => console.log(` API running on localhost: ${port} `));
+app.listen(port, () => console.log(` API running on localhost: ${port} `)); // eslint-disable-line no-console
