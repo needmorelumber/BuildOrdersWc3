@@ -5,7 +5,6 @@ import path from 'path';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import BuildSingle from '../BuildSingle/BuildSingle';
 import CurrentBuild from '../../containers/CurrentBuild';
-import fetchBuilds from '../../actions/actions';
 import LoadingAnimation from '../loadingAnimation/loadingAnimation';
 import Pagination from './Pagination';
 import data from '../../MasterData';
