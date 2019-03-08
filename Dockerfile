@@ -14,7 +14,7 @@ USER node
 
 # Copy package over and install it
 COPY package.json package-lock.json* ./
-RUN npm install
+RUN yarn
 ENV PATH /opt/node_app/node_modules/.bin:$PATH
 
 # copy in our source code
