@@ -2,89 +2,94 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const User = mongoose.model('user');
-const build_order = mongoose.model('build_order');
+const BuildOrder = mongoose.model('build_order');
 
 
 module.exports = (() => ({
   newUser(req, res) {
     const { body } = req;
-    if (!body.credentials.username || !body.credentials.eMail || !body.credentials.password || !body.credentials.confirmPassword) {
+
+    // TODO Use real validation library
+    if (!body.credentials.username
+      || !body.credentials.eMail
+      || !body.credentials.password
+      || !body.credentials.confirmPassword) {
       // Calling api directly...
-      res.status(404).send({
+      return res.status(404).send({
         Message: 'Intentionally getting past front end',
       });
-      return;
     }
-    User.findOne({
+
+    return User.findOne({
       eMail: body.credentials.eMail,
     }, (err, userFound) => {
       if (err) {
-        res.status(500).send('Database Error');
-        return;
+        return res.status(500).send('Database Error');
       }
       if (userFound) {
         // Indicates that the E-mail is already in use
-        res.status(200).send({
+        return res.status(200).send({
           Message: 'Invalid E-mail',
         });
-      } else {
-        const userToSave = new User(body.credentials);
-        const saltrounds = 9;
-        bcrypt.hash(body.credentials.password, saltrounds, (err, hash) => {
-          if (err) {
-            console.log(err);
-          } else {
-            userToSave.password = hash;
-            userToSave.save(err => {
-              if (err) {
-                console.log(err);
-              } else {
-                req.session.user = userToSave;
-                userToSave.password = null;
-                res.json({
-                  user: userToSave,
-                });
-              }
-            });
-          }
-        });
       }
+
+      const userToSave = new User(body.credentials);
+      const saltrounds = 9;
+      // This could use async / await or then'ing
+      bcrypt.hash(body.credentials.password, saltrounds, (bcryptErr, hash) => {
+        if (!bcryptErr) {
+          userToSave.password = hash;
+          userToSave.save(userSaveErr => {
+            if (!userSaveErr) {
+              req.session.user = userToSave;
+              userToSave.password = null;
+              res.json({
+                user: userToSave,
+              });
+            }
+          });
+        }
+      });
+      return null;
     });
   },
+
   loginUser(req, res) {
     const loginInfo = req.body.credentials;
     User.findOne({
       eMail: loginInfo.eMail,
     }, (err, userFound) => {
+      // TODO use real validation here
       if (!loginInfo.eMail || !loginInfo.password) {
         res.status(404).send({ Message: 'missing field sneaky' });
       } else if (userFound) {
-        bcrypt.compare(loginInfo.password, userFound.password, (err, bcryptRes) => {
+        bcrypt.compare(loginInfo.password, userFound.password, (bcryptErr, bcryptRes) => {
           if (bcryptRes === true) {
-            userFound.password = null;
             req.session.user = userFound;
             res.json({
-              user: userFound,
+              user: { ...userFound, password: null },
             });
           } else {
-            res.status(200).send({
+            res.status(400).send({
               Message: 'Credentials Failed, please try again.',
             });
           }
         });
       } else {
-        res.status(200).send({
+        res.status(404).send({
           Message: 'User Not Found',
         });
       }
     });
   },
+
   getCurrentUserCookie(req, res) {
     const { session } = req;
+    // this would benefit from just using try / catch to be frank
     if (session.user) {
       if (session.user._id) {
         const { user } = session;
-        build_order.find({ ownerId: user._id }, (err, builds) => {
+        BuildOrder.find({ ownerId: user._id }, (err, builds) => {
           if (!err) {
             user.userBuilds = builds;
             res.json({ user });
@@ -97,34 +102,32 @@ module.exports = (() => ({
       res.json({ user: false });
     }
   },
+
   logOut(req, res) {
-    const user = req.session.user ? req.session.user : null;
     req.session.user = {};
     res.json({ loggedOut: true });
   },
+
   deleteUser(req, res) {
     const { user } = req.session;
     const { id } = req.body;
     if (user._id === id) {
       User.findOne({ _id: user._id }, (err, userFromdb) => {
-        bcrypt.compare(req.body.password, userFromdb.password, (err, bcryptRes) => {
+        bcrypt.compare(req.body.password, userFromdb.password, (bcryptErr, bcryptRes) => {
           if (bcryptRes === true) {
             // Loop all owned builds and remove
-            userFromdb.ownedTimelineIds.forEach(id => {
-              build_order.findByIdAndRemove(id, (err, build) => {
-                if (err) {
-                  res.status(200).json({ Message: 'Database Error, try again later' });
-                }
-              });
+            userFromdb.ownedTimelineIds.forEach(buildId => {
+              BuildOrder.findByIdAndRemove(buildId, removeError => (removeError
+                ? res.status(500).json({ Message: 'Database Error, try again later' })
+                : null
+              ));
             });
             // Remove the user
-            User.findByIdAndRemove(id, (err, user) => {
-              if (!err) res.status(200).json({ removed: true });
-              else res.status(200).json({ Message: 'Database Error, try again later' });
-            });
-          } else {
-            res.status(200).json({ Message: 'Password does not match' });
+            return User.findByIdAndRemove(id, findError => (!findError
+              ? res.status(200).json({ removed: true })
+              : res.status(200).json({ Message: 'Database Error, try again later' })));
           }
+          return res.status(200).json({ Message: 'Password does not match' });
         });
       });
     }
@@ -134,14 +137,16 @@ module.exports = (() => ({
     const newUsername = req.body.username;
     User.findById(id, (err, user) => {
       if (err) res.status(200).json({ Message: 'Database Error, try again later' });
+      // eslint-disable-next-line no-param-reassign
       user.username = newUsername;
-      user.save((err, updated) => {
+      user.save((saveErr, updated) => {
         req.session.user = updated;
-        build_order.find({ ownerId: user._id }, (err, builds) => {
-          if (!err) {
+        BuildOrder.find({ ownerId: user._id }, (findErr, builds) => {
+          if (!findErr) {
             req.session.user.userBuilds = builds;
-            res.status(200).json({ user });
+            return res.status(200).json({ user });
           }
+          return null;
         });
       });
     });
