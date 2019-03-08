@@ -1,83 +1,75 @@
 import axios from 'axios';
 
 export const TRY_LOGIN = 'TRY_LOGIN';
-function tryLogin(credentials) {
-  return {
-    type: TRY_LOGIN,
-    payload: {
-      isFetching: true,
-      payload: { credentials },
-    },
-  };
-}
-export const RESOLVE_LOGIN = 'RESOLVE_LOGIN';
-function resolveLogin() {
-  return {
-    type: RESOLVE_LOGIN,
-
-  };
-}
-export const TRY_REGISTER = 'TRY_REGISTER';
-function tryRegister(credentials) {
-  return {
-    type: TRY_REGISTER,
+const tryLogin = credentials => ({
+  type: TRY_LOGIN,
+  payload: {
+    isFetching: true,
     payload: { credentials },
-  };
-}
+  },
+});
+
+export const RESOLVE_LOGIN = 'RESOLVE_LOGIN';
+const resolveLogin = () => ({ type: RESOLVE_LOGIN });
+
+export const TRY_REGISTER = 'TRY_REGISTER';
+const tryRegister = credentials => ({
+  type: TRY_REGISTER,
+  payload: { credentials },
+});
+
 export const RESOLVE_REGISTER = 'RESOLVE_REGISTER';
-function resolveRegister(user) {
-  return {
-    type: RESOLVE_REGISTER,
-    payload: {
-      user: { user },
-    },
-  };
-}
+const resolveRegister = user => ({
+  type: RESOLVE_REGISTER,
+  payload: {
+    user: { user },
+  },
+});
+
 export const UPDATE_USER = 'UPDATE_USER';
-function updateUser(user) {
-  return {
-    type: UPDATE_USER,
-    payload: {
-      user,
-    },
-  };
-}
+const updateUser = user => ({
+  type: UPDATE_USER,
+  payload: {
+    user,
+  },
+});
+
 export const UPDATE_REG_MESSAGE = 'UPDATE_REG_MESSAGE';
-export function updateRegMessage(message) {
-  return {
-    type: UPDATE_REG_MESSAGE,
-    payload: {
-      message,
-    },
-  };
-}
+export const updateRegMessage = message => ({
+  type: UPDATE_REG_MESSAGE,
+  payload: {
+    message,
+  },
+});
+
 export const UPDATE_LOGIN_MESSAGE = 'UPDATE_LOGIN_MESSAGE';
-export function updateLoginMessage(message) {
-  return {
-    type: UPDATE_LOGIN_MESSAGE,
-    payload: {
-      message,
-    },
-  };
-}
-export function updateLoginMessageTimed(message) {
-  return function (dispatch) {
+export const updateLoginMessage = message => ({
+  type: UPDATE_LOGIN_MESSAGE,
+  payload: {
+    message,
+  },
+});
+
+export const updateLoginMessageTimed = message => (
+  dispatch => {
     dispatch(updateLoginMessage(message));
-    window.setTimeout(() => {
+    setTimeout(() => {
       dispatch(updateLoginMessage(''));
     }, 4000);
-  };
-}
-export function updateRegMessageTimed(message) {
-  return function (dispatch) {
+  }
+);
+
+export const updateRegMessageTimed = message => (
+  dispatch => {
     dispatch(updateRegMessage(message));
-    window.setTimeout(() => {
+    setTimeout(() => {
       dispatch(updateRegMessage(''));
     }, 4000);
-  };
-}
-export function loginToServer(credentials) {
-  return function (dispatch) {
+  }
+);
+
+export const loginToServer = credentials => (
+  dispatch => {
     dispatch(tryLogin());
     return axios.post('/api/login', { credentials })
       .then(
@@ -94,16 +86,14 @@ export function loginToServer(credentials) {
           dispatch(resolveLogin(user));
         }
       });
-  };
-}
-export function registerNewUser(credentials) {
-  return function (dispatch) {
+  }
+);
+
+export const registerNewUser = credentials => (
+  dispatch => {
     dispatch(tryRegister());
     return axios.post('/api/new_user', { credentials })
-      .then(
-        res => (res.data),
-        err => console.log(err),
-      )
+      .then(res => res.data)
       .then(user => {
         if (user.Message) {
           dispatch(updateRegMessageTimed(user.Message));
@@ -114,32 +104,27 @@ export function registerNewUser(credentials) {
           dispatch(updateUser(user));
         }
       });
-  };
-}
-export function fetchAndUpdateUser() {
-  return dispatch => axios.get('/api/get_user')
-    .then(
-      res => (res.data),
-      err => console.log(err),
-    )
+  }
+);
+
+export const fetchAndUpdateUser = () => (
+  dispatch => axios.get('/api/get_user')
+    .then(res => res.data)
     .then(user => {
       if (user) {
         dispatch(updateUser(user));
       }
-    });
-}
-export function logOut() {
-  return dispatch => axios.get('/api/logout')
-    .then(
-      res => (res.data),
-      err => console.log(err),
-    )
-    .then(res => {
-      dispatch(updateUser(false));
-    });
-}
-export function deleteUser(password, id) {
-  return dispatch => axios.post('/api/delete_user', { id, password })
+    })
+);
+
+export const logOut = () => (
+  dispatch => axios.get('/api/logout')
+    .then(res => res.data)
+    .then(() => dispatch(updateUser(false)))
+);
+
+export const deleteUser = (password, id) => (
+  dispatch => axios.post('/api/delete_user', { id, password })
     .then(res => {
       if (!res.data.Message) {
         dispatch(updateUser(false));
@@ -147,32 +132,37 @@ export function deleteUser(password, id) {
         dispatch(updateRegMessageTimed(res.data.Message));
       }
     })
-    .catch(err => {
+    .catch(() => {
       dispatch(updateRegMessageTimed('Sorry we had an error, please try again'));
-    });
-}
-export function changeUsername(id, username) {
-  return dispatch => axios.post('/api/change_username', { id, username })
+    })
+);
+export const changeUsername = (id, username) => (
+  dispatch => axios.post('/api/change_username', { id, username })
     .then(res => {
       if (!res.data.Message) {
-        console.log(res.data.user);
         dispatch(updateUser(res.data.user));
       } else {
         dispatch(updateRegMessageTimed(res.data.Message));
       }
     })
-    .catch(err => {
+    .catch(() => {
       dispatch(updateRegMessageTimed('Sorry we had an error, please try again'));
-    });
-}
-export function callLambda() {
-  return dispatch => axios.get('api/lambda')
+    })
+);
+
+export const callLambda = () => (
+  // TODO: Figure out what this does, given that it just console.logs
+  () => axios.get('api/lambda')
     .then(res => {
       if (res) {
+        // eslint-disable-next-line no-console
         console.log('got res');
       } else {
+        // eslint-disable-next-line no-console
         console.log('no res');
       }
+      // eslint-disable-next-line no-console
       console.log(res);
-    }).catch(err => console.log(err));
-}
+      // eslint-disable-next-line no-console
+    }).catch(err => console.log(err))
+);
