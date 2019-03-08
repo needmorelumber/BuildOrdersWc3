@@ -1,0 +1,4 @@
+- Remove hamburger menu
+- header and a footer that has smaller cta for login / signup
+- I think we should copy grid layout for LIST like so: https://www.artifactfire.com/artifact/decks
+- https://precursorapp.com/document/Untitled-17592208310806
