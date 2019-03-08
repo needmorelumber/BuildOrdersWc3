@@ -6,7 +6,7 @@
   "proxy": "http://localhost:4200",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"webpack-dev-server --config  webpack.dev.js --host 0.0.0.0 --inline\" \"nodemon server.js\"",
+    "start": "concurrently \"webpack-dev-server --config  webpack.dev.js --host 0.0.0.0 --inline\" \"supervisor server.js\"",
     "build": "webpack --config webpack.prod.js"
   },
   "env": {
@@ -49,7 +49,6 @@
     "lodash": "^4.17.5",
     "mongoose": "^4.13.11",
     "node-sass": "^4.7.2",
-    "nodemon": "^1.17.1",
     "normalizr": "^3.2.4",
     "react": "^16.8.3",
     "react-burger-menu": "^2.4.2",
@@ -70,6 +69,7 @@
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.19.1",
+    "supervisor": "0.12.0",
     "svg-inline-loader": "^0.8.0",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack-hot-middleware": "^2.21.2",

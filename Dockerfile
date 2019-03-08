@@ -1,9 +1,10 @@
 # Get latest node
 FROM node:8
 
-# install dependencies first, in a different location for easier app bind mounting for local development
+# install dependencies first, in a different location for easier app bind mounting for local development.
+# Note: that means if you try to put it in /app, it will fail...
 # due to default /opt permissions we have to create the dir with root and change perms
-RUN mkdir -p /opt/node_app/app && chown node:node /opt/node_app
+RUN mkdir -p /opt/node_app/app && chown -R node:node /opt/node_app
 WORKDIR /opt/node_app
 
 # the official node image provides an unprivileged user as a security best practice
