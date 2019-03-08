@@ -8,53 +8,38 @@ export const VisibilityFilters = {
   SHOW_UNDEAD: 'SHOW_UNDEAD',
   SHOW_NIGHTELF: 'SHOW_NIGHTELF',
   SHOW_POPULAR: 'SHOW_POPULAR',
-  SHOW_ALL: 'SHOW_ALL',
-
 };
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
-export function setVisibilityFilter(filter) {
-  return { type: SET_VISIBILITY_FILTER, payload: filter };
-}
+export const setVisibilityFilter = filter => ({ type: SET_VISIBILITY_FILTER, payload: filter });
+
 export const SET_SEARCH_QUERY = 'SET_SEARCH_QUERY';
-export function setSearchQuery(query) {
-  return { type: SET_SEARCH_QUERY, payload: query };
-}
+export const setSearchQuery = query => ({ type: SET_SEARCH_QUERY, payload: query });
+
 export const SET_SORT_TYPE = 'SET_SORT_TYPE';
-export function setSortType(sortType) {
-  return { type: SET_SORT_TYPE, payload: sortType };
-}
+export const setSortType = sortType => ({ type: SET_SORT_TYPE, payload: sortType });
+
 export const TOGGLE_EMPTY = 'TOGGLE_EMPTY';
-export function toggleEmpty() {
-  return {
+export const toggleEmpty = () => ({
     type: TOGGLE_EMPTY,
-    payload: {
-      isToggledOrders: true,
-    },
-  };
-}
+    payload: { isToggledOrders: true },
+});
 export const ADD_MINUTE = 'ADD_MINUTE';
-export function addMinute() {
-  return { type: ADD_MINUTE };
-}
+export const addMinute = () => ({ type: ADD_MINUTE });
+
 export const REMOVE_MINUTE = 'REMOVE_MINUTE';
-export function removeMinute() {
-  return { type: REMOVE_MINUTE };
-}
+export const removeMinute = () => ({ type: REMOVE_MINUTE });
+
 export const RESTORE_BUILD = 'RESTORE_BUILD';
-export function restoreBuild() {
-  return {
+export const restoreBuild = () => ({
     type: RESTORE_BUILD,
-    payload: {
-      isToggledOrders: false,
-    },
-  };
-}
+    payload: { isToggledOrders: false },
+});
+
 export const CREATE_BUILDS = 'CREATE_BUILDS';
-function createBuilds() {
-  return { type: CREATE_BUILDS };
-}
+const createBuilds = () => ({ type: CREATE_BUILDS }
+)
 export const BEGIN_BUILD_UPDATE = 'BEGIN_BUILD_UPDATE';
-function beginBuildUpdate() {
+const beginBuildUpdate => () {
   return {
     type: BEGIN_BUILD_UPDATE,
     payload: {
@@ -63,7 +48,7 @@ function beginBuildUpdate() {
   };
 }
 export const RESOLVE_BUILD_UPDATE = 'RESOLVE_BUILD_UPDATE';
-function resolveBuildUpdate(build) {
+const resolveBuildUpdate => (build) {
   return {
     type: RESOLVE_BUILD_UPDATE,
     payload: {
@@ -73,7 +58,7 @@ function resolveBuildUpdate(build) {
   };
 }
 export const BEGIN_BUILD_UPLOAD = 'BEGIN_BUILD_UPLOAD';
-function beginBuildUpload(build) {
+const beginBuildUpload => (build) {
   return {
     type: BEGIN_BUILD_UPLOAD,
     payload: {
@@ -83,7 +68,7 @@ function beginBuildUpload(build) {
   };
 }
 export const RESOLVE_BUILD_UPLOAD = 'RESOLVE_BUILD_UPLOAD';
-function resolveBuildUpload(json) {
+const resolveBuildUpload => (json) {
   if (json.error) {
     return {
       type: RESOLVE_BUILD_UPLOAD,
@@ -101,7 +86,7 @@ function resolveBuildUpload(json) {
   };
 }
 export const REQUEST_BUILDS = 'REQUEST_BUILDS';
-function requestBuilds(page) {
+const requestBuilds => (page) {
   return {
     type: REQUEST_BUILDS,
     payload: {
@@ -110,7 +95,7 @@ function requestBuilds(page) {
   };
 }
 export const RECEIVE_BUILDS = 'RECEIVE_BUILDS';
-function receiveBuilds(json) {
+const receiveBuilds => (json) {
   return {
     type: RECEIVE_BUILDS,
     payload: {
@@ -121,7 +106,7 @@ function receiveBuilds(json) {
   };
 }
 export const REQUEST_BUILD_ID = 'REQUEST_BUILD_ID';
-function requestBuildById(id) {
+const requestBuildById => (id) {
   return {
     type: REQUEST_BUILD_ID,
     payload: {
@@ -130,7 +115,7 @@ function requestBuildById(id) {
   };
 }
 export const UPDATE_CURRENT_BUILD = 'UPDATE_CURRENT_BUILD';
-function updateCurrentBuild(json) {
+const updateCurrentBuild => (json) {
   return {
     type: UPDATE_CURRENT_BUILD,
     payload: {
@@ -139,7 +124,7 @@ function updateCurrentBuild(json) {
   };
 }
 export const UPDATE_ONE_BUILD = 'UPDATE_ONE_BUILD';
-function updateOneBuild(json, index) {
+const updateOneBuild => (json, index) {
   return {
     type: UPDATE_ONE_BUILD,
     payload: {
@@ -149,15 +134,15 @@ function updateOneBuild(json, index) {
   };
 }
 export const BEGIN_DELETE_BUILD = 'BEGIN_DELETE_BUILD';
-function beginDeleteBuild() {
+const beginDeleteBuild => () {
   return { type: BEGIN_DELETE_BUILD };
 }
 export const RESOLVE_DELETE_BUILD = 'RESOLVE_DELETE_BUILD';
-function resolveDeleteBuild(json) {
+const resolveDeleteBuild => (json) {
   return { type: RESOLVE_DELETE_BUILD };
 }
 export const NEXT_PAGE_BUILDS = 'NEXT_PAGE_BUILDS';
-function nextPage(currPage) {
+const nextPage => (currPage) {
   return {
     type: NEXT_PAGE_BUILDS,
     payload: {
@@ -166,11 +151,11 @@ function nextPage(currPage) {
   };
 }
 export const FAILED_LOADING_BUILDS = 'FAILED_LOADING_BUILDS';
-function failedLoadingBuilds() {
+const failedLoadingBuilds => () {
   return { type: FAILED_LOADING_BUILDS };
 }
 export const UPDATE_ADD_ORDER_MESSAGE = 'UPDATE_ADD_ORDER_MESSAGE';
-export function updateAddOrderMessage(message) {
+export const updateAddOrderMessage => (message) {
   return {
     type: UPDATE_ADD_ORDER_MESSAGE,
     payload: {
@@ -179,7 +164,7 @@ export function updateAddOrderMessage(message) {
   };
 }
 export const UPDATE_CURRENT_ORDER = 'UPDATE_CURRENT_ORDER';
-export function updateCurrentOrder(order) {
+export const updateCurrentOrder => (order) {
   return {
     type: UPDATE_CURRENT_ORDER,
     payload: {
@@ -188,13 +173,13 @@ export function updateCurrentOrder(order) {
   };
 }
 export const TOGGLE_ADDING_ORDER = 'TOGGLE_ADDING_ORDER';
-export function toggleAddingOrder(bool) {
+export const toggleAddingOrder => (bool) {
   return { type: TOGGLE_ADDING_ORDER,
     payload: {
       bool,
     } };
 }
-export function fetchBuilds(currPage) {
+export const fetchBuilds => (currPage) {
   return function (dispatch) {
     dispatch(requestBuilds());
     return axios
@@ -208,7 +193,7 @@ export function fetchBuilds(currPage) {
       });
   };
 }
-export function fetchBuildById(id) {
+export const fetchBuildById => (id) {
   return function (dispatch) {
     dispatch(requestBuildById(id));
     return axios
@@ -222,7 +207,7 @@ export function fetchBuildById(id) {
       });
   };
 }
-export function newBuild(build) {
+export const newBuild => (build) {
   return function (dispatch) {
     dispatch(beginBuildUpload());
     return axios
@@ -235,7 +220,7 @@ export function newBuild(build) {
       });
   };
 }
-export function updateBuildById(build, id) {
+export const updateBuildById => (build, id) {
   return function (dispatch) {
     dispatch(beginBuildUpdate());
     return axios
@@ -249,7 +234,7 @@ export function updateBuildById(build, id) {
       });
   };
 }
-export function deleteBuild(id) {
+export const deleteBuild => (id) {
   return function (dispatch) {
     dispatch(beginDeleteBuild());
     return axios
@@ -266,7 +251,7 @@ export function deleteBuild(id) {
       });
   };
 }
-export function updateLoginMessageTimed(message) {
+export const updateLoginMessageTimed => (message) {
   return function (dispatch) {
     dispatch(updateAddOrderMessage(message));
     window.setTimeout(() => {
@@ -274,7 +259,7 @@ export function updateLoginMessageTimed(message) {
     }, 2800);
   };
 }
-export function addMinuteApi(build, id) {
+export const addMinuteApi => (build, id) {
   return function (dispatch) {
     dispatch(addMinute());
     return axios
@@ -288,7 +273,7 @@ export function addMinuteApi(build, id) {
       });
   };
 }
-export function removeMinuteApi(build, id) {
+export const removeMinuteApi => (build, id) {
   return function (dispatch) {
     dispatch(removeMinute());
     return axios
@@ -302,7 +287,7 @@ export function removeMinuteApi(build, id) {
       });
   };
 }
-export function likeBuild(id, currPage, index) {
+export const likeBuild => (id, currPage, index) {
   return function (dispatch) {
     return axios
       .post('/api/like_build', { id, index })
