@@ -6,10 +6,10 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./:/usr/src/app
+      - ./:/opt/node_app/app
     links:
       - mongo
-    working_dir: /usr/src/app/
+    working_dir: /opt/node_app/app
     command: 'bash -c "npm start"'
   mongo:
     container_name: mongo
@@ -17,4 +17,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ./data:/data/db
+      - mongodata:/data/db
+
+volumes:
+  mongodata: {}

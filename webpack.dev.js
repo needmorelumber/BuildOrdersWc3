@@ -7,7 +7,7 @@ const common = require('./webpack.common.js');
 module.exports = merge(common, {
   devtool: 'inline-source-map',
   entry: [
-    path.resolve('/usr/src/app/index.js'),
+    path.resolve('/opt/node_app/app/index.js'),
   ],
   output: {
     path: path.resolve(__dirname, 'dist/js/'),

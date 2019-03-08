@@ -14,6 +14,8 @@ Feel free to open issues or pull requests. See below for how to get this running
 Mac and Windows' docker installation comes with docker-compose preinstalled. For linux
 Follow the [instructions here](https://docs.docker.com/compose/install/#install-compose).
 
+Make sure to follow the [post-install instructions](https://docs.docker.com/install/linux/linux-postinstall/), too.
+
 ### Booting up your local
 
 Check that your docker and docker-compose are actually installed!
