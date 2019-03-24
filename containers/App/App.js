@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 import BuildsPage from '../BuildsPage';
 import Header from '../../components/Header/Header';
 import NewBuild from '../../components/NewBuild/NewBuild';
@@ -17,10 +19,11 @@ import './app.sass';
 
 const App = () => (
   <Fragment>
+    <CssBaseline />
     <Header />
     <div className="container">
       <Switch>
-        <Redirect from="/" to="/home" />
+        <Redirect from="/" to="/home" exact />
         <Route path="/home" component={Home} exact />
         <Route path="/builds/new" component={NewBuild} />
         <Route path="/builds" component={BuildsPage} exact />
