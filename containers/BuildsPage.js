@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
-import VisibleBuilds from './VisibleBuilds';
-import CurrentBuild from './CurrentBuild';
-import BuildListControls from '../components/BuildList/BuildListControls';
-import { setVisibilityFilter, setSearchQuery, setSortType } from '../actions/build';
 // MUI
 import { withStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
@@ -16,13 +12,17 @@ import Input from '@material-ui/core/Input';
 // Inline css
 import '../components/BuildList/buildList.sass';
 import { Toolbar } from 'react-md';
+import { setVisibilityFilter, setSearchQuery, setSortType } from '../actions/build';
+import BuildListControls from '../components/BuildList/BuildListControls';
+import CurrentBuild from './CurrentBuild';
+import VisibleBuilds from './VisibleBuilds';
 
 
 const styles = theme => ({
   fixedButton: {
     position: 'fixed',
     left: '90%',
-    bottom: '10%'
+    bottom: '10%',
   },
   search: {
     position: 'relative',
@@ -94,8 +94,8 @@ class BuildsPageComp extends Component {
           <div className="rows">
             <div className="row is-2 rows">
               { user
-                ? (  
-                  <Fab size='large' className={classes.fixedButton} color="primary" to="/builds/new" component={Link}>
+                ? (
+                  <Fab size="large" className={classes.fixedButton} color="primary" to="/builds/new" component={Link}>
                     <AddIcon data-tip="New Build" />
                   </Fab>
                 )
@@ -106,21 +106,21 @@ class BuildsPageComp extends Component {
                 setSortType={setSortType}
               />
               <Toolbar>
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
+                <div className={classes.search}>
+                  <div className={classes.searchIcon}>
+                    <SearchIcon />
+                  </div>
+                  <Input
+                    placeholder="Search builds..."
+                    ref={input => this.input = input}
+                    onChange={event => this.handleChange(event)}
+                    classes={{
+                      underline: classes.cssUnderline,
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                    }}
+                  />
                 </div>
-                <Input
-                  placeholder="Search builds..."
-                  ref={input => this.input = input}
-                  onChange={(event) => this.handleChange(event)}
-                  classes={{
-                    underline: classes.cssUnderline,
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                />
-              </div>
               </Toolbar>
               {/* <input
                 className="input searchBox"
