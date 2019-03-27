@@ -12,6 +12,7 @@ import './home.sass';
 
 const styles = theme => ({
   heroUnit: {
+    minHeight: '99vh',
     backgroundColor: theme.palette.background.paper,
   },
   heroContent: {
@@ -20,7 +21,8 @@ const styles = theme => ({
     padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`,
   },
   heroButtons: {
-    marginTop: theme.spacing.unit * 4,
+    backgroundColor: theme.palette.primary,
+    marginTop: theme.spacing.unit * 12,
   },
 });
 
@@ -40,12 +42,12 @@ const Home = ({ classes }) => (
           </Typography>
           <Grid container spacing={16} justify="center">
             <Grid item>
-              <Button component={Link} to="/register">
+              <Button className={classes.heroButtons} component={Link} to="/register">
                 Create a Build
               </Button>
             </Grid>
             <Grid item>
-              <Button component={Link} to="/builds">
+              <Button className={classes.heroButtons} component={Link} to="/builds">
                 Browse Builds
               </Button>
             </Grid>
