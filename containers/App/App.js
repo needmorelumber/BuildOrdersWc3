@@ -3,6 +3,8 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
+import brown from '@material-ui/core/colors/brown';
+import green from '@material-ui/core/colors/green';
 import BuildsPage from '../BuildsPage';
 import Header from '../../components/Header/Header_MUI';
 import NewBuild from '../../components/NewBuild/NewBuild';
@@ -14,9 +16,7 @@ import UserPage from '../UserPage';
 import Home from '../../components/Home/Home';
 import InGameHelper from '../InGameHelper';
 import EditBuildPage from '../EditBuildPage';
-// Mui colors 
-import brown from '@material-ui/core/colors/brown';
-import green from '@material-ui/core/colors/green';
+// Mui colors
 // import Footer from '../../components/Footer/Footer';
 import './app.sass';
 
@@ -26,13 +26,23 @@ const theme = createMuiTheme({
     secondary: brown,
     type: 'light',
   },
+  typography: {
+    useNextVariants: true,
+    h6: {
+      fontSize: '1em',
+      fontFamily: '"Press Start 2P"',
+    },
+    h5: {
+      fontFamily: '"Press Start 2P"',
+    },
+  },
 });
 
 const App = () => (
   <MuiThemeProvider theme={theme}>
-  <Fragment>
-    <CssBaseline />
-    <Header />
+    <Fragment>
+      <CssBaseline />
+      <Header />
       <Switch>
         <Redirect from="/" to="/home" exact />
         <Route path="/home" component={Home} exact />
@@ -46,8 +56,8 @@ const App = () => (
         <Route path="/build/:id/edit" component={EditBuildPage} />
         <Route component={NoMatch} />
       </Switch>
-    {/* <Footer /> */}
-  </Fragment>
+      {/* <Footer /> */}
+    </Fragment>
   </MuiThemeProvider>
 );
 

@@ -21,34 +21,41 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
+  tabTitle: {
+    fontSize: '1em',
+    fontFamily: '"Press Start 2P"',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '.6em',
+    },
+  },
 });
 
 class BuildListControls extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 0
-    }
-  };
+      value: 0,
+    };
+  }
 
-  handleChange (event, value) {
+  handleChange(event, value) {
     this.setState({ value });
-  };
-  
+  }
+
   render() {
     const { value } = this.state;
     const { classes } = this.props;
     return (
-    <div className={classes.root}>
-      <AppBar position="static" color="secondary">
-        <Tabs value={value} indicatorColor="primary" onChange={(event, value) => this.handleChange(event, value)}>
-          <Tab onClick={() => this.props.setFilter('SHOW_ALL')} label="Show All" />
-          <Tab onClick={() => this.props.setFilter('SHOW_ORC')} label="Orc" />
-          <Tab onClick={() => this.props.setFilter('SHOW_HUMAN')} label="Human" />
-          <Tab onClick={() => this.props.setFilter('SHOW_UNDEAD')} label="Undead" />
-          <Tab onClick={() => this.props.setFilter('SHOW_NIGHTELF')} label="Night Elf" />
-        </Tabs>
-      </AppBar>
+      <div className={classes.root}>
+        <AppBar position="static" color="secondary">
+          <Tabs value={value} indicatorColor="primary" onChange={(event, value) => this.handleChange(event, value)}>
+            <Tab onClick={() => this.props.setFilter('SHOW_ALL')} label={<Typography className={classes.tabTitle} color="inherit" noWrap> Show All </Typography>} />
+            <Tab onClick={() => this.props.setFilter('SHOW_ORC')} label={<Typography className={classes.tabTitle} color="inherit" noWrap> Orc</Typography>} />
+            <Tab onClick={() => this.props.setFilter('SHOW_HUMAN')} label={<Typography className={classes.tabTitle} color="inherit" noWrap> Human </Typography>} />
+            <Tab onClick={() => this.props.setFilter('SHOW_UNDEAD')} label={<Typography className={classes.tabTitle} color="inherit" noWrap> Undead </Typography>} />
+            <Tab onClick={() => this.props.setFilter('SHOW_NIGHTELF')} label={<Typography className={classes.tabTitle} color="inherit" noWrap> Night Elf </Typography>} />
+          </Tabs>
+        </AppBar>
         {/* <aside className="row menu">
           <p className="menu-label">
             Sort By
@@ -62,7 +69,7 @@ class BuildListControls extends Component {
             </li>
           </ul>
         </aside> */}
-      </div>  
+      </div>
     );
   }
 }

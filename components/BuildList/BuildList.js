@@ -3,6 +3,7 @@ import './buildList.sass';
 import { Link } from 'react-router-dom';
 import path from 'path';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import BuildSingle from '../BuildSingle/BuildSingle';
 import CurrentBuild from '../../containers/CurrentBuild';
 import LoadingAnimation from '../loadingAnimation/loadingAnimation';
@@ -28,10 +29,6 @@ export default class BuildList extends React.Component {
       expandedItem: false });
   }
 
-  componentWillReceiveProps(nextProps) {
-    // UPDATE SINGLE ARRAY POS
-  }
-
   handleExpandItem(index) {
     if (index === false) {
       this.setState({
@@ -53,6 +50,12 @@ export default class BuildList extends React.Component {
     this.props.onBuildClick(id);
   }
 
+  fetchMoreData() {
+    this.setState({
+      pageOfItems: this.state.pageOfItems.concat(this.props.builds.visible_items.from({ length: 10 })),
+    });
+  }
+
   render() {
     const p = this.props;
     const b = p.builds;
@@ -62,7 +65,7 @@ export default class BuildList extends React.Component {
     const { likeBuild } = p;
     const failedToLoadCheck = b.failedToLoad;
     const { isFetching } = b;
-    const builds = this.state.pageOfItems.map((build, index) => {
+    const builds = b.visible_items ? b.visible_items.map((build, index) => {
       const { race } = build;
       const iconString = `https://s3.us-west-2.amazonaws.com/needmorelumberassets/icons/${race}.jpg`;
       return (
@@ -102,7 +105,7 @@ export default class BuildList extends React.Component {
           </article>
         </CSSTransition>
       );
-    });
+    }) : null;
     return (
       <div className="buildsSection has-text-centered section">
         <h1 className="title">All Warcraft 3 build guides</h1>
@@ -112,10 +115,19 @@ export default class BuildList extends React.Component {
                   ? !failedToLoadCheck
                     ? (
                       <div className="buildsContainer">
-                        <Pagination items={b.visible_items} onChangePage={this.onChangePage} />
+                        {/* <Pagination items={b.visible_items} onChangePage={this.onChangePage} />
                         <TransitionGroup>
                           {builds}
-                        </TransitionGroup>
+                        </TransitionGroup> */}
+                        <InfiniteScroll
+                          dataLength={b.visible_items.length}
+                          next={() => this.fetchMoreData()}
+                          hasMore
+                          loader={<h4>Loading...</h4>}
+                        >
+                          { console.log(this.state.pageOfItems) }
+                          { this.state.pageOfItems }
+                        </InfiniteScroll>
 
                       </div>
                     )
