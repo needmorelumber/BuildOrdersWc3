@@ -2,7 +2,6 @@
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable global-require */
 const mongoose = require('mongoose');
-const path = require('path');
 const config = require('./config');
 
 
@@ -25,14 +24,17 @@ process.on('SIGINT', () => {
 });
 
 // Explicitly import models
-const modelsPath = path.join(__dirname, '../models');
-const modelPaths = [
-  'buildOrder.js',
-  'buildUnit.js',
-  'likes.js',
-  'raceUnit.js',
-  'tempUser.js',
-  'user.js',
-].map(model => path.join(modelsPath, model));
+// User stuff
+require('../models/user/user.js');
+require('../models/user/tempUser.js');
 
-modelPaths.forEach(modelPath => require(modelPath));
+// Build Stuff
+require('../models/builds/build.js');
+require('../models/builds/buildStep.js');
+
+
+// outdated models to be deprecated
+require('../models/buildOrder.js');
+require('../models/buildUnit.js');
+require('../models/likes.js');
+require('../models/raceUnit.js');
