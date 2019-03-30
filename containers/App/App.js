@@ -35,6 +35,12 @@ const theme = createMuiTheme({
     h5: {
       fontFamily: '"Press Start 2P"',
     },
+    subheading: {
+      fontFamily: '"Press Start 2P"',
+    },
+    heading: {
+      fontFamily: '"Press Start 2P"',
+    },
   },
 });
 
