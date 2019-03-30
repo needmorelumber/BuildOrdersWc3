@@ -11,4 +11,5 @@ const buildSchema = new mongoose.Schema({
   ownerUsername: String,
   buildSteps: [],
 }, { timestamps: true });
-mongoose.model('build', buildSchema);
+
+module.exports = mongoose.model('Build', buildSchema);

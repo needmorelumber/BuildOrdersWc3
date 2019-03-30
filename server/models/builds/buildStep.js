@@ -6,4 +6,4 @@ const buildStep = new mongoose.Schema({
   description: { type: String, required: true },
 }, { timestamp: true });
 
-mongoose.model('buildStep', buildStep);
+module.export = mongoose.model('BuildStep', buildStep);
