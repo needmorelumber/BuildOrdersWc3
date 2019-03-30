@@ -6,15 +6,6 @@ const config = require('./config');
 
 
 mongoose.connect(config.dbURI);
-mongoose.connection.on('connected', () => {
-  console.log(`Mongoose default connection open to ${config.dbURI}`);
-});
-mongoose.connection.on('error', err => {
-  console.error(`Mongoose default connection error: ${err}`);
-});
-mongoose.connection.on('disconnected', () => {
-  console.log('Mongoose default connection disconnected');
-});
 
 process.on('SIGINT', () => {
   mongoose.connection.close(() => {
