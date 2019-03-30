@@ -20,8 +20,9 @@ const MongoStore = require('connect-mongo')(session);
 const config = require('./server/config/config');
 // TODO: This slaps a bunch of things into global scope rather than
 // explicit exports/imports. Let's change that.
-const api = require('./server/config/api.js');
 require('./server/config/mongoose.js');
+const api = require('./server/config/api.js');
+
 const Build = require('./server/models/builds/build');
 
 // TODO: get rid of the need for this
