@@ -10,9 +10,9 @@ const buildStepSchema = new mongoose.Schema({
 const buildSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
   race: { type: String, required: true, trim: true },
-  opposing_race: String,
+  opposing_race: { type: String, required: true, trim: true },
   matchup: { type: String, required: true, trim: true },
-  description: String,
+  description: { type: String, required: false, trim: true },
   patch: { type: String, required: true },
   ownerId: { type: String, required: true },
   ownerUsername: { type: String, required: true },
