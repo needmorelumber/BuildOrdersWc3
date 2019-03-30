@@ -11,10 +11,11 @@ const buildSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
   race: { type: String, required: true, trim: true },
   opposing_race: String,
+  matchup: { type: String, required: true, trim: true },
   description: String,
   patch: { type: String, required: true },
-  ownerId: String,
-  ownerUsername: String,
+  ownerId: { type: String, required: true },
+  ownerUsername: { type: String, required: true },
   buildSteps: [buildStepSchema],
 }, { timestamps: true });
 
