@@ -30,7 +30,6 @@ require('../models/user/tempUser.js');
 
 // Build Stuff
 require('../models/builds/build.js');
-require('../models/builds/buildStep.js');
 
 
 // outdated models to be deprecated
