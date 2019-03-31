@@ -124,6 +124,7 @@ class Header extends React.Component {
   render() {
     const { anchorEl, mobileMoreAnchorEl } = this.state;
     const { classes, userState } = this.props;
+    console.log(userState)
     const { user } = userState.user;
     const isMenuOpen = !!anchorEl;
     const isMobileMenuOpen = !!mobileMoreAnchorEl;
@@ -223,7 +224,7 @@ Header.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  ...state,
+  userState: state.userState,
 });
 const mapDispatchToProps = dispatch => ({
   fetchUser: () => {
