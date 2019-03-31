@@ -37,16 +37,16 @@ class BuildListControls extends Component {
   
   render() {
     const { value } = this.state;
-    const { classes } = this.props;
+    const { classes, setFilter } = this.props;
     return (
     <div className={classes.root}>
       <AppBar position="static" color="secondary">
-        <Tabs value={value} indicatorColor="primary" onChange={(event, value) => this.handleChange(event, value)}>
-          <Tab onClick={() => this.props.setFilter('SHOW_ALL')} label="Show All" />
-          <Tab onClick={() => this.props.setFilter('SHOW_ORC')} label="Orc" />
-          <Tab onClick={() => this.props.setFilter('SHOW_HUMAN')} label="Human" />
-          <Tab onClick={() => this.props.setFilter('SHOW_UNDEAD')} label="Undead" />
-          <Tab onClick={() => this.props.setFilter('SHOW_NIGHTELF')} label="Night Elf" />
+        <Tabs value={value} indicatorColor="primary" onChange={(event, changedValue) => this.handleChange(event, changedValue)}>
+          <Tab onClick={() => setFilter('SHOW_ALL')} label="Show All" />
+          <Tab onClick={() => setFilter('SHOW_ORC')} label="Orc" />
+          <Tab onClick={() => setFilter('SHOW_HUMAN')} label="Human" />
+          <Tab onClick={() => setFilter('SHOW_UNDEAD')} label="Undead" />
+          <Tab onClick={() => setFilter('SHOW_NIGHTELF')} label="Night Elf" />
         </Tabs>
       </AppBar>
         {/* <aside className="row menu">

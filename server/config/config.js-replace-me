@@ -4,7 +4,7 @@
 
 module.exports =  (() => {
   const config = {
-    dbURI: `mongodb://mongo:27017`,
+    dbURI: `mongodb://mongo:27017/needmorelumber`,
     sessionSecret: 'abcdefg12345'
   }
   return config;
