@@ -14,12 +14,27 @@ const mapDispatchToProps = {
 
 class BuildDetail extends React.Component {
   componentDidMount() {
-    this.props.getBuildOrder(this.props.id);
+    this.props.getBuildOrder(this.getId());
+  }
+
+  getId() {
+    return this.props.match.params.id;
   }
 
   render() {
+    const { buildOrder } = this.props;
     return (
-      <div>hello</div>
+      <div>
+        <span>name: {buildOrder.name}</span> <br />
+        <span>race: {buildOrder.race}</span> <br />
+        <span>opposing_race: {buildOrder.opposing_race}</span> <br />
+        <span>matchup: {buildOrder.matchup}</span> <br />
+        <span>description: {buildOrder.description}</span> <br />
+        <span>patch: {buildOrder.patch}</span> <br />
+        <span>ownerUsername: {buildOrder.ownerUsername}</span> <br />
+        <span>ownerId: {buildOrder.ownerId}</span> <br />
+        <span>buildSteps: {buildOrder.buildSteps}</span> <br />
+      </div>
     );
   }
 }
@@ -29,6 +44,7 @@ const decorators = [
 ];
 
 BuildDetail.propTypes = {
+  match: PropTypes.object.isRequired,
   getBuildOrder: PropTypes.func.isRequired,
   buildOrder: PropTypes.object,
 };
