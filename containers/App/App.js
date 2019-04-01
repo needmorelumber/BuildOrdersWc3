@@ -12,7 +12,8 @@ import RegisterPage from '../RegisterPage';
 import UserPage from '../UserPage';
 import Home from '../../components/Home/Home';
 import InGameHelper from '../InGameHelper';
-import EditBuildPage from '../EditBuildPage';
+import EditBuildPage from '../EditBuildPage'
+import BuildDetail from '../../apps/buildOrders/components/pages/detail';
 // import Footer from '../../components/Footer/Footer';
 import './app.sass';
 
@@ -27,7 +28,7 @@ const App = () => (
         <Route path="/home" component={Home} exact />
         <Route path="/builds/new" component={NewBuild} />
         <Route path="/builds" component={BuildsPage} exact />
-        <Route path="/build/:id" component={TimeLineContainer} exact />
+        <Route path="/builds/:id" component={BuildDetail} exact />
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
         <Route path="/user/profile" component={UserPage} />
