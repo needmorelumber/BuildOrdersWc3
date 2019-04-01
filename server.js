@@ -56,13 +56,16 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: db }),
 }));
 
+// Server Route definitions
 app.use('/api/builds', service({ Model: Build }));
 app.use('/api', api);
 
+// Client route definitions
 app.use(express.static(path.join(__dirname, 'dist')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/dist/index.html'));
 });
+
 const port = process.env.PORT || PORT_NUM;
 app.set('port', port);
 

@@ -549,6 +549,15 @@
     events "^3.0.0"
     uberproto "^2.0.2"
 
+"@feathersjs/rest-client@^1.4.7":
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/@feathersjs/rest-client/-/rest-client-1.4.7.tgz#6fb556721b661f7aa73f27173925b17274fae164"
+  integrity sha512-Eybe9iTMz2r1J8ITRZH4/WGfIhwSIzP9kiTpwAVESo6NGE6rgwvN95FmtI5AtCABV5v4C2Cy/tVDsMMa9Dgs+A==
+  dependencies:
+    "@feathersjs/commons" "^4.0.0"
+    "@feathersjs/errors" "^3.3.6"
+    qs "^6.5.0"
+
 "@fortawesome/fontawesome-common-types@^0.1.7":
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.1.7.tgz#4336c4b06d0b5608ff1215464b66fcf9f4795284"
@@ -4756,10 +4765,10 @@ fd-slicer@~1.1.0:
   dependencies:
     pend "~1.2.0"
 
-feathers-mongoose@^7.3.2:
-  version "7.3.2"
-  resolved "https://registry.yarnpkg.com/feathers-mongoose/-/feathers-mongoose-7.3.2.tgz#cddede05f7aeb4e1df026d1e4d919ed6c7242337"
-  integrity sha512-TUkuxZuw62Dnh4d8J4hHmseFMOrKxylvQf3r1bnCTpO284dFOSvo7LhIh+xCGuCZo+IzJhyoh9LUOjjyAbwaYQ==
+feathers-mongoose@7.3.0:
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/feathers-mongoose/-/feathers-mongoose-7.3.0.tgz#ed20c556eab665811d823fd1b144944ee947cd66"
+  integrity sha512-/IwzfZ6epeaVjZf6HthThZl0eq7InIMahY0JrvbuFVgAYHJWVGR59Stjb/35C9hSaLVbsuA0Z4QaFvEF/yCtcQ==
   dependencies:
     "@feathersjs/adapter-commons" "^2.0.0"
     "@feathersjs/commons" "^4.0.0"
@@ -9449,6 +9458,11 @@ qs@6.5.2, qs@~6.5.2:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.6.0.tgz#a99c0f69a8d26bf7ef012f871cdabb0aee4424c2"
   integrity sha512-KIJqT9jQJDQx5h5uAVPimw6yVg2SekOKu959OCtktD3FjzbpvaPr8i4zzg07DOMz+igA4W/aNM7OV8H37pFYfA==
+
+qs@^6.5.0:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
+  integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
 
 query-string@^4.1.0:
   version "4.3.4"

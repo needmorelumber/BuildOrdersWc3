@@ -13,6 +13,7 @@ module.exports = {
     }
   },
   rules: {
+    'import/prefer-default-export': 'off',
     'arrow-parens': ['error', 'as-needed'],
     'no-unused-expressions': 'off',
     'object-curly-newline': ['error', { consistent: true }],
