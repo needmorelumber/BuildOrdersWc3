@@ -90,8 +90,13 @@ class Header extends React.Component {
     this.handleMobileMenuClose = this.handleMobileMenuClose.bind(this);
   }
 
-  handleProfileMenuOpen(event) {
-    this.setState({ anchorEl: event.currentTarget });
+  componentDidMount() {
+    // Fetch the user on load
+    this.props.fetchUser();
+  }
+
+  handleProfileMenuOpen() {
+    this.setState({ anchorEl: this.userMenuButton });
   }
 
   handleMenuClose() {
@@ -107,10 +112,6 @@ class Header extends React.Component {
     this.setState({ mobileMoreAnchorEl: null });
   }
 
-  componentWillMount() {
-    // Fetch the user on load
-    this.props.fetchUser();
-  }
 
   // Return the menuitems for mui
   // Optional second arg for mobile styles
@@ -203,7 +204,7 @@ class Header extends React.Component {
       <div className={classes.root}>
         <AppBar position="sticky">
           <Toolbar>
-            <img alt="logo" src={'./../main_logo.svg'} className={classes.imageLogo} />
+            <img alt="logo" src="./../main_logo.svg" className={classes.imageLogo} />
             <Divider className={classes.titleDivider} />
             <Typography variant="h5" color="inherit" noWrap className={classes.title}>
                 Need More Lumber
@@ -223,6 +224,7 @@ class Header extends React.Component {
               </IconButton>
             </div>
             <IconButton
+              ref={accountMenuButton => this.accountMenuButton = accountMenuButton}
               aria-owns={isMenuOpen ? 'material-appbar' : undefined}
               aria-haspopup="true"
               onClick={event => this.handleProfileMenuOpen(event)}

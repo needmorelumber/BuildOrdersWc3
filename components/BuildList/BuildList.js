@@ -3,7 +3,7 @@ import './buildList.sass';
 import { Link } from 'react-router-dom';
 import path from 'path';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import InfiniteScroll from 'react-infinite-scroll-component';
+// import InfiniteScroll from 'react-infinite-scroll-component';
 import BuildSingle from '../BuildSingle/BuildSingle';
 import CurrentBuild from '../../containers/CurrentBuild';
 import LoadingAnimation from '../loadingAnimation/loadingAnimation';
