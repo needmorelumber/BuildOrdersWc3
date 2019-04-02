@@ -2,20 +2,10 @@
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable global-require */
 const mongoose = require('mongoose');
-const path = require('path');
 const config = require('./config');
 
 
 mongoose.connect(config.dbURI);
-mongoose.connection.on('connected', () => {
-  console.log(`Mongoose default connection open to ${config.dbURI}`);
-});
-mongoose.connection.on('error', err => {
-  console.error(`Mongoose default connection error: ${err}`);
-});
-mongoose.connection.on('disconnected', () => {
-  console.log('Mongoose default connection disconnected');
-});
 
 process.on('SIGINT', () => {
   mongoose.connection.close(() => {
@@ -25,14 +15,16 @@ process.on('SIGINT', () => {
 });
 
 // Explicitly import models
-const modelsPath = path.join(__dirname, '../models');
-const modelPaths = [
-  'buildOrder.js',
-  'buildUnit.js',
-  'likes.js',
-  'raceUnit.js',
-  'tempUser.js',
-  'user.js',
-].map(model => path.join(modelsPath, model));
+// User stuff
+require('../models/user/user.js');
+require('../models/user/tempUser.js');
 
-modelPaths.forEach(modelPath => require(modelPath));
+// Build Stuff
+require('../models/builds/build.js');
+
+
+// outdated models to be deprecated
+require('../models/buildOrder.js');
+require('../models/buildUnit.js');
+require('../models/likes.js');
+require('../models/raceUnit.js');

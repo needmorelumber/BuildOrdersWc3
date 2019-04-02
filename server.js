@@ -1,20 +1,52 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const session = require('express-session');
+// Base
+const feathers = require('@feathersjs/feathers');
+const express = require('@feathersjs/express');
+const service = require('feathers-mongoose');
+
+// Nodejs
 const path = require('path');
+
+// middleware
+const session = require('express-session');
 const helmet = require('helmet');
-const mongoose = require('mongoose');
-const MongoStore = require('connect-mongo')(session);
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
-const config = require('./server/config/config');
 
+// Mongo
+const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session);
+
+// Our stuff
+const config = require('./server/config/config');
+// TODO: This slaps a bunch of things into global scope rather than
+// explicit exports/imports. Let's change that.
+require('./server/config/mongoose.js');
+const api = require('./server/config/api.js');
+
+const Build = require('./server/models/builds/build');
+
+// TODO: get rid of the need for this
 const PORT_NUM = '4200';
-const app = express();
+
+// Make Mongoose use the ES6 promise
+// This is needed to make Feathers happy.
+mongoose.Promise = global.Promise;
+
+// This creates an app that is both, an Express and Feathers app
+const app = express(feathers());
+
+// Turn on JSON body parsing for REST services
+app.use(express.json());
+// Turn on URL-encoded body parsing for REST services
+app.use(express.urlencoded({ extended: true }));
+// Set up REST transport using Express
+app.configure(express.rest());
+app.use(cookieParser());
+app.use(compression());
+app.use(helmet());
+
 
 // Get our API routes -- This connects into back end Logic //
-app.use(cookieParser());
-require('./server/config/mongoose.js');
 
 const db = mongoose.connection;
 app.use(session({
@@ -24,18 +56,16 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: db }),
 }));
 
-const api = require('./server/config/api.js');
-
-app.use(compression());
-
-app.use(helmet());
-app.use(bodyParser.json());
+// Server Route definitions
+app.use('/api/builds', service({ Model: Build }));
 app.use('/api', api);
 
+// Client route definitions
 app.use(express.static(path.join(__dirname, 'dist')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/dist/index.html'));
 });
+
 const port = process.env.PORT || PORT_NUM;
 app.set('port', port);
 

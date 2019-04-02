@@ -8,19 +8,15 @@ import Divider from '@material-ui/core/Divider';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
-import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-// Data
-import data from '../../MasterData';
 // Redux Actions
 import { fetchAndUpdateUser, logOut } from '../../actions/user';
+// Decorators
+import { decorateComponent } from '../../apps/common/helpers';
 
 const styles = theme => ({
   root: {
@@ -44,11 +40,9 @@ const styles = theme => ({
     //   }
   },
   title: {
-    // display: 'none',
-    fontSize: '.8em',
+    display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
-      fontSize: '1.4em',
     },
   },
   sectionDesktop: {
@@ -63,18 +57,6 @@ const styles = theme => ({
       display: 'none',
     },
   },
-  imageLogo: {
-    width: '6%',
-    color: 'white',
-    fill: 'white',
-  },
-  titleDivider: {
-    width: 1,
-    margin: '0 16px',
-    backgroundColor: '#262626',
-    display: 'inline-block',
-    transform: 'scaleX(0.5)',
-  },
 });
 
 class Header extends React.Component {
@@ -84,6 +66,7 @@ class Header extends React.Component {
       anchorEl: null,
       mobileMoreAnchorEl: null,
     };
+    // Replace the bindings after babel is in project
     this.handleProfileMenuOpen = this.handleProfileMenuOpen.bind(this);
     this.handleMenuClose = this.handleMenuClose.bind(this);
     this.handleMobileMenuOpen = this.handleMobileMenuOpen.bind(this);
@@ -92,11 +75,12 @@ class Header extends React.Component {
 
   componentDidMount() {
     // Fetch the user on load
-    this.props.fetchUser();
+    const { fetchUser } = this.props;
+    fetchUser();
   }
 
-  handleProfileMenuOpen() {
-    this.setState({ anchorEl: this.userMenuButton });
+  handleProfileMenuOpen(event) {
+    this.setState({ anchorEl: event.currentTarget });
   }
 
   handleMenuClose() {
@@ -137,7 +121,6 @@ class Header extends React.Component {
           {item.display}
         </MenuItem>
       </Link>
-
     ));
   }
 
@@ -145,8 +128,8 @@ class Header extends React.Component {
     const { anchorEl, mobileMoreAnchorEl } = this.state;
     const { classes, userState } = this.props;
     const { user } = userState.user;
-    const isMenuOpen = Boolean(anchorEl);
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+    const isMenuOpen = !!anchorEl;
+    const isMobileMenuOpen = !!mobileMoreAnchorEl;
     // The render of mobile drop down menu
     const renderMobileMenu = (
       <Menu
@@ -204,9 +187,7 @@ class Header extends React.Component {
       <div className={classes.root}>
         <AppBar position="sticky">
           <Toolbar>
-            <img alt="logo" src="./../main_logo.svg" className={classes.imageLogo} />
-            <Divider className={classes.titleDivider} />
-            <Typography variant="h5" color="inherit" noWrap className={classes.title}>
+            <Typography className={classes.title} variant="h6" color="inherit" noWrap>
                 Need More Lumber
             </Typography>
             <div className={classes.grow} />
@@ -224,7 +205,6 @@ class Header extends React.Component {
               </IconButton>
             </div>
             <IconButton
-              ref={accountMenuButton => this.accountMenuButton = accountMenuButton}
               aria-owns={isMenuOpen ? 'material-appbar' : undefined}
               aria-haspopup="true"
               onClick={event => this.handleProfileMenuOpen(event)}
@@ -245,8 +225,9 @@ Header.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
+// Redux state mapping
 const mapStateToProps = state => ({
-  ...state,
+  userState: state.userState,
 });
 const mapDispatchToProps = dispatch => ({
   fetchUser: () => {
@@ -256,8 +237,11 @@ const mapDispatchToProps = dispatch => ({
     dispatch(logOut());
   },
 });
-Header = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Header);
-export default withStyles(styles)(Header);
+
+// Apply MUI and Redux Decorators
+const decorators = [
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles),
+];
+
+export default decorateComponent(Header, decorators);
