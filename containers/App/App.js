@@ -2,11 +2,14 @@ import React, { Fragment } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+// Mui colors
+import brown from '@material-ui/core/colors/brown';
+import green from '@material-ui/core/colors/green';
 
 import BuildsPage from '../BuildsPage';
 import Header from '../../components/Header/Header_MUI';
 import NewBuild from '../../components/NewBuild/NewBuild';
-import TimeLineContainer from '../TimeLineContainer';
+// import TimeLineContainer from '../TimeLineContainer';
 import NoMatch from '../../components/noMatch';
 import LoginPage from '../LoginPage';
 import RegisterPage from '../RegisterPage';
@@ -14,9 +17,8 @@ import UserPage from '../UserPage';
 import Home from '../../components/Home/Home';
 import InGameHelper from '../InGameHelper';
 import EditBuildPage from '../EditBuildPage';
-// Mui colors 
-import brown from '@material-ui/core/colors/brown';
-import green from '@material-ui/core/colors/green';
+
+import BuildDetail from '../../apps/buildOrders/components/pages/detail';
 // import Footer from '../../components/Footer/Footer';
 import './app.sass';
 
@@ -30,15 +32,15 @@ const theme = createMuiTheme({
 
 const App = () => (
   <MuiThemeProvider theme={theme}>
-  <Fragment>
-    <CssBaseline />
-    <Header />
+    <Fragment>
+      <CssBaseline />
+      <Header />
       <Switch>
         <Redirect from="/" to="/home" exact />
         <Route path="/home" component={Home} exact />
         <Route path="/builds/new" component={NewBuild} />
         <Route path="/builds" component={BuildsPage} exact />
-        <Route path="/build/:id" component={TimeLineContainer} exact />
+        <Route path="/builds/:id" component={BuildDetail} exact />
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
         <Route path="/user/profile" component={UserPage} />
@@ -46,8 +48,8 @@ const App = () => (
         <Route path="/build/:id/edit" component={EditBuildPage} />
         <Route component={NoMatch} />
       </Switch>
-    {/* <Footer /> */}
-  </Fragment>
+      {/* <Footer /> */}
+    </Fragment>
   </MuiThemeProvider>
 );
 
