@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import warcraftApp from './reducers/index';
+import reducers from './reducers/index';
 import configureStore from './store/configureStore';
 // TODO: convert to index.js to avoid redundancy
 import App from './containers/App/App';
 
 import './index.sass';
 
-const store = configureStore(warcraftApp);
+const store = configureStore(reducers);
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>

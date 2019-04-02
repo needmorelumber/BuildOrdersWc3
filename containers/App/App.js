@@ -19,6 +19,9 @@ import InGameHelper from '../InGameHelper';
 import EditBuildPage from '../EditBuildPage';
 
 import BuildDetail from '../../apps/buildOrders/components/pages/detail';
+import BuildList from '../../apps/buildOrders/components/pages/list';
+import BuildCreate from '../../apps/buildOrders/components/pages/create';
+import BuildUpdate from '../../apps/buildOrders/components/pages/update';
 // import Footer from '../../components/Footer/Footer';
 import './app.sass';
 
@@ -38,17 +41,23 @@ const App = () => (
       <Switch>
         <Redirect from="/" to="/home" exact />
         <Route path="/home" component={Home} exact />
+
+        {/* Old Build routes */}
         <Route path="/builds/new" component={NewBuild} />
         <Route path="/builds" component={BuildsPage} exact />
+
+        {/* New Build routes */}
+        <Route path="/builds-list" component={BuildList} exact />
         <Route path="/builds/:id" component={BuildDetail} exact />
+        <Route path="/builds/update/:id" component={BuildUpdate} exact />
+        <Route path="/builds/create" component={BuildCreate} exact />
+
+        {/* auth / user routes */}
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
         <Route path="/user/profile" component={UserPage} />
-        <Route path="/build/:id/playing" component={InGameHelper} />
-        <Route path="/build/:id/edit" component={EditBuildPage} />
         <Route component={NoMatch} />
       </Switch>
-      {/* <Footer /> */}
     </Fragment>
   </MuiThemeProvider>
 );
