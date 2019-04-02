@@ -1,32 +1,44 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './buildList.sass';
+// MUI
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import { withStyles } from '@material-ui/core';
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+  },
+});
 
 class BuildListControls extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0,
+    };
+  }
+
+  handleChange(event, value) {
+    this.setState({ value });
+  }
+
   render() {
+    const { value } = this.state;
+    const { classes, setFilter } = this.props;
     return (
-      <div className="row rows" style={{ marginTop: 100 }}>
-        <aside className="row">
-          <p className="">
-            Filter by Race
-          </p>
-          <ul className="filter-race-menu">
-            <li onClick={() => this.props.setFilter('SHOW_ALL')}>
-              <a>All Races</a>
-            </li>
-            <li onClick={() => this.props.setFilter('SHOW_ORC')}>
-              <a>Orc</a>
-            </li>
-            <li onClick={() => this.props.setFilter('SHOW_HUMAN')}>
-              <a>Human</a>
-            </li>
-            <li onClick={() => this.props.setFilter('SHOW_UNDEAD')}>
-              <a>Undead</a>
-            </li>
-            <li onClick={() => this.props.setFilter('SHOW_NIGHTELF')}>
-              <a>Nightelf</a>
-            </li>
-          </ul>
-        </aside>
+      <div className={classes.root}>
+        <AppBar position="static" color="secondary">
+          <Tabs value={value} indicatorColor="primary" onChange={(event, changedValue) => this.handleChange(event, changedValue)}>
+            <Tab onClick={() => setFilter('SHOW_ALL')} label="Show All" />
+            <Tab onClick={() => setFilter('SHOW_ORC')} label="Orc" />
+            <Tab onClick={() => setFilter('SHOW_HUMAN')} label="Human" />
+            <Tab onClick={() => setFilter('SHOW_UNDEAD')} label="Undead" />
+            <Tab onClick={() => setFilter('SHOW_NIGHTELF')} label="Night Elf" />
+          </Tabs>
+        </AppBar>
         {/* <aside className="row menu">
           <p className="menu-label">
             Sort By
@@ -45,4 +57,4 @@ class BuildListControls extends Component {
   }
 }
 
-export default BuildListControls;
+export default withStyles(styles)(BuildListControls);
