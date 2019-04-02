@@ -48,9 +48,9 @@ const App = () => (
 
         {/* New Build routes */}
         <Route path="/builds-list" component={BuildList} exact />
+        <Route path="/builds/create" component={BuildCreate} exact />
         <Route path="/builds/:id" component={BuildDetail} exact />
         <Route path="/builds/update/:id" component={BuildUpdate} exact />
-        <Route path="/builds/create" component={BuildCreate} exact />
 
         {/* auth / user routes */}
         <Route path="/login" component={LoginPage} />
