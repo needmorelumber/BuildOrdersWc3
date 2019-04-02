@@ -14,6 +14,8 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 // Redux Actions
 import { fetchAndUpdateUser, logOut } from '../../actions/user';
+// Decorators
+import { decorateComponent } from '../../apps/common/helpers';
 
 const styles = theme => ({
   root: {
@@ -124,7 +126,6 @@ class Header extends React.Component {
   render() {
     const { anchorEl, mobileMoreAnchorEl } = this.state;
     const { classes, userState } = this.props;
-    console.log(userState)
     const { user } = userState.user;
     const isMenuOpen = !!anchorEl;
     const isMobileMenuOpen = !!mobileMoreAnchorEl;
@@ -223,6 +224,7 @@ Header.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
+// Redux state mapping
 const mapStateToProps = state => ({
   userState: state.userState,
 });
@@ -234,8 +236,11 @@ const mapDispatchToProps = dispatch => ({
     dispatch(logOut());
   },
 });
-Header = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Header);
-export default withStyles(styles)(Header);
+
+// Apply MUI and Redux Decorators
+const decorators = [
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles),
+];
+
+export default decorateComponent(Header, decorators);
