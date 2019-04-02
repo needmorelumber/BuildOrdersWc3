@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { decorateComponent } from '../../../common/helpers';
-import { getBuildOrderCall } from '../../ducks';
+import { getBuildOrderCall } from '../../ducks/build';
 
 const mapStateToProps = ({ buildOrder }) => ({
   buildOrder,
