@@ -1,17 +1,28 @@
-import PropTypes from 'prop-types';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {
+  Typography,
+  Link,
+  CssBaseline,
+} from '@material-ui/core';
+
 import { decorateComponent } from '../../../common/helpers';
-import { getBuildOrderCall, updateBuild } from '../../ducks/build';
+
+import { updateBuild, getBuildOrderCall } from '../../ducks/build';
+import UpdateBuildForm from '../forms/buildForm';
+import { buildMatchup } from '../../helpers';
 
 const mapStateToProps = ({ buildOrder }) => ({
   buildOrder,
 });
 
+
 const mapDispatchToProps = {
   getBuildOrder: getBuildOrderCall,
   updateBuildOrder: updateBuild,
 };
+
 
 class BuildUpdate extends React.Component {
   componentDidMount() {
@@ -23,31 +34,44 @@ class BuildUpdate extends React.Component {
   }
 
   render() {
-    const { buildOrder } = this.props;
+    const onSubmit = values => this.props.updateBuildOrder(
+      {
+        _id: this.props.buildOrder._id,
+        matchup: buildMatchup(values.race, values.opposing_race),
+        ownerId: this.props.buildOrder.ownerId,
+        ownerUsername: this.props.buildOrder.ownerUsername,
+        ...values,
+      },
+    );
+
     return (
-      <div>
-        <span>name: {buildOrder.name}</span> <br />
-        <span>race: {buildOrder.race}</span> <br />
-        <span>opposing_race: {buildOrder.opposing_race}</span> <br />
-        <span>matchup: {buildOrder.matchup}</span> <br />
-        <span>description: {buildOrder.description}</span> <br />
-        <span>patch: {buildOrder.patch}</span> <br />
-        <span>ownerUsername: {buildOrder.ownerUsername}</span> <br />
-        <span>ownerId: {buildOrder.ownerId}</span> <br />
-        <span>buildSteps: {buildOrder.buildSteps}</span> <br />
+      <div style={{ padding: 16, margin: 'auto', maxWidth: 900 }}>
+        <CssBaseline />
+        <Typography variant="h5" align="center" component="h2" gutterBottom>
+          Edit Your Build
+        </Typography>
+        <Typography paragraph>
+          I stole <Link href="https://codesandbox.io/s/9ywq085k9w">this code.</Link>
+        </Typography>
+        <UpdateBuildForm
+          onSubmit={onSubmit}
+          validate={() => ({})}
+          initialValues={this.props.buildOrder}
+        />
       </div>
     );
   }
 }
 
+BuildUpdate.propTypes = {
+  updateBuildOrder: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
+  buildOrder: PropTypes.object,
+  getBuildOrder: PropTypes.func.isRequired,
+};
+
 const decorators = [
   connect(mapStateToProps, mapDispatchToProps),
 ];
-
-BuildUpdate.propTypes = {
-  match: PropTypes.object.isRequired,
-  getBuildOrder: PropTypes.func.isRequired,
-  buildOrder: PropTypes.object,
-};
 
 export default decorateComponent(BuildUpdate, decorators);

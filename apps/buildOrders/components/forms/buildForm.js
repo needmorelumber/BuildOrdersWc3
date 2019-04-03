@@ -3,30 +3,22 @@ import PropTypes from 'prop-types';
 import { Form, Field } from 'react-final-form';
 import { TextField, Select } from 'final-form-material-ui';
 import {
-  Typography,
   Paper,
-  Link,
   Grid,
   Button,
-  CssBaseline,
   MenuItem,
 } from '@material-ui/core';
 
-const validate = () => {
-  1 + 1;
-  return {};
-};
+import { PATCHES, RACES } from '../../constants';
 
-const initialValues = {
-
-};
-
-const raceDropdownItems = [
-  (<MenuItem key="HU" value="HU">Human</MenuItem>),
-  (<MenuItem key="NE" value="NE">Night Elf</MenuItem>),
-  (<MenuItem key="OR" value="OR">Orc</MenuItem>),
-  (<MenuItem key="UD" value="UD">Undead</MenuItem>),
-];
+const raceDropdownItems = RACES.map(race => (
+  <MenuItem
+    key={race.code}
+    value={race.code}
+  >
+    {race.label}
+  </MenuItem>
+));
 
 // eslint-disable-next-line react/prop-types
 const formRender = ({ handleSubmit, submitting, values }) => (
@@ -77,7 +69,7 @@ const formRender = ({ handleSubmit, submitting, values }) => (
             label="Patch"
             formControlProps={{ fullWidth: true }}
           >
-            <MenuItem key="" value="1.30.4">1.30.4</MenuItem>
+            {PATCHES.map(patch => (<MenuItem key={patch} value={patch}>{patch}</MenuItem>))}
           </Field>
         </Grid>
         <Grid item xs={12}>
@@ -109,27 +101,20 @@ const formRender = ({ handleSubmit, submitting, values }) => (
   </form>
 );
 
-const CreateBuildForm = ({ onSubmit }) => (
-  <div style={{ padding: 16, margin: 'auto', maxWidth: 900 }}>
-    <CssBaseline />
-    <Typography variant="h5" align="center" component="h2" gutterBottom>
-      Create Build
-    </Typography>
-    <Typography paragraph>
-      I stole <Link href="https://codesandbox.io/s/9ywq085k9w">this code.</Link>
-    </Typography>
-    <Form
-      onSubmit={onSubmit}
-      initialValues={initialValues}
-      validate={validate}
-      render={formRender}
-    />
-  </div>
+const CreateUpdateBuildForm = ({ onSubmit, initialValues = {}, validate }) => (
+  <Form
+    onSubmit={onSubmit}
+    initialValues={initialValues}
+    validate={validate}
+    render={formRender}
+  />
 );
 
-CreateBuildForm.propTypes = {
+CreateUpdateBuildForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  initialValues: PropTypes.object,
+  validate: PropTypes.func.isRequired,
 };
 
 
-export default CreateBuildForm;
+export default CreateUpdateBuildForm;
