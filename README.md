@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/needmorelumber/BuildOrdersWc3/tree/master.svg?style=svg)](https://circleci.com/gh/needmorelumber/BuildOrdersWc3/tree/master)
 ## Hey this is www.needMoreLumber.com
 
 It's a place to create and share build orders for warcraft 3, and use those builds to help you in game.
@@ -39,3 +40,8 @@ docker-compose up
 ```
 
 after this has completed you should be able to visit http://localhost:3000/ and your local is set up.
+
+## Steal our code
+NeedMoreLumber is open source and under the [APGL-3.0](https://github.com/needmorelumber/BuildOrdersWc3/blob/master/LICENSE.txt) license. This means you're free to steal it if you want but it has to be open source with the same license. So if you want to steal our code and build NeedMoreGold.com that's fine, actually please do so you can pay for hosting costs!
+
+Otherwise just open an issue or pull request and we'll try to make NML the best it can be.
