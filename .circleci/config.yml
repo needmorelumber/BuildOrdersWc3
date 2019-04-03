@@ -8,6 +8,7 @@ jobs:
     docker:
       - image: circleci/node:10-browsers
     steps:
+      - checkout
       # TODO: see how useful this is.
       - node/with-cache:
           cache-key: "yarn.lock"
