@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"webpack-dev-server --config  webpack.dev.js --host 0.0.0.0 --inline\" \"supervisor server.js\"",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js",
+    "lint": "eslint actions components containers reducers server store"
   },
   "env": {
     "development": {
