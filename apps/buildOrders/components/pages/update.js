@@ -42,7 +42,7 @@ class BuildUpdate extends React.Component {
         ownerUsername: this.props.buildOrder.ownerUsername,
         ...values,
       },
-    );
+    ).then(() => this.props.history.replace(`/builds/${this.props.buildOrder._id}/`));
 
     return (
       <div style={{ padding: 16, margin: 'auto', maxWidth: 900 }}>
@@ -64,8 +64,9 @@ class BuildUpdate extends React.Component {
 }
 
 BuildUpdate.propTypes = {
-  updateBuildOrder: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  updateBuildOrder: PropTypes.func.isRequired,
   buildOrder: PropTypes.object,
   getBuildOrder: PropTypes.func.isRequired,
 };

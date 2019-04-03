@@ -13,9 +13,9 @@ export const getBuildOrderCall = id => dispatch => builds
   .get(id)
   .then(build => dispatch(setBuildOrder(build)));
 
-export const createBuild = build => builds.create(build);
+export const createBuild = build => () => builds.create(build);
 
-export const updateBuild = build => builds.update(build._id, build);
+export const updateBuild = build => () => builds.update(build._id, build);
 
 export const createDummyBuild = () => createBuild({
   name: 'foobar',

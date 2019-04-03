@@ -19,7 +19,7 @@ const mapDispatchToProps = {
 };
 
 
-const BuildCreate = ({ createBuildOrder }) => {
+const BuildCreate = ({ createBuildOrder, history }) => {
   const onSubmit = values => createBuildOrder(
     {
       matchup: buildMatchup(values.race, values.opposing_race),
@@ -27,7 +27,7 @@ const BuildCreate = ({ createBuildOrder }) => {
       ownerUsername: 'fakeUser',
       ...values,
     },
-  );
+  ).then(createdBuild => history.replace(`/builds/${createdBuild._id}/`));
 
   const initialValues = {
     patch: getCurrentPatch(),
@@ -53,6 +53,7 @@ const BuildCreate = ({ createBuildOrder }) => {
 
 BuildCreate.propTypes = {
   createBuildOrder: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 const decorators = [
