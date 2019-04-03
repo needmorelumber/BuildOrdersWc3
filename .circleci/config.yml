@@ -5,6 +5,8 @@ orbs:
 
 jobs:
   build-and-lint:
+    docker:
+      - image: circleci/node:10-browsers
     steps:
       # TODO: see how useful this is.
       - node/with-cache:
