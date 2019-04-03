@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/needmorelumber/BuildOrdersWc3/tree/master.svg?style=svg)](https://circleci.com/gh/needmorelumber/BuildOrdersWc3/tree/master)
 ## Hey this is www.needMoreLumber.com
 
 It's a place to create and share build orders for warcraft 3, and use those builds to help you in game.
