@@ -1,5 +1,5 @@
 # Get latest node
-FROM node:8
+FROM node:10-alpine
 
 # install dependencies first, in a different location for easier app bind mounting for local development.
 # Note: that means if you try to put it in /app, it will fail...
