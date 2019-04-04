@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   Typography,
-  Link,
   CssBaseline,
 } from '@material-ui/core';
 
@@ -38,9 +37,6 @@ const BuildCreate = ({ createBuildOrder, history }) => {
       <CssBaseline />
       <Typography variant="h5" align="center" component="h2" gutterBottom>
         Create Build
-      </Typography>
-      <Typography paragraph>
-        I stole <Link href="https://codesandbox.io/s/9ywq085k9w">this code.</Link>
       </Typography>
       <CreateBuildForm
         onSubmit={onSubmit}

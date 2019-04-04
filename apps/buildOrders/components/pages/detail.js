@@ -33,7 +33,7 @@ class BuildDetail extends React.Component {
         <span>patch: {buildOrder.patch}</span> <br />
         <span>ownerUsername: {buildOrder.ownerUsername}</span> <br />
         <span>ownerId: {buildOrder.ownerId}</span> <br />
-        <span>buildSteps: {buildOrder.buildSteps}</span> <br />
+        <span>buildSteps: <pre>{JSON.stringify(buildOrder.buildSteps)}</pre></span> <br />
       </div>
     );
   }

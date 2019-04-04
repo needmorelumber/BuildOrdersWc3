@@ -4,7 +4,6 @@ const buildStepSchema = new mongoose.Schema({
   food: { type: String, required: true, trim: true },
   totalFood: { type: String, required: true, trim: true },
   description: { type: String, required: true },
-  order: { type: Number, required: true },
 }, { timestamp: true });
 
 const buildSchema = new mongoose.Schema({
