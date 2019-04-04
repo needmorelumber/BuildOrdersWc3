@@ -1,17 +1,16 @@
 require('path');
-require('clean-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  title: 'Need More Lumber',
-  template: 'index.html',
-});
 module.exports = {
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          'style-loader',
+          'css-loader',
+        ],
       },
       {
         test: /\.svg$/,
@@ -26,30 +25,34 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [{
-          loader: 'style-loader', // creates style nodes from JS strings
-        }, {
-          loader: 'css-loader', // translates CSS into CommonJS
-        }, {
-          loader: 'sass-loader', // compiles Sass to CSS
-        }, {
-          loader: 'resolve-url-loader', // translates CSS into CommonJS
-        },
+        use: [
+          'style-loader', // creates style nodes from JS strings
+          'css-loader', // translates CSS into CommonJS
+          'sass-loader', // compiles Sass to CSS
+          'resolve-url-loader', // translates CSS into CommonJS
         ],
       },
-      { test: /\.sass$/,
-        use: [{
-          loader: 'style-loader', // creates style nodes from JS strings
-        }, {
-          loader: 'css-loader', // translates CSS into CommonJS
-        }, {
-          loader: 'resolve-url-loader', // translates CSS into CommonJS
-        }, {
-          loader: 'sass-loader', // compiles Sass to CSS
-        }] },
-      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
+      {
+        test: /\.sass$/,
+        use: [
+          'style-loader', // creates style nodes from JS strings
+          'css-loader', // translates CSS into CommonJS
+          'resolve-url-loader', // translates CSS into CommonJS
+          'sass-loader', // compiles Sass to CSS
+        ],
+      },
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+      },
     ],
   },
-  plugins: [HtmlWebpackPluginConfig],
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Need More Lumber',
+      template: 'index.html',
+    }),
+    new CleanWebpackPlugin(),
+  ],
 };
