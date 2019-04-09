@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"webpack-dev-server --config  webpack.dev.js --host 0.0.0.0 --inline\" \"supervisor server.js\"",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js",
+    "lint": "eslint actions components containers reducers server store"
   },
   "env": {
     "development": {
@@ -41,6 +42,9 @@
     "express-sessions": "^1.0.6",
     "fakegoose": "0.0.2",
     "feathers-mongoose": "7.3.0",
+    "final-form": "^4.12.0",
+    "final-form-arrays": "^1.1.2",
+    "final-form-material-ui": "^0.3.0",
     "font-awesome": "^4.7.0",
     "helmet": "^3.12.0",
     "img-loader": "^2.0.1",
@@ -54,7 +58,12 @@
     "react-burger-menu": "^2.4.2",
     "react-dom": "^16.8.6",
     "react-drawer": "^1.3.2",
+<<<<<<< HEAD
     "react-infinite-scroll-component": "^4.5.2",
+=======
+    "react-final-form": "^4.1.0",
+    "react-final-form-arrays": "^2.0.3",
+>>>>>>> 9ea5146ddb15d19fd3a2ab3fde3b1c098305e083
     "react-md": "^1.2.11",
     "react-native": "^0.55.3",
     "react-paginate": "^5.1.0",
