@@ -55,7 +55,7 @@ const App = () => (
       <CssBaseline />
       <Header />
       <Switch>
-        <Redirect from="/" to="/home" exact />
+        <Redirect from="/" to="/builds-list" exact />
         <Route path="/home" component={Home} exact />
 
         {/* Old Build routes */}
@@ -63,7 +63,7 @@ const App = () => (
         <Route path="/builds" component={BuildsPage} exact />
 
         {/* New Build routes */}
-        <Route path="/builds-list" component={BuildList} exact />
+        <Route path="/builds-list" component={BuildsPage} exact />
         <Route path="/builds/create" component={BuildCreate} exact />
         <Route path="/builds/:id" component={BuildDetail} exact />
         <Route path="/builds/:id/update" component={BuildUpdate} exact />
