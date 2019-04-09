@@ -57,7 +57,7 @@ const formRender = ({ handleSubmit, submitting, values }) => (
           <Field
             fullWidth
             required
-            name="opposing_race"
+            name="opposingRace"
             component={Select}
             label="Opposing Race"
             formControlProps={{ fullWidth: true }}
