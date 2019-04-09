@@ -12,9 +12,16 @@ import {
   Typography,
   Divider,
 } from '@material-ui/core';
+import { HotKeys } from 'react-hotkeys';
 
 import { TextFieldInput } from '../../../common/components/react-final-form-material-ui-fields';
 import { PATCHES, RACES } from '../../constants';
+
+const keyMap = {
+  ADD_ROW: { sequence: 'tab', action: 'keyup' },
+  MOVE_ROW_UP: 'up',
+  MOVE_ROW_DOWN: 'down',
+};
 
 const raceDropdownItems = RACES.map(race => (
   <MenuItem
@@ -100,9 +107,16 @@ const formRender = ({ handleSubmit, submitting, values }) => (
         </Grid>
         <FieldArray name="buildSteps">
           {({ fields }) => fields.map((buildStep, index) => {
-            const onKeyUp = e => {
-              // @TODO use https://github.com/greena13/react-hotkeys
-              if (e.keyCode === 38) {
+            const handlers = {
+              ADD_ROW: e => {
+                console.log('TAB!');
+                if (index === fields.length - 1) {
+                  fields.push(null);
+                  e.preventDefault();
+                }
+              },
+              MOVE_ROW_UP: e => {
+                console.log('UP!');
                 try {
                   // Up key pressed
                   e.preventDefault();
@@ -110,8 +124,9 @@ const formRender = ({ handleSubmit, submitting, values }) => (
                 } catch (error) {
                   // do nothing.
                 }
-              }
-              if (e.keyCode === 40) {
+              },
+              MOVE_ROW_DOWN: e => {
+                console.log('DOWN!');
                 try {
                   // Down key pressed
                   e.preventDefault();
@@ -119,7 +134,7 @@ const formRender = ({ handleSubmit, submitting, values }) => (
                 } catch (error) {
                   // do nothing;
                 }
-              }
+              },
             };
             return (
               <Fragment key={buildStep}>
@@ -130,9 +145,6 @@ const formRender = ({ handleSubmit, submitting, values }) => (
                     component={TextFieldInput}
                     type="text"
                     label="Food"
-                    extraInput={{
-                      onKeyUp,
-                    }}
                   />
                 </Grid>
                 <Grid item xs={1}>
@@ -142,31 +154,19 @@ const formRender = ({ handleSubmit, submitting, values }) => (
                     component={TextFieldInput}
                     type="text"
                     label="Total"
-                    extraInput={{
-                      onKeyUp,
-                    }}
                   />
                 </Grid>
                 <Grid item xs={10}>
-                  <Field
-                    fullWidth
-                    multiline
-                    name={`${buildStep}.description`}
-                    component={TextFieldInput}
-                    type="textarea"
-                    label="Notes"
-                    extraInput={{
-                      onKeyUp,
-                      onKeyDown: e => {
-                        // @TODO use https://github.com/greena13/react-hotkeys
-                        if (index === fields.length - 1
-                          && e.keyCode === 9) {
-                          fields.push(null);
-                          e.preventDefault();
-                        }
-                      },
-                    }}
-                  />
+                  <HotKeys keyMap={keyMap} handlers={handlers}>
+                    <Field
+                      fullWidth
+                      multiline
+                      name={`${buildStep}.description`}
+                      component={TextFieldInput}
+                      type="textarea"
+                      label="Notes"
+                    />
+                  </HotKeys>
                 </Grid>
               </Fragment>
             );
