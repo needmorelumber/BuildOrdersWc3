@@ -12,7 +12,7 @@ import {
   Typography,
   Divider,
 } from '@material-ui/core';
-import { HotKeys } from 'react-hotkeys';
+import { withHotKeys } from 'react-hotkeys';
 
 import { TextFieldInput } from '../../../common/components/react-final-form-material-ui-fields';
 import { PATCHES, RACES } from '../../constants';
@@ -134,12 +134,12 @@ const formRender = ({ handleSubmit, submitting, values }) => (
               },
             };
             return (
-              <HotKeys component={Fragment} key={buildStep} keyMap={keyMap} handlers={handlers}>
+              <Fragment key={buildStep}>
                 <Grid item xs={1}>
                   <Field
                     fullWidth
                     name={`${buildStep}.food`}
-                    component={TextFieldInput}
+                    component={withHotKeys(TextFieldInput, { keyMap, handlers })}
                     type="text"
                     label="Food"
                   />
@@ -148,7 +148,7 @@ const formRender = ({ handleSubmit, submitting, values }) => (
                   <Field
                     fullWidth
                     name={`${buildStep}.totalFood`}
-                    component={TextFieldInput}
+                    component={withHotKeys(TextFieldInput, { keyMap, handlers })}
                     type="text"
                     label="Total"
                   />
@@ -158,12 +158,12 @@ const formRender = ({ handleSubmit, submitting, values }) => (
                     fullWidth
                     multiline
                     name={`${buildStep}.description`}
-                    component={TextFieldInput}
+                    component={withHotKeys(TextFieldInput, { keyMap, handlers })}
                     type="textarea"
                     label="Notes"
                   />
                 </Grid>
-              </HotKeys>
+              </Fragment>
             );
           })}
         </FieldArray>

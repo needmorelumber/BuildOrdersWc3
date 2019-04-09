@@ -7,21 +7,23 @@ import TextField from '@material-ui/core/TextField';
 // because I needed to give it extraInput.
 export const TextFieldInput = (
   // eslint-disable-next-line react/prop-types
-  { input: { name, onChange, value, ...restInput }, meta, extraInput, ...rest },
+  { input: { name, onChange, value, ...restInput }, meta, hotKeys, handlers, ...rest },
 ) => {
   const showError = (
     (meta.submitError && !meta.dirtySinceLastSubmit) || meta.error
   ) && meta.touched;
 
   return (
-    <TextField
-      {...rest}
-      name={name}
-      helperText={showError ? meta.error || meta.submitError : undefined}
-      error={showError}
-      inputProps={{ ...restInput, ...extraInput }}
-      onChange={onChange}
-      value={value}
-    />
+    <span {...{ ...hotKeys, handlers }}>
+      <TextField
+        {...rest}
+        name={name}
+        helperText={showError ? meta.error || meta.submitError : undefined}
+        error={showError}
+        inputProps={{ ...restInput }}
+        onChange={onChange}
+        value={value}
+      />
+    </span>
   );
 };
