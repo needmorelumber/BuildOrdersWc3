@@ -41,6 +41,7 @@
     "express-session": "^1.15.6",
     "express-sessions": "^1.0.6",
     "fakegoose": "0.0.2",
+    "feathers-mongodb-fuzzy-search": "^1.1.1",
     "feathers-mongoose": "7.3.0",
     "final-form": "^4.12.0",
     "final-form-arrays": "^1.1.2",

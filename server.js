@@ -2,6 +2,7 @@
 const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 const service = require('feathers-mongoose');
+const search = require('feathers-mongodb-fuzzy-search');
 
 // Nodejs
 const path = require('path');
@@ -44,6 +45,24 @@ app.configure(express.rest());
 app.use(cookieParser());
 app.use(compression());
 app.use(helmet());
+
+// this is here to do fuzzy searching on LIST page
+app.hooks({
+  before: {
+    all: [
+      search(), // full text search on text indexes
+      search({
+        fields: [
+          'name',
+          'race',
+          'opposingRace',
+          'description',
+          'ownerUsername',
+        ],
+      }),
+    ],
+  },
+});
 
 
 // Get our API routes -- This connects into back end Logic //

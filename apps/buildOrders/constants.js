@@ -11,3 +11,7 @@ export const RACES = [
   { code: 'OR', label: 'Orc' },
   { code: 'UD', label: 'Undead' },
 ];
+
+export const getRaceLabel = race => RACES.find(el => el.code === race).label;
+
+export const getIconString = race => `https://s3.us-west-2.amazonaws.com/needmorelumberassets/icons/${getRaceLabel(race)}.jpg`;

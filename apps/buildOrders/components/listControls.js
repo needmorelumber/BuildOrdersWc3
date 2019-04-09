@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 // MUI
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -8,6 +9,8 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core';
+
+import { FEATHERS_DESCENDING } from '../../common/constants';
 
 const styles = theme => ({
   root: {
@@ -23,12 +26,57 @@ const styles = theme => ({
   },
 });
 
+const searchFields = [
+  'name',
+  'race',
+  'opposingRace',
+  'description',
+  'ownerUsername',
+];
+
 class BuildListControls extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      sortType: 'createdAt',
+      filterRace: undefined,
+      searchTerms: '',
       value: 0,
     };
+  }
+
+  setSortType(sortType, callback) {
+    return this.setState({ sortType }, callback);
+  }
+
+  setFilter(filterRace, callback) {
+    return this.setState({ filterRace }, callback);
+  }
+
+  setSearchTerm(searchTerms, callback) {
+    return this.setState({ searchTerms }, callback);
+  }
+
+  getBuilds() {
+    const { searchTerms } = this.state;
+
+    // this uses feathers-mongodb-fuzzy-search to ask:
+    // "Find me any entity where one of the fields in searchFields fuzzy-matches the search term"
+    const search = searchTerms
+      ? {
+        $or: searchFields.map(field => ({ [field]: { $search: searchTerms } })),
+      }
+      : {};
+
+    return this.props.getBuildOrders({
+      query: {
+        race: this.state.filterRace,
+        $sort: {
+          [this.state.sortType]: FEATHERS_DESCENDING,
+        },
+        ...search,
+      },
+    });
   }
 
   handleChange(event, value) {
@@ -37,30 +85,28 @@ class BuildListControls extends Component {
 
   render() {
     const { value } = this.state;
-    const { classes, getBuildOrders } = this.props;
-    const setFilter = race => (
-      !race || race === ''
-        ? getBuildOrders()
-        : getBuildOrders({
-          query: {
-            race,
-          },
-        })
-    );
+    const { classes } = this.props;
+
+    const onTabClick = race => () => {
+      this.setFilter(race, this.getBuilds);
+    };
+
+    const onSearch = e => {
+      this.setSearchTerm(e.target.value, this.getBuilds);
+    };
 
     return (
       <div className={classes.root}>
         <AppBar position="static" color="secondary">
           <Tabs value={value} indicatorColor="primary" onChange={(event, changedValue) => this.handleChange(event, changedValue)}>
-            <Tab onClick={() => setFilter('')} className={classes.tabTitle} label="Show All" />
-            <Tab onClick={() => setFilter('OR')} className={classes.tabTitle} label="Orc" />
-            <Tab onClick={() => setFilter('HU')} className={classes.tabTitle} label="Human" />
-            <Tab onClick={() => setFilter('UD')} className={classes.tabTitle} label="Undead" />
-            <Tab onClick={() => setFilter('NE')} className={classes.tabTitle} label="Night Elf" />
+            <Tab onClick={onTabClick()} className={classes.tabTitle} label="Show All" />
+            <Tab onClick={onTabClick('OR')} className={classes.tabTitle} label="Orc" />
+            <Tab onClick={onTabClick('HU')} className={classes.tabTitle} label="Human" />
+            <Tab onClick={onTabClick('UD')} className={classes.tabTitle} label="Undead" />
+            <Tab onClick={onTabClick('NE')} className={classes.tabTitle} label="Night Elf" />
           </Tabs>
         </AppBar>
-        {/* SEARCH BAR, UNCOMMENT WHEN CONNECTED TO DATA */}
-        {/* <Toolbar>
+        <Toolbar>
           <TextField
             variant="outlined"
             fullWidth
@@ -74,10 +120,9 @@ class BuildListControls extends Component {
                 </InputAdornment>
               ),
             }}
-            ref={input => this.input = input}
-            onChange={event => this.handleSearchChange(event)}
+            onChange={onSearch}
           />
-        </Toolbar> */}
+        </Toolbar>
         {/* <aside className="row menu">
           <p className="menu-label">
             Sort By
@@ -86,7 +131,7 @@ class BuildListControls extends Component {
             <li onClick={() => this.props.setSortType("POPULARITY")}>
               <a>Popularity</a>
             </li>
-            <li onClick={() => this.props.setSortType("CREATED_ON")}>
+            <li onClick={() => this.props.setSortType("createdAt")}>
               <a>Date Created</a>
             </li>
           </ul>
@@ -95,5 +140,10 @@ class BuildListControls extends Component {
     );
   }
 }
+
+BuildListControls.propTypes = {
+  classes: PropTypes.object.isRequired,
+  getBuildOrders: PropTypes.func.isRequired,
+};
 
 export default withStyles(styles)(BuildListControls);

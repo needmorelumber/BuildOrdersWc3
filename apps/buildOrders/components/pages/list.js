@@ -21,7 +21,7 @@ const mapDispatchToProps = {
 };
 
 // Styles
-const styles = theme => ({
+const styles = () => ({
   root: {
     margin: 10,
     minHeight: '90vh',
