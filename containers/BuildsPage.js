@@ -7,8 +7,9 @@ import { withStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
-import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
 // Inline css
 import '../components/BuildList/buildList.sass';
 import { Toolbar } from 'react-md';
@@ -24,50 +25,9 @@ const styles = theme => ({
     left: '90%',
     bottom: '10%',
   },
-  search: {
-    position: 'relative',
-    marginTop: 20,
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing.unit * 2,
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing.unit * 3,
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    width: theme.spacing.unit * 9,
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-    width: '100%',
-  },
-  cssUnderline: {
-    '&:after': {
-      borderBottomColor: theme.palette.secondary[500],
-    },
-  },
-  inputInput: {
-    paddingTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: 200,
-    },
+  searchInput: {
+    margin: 10,
+    width: '90%',
   },
 });
 
@@ -106,21 +66,22 @@ class BuildsPageComp extends Component {
                 setSortType={setSortType}
               />
               <Toolbar>
-                <div className={classes.search}>
-                  <div className={classes.searchIcon}>
-                    <SearchIcon />
-                  </div>
-                  <Input
-                    placeholder="Search builds..."
-                    ref={input => this.input = input}
-                    onChange={event => this.handleChange(event)}
-                    classes={{
-                      underline: classes.cssUnderline,
-                      root: classes.inputRoot,
-                      input: classes.inputInput,
-                    }}
-                  />
-                </div>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  margin="normal"
+                  className={classes.searchInput}
+                  placeholder="Search builds..."
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                  ref={input => this.input = input}
+                  onChange={event => this.handleChange(event)}
+                />
               </Toolbar>
               {/* <input
                 className="input searchBox"

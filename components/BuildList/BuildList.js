@@ -9,6 +9,8 @@ import CurrentBuild from '../../containers/CurrentBuild';
 import LoadingAnimation from '../loadingAnimation/loadingAnimation';
 import Pagination from './Pagination';
 import data from '../../MasterData';
+import BuildCardSingle from './BuildCardSingle';
+import { Typography } from '@material-ui/core';
 
 export default class BuildList extends React.Component {
   constructor(props) {
@@ -29,14 +31,14 @@ export default class BuildList extends React.Component {
     this.setState({ pageOfItems,
       expandedItem: false });
   }
-// componentWillReceiveProps(nextProps){
-//   if(nextProps.builds.visible_items) {
-//     console.log(nextProps.builds.visible_items)
-//     this.setState({
-//       allitems: nextProps.builds.visible_items
-//     })
-//   }
-// }
+  // componentWillReceiveProps(nextProps){
+  //   if(nextProps.builds.visible_items) {
+  //     console.log(nextProps.builds.visible_items)
+  //     this.setState({
+  //       allitems: nextProps.builds.visible_items
+  //     })
+  //   }
+  // }
 
   handleExpandItem(index) {
     if (index === false) {
@@ -85,7 +87,8 @@ export default class BuildList extends React.Component {
           timeout={800}
           classNames="buildCard"
         >
-          <article className="post" onClick={() => this.onBuildClick(build._id, index)}>
+          <BuildCardSingle build={build} iconString={iconString} />
+          {/* <article className="post" onClick={() => this.onBuildClick(build._id, index)}>
             { p.userState.user.user !== false
               ? <span className="pull-right likebuild has-text-grey-light"><i onClick={() => likeBuild(build._id, page, index)} className="fa fa-thumbs-up" /> {build.likes}</span>
               : null
@@ -113,13 +116,13 @@ export default class BuildList extends React.Component {
                             : null
                         }
 
-          </article>
+          </article> */}
         </CSSTransition>
       );
     }) : null;
     return (
       <div className="buildsSection has-text-centered section">
-        <h1 className="title">All Warcraft 3 build guides</h1>
+        <Typography variant="h5"> All Builds </Typography>
         <p className="subtitle">Select to view in detail</p>
         {
                 !isFetching

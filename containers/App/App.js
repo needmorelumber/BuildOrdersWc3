@@ -6,8 +6,6 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import brown from '@material-ui/core/colors/brown';
 import green from '@material-ui/core/colors/green';
 
-import brown from '@material-ui/core/colors/brown';
-import green from '@material-ui/core/colors/green';
 import BuildsPage from '../BuildsPage';
 import Header from '../../components/Header/Header_MUI';
 import NewBuild from '../../components/NewBuild/NewBuild';
@@ -31,7 +29,7 @@ const theme = createMuiTheme({
   palette: {
     primary: green,
     secondary: brown,
-    type: 'light',
+    type: 'dark',
   },
   typography: {
     useNextVariants: true,
