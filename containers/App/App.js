@@ -63,7 +63,6 @@ const App = () => (
         <Route path="/builds" component={BuildsPage} exact />
 
         {/* New Build routes */}
-        <Route path="/builds-list" component={BuildsPage} exact />
         <Route path="/builds/create" component={BuildCreate} exact />
         <Route path="/builds/:id" component={BuildDetail} exact />
         <Route path="/builds/:id/update" component={BuildUpdate} exact />
