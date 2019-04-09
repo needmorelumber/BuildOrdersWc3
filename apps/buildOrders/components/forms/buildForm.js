@@ -108,28 +108,25 @@ const formRender = ({ handleSubmit, submitting, values }) => (
         <FieldArray name="buildSteps">
           {({ fields }) => fields.map((buildStep, index) => {
             const handlers = {
-              ADD_ROW: e => {
+              ADD_ROW: () => {
                 console.log('TAB!');
                 if (index === fields.length - 1) {
                   fields.push(null);
-                  e.preventDefault();
                 }
               },
-              MOVE_ROW_UP: e => {
+              MOVE_ROW_UP: () => {
                 console.log('UP!');
                 try {
                   // Up key pressed
-                  e.preventDefault();
                   fields.move(index, index - 1);
                 } catch (error) {
                   // do nothing.
                 }
               },
-              MOVE_ROW_DOWN: e => {
+              MOVE_ROW_DOWN: () => {
                 console.log('DOWN!');
                 try {
                   // Down key pressed
-                  e.preventDefault();
                   fields.move(index, index + 1);
                 } catch (error) {
                   // do nothing;
@@ -137,7 +134,7 @@ const formRender = ({ handleSubmit, submitting, values }) => (
               },
             };
             return (
-              <Fragment key={buildStep}>
+              <HotKeys component={Fragment} key={buildStep} keyMap={keyMap} handlers={handlers}>
                 <Grid item xs={1}>
                   <Field
                     fullWidth
@@ -157,18 +154,16 @@ const formRender = ({ handleSubmit, submitting, values }) => (
                   />
                 </Grid>
                 <Grid item xs={10}>
-                  <HotKeys keyMap={keyMap} handlers={handlers}>
-                    <Field
-                      fullWidth
-                      multiline
-                      name={`${buildStep}.description`}
-                      component={TextFieldInput}
-                      type="textarea"
-                      label="Notes"
-                    />
-                  </HotKeys>
+                  <Field
+                    fullWidth
+                    multiline
+                    name={`${buildStep}.description`}
+                    component={TextFieldInput}
+                    type="textarea"
+                    label="Notes"
+                  />
                 </Grid>
-              </Fragment>
+              </HotKeys>
             );
           })}
         </FieldArray>
