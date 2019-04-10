@@ -6,13 +6,14 @@ export const PATCHES = [
 export const getCurrentPatch = () => PATCHES[0];
 
 export const RACES = [
-  { code: 'HU', label: 'Human' },
-  { code: 'NE', label: 'Night+Elf' },
-  { code: 'OR', label: 'Orc' },
-  { code: 'UD', label: 'Undead' },
+  { code: 'HU', path: 'Human', label: 'Human' },
+  { code: 'NE', path: 'Night+Elf', label: 'Night Elf' },
+  { code: 'OR', path: 'Orc', label: 'Orc' },
+  { code: 'UD', path: 'Undead', label: 'Undead' },
 ];
 
 export const getRaceLabel = race => RACES.find(el => el.code === race).label;
+export const getRacePath = race => RACES.find(el => el.code === race).path;
 
-export const getIconString = race => `https://s3.us-west-2.amazonaws.com/needmorelumberassets/icons/${getRaceLabel(race)}.png`;
-export const getFeatImage = race => `https://s3.us-west-2.amazonaws.com/needmorelumberassets/icons/feat/${getRaceLabel(race)}_feat.png`;
+export const getIconString = race => `https://s3.us-west-2.amazonaws.com/needmorelumberassets/icons/${getRacePath(race)}.png`;
+export const getFeatImage = race => `https://s3.us-west-2.amazonaws.com/needmorelumberassets/icons/feat/${getRacePath(race)}_feat.png`;
