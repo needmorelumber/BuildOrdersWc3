@@ -38,7 +38,7 @@ const styles = theme => ({
     paddingLeft: '20px',
     paddingTop: '20px',
     paddingRight: '20px',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       paddingLeft: '20%',
       paddingRight: '20%',
       paddingTop: '1%',
@@ -49,7 +49,7 @@ const styles = theme => ({
     paddingLeft: '20px',
     paddingTop: '20px',
     paddingRight: '20px',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       paddingLeft: '20%',
       paddingRight: '20%',
       paddingTop: '1%',
@@ -60,7 +60,7 @@ const styles = theme => ({
     paddingLeft: '20px',
     paddingTop: '20px',
     paddingRight: '20px',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       paddingLeft: '20%',
       paddingRight: '20%',
       paddingTop: '1%',
