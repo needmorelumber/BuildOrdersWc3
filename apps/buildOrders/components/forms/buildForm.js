@@ -25,9 +25,10 @@ const raceDropdownItems = RACES.map(race => (
   </MenuItem>
 ));
 
+const fieldArrayRefs = {};
 
 // eslint-disable-next-line react/prop-types
-const formRender = ({ handleSubmit, submitting, values }) => (
+const formRender = ({ handleSubmit, submitting, values, form }) => (
   <form onSubmit={handleSubmit} noValidate>
     <Paper style={{ padding: 16 }}>
       <Grid container alignItems="flex-start" spacing={8}>
@@ -95,55 +96,82 @@ const formRender = ({ handleSubmit, submitting, values }) => (
           </Typography>
           <Typography paragraph>
             Hit <strong>Tab</strong> to make a new step.
-            Use your keyboard <strong>Up</strong> and <strong>Down</strong> to reorder.
+            Hit <strong>Backspace</strong> to go back or delete steps.
           </Typography>
         </Grid>
         <FieldArray name="buildSteps">
-          {({ fields }) => fields.map((buildStep, index) => {
-            const onKeyUp = e => {
-              // @TODO use https://github.com/greena13/react-hotkeys
-              if (e.keyCode === 38) {
-                try {
-                  // Up key pressed
-                  e.preventDefault();
-                  fields.move(index, index - 1);
-                } catch (error) {
-                  // do nothing.
-                }
+          {({ fields }) => fields.map((buildStepName, index) => {
+            const buildStep = fields.value[index];
+
+            // We're keeping an index to reference each input field.
+            fieldArrayRefs[index] = { ...fieldArrayRefs[index] };
+
+            const onTabMakeNewRow = e => {
+              if (index === fields.length - 1
+                && e.keyCode === 9) {
+                // Tab was pushed, make a new row.
+                fields.push(null);
+                // prevent default to prevent submit button from being focused
+                e.preventDefault();
               }
-              if (e.keyCode === 40) {
+            };
+
+            const onBackSpaceDeleteStep = e => {
+              if (e.keyCode === 8
+                && index > 0
+                && (!buildStep || !buildStep.food)) {
                 try {
-                  // Down key pressed
-                  e.preventDefault();
-                  fields.move(index, index + 1);
+                  // backspace key pressed:
+                  // Remove this field
+                  fields.remove(index);
+                  // Focus the description from the previous row
+                  setTimeout(() => fieldArrayRefs[index - 1].description.focus(), 100);
                 } catch (error) {
-                  // do nothing;
+                  // do nothing
                 }
               }
             };
+
+            const onBackSpaceFocusPrecedingRow = (buildStepProp, toFocusProp) => e => {
+              if (e.keyCode === 8
+                && buildStep
+                && !buildStep[buildStepProp]) {
+                try {
+                  // backspace key pressed:
+                  // Focus the the preceding field
+                  setTimeout(() => fieldArrayRefs[index][toFocusProp].focus(), 100);
+                } catch (error) {
+                  // do nothing
+                }
+              }
+            };
+
             return (
-              <Fragment key={buildStep}>
+              <Fragment key={buildStepName}>
                 <Grid item xs={1}>
                   <Field
                     fullWidth
-                    name={`${buildStep}.food`}
+                    autoFocus={index > 0 && index === fields.length - 1}
+                    name={`${buildStepName}.food`}
                     component={TextFieldInput}
                     type="text"
                     label="Food"
+                    inputRef={input => { fieldArrayRefs[index].food = input; }}
                     extraInput={{
-                      onKeyUp,
+                      onKeyDown: onBackSpaceDeleteStep,
                     }}
                   />
                 </Grid>
                 <Grid item xs={1}>
                   <Field
                     fullWidth
-                    name={`${buildStep}.totalFood`}
+                    name={`${buildStepName}.totalFood`}
                     component={TextFieldInput}
                     type="text"
                     label="Total"
+                    inputRef={input => { fieldArrayRefs[index].totalFood = input; }}
                     extraInput={{
-                      onKeyUp,
+                      onKeyDown: onBackSpaceFocusPrecedingRow('totalFood', 'food'),
                     }}
                   />
                 </Grid>
@@ -151,19 +179,15 @@ const formRender = ({ handleSubmit, submitting, values }) => (
                   <Field
                     fullWidth
                     multiline
-                    name={`${buildStep}.description`}
+                    name={`${buildStepName}.description`}
                     component={TextFieldInput}
                     type="textarea"
                     label="Notes"
+                    inputRef={input => { fieldArrayRefs[index].description = input; }}
                     extraInput={{
-                      onKeyUp,
                       onKeyDown: e => {
-                        // @TODO use https://github.com/greena13/react-hotkeys
-                        if (index === fields.length - 1
-                          && e.keyCode === 9) {
-                          fields.push(null);
-                          e.preventDefault();
-                        }
+                        onTabMakeNewRow(e);
+                        onBackSpaceFocusPrecedingRow('description', 'totalFood')(e);
                       },
                     }}
                   />
