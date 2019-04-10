@@ -87,7 +87,7 @@ class BuildDetail extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {buildOrder.buildSteps && buildOrder.buildSteps[1] ? buildOrder.buildSteps.map(step => (
+              {(buildOrder.buildSteps && buildOrder.buildSteps[0] !== null ) ? buildOrder.buildSteps.map(step => (
                 <TableRow className={classes.row} key={`${step.food}${step.totalFood}`}>
                   <CustomTableCell component="th" scope="row">
                     {step.description}
