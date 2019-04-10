@@ -8,15 +8,18 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { decorateComponent } from '../../common/helpers';
-import { getIconString } from '../constants';
+import { getIconString, getFeatImage } from '../constants';
 
 const styles = () => ({
   card: {
-    height: '100%',
+  },
+  cardContent: {
+    backgroundColor: 'rgba(0,0,0, 0.3)',
   },
   avatar: {
     objectFit: 'cover',
-    backgroundColor: 'black',
+    overflow: 'visible',
+    backgroundColor: 'rgba(155,155,155, 0.2)',
   },
 });
 
@@ -42,9 +45,9 @@ const BuildCardSingle = ({ classes, build }) => {
         image="/static/images/cards/paella.jpg"
         title="Paella dish"
       /> */}
-      <CardContent>
+      <CardContent className={classes.cardContent}>
         <Typography component="p">
-          { description }
+          { `${description.slice(0, 119)}...` }
         </Typography>
       </CardContent>
       {/* Soon we use these actions for sharing link and favoriting build */}

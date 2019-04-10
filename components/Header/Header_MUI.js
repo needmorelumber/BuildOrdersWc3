@@ -40,8 +40,9 @@ const styles = theme => ({
     //   }
   },
   title: {
-    display: 'none',
+    fontSize: '0.6em',
     [theme.breakpoints.up('sm')]: {
+      fontSize: '100%',
       display: 'block',
     },
   },

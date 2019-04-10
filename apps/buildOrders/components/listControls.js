@@ -21,7 +21,7 @@ const styles = theme => ({
     fontSize: '1em',
     fontFamily: '"Press Start 2P"',
     [theme.breakpoints.down('sm')]: {
-      fontSize: '.6em',
+      fontSize: '.4em',
     },
   },
 });
