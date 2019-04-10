@@ -21,7 +21,7 @@ const mapDispatchToProps = {
 const BuildCreate = ({ createBuildOrder, history }) => {
   const onSubmit = values => createBuildOrder(
     {
-      matchup: buildMatchup(values.race, values.opposing_race),
+      matchup: buildMatchup(values.race, values.opposingRace),
       ownerId: 1,
       ownerUsername: 'fakeUser',
       ...values,

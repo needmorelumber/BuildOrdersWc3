@@ -55,11 +55,11 @@ const App = () => (
       <CssBaseline />
       <Header />
       <Switch>
-        <Redirect from="/" to="/builds-list" exact />
+        <Redirect from="/" to="/builds" exact />
         <Route path="/home" component={Home} exact />
 
         {/* New Build routes */}
-        <Route path="/builds" component={BuildsPage} exact />
+        <Route path="/builds" component={BuildList} exact />
         <Route path="/builds/create" component={BuildCreate} exact />
         <Route path="/builds/:id" component={BuildDetail} exact />
         <Route path="/builds/:id/update" component={BuildUpdate} exact />

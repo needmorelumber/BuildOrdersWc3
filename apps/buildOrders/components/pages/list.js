@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 // Mui
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { Divider } from '@material-ui/core';
+import { Divider, Button } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 // Functionality
 import { decorateComponent } from '../../../common/helpers';
 import { getBuildOrdersCall } from '../../ducks/builds';
@@ -34,13 +36,24 @@ const styles = theme => ({
   gridItem: {
     height: 200,
   },
+  addContainer: {
+  },
+  mainAdd: {
+    background: 'linear-gradient(45deg, #4caf50 30%, #64dd17 90%)',
+    width: '100%',
+    marginTop: '10px',
+    [theme.breakpoints.up('md')]: {
+      width: '80%',
+      marginLeft: '15%',
+      marginTop: '15%',
+      height: '40%',
+    },
+  },
   gridContainer: {
-    paddingLeft: '20px',
     paddingTop: '20px',
-    paddingRight: '20px',
     [theme.breakpoints.up('lg')]: {
-      paddingLeft: '20%',
-      paddingRight: '20%',
+      paddingLeft: '15%',
+      paddingRight: '15%',
       paddingTop: '1%',
       height: '40%',
     },
@@ -58,11 +71,17 @@ class BuildList extends React.Component {
       <div className={classes.root}>
         <Grid container direction="row" justify="flex-start" spacing={0}>
           <Grid className={classes.gridContainer} container direction="row">
-            <Grid item md={12} lg={12} xs={12} s={12}>
+            <Grid item md={7} lg={7} xs={12} s={12}>
               <Typography variant="h5">
                     Featured Build
               </Typography>
               <FeaturedBuild />
+            </Grid>
+            <Grid item md={5} lg={5} xs={12} s={12} className={classes.addContainer}>
+              <Button className={classes.mainAdd} component={Link} to="/builds/create">
+                <Typography variant="h6"> Create a build
+                </Typography>
+              </Button>
             </Grid>
           </Grid>
           <Grid className={classes.gridContainer} container direction="row">
