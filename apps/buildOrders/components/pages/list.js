@@ -45,28 +45,6 @@ const styles = theme => ({
       height: '40%',
     },
   },
-  listControls: {
-    paddingLeft: '20px',
-    paddingTop: '20px',
-    paddingRight: '20px',
-    [theme.breakpoints.up('lg')]: {
-      paddingLeft: '20%',
-      paddingRight: '20%',
-      paddingTop: '1%',
-      height: '40%',
-    },
-  },
-  featured: {
-    paddingLeft: '20px',
-    paddingTop: '20px',
-    paddingRight: '20px',
-    [theme.breakpoints.up('lg')]: {
-      paddingLeft: '20%',
-      paddingRight: '20%',
-      paddingTop: '1%',
-      height: '40%',
-    },
-  },
 });
 
 class BuildList extends React.Component {
@@ -79,7 +57,7 @@ class BuildList extends React.Component {
     return (
       <div className={classes.root}>
         <Grid container direction="row" justify="flex-start" spacing={0}>
-          <Grid className={classes.featured} container direction="row">
+          <Grid className={classes.gridContainer} container direction="row">
             <Grid item md={12} lg={12} xs={12} s={12}>
               <Typography variant="h5">
                     Featured Build
@@ -87,7 +65,7 @@ class BuildList extends React.Component {
               <FeaturedBuild />
             </Grid>
           </Grid>
-          <Grid className={classes.listControls} container direction="row">
+          <Grid className={classes.gridContainer} container direction="row">
             <Grid item md={12} lg={12} xs={12} s={12}>
               <ListControls getBuildOrders={getBuildOrders} />
             </Grid>
