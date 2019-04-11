@@ -10,9 +10,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { connect } from 'react-redux';
 // Functionality
-import { Typography } from '@material-ui/core';
+import { Typography, Divider } from '@material-ui/core';
 import { decorateComponent } from '../../../common/helpers';
-import build, { getBuildOrderCall } from '../../ducks/build';
+import { getBuildOrderCall } from '../../ducks/build';
 // Elements
 
 // Redux connections
@@ -76,26 +76,32 @@ class BuildDetail extends React.Component {
       <div className={classes.root}>
         <Paper>
           <Typography className={classes.title} variant="h5"> {buildOrder.name} </Typography>
+          <Typography className={classes.subtitle}> {buildOrder.ownerUsername} </Typography>
           <Typography className={classes.subtitle}> {buildOrder.matchup} </Typography>
           <Typography className={classes.subtitle}> {buildOrder.patch} </Typography>
+          <Divider />
+          <Typography className={classes.subtitle}> {buildOrder.description} </Typography>
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
+                <CustomTableCell align="left">Food</CustomTableCell>
+                <CustomTableCell align="left">Total Food</CustomTableCell>
                 <CustomTableCell>Description</CustomTableCell>
-                <CustomTableCell align="right">Food</CustomTableCell>
-                <CustomTableCell align="right">Total Food</CustomTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {(buildOrder.buildSteps && buildOrder.buildSteps[0] !== null ) ? buildOrder.buildSteps.map(step => (
-                <TableRow className={classes.row} key={`${step.food}${step.totalFood}`}>
-                  <CustomTableCell component="th" scope="row">
-                    {step.description}
-                  </CustomTableCell>
-                  <CustomTableCell align="right">{step.food}</CustomTableCell>
-                  <CustomTableCell align="right">{step.totalFood}</CustomTableCell>
-                </TableRow>
-              )) : null }
+              {(buildOrder.buildSteps && buildOrder.buildSteps[0] !== null)
+                ? buildOrder.buildSteps.map(step => (
+                  <TableRow className={classes.row} key={`${step.food}${step.totalFood}`}>
+                    <CustomTableCell align="left">{step.food}</CustomTableCell>
+                    <CustomTableCell align="left">{step.totalFood}</CustomTableCell>
+                    <CustomTableCell component="th" scope="row">
+                      {step.description}
+                    </CustomTableCell>
+                  </TableRow>
+                ))
+                : null
+              }
             </TableBody>
           </Table>
         </Paper>
@@ -112,7 +118,8 @@ const decorators = [
 BuildDetail.propTypes = {
   match: PropTypes.object.isRequired,
   getBuildOrder: PropTypes.func.isRequired,
-  buildOrder: PropTypes.object,
+  classes: PropTypes.object.isRequired,
+  buildOrder: PropTypes.object.isRequired,
 };
 
 export default decorateComponent(BuildDetail, decorators);
