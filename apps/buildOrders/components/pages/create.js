@@ -40,8 +40,8 @@ const BuildCreate = ({ createBuildOrder, history }) => {
       </Typography>
       <CreateBuildForm
         onSubmit={onSubmit}
-        validate={() => ({})}
         initialValues={initialValues}
+        validate={() => ({})}
       />
     </div>
   );

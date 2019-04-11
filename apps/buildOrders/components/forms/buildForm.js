@@ -15,6 +15,11 @@ import {
 
 import { TextFieldInput } from '../../../common/components/react-final-form-material-ui-fields';
 import { PATCHES, RACES } from '../../constants';
+import {
+  required,
+  maxLength,
+  composeValidators,
+} from '../../../common/final-form/validators';
 
 const raceDropdownItems = RACES.map(race => (
   <MenuItem
@@ -28,13 +33,14 @@ const raceDropdownItems = RACES.map(race => (
 const fieldArrayRefs = {};
 
 // eslint-disable-next-line react/prop-types
-const formRender = ({ handleSubmit, submitting, values, form }) => (
-  <form onSubmit={handleSubmit} noValidate>
+const formRender = ({ handleSubmit, submitting, values, form, pristine, invalid }) => (
+  <form onSubmit={handleSubmit}>
     <Paper style={{ padding: 16 }}>
       <Grid container alignItems="flex-start" spacing={8}>
         <Grid item xs={12}>
           <Field
             fullWidth
+            validate={composeValidators(required, maxLength(500))}
             required
             name="name"
             component={TextFieldInput}
@@ -45,6 +51,7 @@ const formRender = ({ handleSubmit, submitting, values, form }) => (
         <Grid item xs={4}>
           <Field
             fullWidth
+            validate={required}
             required
             name="race"
             component={Select}
@@ -58,6 +65,7 @@ const formRender = ({ handleSubmit, submitting, values, form }) => (
           <Field
             fullWidth
             required
+            validate={required}
             name="opposingRace"
             component={Select}
             label="Opposing Race"
@@ -71,6 +79,7 @@ const formRender = ({ handleSubmit, submitting, values, form }) => (
           <Field
             fullWidth
             required
+            validate={required}
             name="patch"
             component={Select}
             label="Patch"
@@ -83,6 +92,7 @@ const formRender = ({ handleSubmit, submitting, values, form }) => (
           <Field
             fullWidth
             multiline
+            validate={composeValidators(required, maxLength(1000))}
             name="description"
             component={TextFieldInput}
             type="textarea"
@@ -151,6 +161,7 @@ const formRender = ({ handleSubmit, submitting, values, form }) => (
                 <Grid item xs={1}>
                   <Field
                     fullWidth
+                    validate={composeValidators(required, maxLength(6))}
                     autoFocus={index > 0 && index === fields.length - 1}
                     name={`${buildStepName}.food`}
                     component={TextFieldInput}
@@ -165,6 +176,7 @@ const formRender = ({ handleSubmit, submitting, values, form }) => (
                 <Grid item xs={1}>
                   <Field
                     fullWidth
+                    validate={composeValidators(required, maxLength(6))}
                     name={`${buildStepName}.totalFood`}
                     component={TextFieldInput}
                     type="text"
@@ -179,6 +191,7 @@ const formRender = ({ handleSubmit, submitting, values, form }) => (
                   <Field
                     fullWidth
                     multiline
+                    validate={composeValidators(required, maxLength(500))}
                     name={`${buildStepName}.description`}
                     component={TextFieldInput}
                     type="textarea"
@@ -201,7 +214,7 @@ const formRender = ({ handleSubmit, submitting, values, form }) => (
             variant="contained"
             color="primary"
             type="submit"
-            disabled={submitting}
+            disabled={submitting || pristine || invalid}
           >
             Submit
           </Button>
@@ -230,7 +243,7 @@ const CreateUpdateBuildForm = ({ onSubmit, initialValues = {}, validate }) => (
 CreateUpdateBuildForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   initialValues: PropTypes.object,
-  validate: PropTypes.func.isRequired,
+  validate: PropTypes.func,
 };
 
 
