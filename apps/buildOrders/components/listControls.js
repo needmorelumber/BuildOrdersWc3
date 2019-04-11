@@ -45,6 +45,11 @@ class BuildListControls extends Component {
     };
   }
 
+  componentDidMount() {
+    this.getBuilds();
+  }
+
+
   setSortType(sortType, callback) {
     return this.setState({ sortType }, callback);
   }

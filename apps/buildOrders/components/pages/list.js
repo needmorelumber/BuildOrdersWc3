@@ -60,48 +60,39 @@ const styles = theme => ({
   },
 });
 
-class BuildList extends React.Component {
-  componentDidMount() {
-    this.props.getBuildOrders();
-  }
-
-  render() {
-    const { buildOrders, classes, getBuildOrders } = this.props;
-    return (
-      <div className={classes.root}>
-        <Grid container direction="row" justify="flex-start" spacing={0}>
-          <Grid className={classes.gridContainer} container direction="row">
-            <Grid item md={7} lg={7} xs={12} s={12}>
-              <Typography variant="h5">
-                    Featured Build
-              </Typography>
-              <FeaturedBuild />
-            </Grid>
-            <Grid item md={5} lg={5} xs={12} s={12} className={classes.addContainer}>
-              <Button className={classes.mainAdd} component={Link} to="/builds/create">
-                <Typography variant="h6"> Create a build
-                </Typography>
-              </Button>
-            </Grid>
-          </Grid>
-          <Grid className={classes.gridContainer} container direction="row">
-            <Grid item md={12} lg={12} xs={12} s={12}>
-              <ListControls getBuildOrders={getBuildOrders} />
-            </Grid>
-          </Grid>
-          <Divider variant="middle" color="primary" />
-          <Grid className={classes.gridContainer} container direction="row" justify="flex-start" spacing={8}>
-            {buildOrders && buildOrders.map(build => (
-              <Grid md={6} lg={3} xs={12} s={12} key={build._id} className={classes.gridItem} item>
-                <BuildCard build={build} />
-              </Grid>
-            ))}
-          </Grid>
+const BuildList = ({ buildOrders, classes, getBuildOrders }) => (
+  <div className={classes.root}>
+    <Grid container direction="row" justify="flex-start" spacing={0}>
+      <Grid className={classes.gridContainer} container direction="row">
+        <Grid item md={7} lg={7} xs={12} s={12}>
+          <Typography variant="h5">
+                Featured Build
+          </Typography>
+          <FeaturedBuild />
         </Grid>
-      </div>
-    );
-  }
-}
+        <Grid item md={5} lg={5} xs={12} s={12} className={classes.addContainer}>
+          <Button className={classes.mainAdd} component={Link} to="/builds/create">
+            <Typography variant="h6"> Create a build
+            </Typography>
+          </Button>
+        </Grid>
+      </Grid>
+      <Grid className={classes.gridContainer} container direction="row">
+        <Grid item md={12} lg={12} xs={12} s={12}>
+          <ListControls getBuildOrders={getBuildOrders} />
+        </Grid>
+      </Grid>
+      <Divider variant="middle" color="primary" />
+      <Grid className={classes.gridContainer} container direction="row" justify="flex-start" spacing={8}>
+        {buildOrders && buildOrders.map(build => (
+          <Grid md={6} lg={3} xs={12} s={12} key={build._id} className={classes.gridItem} item>
+            <BuildCard build={build} />
+          </Grid>
+        ))}
+      </Grid>
+    </Grid>
+  </div>
+);
 
 const decorators = [
   withStyles(styles),
