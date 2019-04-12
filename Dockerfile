@@ -1,4 +1,5 @@
 # Get latest node
+# TODO: see if we can get alpine working with node-sass
 FROM node:10
 
 ARG NODE=development
