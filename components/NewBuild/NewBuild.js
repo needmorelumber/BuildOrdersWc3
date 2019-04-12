@@ -76,12 +76,12 @@ class NewBuild extends Component {
       <div className="modal is-active" id="newBuildForm">
         { !this.props.userState.user.user && (<Redirect to="/builds" />)}
         <div className="modal-background" />
-        <div className="modal-card">
+        <div className="modal-card newFormModal">
           <header className="modal-card-head">
             <p className="modal-card-title"> Submit a new build </p>
             <Link to="/builds"><button className="delete is-large" aria-label="close" /></Link>
           </header>
-          <section className="modal-card-body">
+          <section className="modal-card-body newFormModal">
             <form onSubmit={this.handleSubmit}>
               {
                                     inputsArray.map((inp, index) => (

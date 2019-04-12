@@ -11,6 +11,13 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
+  tabTitle: {
+    fontSize: '1em',
+    fontFamily: '"Press Start 2P"',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '.6em',
+    },
+  },
 });
 
 class BuildListControls extends Component {

@@ -1,23 +1,18 @@
 version: "2"
 services:
   needmorelumber:
+    depends_on:
+      - mongo
     container_name: needmorelumber
     build: .
     ports:
       - "3000:3000"
     volumes:
       - ./:/opt/node_app/app
-    links:
-      - mongo
     working_dir: /opt/node_app/app
-    command: 'bash -c "npm start"'
+    command: ['yarn', 'start']
   mongo:
     container_name: mongo
     image: mongo
     ports:
       - "27017:27017"
-    volumes:
-      - mongodata:/data/db
-
-volumes:
-  mongodata: {}
