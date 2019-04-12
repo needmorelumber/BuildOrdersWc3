@@ -1,6 +1,8 @@
 version: "2"
 services:
   needmorelumber:
+    depends_on:
+      - mongo
     container_name: needmorelumber
     build: .
     ports:
