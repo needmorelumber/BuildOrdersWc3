@@ -12,7 +12,6 @@ export const setBuildOrders = buildOrders => ({ type: SET_BUILD_ORDERS, buildOrd
 export const getBuildOrdersCall = params => dispatch => builds
   .find(params)
   .then(buildOrders => dispatch(setBuildOrders(buildOrders)));
-
 // Reducer
 export default (buildOrders = [], action) => {
   switch (action.type) {

@@ -29,7 +29,23 @@ const theme = createMuiTheme({
   palette: {
     primary: green,
     secondary: brown,
-    type: 'light',
+    type: 'dark',
+  },
+  typography: {
+    useNextVariants: true,
+    h6: {
+      fontSize: '1em',
+      fontFamily: '"Press Start 2P"',
+    },
+    h5: {
+      fontFamily: '"Press Start 2P"',
+    },
+    subheading: {
+      fontFamily: '"Press Start 2P"',
+    },
+    heading: {
+      fontFamily: '"Press Start 2P"',
+    },
   },
 });
 
@@ -39,18 +55,14 @@ const App = () => (
       <CssBaseline />
       <Header />
       <Switch>
-        <Redirect from="/" to="/home" exact />
+        <Redirect from="/" to="/builds" exact />
         <Route path="/home" component={Home} exact />
 
-        {/* Old Build routes */}
-        <Route path="/builds/new" component={NewBuild} />
-        <Route path="/builds" component={BuildsPage} exact />
-
         {/* New Build routes */}
-        <Route path="/builds-list" component={BuildList} exact />
+        <Route path="/builds" component={BuildList} exact />
         <Route path="/builds/create" component={BuildCreate} exact />
         <Route path="/builds/:id" component={BuildDetail} exact />
-        <Route path="/builds/update/:id" component={BuildUpdate} exact />
+        <Route path="/builds/:id/update" component={BuildUpdate} exact />
 
         {/* auth / user routes */}
         <Route path="/login" component={LoginPage} />
