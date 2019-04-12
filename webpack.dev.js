@@ -6,9 +6,7 @@ const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
   devtool: 'inline-source-map',
-  entry: [
-    path.resolve('/opt/node_app/app/index.js'),
-  ],
+  entry: ['./index.js'],
   output: {
     path: path.resolve(__dirname, 'dist/js/'),
     filename: 'bundle.js',
@@ -21,8 +19,8 @@ module.exports = merge(common, {
       '/api': 'http://localhost:4200',
     },
   },
-  devtool: 'eval',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
   ],
+  mode: 'development',
 });

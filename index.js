@@ -8,8 +8,6 @@ import configureStore from './store/configureStore';
 // TODO: convert to index.js to avoid redundancy
 import App from './containers/App/App';
 
-import './index.sass';
-
 const store = configureStore(reducers);
 ReactDOM.render(
   <BrowserRouter>
