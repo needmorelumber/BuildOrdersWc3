@@ -1,10 +1,12 @@
 # Get latest node
-FROM node:10
+# TODO: see if we can get alpine working with node-sass
+FROM node:10-alpine
 
-ENV NODE_ENV development
+ENV NODE_ENV production
 
 USER node
 COPY --chown=node / /usr/src/app/
 WORKDIR /usr/src/app/
 RUN yarn && yarn cache clean
+RUN yarn build
 CMD ["node", "server.js"]
